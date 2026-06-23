@@ -4,7 +4,7 @@
 - 마이너 올림 (1.2 → 1.3): 체크 항목 추가, 표현 다듬기 등 작은 개선
 - 메이저 올림 (1.x → 2.0): 역할·출력 형식·동작이 크게 바뀔 때
 
-**작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync-agents.bat`을 실행해 전역(`C:\Users\PC\.claude\agents`)에 반영한다. 변경 시 해당 에이전트의 frontmatter `version`/`updated`를 올리고 아래에 기록한다.
+**작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync-agents.bat`을 실행해 전역(`C:\Users\PC\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`의 버전 표도 갱신한 뒤 ④ `git commit` + `git push` 한다.
 
 ---
 
