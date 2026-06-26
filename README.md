@@ -6,7 +6,7 @@
 - 에이전트 수: **13종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `test-runner` **v1.4**, `code-reviewer` **v1.3**, `perf-auditor`·`devops-reviewer`·`test-strategy`·`migration-reviewer` **v1.1**(신규 4종), 그 외 **v1.2** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `test-runner` **v1.4**, `code-reviewer`·`security-reviewer` **v1.3**, `perf-auditor`·`devops-reviewer`·`test-strategy`·`migration-reviewer` **v1.1**(신규 4종), 그 외 **v1.2** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -28,7 +28,7 @@
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
 | 1 | `code-reviewer` | `/review` | 품질 | 1.3 | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
-| 2 | `security-reviewer` | `/sec` | 품질 | 1.2 | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
+| 2 | `security-reviewer` | `/sec` | 품질 | 1.3 | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
 | 3 | `test-runner` | `/test` | 품질 | 1.4 | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
 | 4 | `test-strategy` | `/coverage` | 품질 | 1.1 | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
 | 5 | `perf-auditor` | `/perf` | 품질 | 1.1 | Next.js 프론트 성능 점검 | Read, Grep, Glob |
@@ -59,7 +59,7 @@
 
 - **언제**: PR/새 기능 머지 전, 보안 점검 필요 시
 - **기준**: OWASP Top 10
-- **점검**: 인증/인가(라우터 레벨 의존성까지 확인해 오탐 방지), IDOR, RBAC, 경로 탐색, JWT(알고리즘·exp·저장 위치), 인젝션, XSS, 민감정보 노출, CSRF/SSRF, Pydantic 과잉 수용(Mass Assignment), CORS
+- **점검**: 인증/인가(라우터 레벨 의존성까지 확인해 오탐 방지), IDOR/BOLA·BFLA·WebSocket(CSWSH), RBAC, 경로 탐색, JWT(알고리즘 고정·alg confusion·kid/jku 헤더 주입·exp·저장 위치), 인젝션(SQL·SSTI·OS/NoSQL), XSS, 과잉 응답(API3, response_model), CSRF/SSRF, Mass Assignment/BOPLA, LLM 연동 시 간접 프롬프트 인젝션, CORS
 - **출력**: 심각도(Critical~Low)순 + "즉시 고쳐야 할 Top 3"
 </details>
 
