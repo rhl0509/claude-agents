@@ -220,11 +220,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 9개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 13개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```bat
 sync-agents.bat
 ```
-> `sync-agents.bat`은 9개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로 복사합니다.
+> `sync-agents.bat`은 13개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로 복사합니다.
 
 슬래시 명령(`/review` 등)을 쓰려면 `commands/` 내용을 `~/.claude/commands/`에도 두세요.
 
