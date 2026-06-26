@@ -8,6 +8,29 @@
 
 ---
 
+## 1.1 (2026-06-26) — 모델 티어링 + 외부 문서/보안 정보 연동
+
+**모델 재배정 (난이도 기반)**
+- `opus`로 상향: `security-reviewer`, `db-optimizer`, `data-modeler`, `design-system-architect`, `system-architect`
+- `haiku`로 하향: `test-runner` (기계적 실행·분석)
+- `sonnet` 유지: `code-reviewer`, `api-doc-writer`, `ui-ux-reviewer`
+
+**도구 추가 (+ 사용 지침 문단)**
+- `api-doc-writer` 1.1 — Context7(`resolve-library-id`/`get-library-docs`) 추가: 버전 민감한 FastAPI/Pydantic 동작 확인
+- `design-system-architect` 1.1 — Context7 추가: Tailwind v3/v4 등 버전별 설정 문법 확인
+- `system-architect` 1.1 — Context7 추가: 프레임워크 권장 패턴(App Router, 의존성/백그라운드 작업 등) 버전 확인
+- `security-reviewer` 1.1 — WebSearch/WebFetch 추가: 의존성 CVE·보안 권고(GHSA/NVD) 확인 (코드 분석 보조 수단)
+- `db-optimizer` 1.1, `data-modeler` 1.1 — `opus`로 상향 (프롬프트 변경 없음)
+- `test-runner` 1.1 — `haiku`로 변경
+
+**문서/도구**
+- `CLAUDE.md` — 에이전트 표에 4종(ui-ux-reviewer, design-system-architect, data-modeler, system-architect) 추가, 모델 티어링·frontmatter 스키마 설명, `sync.ps1` 기반 위치·동기화 섹션
+- `sync.ps1` 신규 — PowerShell 동기화 스크립트
+
+> `code-reviewer`, `ui-ux-reviewer`는 1.0 유지 (변경 없음).
+
+---
+
 ## 1.0 (2026-06-23) — 최초 버전 기준선
 
 9개 에이전트 첫 버전 등록.

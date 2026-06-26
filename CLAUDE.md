@@ -13,19 +13,29 @@ The agents are authored in **Korean** and all target the same downstream stack t
 | File | Purpose | Tools | Writes code? |
 |---|---|---|---|
 | `code-reviewer.md` | General quality/readability/bug review across Next.js + FastAPI | Read, Grep, Glob, Bash | No |
-| `security-reviewer.md` | OWASP-oriented security review (authz/IDOR, JWT, injection, XSS, secret leakage) | Read, Grep, Glob | No |
+| `security-reviewer.md` | OWASP-oriented security review (authz/IDOR, JWT, injection, XSS, secret leakage) | Read, Grep, Glob, WebSearch, WebFetch | No |
 | `db-optimizer.md` | MySQL schema/query/index analysis (N+1, indexing, pagination, locks) | Read, Grep, Glob, Bash | No |
-| `api-doc-writer.md` | Catalog FastAPI endpoints into API docs | Read, Grep, Glob | No |
+| `api-doc-writer.md` | Catalog FastAPI endpoints into API docs | Read, Grep, Glob, Context7 | No |
 | `test-runner.md` | Run pytest / Jest / Vitest and diagnose failures | Bash, Read, Grep, Glob | No |
+| `ui-ux-reviewer.md` | Next.js UI/UX, a11y, responsive, state-handling review | Read, Grep, Glob | No |
+| `design-system-architect.md` | Design tokens, component hierarchy, theming, Tailwind config | Read, Grep, Glob, Context7 | No |
+| `data-modeler.md` | MySQL data-model / schema design (ERD, normalization, keys) | Read, Grep, Glob | No |
+| `system-architect.md` | System architecture design / review across the full stack | Read, Grep, Glob | No |
 
 ## Shared conventions (follow these when adding or editing an agent)
 
-- **Frontmatter schema**: every agent has `name`, `description`, `tools`, `model`. `name` matches the filename (kebab-case). `model` is `sonnet` across all current agents.
+- **Frontmatter schema**: every agent has `name`, `description`, `tools`, `model` (plus `version`, `updated`). `name` matches the filename (kebab-case). `model` is tiered by task difficulty: `opus` for deep-reasoning agents (security-reviewer, db-optimizer, data-modeler, design-system-architect, system-architect), `haiku` for mechanical ones (test-runner), `sonnet` for the rest (code-reviewer, api-doc-writer, ui-ux-reviewer).
 - **`description` is a routing signal**, not a label. Write it so the orchestrator knows *when* to invoke this agent — include concrete trigger situations (e.g. "PR 머지 전", "느린 쿼리 진단") and disambiguate from neighboring agents (security-reviewer's description explicitly defers general review to code-reviewer).
 - **Least-privilege tools**: grant only what the job needs. Read-only reviewers get `Read, Grep, Glob`. Add `Bash` only with a documented, narrow purpose: `test-runner` runs tests; `db-optimizer` runs read-only `EXPLAIN`/`SHOW INDEX` *only when the user explicitly asks*; `code-reviewer` uses it solely for `git diff` to scope the review, never to run or mutate code.
 - **Analysis agents do not mutate.** Reviewers state "파일을 수정하지 않는다"; `db-optimizer` proposes DDL but never runs `ALTER`/`DROP`; `test-runner` fixes production code only when explicitly told. Preserve this boundary — it's the core contract of the set.
 - **Every prompt ends with an explicit output format** (severity-tagged blocks, tables grouped by resource/tag, a prioritized "Top 3" summary). Keep findings anchored to `파일경로:줄번호`.
 - **Uncertainty is surfaced, not guessed**: agents mark unclear items "확인 필요" / "추정" rather than inventing facts. Keep this in new prompts.
+
+## Locations & sync (single source of truth)
+
+- **Source of truth**: the top-level `*.md` files in this directory (`d:\auto_agent`). Edit agents here only.
+- **Runtime location**: Claude Code loads agents from `%USERPROFILE%\.claude\agents\`. After editing, run `sync.ps1` to copy the definitions there. Do not hand-edit the runtime copies — they get overwritten on sync.
+- Do **not** keep a separate `.claude/agents/` copy inside this repo; it duplicates the global runtime set and drifts. The global set already applies to every project.
 
 ## Settings
 
