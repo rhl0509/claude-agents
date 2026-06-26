@@ -6,7 +6,7 @@
 - 에이전트 수: **10종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `code-reviewer`·`test-runner` **v1.2**, `migration-reviewer` **v1.0**(신규), 그 외 **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `test-runner` **v1.3**, `code-reviewer` **v1.2**, `migration-reviewer` **v1.0**(신규), 그 외 **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -29,7 +29,7 @@
 |---|---|---|---|---|---|---|
 | 1 | `code-reviewer` | `/review` | 품질 | 1.2 | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
 | 2 | `security-reviewer` | `/sec` | 품질 | 1.1 | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
-| 3 | `test-runner` | `/test` | 품질 | 1.2 | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
+| 3 | `test-runner` | `/test` | 품질 | 1.3 | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
 | 4 | `api-doc-writer` | `/apidoc` | 문서 | 1.1 | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
 | 5 | `db-optimizer` | `/db` | DB | 1.1 | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
 | 6 | `migration-reviewer` | `/migrate` | DB | 1.0 | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
@@ -66,6 +66,7 @@
 - **언제**: 코드 수정 후 테스트 실행·실패 진단
 - **러너**: pytest(FastAPI), Jest/Vitest(Next.js)
 - **원칙**: 프로덕션 코드·환경(설치·venv)을 임의로 건드리지 않음 — 사전 조건으로 보고, 명시 요청 시만 실행
+- **테스트 품질 스캔(v1.3)**: 통과한 테스트도 훑어 change-detector(리터럴/카운트 동결)·목 그린을 "테스트 자체 약점"으로 표시 — green을 커버리지 양호로 칭찬하지 않음
 - **출력**: 통과/실패/스킵 집계 → 실패별 원인 분류(코드 버그/테스트 오류/환경/외부 의존성)·제안, 플레이키 표시
 </details>
 
