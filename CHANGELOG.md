@@ -11,9 +11,9 @@
 ## 1.1 (2026-06-26) — 모델 티어링 + 외부 문서/보안 정보 연동
 
 **모델 재배정 (난이도 기반)**
-- `opus`로 상향: `code-reviewer`, `security-reviewer`, `db-optimizer`, `data-modeler`, `design-system-architect`, `system-architect`
+- `opus`로 상향: `code-reviewer`, `security-reviewer`, `db-optimizer`, `data-modeler`, `design-system-architect`, `system-architect`, `ui-ux-reviewer`
 - `haiku`로 하향: `test-runner` (기계적 실행·분석)
-- `sonnet` 유지: `api-doc-writer`, `ui-ux-reviewer`
+- `sonnet` 유지: `api-doc-writer`
 
 **도구 추가 (+ 사용 지침 문단)**
 - `api-doc-writer` 1.1 — Context7(`resolve-library-id`/`get-library-docs`) 추가: 버전 민감한 FastAPI/Pydantic 동작 확인
@@ -21,13 +21,12 @@
 - `system-architect` 1.1 — Context7 추가: 프레임워크 권장 패턴(App Router, 의존성/백그라운드 작업 등) 버전 확인
 - `security-reviewer` 1.1 — WebSearch/WebFetch 추가: 의존성 CVE·보안 권고(GHSA/NVD) 확인 (코드 분석 보조 수단)
 - `code-reviewer` 1.1, `db-optimizer` 1.1, `data-modeler` 1.1 — `opus`로 상향 (프롬프트 변경 없음)
+- `ui-ux-reviewer` 1.1 — `opus`로 상향 + **심미성/차별성 점검 항목 추가** (Anthropic 프런트엔드 미학 가이드[Claude Cookbook] 기준: 제네릭 폰트·밋밋한 위계·안전한 팔레트·평면 배경·천편일률 레이아웃·"AI slop" 인상 점검. 사용성·접근성 우선의 보조 항목)
 - `test-runner` 1.1 — `haiku`로 변경
 
 **문서/도구**
 - `CLAUDE.md` — 에이전트 표에 4종(ui-ux-reviewer, design-system-architect, data-modeler, system-architect) 추가, 모델 티어링·frontmatter 스키마 설명, `sync.ps1` 기반 위치·동기화 섹션
 - `sync.ps1` 신규 — PowerShell 동기화 스크립트
-
-> `ui-ux-reviewer`는 1.0 유지 (변경 없음).
 
 ---
 

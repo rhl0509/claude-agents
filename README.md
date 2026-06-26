@@ -6,7 +6,7 @@
 - 에이전트 수: **9종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: 대부분 **v1.1** (`ui-ux-reviewer`만 v1.0) — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: 전 에이전트 **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -32,7 +32,7 @@
 | 3 | `test-runner` | `/test` | 품질 | 1.1 | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
 | 4 | `api-doc-writer` | `/apidoc` | 문서 | 1.1 | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
 | 5 | `db-optimizer` | `/db` | DB | 1.1 | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
-| 6 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.0 | UI/UX·접근성·반응형 점검 | Read, Grep, Glob |
+| 6 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.1 | UI/UX·접근성·반응형 점검 | Read, Grep, Glob |
 | 7 | `design-system-architect` | `/dsystem` | 디자인 | 1.1 | 디자인 토큰·컴포넌트 설계 | Read, Grep, Glob, Context7 |
 | 8 | `data-modeler` | `/datamodel` | 설계 | 1.1 | 데이터 모델/스키마 설계 | Read, Grep, Glob |
 | 9 | `system-architect` | `/arch` | 설계 | 1.1 | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
