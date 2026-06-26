@@ -25,21 +25,21 @@
 
 ## 에이전트 13종
 
-| # | 에이전트 | 슬래시 | 분류 | 버전 | 역할 | 도구 |
-|---|---|---|---|---|---|---|
-| 1 | `code-reviewer` | `/review` | 품질 | 1.3 | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
-| 2 | `security-reviewer` | `/sec` | 품질 | 1.3 | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
-| 3 | `test-runner` | `/test` | 품질 | 1.4 | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
-| 4 | `test-strategy` | `/coverage` | 품질 | 1.1 | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
-| 5 | `perf-auditor` | `/perf` | 품질 | 1.1 | Next.js 프론트 성능 점검 | Read, Grep, Glob |
-| 6 | `api-doc-writer` | `/apidoc` | 문서 | 1.2 | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
-| 7 | `db-optimizer` | `/db` | DB | 1.2 | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
-| 8 | `migration-reviewer` | `/migrate` | DB | 1.1 | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
-| 9 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.2 | UI/UX·접근성·반응형 점검 | Read, Grep, Glob |
-| 10 | `design-system-architect` | `/dsystem` | 디자인 | 1.2 | 디자인 토큰·컴포넌트 설계 | Read, Grep, Glob, Context7 |
-| 11 | `data-modeler` | `/datamodel` | 설계 | 1.2 | 데이터 모델/스키마 설계 | Read, Grep, Glob |
-| 12 | `system-architect` | `/arch` | 설계 | 1.2 | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
-| 13 | `devops-reviewer` | `/devops` | 운영 | 1.1 | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
+| # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
+|---|---|---|---|---|---|---|---|
+| 1 | `code-reviewer` | `/review` | 품질 | 1.3 | opus | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
+| 2 | `security-reviewer` | `/sec` | 품질 | 1.3 | opus | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
+| 3 | `test-runner` | `/test` | 품질 | 1.4 | haiku | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
+| 4 | `test-strategy` | `/coverage` | 품질 | 1.1 | opus | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
+| 5 | `perf-auditor` | `/perf` | 품질 | 1.1 | opus | Next.js 프론트 성능 점검 | Read, Grep, Glob |
+| 6 | `api-doc-writer` | `/apidoc` | 문서 | 1.2 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
+| 7 | `db-optimizer` | `/db` | DB | 1.2 | opus | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
+| 8 | `migration-reviewer` | `/migrate` | DB | 1.1 | opus | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
+| 9 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.2 | opus | UI/UX·접근성·반응형 점검 | Read, Grep, Glob |
+| 10 | `design-system-architect` | `/dsystem` | 디자인 | 1.2 | opus | 디자인 토큰·컴포넌트 설계 | Read, Grep, Glob, Context7 |
+| 11 | `data-modeler` | `/datamodel` | 설계 | 1.2 | opus | 데이터 모델/스키마 설계 | Read, Grep, Glob |
+| 12 | `system-architect` | `/arch` | 설계 | 1.2 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
+| 13 | `devops-reviewer` | `/devops` | 운영 | 1.1 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
 
 ### 🔍 품질 / QA
 
