@@ -18,7 +18,7 @@
 - `test-strategy` 1.0 (`/coverage`, opus) — 테스트 커버리지 공백·약한 단언(change-detector·목 그린) 진단 및 보강 케이스 설계(작성은 안 함). 실행·진단은 test-runner와 역할 분리.
 
 **문서**
-- 에이전트 10종 → **13종**. 새 분류 **운영(DevOps)** 추가. CLAUDE.md 표·티어, README 표/상세/사용 예/구조, AGENTS.md 카탈로그 갱신. `/perf`·`/devops`·`/coverage` 슬래시 명령 추가(전역).
+- 에이전트 10종 → **13종**. 새 분류 **운영(DevOps)** 추가. CLAUDE.md 표·티어, README 표/상세/사용 예/구조·설치 섹션(9개→13개) 갱신, AGENTS.md 카탈로그 갱신. `/perf`·`/devops`·`/coverage` 슬래시 명령 추가(전역).
 
 ---
 
