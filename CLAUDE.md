@@ -18,6 +18,9 @@ The agents are authored in **Korean** and all target the same downstream stack t
 | `migration-reviewer.md` | MySQL/Alembic migration safety (locks, backfill order, rollback, deploy order) | Read, Grep, Glob | No |
 | `api-doc-writer.md` | Catalog FastAPI endpoints into API docs | Read, Grep, Glob, Context7 | No |
 | `test-runner.md` | Run pytest / Jest / Vitest and diagnose failures | Bash, Read, Grep, Glob | No |
+| `test-strategy.md` | Diagnose coverage gaps & weak tests, propose cases | Read, Grep, Glob | No |
+| `perf-auditor.md` | Next.js perf (bundle, CWV, RSC boundary, fetching) | Read, Grep, Glob | No |
+| `devops-reviewer.md` | Docker / CI-CD / deploy config & secret-handling review | Read, Grep, Glob | No |
 | `ui-ux-reviewer.md` | Next.js UI/UX, a11y, responsive, state-handling review | Read, Grep, Glob | No |
 | `design-system-architect.md` | Design tokens, component hierarchy, theming, Tailwind config | Read, Grep, Glob, Context7 | No |
 | `data-modeler.md` | MySQL data-model / schema design (ERD, normalization, keys) | Read, Grep, Glob | No |
@@ -25,7 +28,7 @@ The agents are authored in **Korean** and all target the same downstream stack t
 
 ## Shared conventions (follow these when adding or editing an agent)
 
-- **Frontmatter schema**: every agent has `name`, `description`, `tools`, `model` (plus `version`, `updated`). `name` matches the filename (kebab-case). `model` is tiered by task difficulty: `opus` for deep-reasoning agents (code-reviewer, security-reviewer, db-optimizer, migration-reviewer, data-modeler, design-system-architect, system-architect, ui-ux-reviewer), `haiku` for mechanical ones (test-runner), `sonnet` for the rest (api-doc-writer).
+- **Frontmatter schema**: every agent has `name`, `description`, `tools`, `model` (plus `version`, `updated`). `name` matches the filename (kebab-case). `model` is tiered by task difficulty: `opus` for deep-reasoning agents (code-reviewer, security-reviewer, db-optimizer, migration-reviewer, data-modeler, design-system-architect, system-architect, ui-ux-reviewer, perf-auditor, devops-reviewer, test-strategy), `haiku` for mechanical ones (test-runner), `sonnet` for the rest (api-doc-writer).
 - **`description` is a routing signal**, not a label. Write it so the orchestrator knows *when* to invoke this agent — include concrete trigger situations (e.g. "PR 머지 전", "느린 쿼리 진단") and disambiguate from neighboring agents (security-reviewer's description explicitly defers general review to code-reviewer).
 - **Least-privilege tools**: grant only what the job needs. Read-only reviewers get `Read, Grep, Glob`. Add `Bash` only with a documented, narrow purpose: `test-runner` runs tests; `db-optimizer` runs read-only `EXPLAIN`/`SHOW INDEX` *only when the user explicitly asks*; `code-reviewer` uses it solely for `git diff` to scope the review, never to run or mutate code.
 - **Analysis agents do not mutate.** Reviewers state "파일을 수정하지 않는다"; `db-optimizer` proposes DDL but never runs `ALTER`/`DROP`; `test-runner` fixes production code only when explicitly told. Preserve this boundary — it's the core contract of the set.

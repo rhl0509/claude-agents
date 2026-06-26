@@ -8,6 +8,20 @@
 
 ---
 
+## 1.4 (2026-06-26) — 빈자리 보강: 성능·DevOps·테스트 전략 3종 추가
+
+기존 10종이 다루지 않던 명확한 빈자리(프론트 성능, 배포/운영 설정, 테스트 커버리지 설계)를 새 에이전트로 채움. 겹치는 후보(의존성 CVE→security-reviewer, 리팩터링→code-reviewer/system-architect)는 새로 만들지 않고 기존에 흡수하는 원칙(Footprint Ladder) 유지.
+
+**신규 에이전트**
+- `perf-auditor` 1.0 (`/perf`, opus) — Next.js 프론트 성능: 번들/코드 스플리팅, 서버/클라 경계, 데이터 페칭·캐싱, 이미지/폰트, 렌더 비용, Core Web Vitals(LCP/CLS/INP). 시각·접근성은 ui-ux-reviewer, DB 성능은 db-optimizer, 정확성은 code-reviewer와 구분. 빌드는 실행하지 않고 정적 분석(측정 필요 항목은 "확인 필요").
+- `devops-reviewer` 1.0 (`/devops`, opus) — 배포/운영 설정: Dockerfile·docker-compose, CI/CD(GitHub Actions), 시크릿 취급, 빌드 캐시·이미지 크기, 헬스체크·배포 안전성. 코드 보안은 security-reviewer, 마이그레이션은 migration-reviewer, 구조 설계는 system-architect와 구분.
+- `test-strategy` 1.0 (`/coverage`, opus) — 테스트 커버리지 공백·약한 단언(change-detector·목 그린) 진단 및 보강 케이스 설계(작성은 안 함). 실행·진단은 test-runner와 역할 분리.
+
+**문서**
+- 에이전트 10종 → **13종**. 새 분류 **운영(DevOps)** 추가. CLAUDE.md 표·티어, README 표/상세/사용 예/구조, AGENTS.md 카탈로그 갱신. `/perf`·`/devops`·`/coverage` 슬래시 명령 추가(전역).
+
+---
+
 ## 1.3 (2026-06-26) — test-runner 테스트 품질 스캔 강화
 
 실제 픽스처로 10종을 점검한 결과, `test-runner`가 **통과(green)한 change-detector 테스트를 약점으로 잡지 못하고 오히려 "커버리지 양호"로 칭찬**하는 한계를 발견. 원인은 품질 점검이 "실패 분석" 흐름에만 묶여 있어, 통과한 약한 테스트는 아예 보지 않았던 것.
