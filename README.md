@@ -6,7 +6,7 @@
 - 에이전트 수: **9종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: 대부분 **v1.1** (`code-reviewer`·`ui-ux-reviewer`는 v1.0) — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: 대부분 **v1.1** (`ui-ux-reviewer`만 v1.0) — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -27,7 +27,7 @@
 
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 1 | `code-reviewer` | `/review` | 품질 | 1.0 | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
+| 1 | `code-reviewer` | `/review` | 품질 | 1.1 | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
 | 2 | `security-reviewer` | `/sec` | 품질 | 1.1 | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
 | 3 | `test-runner` | `/test` | 품질 | 1.1 | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
 | 4 | `api-doc-writer` | `/apidoc` | 문서 | 1.1 | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
