@@ -4,7 +4,16 @@
 - 마이너 올림 (1.2 → 1.3): 체크 항목 추가, 표현 다듬기 등 작은 개선
 - 메이저 올림 (1.x → 2.0): 역할·출력 형식·동작이 크게 바뀔 때
 
-**작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync-agents.bat`을 실행해 전역(`C:\Users\PC\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`의 버전 표도 갱신한 뒤 ④ `git commit` + `git push` 한다.
+**작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync.ps1`을 실행해 전역(`C:\Users\PC\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`의 버전 표도 갱신한 뒤 ④ `git commit` + `git push` 한다.
+
+---
+
+## 1.16 (2026-06-29) — 문서 stale 참조 정리 (`sync-agents.bat` → `sync.ps1`)
+
+동기화 스크립트 실제 파일명은 `sync.ps1`인데 일부 문서가 존재하지 않는 `sync-agents.bat`을 가리키던 것을 전수 교정. 에이전트 정의 변경 없음(문서·메타만).
+
+**문서**
+- CHANGELOG 작업 규칙 헤더, README(설치 코드블록·업데이트 워크플로·저장소 구조 트리), `.gitignore` 주석의 `sync-agents.bat` 참조를 `sync.ps1`로 통일. README 설치 예시 코드펜스도 `bat` → `powershell`로 수정.
 
 ---
 

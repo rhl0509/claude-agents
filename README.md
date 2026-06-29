@@ -232,10 +232,10 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 
 ### 3) 전역 등록 (Windows)
 저장소의 13개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
-```bat
-sync-agents.bat
+```powershell
+powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync-agents.bat`은 13개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로 복사합니다.
+> `sync.ps1`은 13개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로 복사합니다.
 
 슬래시 명령(`/review` 등)을 쓰려면 `commands/` 내용을 `~/.claude/commands/`에도 두세요.
 
@@ -320,7 +320,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처(`launchers/claude.bat` 
 2. frontmatter `version`/`updated` 갱신 (마이너/메이저 판단)
 3. `CHANGELOG.md`에 변경 기록
 4. **`README.md`의 버전 표 갱신** (버전업 시)
-5. `sync-agents.bat`으로 전역(`~/.claude/agents/`)에 반영
+5. `sync.ps1`으로 전역(`~/.claude/agents/`)에 반영
 6. `git commit` + `git push`
 
 ---
@@ -334,7 +334,7 @@ claude-agents/
 ├─ AGENTS.md                     # 13개 에이전트 통합 정리
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
-├─ sync-agents.bat               # 전역 동기화 스크립트
+├─ sync.ps1                      # 전역 동기화 스크립트
 ├─ .gitignore
 │
 ├─ code-reviewer.md              # ── 에이전트 정의 (13개) ──
