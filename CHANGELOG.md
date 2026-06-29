@@ -8,6 +8,23 @@
 
 ---
 
+## 1.9 (2026-06-29) — ui-ux-reviewer 점검 항목을 실무 디자인 감사 룰셋으로 확장
+
+공개 Claude 디자인 생태계(GitHub "Claude Design" 저장소들 — 특히 [claude-design-auditor-skill](https://github.com/Ashutos1997/claude-design-auditor-skill)의 19개 디자인 감사 카테고리)를 참고해, `ui-ux-reviewer`가 놓치던 화면 레벨 점검 영역을 보강. 생성·아티팩트 제작 도구류(읽기 전용·특정 스택 범위 밖)는 도입하지 않고, 우리 리뷰어에 맞는 점검 룰만 흡수.
+
+**기존 에이전트 보강**
+- `ui-ux-reviewer` 1.2 → 1.3
+  - **신규 점검 항목**: 폼/입력(검증 시점·에러 위치·중복 제출), 마이크로카피/콘텐츠(행동 기반 라벨·에러 메시지·말투), 국제화(i18n/RTL·텍스트 확장·로케일 포맷), 다크모드 품질(단순 반전 넘어 표면 위계·채도·대비), **다크 패턴/윤리**(거짓 긴급성·함정 동의·강제 행동)
+  - **a11y 보강**: `prefers-reduced-motion` 모션 접근성 추가
+  - **일관성 보강**: 아이콘 패밀리·코너 래디우스·인터랙션 상태·내비 활성 표시
+  - **점검 렌즈 명시**: 실무 디자인 감사 카테고리 + Nielsen 사용성 휴리스틱 10
+  - description(라우팅 신호)에 폼·마이크로카피·i18n·다크모드·다크패턴 키워드 추가
+
+**문서**
+- README 상단 버전 요약·버전 표(ui-ux-reviewer 1.3)·상세 블록 갱신. AGENTS.md·design-agents.md·CLAUDE.md 갱신.
+
+---
+
 ## 1.8 (2026-06-29) — design-system-architect에 DESIGN.md 포맷 도입
 
 Google Labs의 [google-labs-code/design.md](https://github.com/google-labs-code/design.md)(코딩 에이전트에게 디자인 시스템을 전달하는 단일 소스 포맷)를 참고해, `design-system-architect`가 흩어진 토큰을 **`DESIGN.md` 한 파일**(기계가 읽는 YAML 프런트매터 토큰 + 사람이 읽는 산문 근거)로 정리·작성하도록 보강. 겹치는 영역이라 새 에이전트를 만들지 않고 기존에 흡수(Footprint Ladder).

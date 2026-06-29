@@ -6,7 +6,7 @@
 - 에이전트 수: **13종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `test-runner` **v1.4**, `code-reviewer`·`security-reviewer`·`design-system-architect` **v1.3**, `perf-auditor`·`devops-reviewer`·`test-strategy`·`migration-reviewer` **v1.1**(신규 4종), 그 외 **v1.2** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `test-runner` **v1.4**, `code-reviewer`·`security-reviewer`·`design-system-architect`·`ui-ux-reviewer` **v1.3**, `perf-auditor`·`devops-reviewer`·`test-strategy`·`migration-reviewer` **v1.1**(신규 4종), 그 외 **v1.2** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -35,7 +35,7 @@
 | 6 | `api-doc-writer` | `/apidoc` | 문서 | 1.2 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
 | 7 | `db-optimizer` | `/db` | DB | 1.2 | opus | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
 | 8 | `migration-reviewer` | `/migrate` | DB | 1.1 | opus | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
-| 9 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.2 | opus | UI/UX·접근성·반응형 점검 | Read, Grep, Glob |
+| 9 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.3 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
 | 10 | `design-system-architect` | `/dsystem` | 디자인 | 1.3 | opus | 디자인 토큰·컴포넌트 설계 (DESIGN.md) | Read, Grep, Glob, Context7 |
 | 11 | `data-modeler` | `/datamodel` | 설계 | 1.2 | opus | 데이터 모델/스키마 설계 | Read, Grep, Glob |
 | 12 | `system-architect` | `/arch` | 설계 | 1.2 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
@@ -130,7 +130,8 @@
 <summary><b>9. ui-ux-reviewer</b> (<code>/ui</code>) — UI/UX·접근성 점검</summary>
 
 - **언제**: 화면 머지 전 디자인 품질 점검
-- **점검**: 레이아웃/간격, 타이포 위계, 색 대비(WCAG AA), 반응형·터치 타깃, 접근성(시맨틱·aria·키보드·alt·label), 상태 표현(로딩/빈/에러), 컴포넌트 일관성
+- **점검**: 레이아웃/간격, 타이포 위계, 색 대비(WCAG AA), 반응형·터치 타깃, 접근성(시맨틱·aria·키보드·alt·label·reduced-motion), 상태 표현(로딩/빈/에러), 컴포넌트 일관성
+- **확장(v1.3)**: 폼/입력(검증 시점·에러 위치), 마이크로카피/콘텐츠, 국제화(i18n/RTL·텍스트 확장), 다크모드 품질(표면 위계), **다크 패턴/윤리**, Nielsen 사용성 휴리스틱 렌즈 (실무 디자인 감사 카테고리 기반)
 - **출력**: 요약 → Must/Should/Nit
 - **구분**: 토큰/시스템 설계는 `design-system-architect`
 </details>

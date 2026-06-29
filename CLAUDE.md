@@ -21,7 +21,7 @@ The agents are authored in **Korean** and all target the same downstream stack t
 | `test-strategy.md` | Diagnose coverage gaps & weak tests, propose cases | Read, Grep, Glob | No |
 | `perf-auditor.md` | Next.js perf (bundle, CWV, RSC boundary, fetching) | Read, Grep, Glob | No |
 | `devops-reviewer.md` | Docker / CI-CD / deploy config & secret-handling review | Read, Grep, Glob | No |
-| `ui-ux-reviewer.md` | Next.js UI/UX, a11y, responsive, state-handling review | Read, Grep, Glob | No |
+| `ui-ux-reviewer.md` | Next.js UI/UX, a11y, responsive, state-handling, forms, microcopy, i18n/RTL, dark mode, dark-pattern review | Read, Grep, Glob | No |
 | `design-system-architect.md` | Design tokens, component hierarchy, theming, Tailwind config; authors a DESIGN.md single source (google-labs-code/design.md format) | Read, Grep, Glob, Context7 | No |
 | `data-modeler.md` | MySQL data-model / schema design (ERD, normalization, keys) | Read, Grep, Glob | No |
 | `system-architect.md` | System architecture design / review across the full stack | Read, Grep, Glob | No |

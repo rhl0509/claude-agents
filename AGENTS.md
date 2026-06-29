@@ -77,7 +77,7 @@ MySQL/Alembic 스키마 마이그레이션 **안전성** 점검(대형 테이블
 ### 🎨 디자인
 
 **9. ui-ux-reviewer (`/ui`)**
-화면 UI/UX·접근성 점검. 레이아웃/간격, 타이포 위계, 색 대비(WCAG AA), 반응형·터치 타깃, 접근성(시맨틱·aria·키보드·alt·label), 상태 표현(로딩/빈/에러), 컴포넌트 일관성. 출력: 요약 → Must/Should/Nit.
+화면 UI/UX·접근성 점검. 레이아웃/간격, 타이포 위계, 색 대비(WCAG AA), 반응형·터치 타깃, 접근성(시맨틱·aria·키보드·alt·label·reduced-motion), 상태 표현(로딩/빈/에러), **폼/입력(검증 시점·에러 위치), 마이크로카피, 국제화(i18n/RTL), 다크모드 품질, 다크 패턴/윤리**, 컴포넌트 일관성. 실무 디자인 감사 카테고리 + Nielsen 휴리스틱 렌즈. 출력: 요약 → Must/Should/Nit.
 → 토큰/시스템 설계는 `design-system-architect`.
 
 **10. design-system-architect (`/dsystem`)**
