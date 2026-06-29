@@ -1,6 +1,6 @@
 ---
 name: test-runner
-description: 테스트를 실행하고 실패 원인을 분석할 때 사용. pytest(FastAPI), Jest/Vitest(Next.js) 등을 돌리고 실패한 케이스를 진단한다. 코드 수정 후 "테스트 돌려봐"가 필요할 때 호출.
+description: 테스트를 실행하고 실패 원인을 분석할 때 사용. pytest(FastAPI), Vitest/Jest 유닛·Playwright/Cypress E2E(Next.js) 등을 돌리고 실패한 케이스를 진단한다. 코드 수정 후 "테스트 돌려봐", "E2E 돌려봐"가 필요할 때 호출.
 tools: Bash, Read, Grep, Glob
 model: haiku
 version: 1.5
