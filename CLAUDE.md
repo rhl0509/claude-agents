@@ -14,17 +14,17 @@ The agents are authored in **Korean** and all target the same downstream stack t
 |---|---|---|---|
 | `code-reviewer.md` | General quality/readability/bug review across Next.js + FastAPI | Read, Grep, Glob, Bash | No |
 | `security-reviewer.md` | OWASP-oriented security review (authz/IDOR, JWT, injection, XSS, secret leakage) | Read, Grep, Glob, WebSearch, WebFetch | No |
-| `db-optimizer.md` | MySQL schema/query/index analysis (N+1, indexing, pagination, locks) | Read, Grep, Glob, Bash | No |
+| `db-optimizer.md` | MySQL schema/query/index analysis (N+1, indexing, pagination, locks, MySQL 9 vector search) | Read, Grep, Glob, Bash | No |
 | `migration-reviewer.md` | MySQL/Alembic migration safety (locks, backfill order, rollback, deploy order) | Read, Grep, Glob | No |
 | `api-doc-writer.md` | Catalog FastAPI endpoints into API docs | Read, Grep, Glob, Context7 | No |
 | `test-runner.md` | Run pytest / Jest / Vitest and diagnose failures | Bash, Read, Grep, Glob | No |
 | `test-strategy.md` | Diagnose coverage gaps & weak tests, propose cases | Read, Grep, Glob | No |
-| `perf-auditor.md` | Next.js perf (bundle, CWV, RSC boundary, fetching) | Read, Grep, Glob | No |
+| `perf-auditor.md` | Next.js perf (bundle, CWV, RSC boundary, fetching, Next 16 cache components/PPR/React Compiler) | Read, Grep, Glob | No |
 | `devops-reviewer.md` | Docker / CI-CD / deploy config & secret-handling review | Read, Grep, Glob | No |
 | `ui-ux-reviewer.md` | Next.js UI/UX, a11y, responsive, state-handling, forms, microcopy, i18n/RTL, dark mode, dark-pattern review | Read, Grep, Glob | No |
 | `design-system-architect.md` | Design tokens, component hierarchy, theming, Tailwind config; authors a DESIGN.md single source (google-labs-code/design.md format) | Read, Grep, Glob, Context7 | No |
-| `data-modeler.md` | MySQL data-model / schema design (ERD, normalization, keys) | Read, Grep, Glob | No |
-| `system-architect.md` | System architecture design / review across the full stack | Read, Grep, Glob | No |
+| `data-modeler.md` | MySQL data-model / schema design (ERD, normalization, keys, MySQL 9 VECTOR/embeddings) | Read, Grep, Glob | No |
+| `system-architect.md` | System architecture design / review across the full stack (incl. LLM/RAG integration) | Read, Grep, Glob | No |
 
 ## Shared conventions (follow these when adding or editing an agent)
 

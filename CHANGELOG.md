@@ -8,6 +8,22 @@
 
 ---
 
+## 1.10 (2026-06-29) — 최신 스택 트렌드 반영 (Next.js 16 / MySQL 9 VECTOR / LLM 연동)
+
+웹 조사로 확인한 두 가지 실질적 트렌드 공백을 5개 에이전트에 반영. ① **Next.js 16**의 캐싱·렌더 모델 변화(Cache Components·`use cache` opt-in, PPR, React Compiler 1.0 stable, Turbopack 기본), ② **MySQL 9.0**의 `VECTOR` 타입(임베딩·시맨틱 검색). 버전 가정은 단정하지 않고 "해당 버전이면 / 확인 필요"로 조건부 서술.
+
+**기존 에이전트 보강**
+- `perf-auditor` 1.1 → 1.2 — 점검 항목에 "Next.js 15/16 캐싱·렌더 모델" 추가: `use cache`/Cache Components opt-in 누락·오캐시, PPR 정적 셸+Suspense 경계, React Compiler 자동 메모와 중복되는 수동 메모, 구·신 캐싱 혼재
+- `code-reviewer` 1.3 → 1.4 — 프론트 체크포인트에 Server Actions 보안(서버 재검증·인가·노출), `use cache` 오캐시, React Compiler 중복 수동 메모 추가
+- `data-modeler` 1.2 → 1.3 — 타입 선택에 임베딩 `VECTOR(N)`(MySQL 9.0+)·저장 구조(8 이하면 외부 벡터 DB 트레이드오프), JSON 컬럼 사용 기준 추가
+- `db-optimizer` 1.2 → 1.3 — 점검 항목에 "벡터 검색"(MySQL 9 `VECTOR_DISTANCE` k-NN 전체 스캔·사전필터·근사검색) 추가
+- `system-architect` 1.2 → 1.3 — 설계 항목에 "LLM/AI 연동"(스트리밍 SSE, RAG/벡터 스토어, LLM 호출 비동기·재시도·비용, MCP 등 도구 경계) 추가. 보안 세부는 security-reviewer로 위임
+
+**문서**
+- README 상단 버전 요약·버전 표(5종)·상세 블록 갱신. AGENTS.md·CLAUDE.md 갱신.
+
+---
+
 ## 1.9 (2026-06-29) — ui-ux-reviewer 점검 항목을 실무 디자인 감사 룰셋으로 확장
 
 공개 Claude 디자인 생태계(GitHub "Claude Design" 저장소들 — 특히 [claude-design-auditor-skill](https://github.com/Ashutos1997/claude-design-auditor-skill)의 19개 디자인 감사 카테고리)를 참고해, `ui-ux-reviewer`가 놓치던 화면 레벨 점검 영역을 보강. 생성·아티팩트 제작 도구류(읽기 전용·특정 스택 범위 밖)는 도입하지 않고, 우리 리뷰어에 맞는 점검 룰만 흡수.
