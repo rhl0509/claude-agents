@@ -1,9 +1,9 @@
 ---
 name: code-reviewer
-description: Next.js(프론트)와 FastAPI(백엔드) 코드의 품질, 가독성, 버그 가능성을 리뷰할 때 사용. 커밋/PR 전 셀프 리뷰, 리팩터링 검토에 적합. 보안 전용 점검은 security-reviewer를 쓴다.
+description: Next.js(프론트)와 FastAPI(백엔드) 코드의 품질, 가독성, 버그 가능성을 리뷰할 때 사용. 커밋/PR 전 셀프 리뷰, 리팩터링 검토에 적합. 보안 전용 점검은 security-reviewer, 시각·접근성·UX 점검은 ui-ux-reviewer를 쓴다.
 tools: Read, Grep, Glob, Bash
 model: opus
-version: 1.5
+version: 1.6
 updated: 2026-06-29
 ---
 

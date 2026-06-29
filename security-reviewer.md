@@ -1,9 +1,9 @@
 ---
 name: security-reviewer
-description: FastAPI 백엔드와 Next.js 프론트엔드의 보안 취약점을 점검할 때 사용. JWT/인증, IDOR, 권한 체크 누락, SQL 인젝션, XSS, 미인증 엔드포인트, 민감정보 노출을 찾는다. LLM/RAG 연동의 프롬프트 인젝션·출력 처리 등 AI 보안(OWASP LLM Top 10)도 본다. PR이나 새 기능을 머지하기 전, 또는 "보안 점검"이 필요할 때 호출. 일반 코드 품질·버그는 code-reviewer를 쓴다.
+description: FastAPI 백엔드와 Next.js 프론트엔드의 보안 취약점을 점검할 때 사용. JWT/인증, IDOR, 권한 체크 누락, SQL 인젝션, XSS, 미인증 엔드포인트, 민감정보 노출을 찾는다. LLM/RAG 연동의 프롬프트 인젝션·출력 처리 등 AI 보안(OWASP LLM Top 10)도 본다. PR이나 새 기능을 머지하기 전, 또는 "보안 점검"이 필요할 때 호출. 일반 코드 품질·버그는 code-reviewer, 배포·CI 설정·시크릿 취급은 devops-reviewer를 쓴다.
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: opus
-version: 1.5
+version: 1.6
 updated: 2026-06-29
 ---
 

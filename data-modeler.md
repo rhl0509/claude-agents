@@ -1,9 +1,9 @@
 ---
 name: data-modeler
-description: MySQL 데이터 모델/스키마를 설계할 때 사용. 엔터티·관계(ERD), 정규화, 키 전략, 제약조건, 이력/감사/soft delete, 다대다 매핑, 타입 선택을 다룬다. ERP처럼 도메인이 복잡한 모델 설계에 적합. 기존 쿼리/인덱스 성능 튜닝은 db-optimizer를 쓴다. 스키마를 직접 변경하지 않고 설계·제안만 한다.
+description: MySQL 데이터 모델/스키마를 설계할 때 사용. 엔터티·관계(ERD), 정규화, 키 전략, 제약조건, 이력/감사/soft delete, 다대다 매핑, 타입 선택을 다룬다. ERP처럼 도메인이 복잡한 모델 설계에 적합. 기존 쿼리/인덱스 성능 튜닝은 db-optimizer, 마이그레이션 안전성(락·백필·롤백)은 migration-reviewer를 쓴다. 스키마를 직접 변경하지 않고 설계·제안만 한다.
 tools: Read, Grep, Glob
 model: opus
-version: 1.3
+version: 1.4
 updated: 2026-06-29
 ---
 

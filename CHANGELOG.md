@@ -8,6 +8,22 @@
 
 ---
 
+## 1.20 (2026-06-29) — description 라우팅 신호 양방향 보강 (편도 deferral 5건)
+
+겹침 쌍 10개를 양방향 deferral 기준으로 점검해 편도(상대는 이 에이전트를 가리키나 이 에이전트는 상대를 안 가리킴) 5건을 대칭화. CLAUDE.md의 "description은 이웃과 구분 짓는 라우팅 신호" 규칙에 맞춤. 트리거 문구는 그대로 두고 "구분" 위임만 추가. (db-optimizer → perf-auditor는 db-optimizer가 MySQL 한정이라 오라우팅 위험 거의 없어 제외)
+
+**기존 에이전트 보강**
+- `code-reviewer` 1.5 → 1.6 — description에 "시각·접근성·UX 점검은 ui-ux-reviewer" 위임 추가(ui-ux는 이미 code-reviewer로 위임, 기본 에이전트 과호출 완화)
+- `security-reviewer` 1.5 → 1.6 — "배포·CI 설정·시크릿 취급은 devops-reviewer" 위임 추가(시크릿/민감정보 노출 겹침 해소)
+- `data-modeler` 1.3 → 1.4 — "마이그레이션 안전성(락·백필·롤백)은 migration-reviewer" 위임 추가(설계 에이전트로 안전성 질의가 새던 것 해소)
+- `test-runner` 1.6 → 1.7 — "커버리지 공백·약한 테스트 진단·보강 전략은 test-strategy" 위임 추가
+- `ui-ux-reviewer` 1.3 → 1.4 — "로드·렌더 성능(번들·CWV)은 perf-auditor" 위임 추가("화면이 느리다"가 ui-ux로 새던 것 해소)
+
+**문서**
+- README 상단 버전 요약·버전 표 갱신.
+
+---
+
 ## 1.19 (2026-06-29) — 문서 stale 교정 (design-agents.md 모델 티어 sonnet → opus)
 
 전체 일관성 점검 중 보조 문서 `design-agents.md`의 "한눈에 보기" 표가 네 에이전트(ui-ux-reviewer·design-system-architect·data-modeler·system-architect)를 과거 티어 `sonnet`으로 표기한 것을 발견. 실제 frontmatter·CLAUDE.md는 전부 `opus`라 교정. 에이전트 정의 변경 없음(문서만).

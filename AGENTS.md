@@ -45,14 +45,15 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 
 **1. code-reviewer (`/review`)**
 Next.js + FastAPI 코드의 품질·가독성·버그 가능성 리뷰. `git diff`로 변경분을 파악해 그 범위에 집중(커밋/PR 전 셀프 리뷰). 백엔드(Pydantic·async·DB 세션·예외·계층 분리), 프론트(서버/클라 경계·페칭·useEffect·타입). Next.js 15/16이면 Server Actions 보안·`use cache` 오캐시·React Compiler 중복 수동 메모도 점검(버전 불명확하면 "확인 필요"). 출력: 요약 → Must fix → Should fix → Nit.
-→ 보안 전용은 `security-reviewer`.
+→ 보안 전용은 `security-reviewer`, 시각·접근성·UX는 `ui-ux-reviewer`.
 
 **2. security-reviewer (`/sec`)**
 OWASP 기준 보안 점검. 인증/인가(라우터 레벨 의존성까지 확인해 오탐 방지), IDOR/BOLA·BFLA, Next.js 미들웨어 인가 우회(CVE-2025-29927), RBAC, 경로 탐색, JWT(alg confusion·헤더 주입), 인젝션(SQL·SSTI·OS/NoSQL), XSS, 과잉 응답(API3), CSRF/SSRF, Mass Assignment, CORS, LLM 보안(OWASP LLM Top 10 2025: 프롬프트 인젝션·과도한 행위성·벡터/임베딩 약점 등). 출력: 심각도순 + "즉시 고쳐야 할 Top 3".
-→ 일반 코드 품질·버그는 `code-reviewer`.
+→ 일반 코드 품질·버그는 `code-reviewer`, 배포·CI 설정·시크릿 취급은 `devops-reviewer`.
 
 **3. test-runner (`/test`)**
 pytest / Vitest·Jest(유닛) / Playwright·Cypress(E2E) 실행 후 실패 분석. 유닛과 E2E를 별개 러너로 인식 — E2E는 실행 비용·서버 기동 전제 때문에 요청 범위 밖이면 임의 실행 안 함. Vitest/jsdom은 async Server Component를 렌더 못 하므로 해당 실패는 프로덕션 버그로 단정하지 말고 Playwright E2E 영역임을 알림. 환경 준비(설치·venv)는 임의로 하지 않고 사전 조건으로 보고. 통과/실패 무관하게 테스트 품질 스캔(change-detector·목 그린)도 수행하며 green을 품질 증거로 칭찬하지 않음. 출력: 통과/실패/스킵 집계 → 실패별 원인 분류·제안, 플레이키·약한 테스트 표시.
+→ 커버리지 공백·약한 테스트 진단·보강 전략은 `test-strategy`.
 
 **4. test-strategy (`/coverage`)**
 테스트 커버리지 공백·약한 테스트 **진단 및 케이스 설계**(테스트 코드는 직접 작성 안 함). 안 짠 경로, 약한 단언(change-detector·목 그린·단언 약함), 테스트 구조, 스택별 핵심 경로 누락, 보강 우선순위. 출력: 요약 → 커버리지 공백(입력→기대결과) → 약한 테스트 → 제안.
@@ -79,7 +80,7 @@ MySQL/Alembic 스키마 마이그레이션 **안전성** 점검(대형 테이블
 
 **9. ui-ux-reviewer (`/ui`)**
 화면 UI/UX·접근성 점검. 레이아웃/간격, 타이포 위계, 색 대비(WCAG AA), 반응형·터치 타깃, 접근성(시맨틱·aria·키보드·alt·label·reduced-motion), 상태 표현(로딩/빈/에러), **폼/입력(검증 시점·에러 위치), 마이크로카피, 국제화(i18n/RTL), 다크모드 품질, 다크 패턴/윤리**, 컴포넌트 일관성. 실무 디자인 감사 카테고리 + Nielsen 휴리스틱 렌즈. 출력: 요약 → Must/Should/Nit.
-→ 토큰/시스템 설계는 `design-system-architect`.
+→ 코드 로직 버그는 `code-reviewer`, 토큰/시스템 설계는 `design-system-architect`, 로드·렌더 성능(번들·CWV)은 `perf-auditor`.
 
 **10. design-system-architect (`/dsystem`)**
 디자인 시스템 설계. 디자인 토큰(색/타이포/스페이싱/래디우스/섀도), 테마(다크모드), 컴포넌트 계층·variant, 네이밍, Tailwind 설정 토큰화, 중복 통합, 문서화. 디자인 시스템을 **`DESIGN.md`**([google-labs-code/design.md](https://github.com/google-labs-code/design.md) 포맷: 프런트매터 토큰 + 산문 근거) 단일 소스로 정리·작성. 토큰 참조 `{colors.primary}`, WCAG 대비 명시. `@google/design.md` CLI(`lint`/`export`→Tailwind v3·v4·DTCG/`diff`)는 실행 안 하고 안내만. 출력: 현황 진단 → 제안 토큰 세트(DESIGN.md 형태) → DESIGN.md 초안 → 컴포넌트 구조 → 마이그레이션 단계.
@@ -88,7 +89,7 @@ MySQL/Alembic 스키마 마이그레이션 **안전성** 점검(대형 테이블
 
 **11. data-modeler (`/datamodel`)**
 MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정규화, 키 전략(대리키/자연키/FK 동작), 타입 선택(임베딩=MySQL 9 `VECTOR(N)` 포함), 제약·무결성, 이력/감사/soft delete/채번, 확장성. 출력: 텍스트 ERD → 테이블별 설계(DDL) → 트레이드오프 → 가정.
-→ 기존 쿼리 성능 튜닝은 `db-optimizer`.
+→ 기존 쿼리 성능 튜닝은 `db-optimizer`, 마이그레이션 안전성(락·백필·롤백)은 `migration-reviewer`.
 
 **12. system-architect (`/arch`)**
 시스템 아키텍처 설계·점검. 계층 분리, 모듈 경계·의존성, API 계약, 인증 구조, 비동기/작업, 캐싱, 폴더 구조, 확장성, LLM/AI 연동(스트리밍 SSE·RAG/벡터 스토어·MCP 도구 경계). 출력(설계): 요구사항 → 옵션 비교 → 권장안(흐름도) → 단계 적용. 출력(점검): 진단 → 문제 → 개선 설계 → 마이그레이션.

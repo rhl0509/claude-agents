@@ -1,9 +1,9 @@
 ---
 name: ui-ux-reviewer
-description: Next.js 프론트엔드의 UI/UX 품질을 점검할 때 사용. 레이아웃·간격·타이포 위계·색 대비·반응형·접근성(a11y)·상태(로딩/빈/에러) 처리·폼/입력·마이크로카피·국제화(i18n/RTL)·다크모드·다크패턴(윤리)·인터랙션 일관성을 리뷰한다. 화면을 머지하기 전 디자인 점검이 필요할 때 호출. 코드 로직 버그는 code-reviewer, 디자인 토큰/시스템 설계는 design-system-architect를 쓴다.
+description: Next.js 프론트엔드의 UI/UX 품질을 점검할 때 사용. 레이아웃·간격·타이포 위계·색 대비·반응형·접근성(a11y)·상태(로딩/빈/에러) 처리·폼/입력·마이크로카피·국제화(i18n/RTL)·다크모드·다크패턴(윤리)·인터랙션 일관성을 리뷰한다. 화면을 머지하기 전 디자인 점검이 필요할 때 호출. 코드 로직 버그는 code-reviewer, 디자인 토큰/시스템 설계는 design-system-architect, 로드·렌더 성능(번들·CWV)은 perf-auditor를 쓴다.
 tools: Read, Grep, Glob
 model: opus
-version: 1.3
+version: 1.4
 updated: 2026-06-29
 ---
 
