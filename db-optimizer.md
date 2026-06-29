@@ -3,7 +3,7 @@ name: db-optimizer
 description: MySQL 스키마, 쿼리, 인덱스를 점검하고 성능을 개선할 때 사용. 느린 쿼리 진단, N+1 문제, 인덱스 설계, 마이그레이션의 성능·인덱스 영향 검토에 적합. ERP처럼 테이블이 많고 조인이 복잡한 경우에 특히 유용. 마이그레이션 안전성(락·무중단·롤백)은 migration-reviewer, 스키마 설계는 data-modeler를 쓴다.
 tools: Read, Grep, Glob, Bash
 model: opus
-version: 1.5
+version: 1.6
 updated: 2026-06-29
 ---
 
@@ -39,7 +39,7 @@ updated: 2026-06-29
 문제별로:
 ```
 [영향도: High/Medium/Low] 제목
-- 위치: 파일/쿼리
+- 위치: `파일경로:줄번호` (인라인 SQL이면 파일·함수)
 - 현재 문제: (왜 느리거나 위험한지)
 - 개선안: (구체적 인덱스 DDL이나 쿼리 재작성 예시)
 - 예상 효과: (대략적 개선 방향)
