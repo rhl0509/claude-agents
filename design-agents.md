@@ -11,10 +11,10 @@ Next.js + FastAPI + MySQL 스택을 위해 추가한 **설계/디자인 전용 �
 
 | 에이전트 | 슬래시 명령 | 모델 | 역할 |
 |---|---|---|---|
-| `ui-ux-reviewer` | `/ui` | sonnet | 화면 UI/UX·접근성·반응형 점검 |
-| `design-system-architect` | `/dsystem` | sonnet | 디자인 토큰·컴포넌트·테마 설계 |
-| `data-modeler` | `/datamodel` | sonnet | 엔터티·관계·키·제약 설계 |
-| `system-architect` | `/arch` | sonnet | 계층·모듈·API·확장성 설계 |
+| `ui-ux-reviewer` | `/ui` | opus | 화면 UI/UX·접근성·반응형 점검 |
+| `design-system-architect` | `/dsystem` | opus | 디자인 토큰·컴포넌트·테마 설계 |
+| `data-modeler` | `/datamodel` | opus | 엔터티·관계·키·제약 설계 |
+| `system-architect` | `/arch` | opus | 계층·모듈·API·확장성 설계 |
 
 ---
 

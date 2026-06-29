@@ -8,6 +8,15 @@
 
 ---
 
+## 1.19 (2026-06-29) — 문서 stale 교정 (design-agents.md 모델 티어 sonnet → opus)
+
+전체 일관성 점검 중 보조 문서 `design-agents.md`의 "한눈에 보기" 표가 네 에이전트(ui-ux-reviewer·design-system-architect·data-modeler·system-architect)를 과거 티어 `sonnet`으로 표기한 것을 발견. 실제 frontmatter·CLAUDE.md는 전부 `opus`라 교정. 에이전트 정의 변경 없음(문서만).
+
+**문서**
+- `design-agents.md` 모델 컬럼 4건 `sonnet` → `opus`.
+
+---
+
 ## 1.18 (2026-06-29) — devops-reviewer에 아티팩트 레지스트리·개발환경(devcontainer/Gitspaces) 점검 추가
 
 Harness Open Source의 나머지 두 축(아티팩트 레지스트리, Gitspaces)을 devops-reviewer로 마저 흡수. 둘 다 devops-reviewer 범위(공급망 보안·인프라 설정)에 자연스럽게 들어가 신규 에이전트 없이 기존 항목 확장.
