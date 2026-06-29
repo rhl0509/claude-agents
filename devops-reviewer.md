@@ -1,9 +1,9 @@
 ---
 name: devops-reviewer
-description: 배포/운영 설정 파일을 점검할 때 사용. Dockerfile·docker-compose, GitHub Actions 등 CI/CD 파이프라인, 환경변수/시크릿 취급, 빌드 캐시·이미지 크기, 헬스체크·재시작 정책, 배포 안전성을 본다. 머지·배포 전 인프라 설정 점검에 적합. 애플리케이션 코드 보안은 security-reviewer, DB 마이그레이션 안전성은 migration-reviewer, 시스템 구조 설계는 system-architect를 쓴다. 설정을 직접 수정하지 않고 점검·제안만 한다.
+description: 배포/운영 설정 파일을 점검할 때 사용. Dockerfile·docker-compose, GitHub Actions·Harness·Drone·GitLab CI 등 CI/CD 파이프라인, 환경변수/시크릿 취급, 빌드 캐시·이미지 크기, 헬스체크·재시작 정책, 배포 안전성을 본다. 머지·배포 전 인프라 설정 점검에 적합. 애플리케이션 코드 보안은 security-reviewer, DB 마이그레이션 안전성은 migration-reviewer, 시스템 구조 설계는 system-architect를 쓴다. 설정을 직접 수정하지 않고 점검·제안만 한다.
 tools: Read, Grep, Glob
 model: opus
-version: 1.2
+version: 1.3
 updated: 2026-06-29
 ---
 
@@ -20,6 +20,11 @@ updated: 2026-06-29
 3. **docker-compose** — 포트 노출 범위(DB를 `0.0.0.0`로 공개), `depends_on`만으로 준비 상태 가정(헬스체크 부재), 볼륨/영속성, 재시작 정책, 네트워크 분리
 4. **CI/CD (GitHub Actions 등)** — 액션 버전 핀(태그 vs commit SHA), 시크릿을 로그/PR에 노출, `pull_request_target` 등 권한 위험, 캐시 활용, `permissions` 과다(워크플로에 명시적 최소 권한 블록 누락 → 기본 권한 상속), 테스트·린트 게이트 누락, 배포 트리거 조건
    - **OIDC 키리스 인증**: 클라우드 배포·레지스트리 푸시에 장기 시크릿(액세스 키) 대신 GitHub OIDC(`permissions: id-token: write`)로 단기 자격증명을 발급받는지 — 장기 시크릿이 저장돼 있으면 OIDC 전환을 제안
+   - **GitHub Actions 외 파이프라인도 같은 렌즈로 본다** — Harness Open Source/Drone(`.harness/*.yaml`·`.drone.yml`, `kind: pipeline` / `spec.stages[].steps[]`), GitLab CI, CircleCI 등이 트리에 있으면 식별해 점검한다:
+     - **스텝 이미지 핀**: 플러그인/스텝 이미지(Harness `type: Plugin`의 `spec.image`, Drone `image:`)가 `latest`가 아닌 태그/digest로 고정됐는지
+     - **시크릿 취급**: Harness `${{ secrets.get("...") }}`·Drone `from_secret`로 참조하는지(하드코딩·평문 `settings`/env로 로그 노출 금지), 빌트인 시크릿 매니저 vs 외부 연동
+     - **권한·격리**: `privileged` 스텝, `/var/run/docker.sock` 마운트(DinD) 같은 컨테이너 탈출 위험, `connectorRef`(레지스트리 인증) 최소 권한
+     - **트리거/클론**: `when`/트리거 조건과 클론 깊이가 과도하지 않은지
 5. **공급망 보안** — 이미지 digest 핀(태그 변조 방지), 의존성 자동 업데이트(Dependabot/Renovate), 취약점 스캔(이미지·의존성), **SBOM 생성**, **이미지 서명·출처 증명**(cosign/sigstore 키리스 + Rekor, 빌드 provenance/attestation)으로 배포물의 출처를 검증 가능한지. 도입 안 됐으면 위험도에 맞춰 제안(필수는 아니나 운영 등급에 따라 권장)
 6. **배포 안전성** — 마이그레이션과 코드 배포 순서(migration-reviewer 영역과 연계), 롤백 전략, 헬스체크/레디니스, 무중단(롤링) 여부, 환경 분리(stage/prod)
 7. **빌드 재현성** — 락파일 사용(`npm ci` vs `install`, pip 핀), 빌드 캐시 키, 결정적 빌드

@@ -96,7 +96,7 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 ### 🚀 운영 (DevOps)
 
 **13. devops-reviewer (`/devops`)**
-배포/운영 설정 점검. Dockerfile(레이어·캐시·이미지 크기·비루트·멀티스테이지), 시크릿/환경변수 취급, docker-compose(헬스체크·의존 순서·볼륨), CI/CD(GitHub Actions 권한·캐시·시크릿 노출·OIDC 키리스 인증), 공급망 보안(SBOM·이미지 서명/cosign·provenance·digest 핀), 배포 안전성, 빌드 재현성. 대상 파일이 없으면 그 사실을 보고. 출력: 요약 → 위험 Top 3 → 주의 → 제안.
+배포/운영 설정 점검. Dockerfile(레이어·캐시·이미지 크기·비루트·멀티스테이지), 시크릿/환경변수 취급, docker-compose(헬스체크·의존 순서·볼륨), CI/CD(GitHub Actions 권한·캐시·시크릿 노출·OIDC 키리스 인증), GHA 외 파이프라인(Harness Open Source/Drone `kind: pipeline`·GitLab CI·CircleCI도 같은 렌즈: 스텝 이미지 핀·`secrets.get`/`from_secret` 시크릿 참조·`privileged`/docker.sock DinD 격리·트리거 범위), 공급망 보안(SBOM·이미지 서명/cosign·provenance·digest 핀), 배포 안전성, 빌드 재현성. 대상 파일이 없으면 그 사실을 보고. 출력: 요약 → 위험 Top 3 → 주의 → 제안.
 → 코드 보안은 `security-reviewer`, 마이그레이션은 `migration-reviewer`, 구조 설계는 `system-architect`.
 
 ---

@@ -8,6 +8,18 @@
 
 ---
 
+## 1.17 (2026-06-29) — devops-reviewer에 GHA 외 파이프라인 인식 추가 (Harness Open Source/Drone)
+
+[harness/harness](https://github.com/harness/harness)(Harness Open Source = SCM+CI/CD+Gitspaces+아티팩트 레지스트리, Drone의 차세대)를 읽고, 우리 스택(Next.js+FastAPI+MySQL) 리뷰 셋에 실제로 전이되는 부분을 점검. Harness는 Go 기반 DevOps 플랫폼이라 **genuine fit은 devops-reviewer 하나**였고(나머지 12종은 앱 코드/DB/디자인 대상이라 Harness 고유 내용 흡수 여지 없음 — 억지 보강 안 함), CI/CD 점검 범위를 GitHub Actions 너머로 확장.
+
+**기존 에이전트 보강**
+- `devops-reviewer` 1.2 → 1.3 — CI/CD 항목에 "GHA 외 파이프라인도 같은 렌즈로" 추가: Harness Open Source/Drone(`.harness/*.yaml`·`.drone.yml`, `kind: pipeline`/`spec.stages[].steps[]`)·GitLab CI·CircleCI 식별 후 ① 플러그인/스텝 이미지 핀(`type: Plugin`의 `spec.image`·Drone `image`), ② 시크릿 참조(`${{ secrets.get(...) }}`·`from_secret`) vs 하드코딩·평문 노출, ③ `privileged`·`/var/run/docker.sock`(DinD) 격리·`connectorRef` 최소 권한, ④ 트리거(`when`)/클론 범위 점검. description에도 Harness·Drone·GitLab CI 라우팅 신호 추가
+
+**문서**
+- README 상단 버전 요약·버전 표·상세 블록 갱신. AGENTS.md·CLAUDE.md 갱신.
+
+---
+
 ## 1.16 (2026-06-29) — 문서 stale 참조 정리 (`sync-agents.bat` → `sync.ps1`)
 
 동기화 스크립트 실제 파일명은 `sync.ps1`인데 일부 문서가 존재하지 않는 `sync-agents.bat`을 가리키던 것을 전수 교정. 에이전트 정의 변경 없음(문서·메타만).

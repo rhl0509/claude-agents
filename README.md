@@ -6,7 +6,7 @@
 - 에이전트 수: **13종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `test-runner`·`db-optimizer` **v1.6**, `code-reviewer`·`security-reviewer` **v1.5**, `data-modeler`·`system-architect`·`ui-ux-reviewer`·`design-system-architect`·`api-doc-writer` **v1.3**, `perf-auditor`·`devops-reviewer`·`test-strategy` **v1.2**, `migration-reviewer` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `test-runner`·`db-optimizer` **v1.6**, `code-reviewer`·`security-reviewer` **v1.5**, `data-modeler`·`system-architect`·`ui-ux-reviewer`·`design-system-architect`·`api-doc-writer`·`devops-reviewer` **v1.3**, `perf-auditor`·`test-strategy` **v1.2**, `migration-reviewer` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -39,7 +39,7 @@
 | 10 | `design-system-architect` | `/dsystem` | 디자인 | 1.3 | opus | 디자인 토큰·컴포넌트 설계 (DESIGN.md) | Read, Grep, Glob, Context7 |
 | 11 | `data-modeler` | `/datamodel` | 설계 | 1.3 | opus | 데이터 모델/스키마 설계 | Read, Grep, Glob |
 | 12 | `system-architect` | `/arch` | 설계 | 1.3 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
-| 13 | `devops-reviewer` | `/devops` | 운영 | 1.2 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
+| 13 | `devops-reviewer` | `/devops` | 운영 | 1.3 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
 
 ### 🔍 품질 / QA
 
@@ -181,6 +181,7 @@
 - **언제**: 머지·배포 전 인프라/파이프라인 설정 점검
 - **점검**: Dockerfile(이미지 핀·멀티스테이지·비루트·HEALTHCHECK), 시크릿/환경변수(하드코딩·이미지 잔존·.env 커밋), docker-compose(포트 노출·헬스체크), CI/CD(액션 핀·권한·시크릿 노출·게이트), 배포 안전성(롤백·무중단), 빌드 재현성(락파일)
 - **공급망·OIDC(v1.2)**: 장기 시크릿 대신 GitHub OIDC 키리스 인증, SBOM 생성, 이미지 서명·출처 증명(cosign/sigstore·provenance), digest 핀, 의존성 자동 업데이트
+- **GHA 외 파이프라인(v1.3)**: Harness Open Source/Drone(`.harness/*.yaml`·`.drone.yml`, `kind: pipeline`)·GitLab CI·CircleCI도 같은 렌즈로 — 플러그인/스텝 이미지 핀, 시크릿 참조(`secrets.get`/`from_secret`) vs 하드코딩, `privileged`·docker.sock(DinD) 격리, 트리거/클론 범위
 - **전제**: 대상 레포에 Docker/CI 설정 파일이 있어야 의미가 있음 — 없으면 그 사실을 보고
 - **출력**: 요약(안전 배포 가능 여부) → 위험 Top 3(안전한 대안) → 주의 → 제안
 - **구분**: 코드 보안은 `security-reviewer`, 마이그레이션 안전성은 `migration-reviewer`, 구조 설계는 `system-architect`
