@@ -8,6 +8,23 @@
 
 ---
 
+## 1.12 (2026-06-29) — test-runner·api-doc-writer 트렌드 반영 (Playwright E2E / FastAPI Annotated)
+
+웹 조사로 확인한 두 에이전트의 트렌드 공백을 반영. ① Next.js 테스트는 유닛(Vitest)과 **E2E(Playwright)**가 분리됐고 Vitest는 **async Server Component**를 렌더 못 함, ② FastAPI는 **`Annotated[...]` 의존성/파라미터 문법**(0.95.0+ 권장)이 표준이고 OpenAPI 3.1을 기본 생성.
+
+**기존 에이전트 보강**
+- `test-runner` 1.4 → 1.5
+  - **러너 식별**: Playwright(`@playwright/test`)·Cypress를 유닛과 별개의 E2E 러너로 인식, 실행 비용·전제(서버 기동) 때문에 요청 범위 밖이면 임의 실행 안 함
+  - **Vitest 한계 인지**: Vitest/jsdom은 async Server Component를 렌더 못 함 → 해당 실패를 프로덕션 버그로 단정하지 말고 Playwright E2E 영역임을 알림
+- `api-doc-writer` 1.2 → 1.3
+  - **시그니처 해석**: `Annotated[User, Depends(...)]`·`Annotated[str|None, Query()/Header()]` 양식을 구식 기본값 문법과 동등하게 인식(인증·파라미터 판정 모두)
+  - **OpenAPI 3.1 교차 점검**: prefix 합성이 불확실하면 `/openapi.json`을 근거로 제안(직접 실행 불가 → "확인 필요")
+
+**문서**
+- README 상단 버전 요약·버전 표·상세 블록 갱신. AGENTS.md·CLAUDE.md 갱신.
+
+---
+
 ## 1.11 (2026-06-29) — 보안·DevOps 최신 트렌드 반영 (Next.js CVE / OWASP LLM 2025 / 공급망·OIDC)
 
 웹 조사로 확인한 보안·운영 영역의 트렌드 공백을 2개 에이전트에 반영. ① **Next.js 미들웨어 인가 우회(CVE-2025-29927)**, ② **OWASP LLM Top 10 2025** 확장(기존 LLM01만 → 과도한 행위성·벡터/임베딩 약점 등), ③ CI/CD **공급망 보안**(SBOM·이미지 서명·OIDC 키리스 인증).

@@ -16,8 +16,8 @@ The agents are authored in **Korean** and all target the same downstream stack t
 | `security-reviewer.md` | OWASP-oriented security review (authz/IDOR, Next.js middleware bypass, JWT, injection, XSS, secret leakage, OWASP LLM Top 10 2025) | Read, Grep, Glob, WebSearch, WebFetch | No |
 | `db-optimizer.md` | MySQL schema/query/index analysis (N+1, indexing, pagination, locks, MySQL 9 vector search) | Read, Grep, Glob, Bash | No |
 | `migration-reviewer.md` | MySQL/Alembic migration safety (locks, backfill order, rollback, deploy order) | Read, Grep, Glob | No |
-| `api-doc-writer.md` | Catalog FastAPI endpoints into API docs | Read, Grep, Glob, Context7 | No |
-| `test-runner.md` | Run pytest / Jest / Vitest and diagnose failures | Bash, Read, Grep, Glob | No |
+| `api-doc-writer.md` | Catalog FastAPI endpoints into API docs (incl. `Annotated[...]` deps, OpenAPI 3.1 cross-check) | Read, Grep, Glob, Context7 | No |
+| `test-runner.md` | Run pytest / Vitest·Jest unit / Playwright·Cypress E2E and diagnose failures (Vitest can't render async Server Components) | Bash, Read, Grep, Glob | No |
 | `test-strategy.md` | Diagnose coverage gaps & weak tests, propose cases | Read, Grep, Glob | No |
 | `perf-auditor.md` | Next.js perf (bundle, CWV, RSC boundary, fetching, Next 16 cache components/PPR/React Compiler) | Read, Grep, Glob | No |
 | `devops-reviewer.md` | Docker / CI-CD / deploy config & secret-handling review (OIDC keyless auth, supply chain: SBOM/signing) | Read, Grep, Glob | No |

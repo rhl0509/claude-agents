@@ -6,7 +6,7 @@
 - 에이전트 수: **13종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `code-reviewer`·`test-runner`·`security-reviewer` **v1.4**, `db-optimizer`·`data-modeler`·`system-architect`·`ui-ux-reviewer`·`design-system-architect` **v1.3**, `perf-auditor`·`api-doc-writer`·`devops-reviewer` **v1.2**, `test-strategy`·`migration-reviewer` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `test-runner` **v1.5**, `code-reviewer`·`security-reviewer` **v1.4**, `db-optimizer`·`data-modeler`·`system-architect`·`ui-ux-reviewer`·`design-system-architect`·`api-doc-writer` **v1.3**, `perf-auditor`·`devops-reviewer` **v1.2**, `test-strategy`·`migration-reviewer` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -29,10 +29,10 @@
 |---|---|---|---|---|---|---|---|
 | 1 | `code-reviewer` | `/review` | 품질 | 1.4 | opus | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
 | 2 | `security-reviewer` | `/sec` | 품질 | 1.4 | opus | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
-| 3 | `test-runner` | `/test` | 품질 | 1.4 | haiku | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
+| 3 | `test-runner` | `/test` | 품질 | 1.5 | haiku | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
 | 4 | `test-strategy` | `/coverage` | 품질 | 1.1 | opus | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
 | 5 | `perf-auditor` | `/perf` | 품질 | 1.2 | opus | Next.js 프론트 성능 점검 | Read, Grep, Glob |
-| 6 | `api-doc-writer` | `/apidoc` | 문서 | 1.2 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
+| 6 | `api-doc-writer` | `/apidoc` | 문서 | 1.3 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
 | 7 | `db-optimizer` | `/db` | DB | 1.3 | opus | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
 | 8 | `migration-reviewer` | `/migrate` | DB | 1.1 | opus | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
 | 9 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.3 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
@@ -69,7 +69,8 @@
 <summary><b>3. test-runner</b> (<code>/test</code>) — 테스트 실행·분석</summary>
 
 - **언제**: 코드 수정 후 테스트 실행·실패 진단
-- **러너**: pytest(FastAPI), Jest/Vitest(Next.js)
+- **러너**: pytest(FastAPI), Vitest/Jest 유닛(Next.js), Playwright/Cypress E2E
+- **러너 구분(v1.5)**: 유닛과 E2E를 별개 러너로 인식 — E2E는 실행 비용·서버 기동 전제 때문에 요청 범위 밖이면 임의 실행 안 함. Vitest/jsdom은 async Server Component를 렌더 못 함 → 해당 실패는 프로덕션 버그로 단정하지 말고 Playwright E2E 영역임을 알림
 - **원칙**: 프로덕션 코드·환경(설치·venv)을 임의로 건드리지 않음 — 사전 조건으로 보고, 명시 요청 시만 실행
 - **테스트 품질 스캔(v1.3)**: 통과한 테스트도 훑어 change-detector(리터럴/카운트 동결)·목 그린을 "테스트 자체 약점"으로 표시 — green을 커버리지 양호로 칭찬하지 않음
 - **출력**: 통과/실패/스킵 집계 → 실패별 원인 분류(코드 버그/테스트 오류/환경/외부 의존성)·제안, 플레이키 표시
@@ -103,6 +104,7 @@
 
 - **언제**: 프론트 연동 전 API 명세 파악, 미문서화 엔드포인트 발견
 - **수집**: 라우터/WebSocket 데코레이터, 다단계(중첩) prefix 합성, 라우터/앱 레벨 의존성까지 본 인증 판정, `tags`/`response_model`/`deprecated` 반영
+- **현대 문법(v1.3)**: `Annotated[User, Depends(...)]`·`Annotated[str|None, Query()/Header()]`(FastAPI 0.95.0+ 권장) 양식을 구식 기본값 문법과 동등 인식. prefix 합성 불확실 시 OpenAPI 3.1 `/openapi.json` 교차 점검을 제안(직접 실행 불가 → "확인 필요")
 - **출력**: 리소스/태그별 표 + 미인증·무응답모델·deprecated 엔드포인트 목록
 </details>
 
