@@ -8,6 +8,19 @@
 
 ---
 
+## 1.13 (2026-06-29) — description 라우팅 신호 정비 (security-reviewer·db-optimizer)
+
+전체 description을 라우팅 신호 관점(트리거 + 이웃 위임)으로 점검해 비대칭·공백 2건을 수정.
+
+**기존 에이전트 보강**
+- `security-reviewer` 1.4 → 1.5 — description에 ① LLM/RAG AI 보안(OWASP LLM Top 10) 라우팅 신호 추가(본문은 이미 다루나 신호가 없어 "프롬프트 인젝션 점검" 등이 안 잡힘), ② "일반 코드 품질·버그는 code-reviewer" 위임 추가(code-reviewer는 반대로 위임하던 비대칭 해소, CLAUDE.md 규칙과 일치)
+- `db-optimizer` 1.3 → 1.4 — description의 "마이그레이션 검토"를 "마이그레이션의 성능·인덱스 영향 검토"로 명확화하고, "안전성(락·무중단·롤백)은 migration-reviewer, 스키마 설계는 data-modeler" 위임 추가(이웃들은 db-optimizer를 가리키나 db-optimizer만 위임 포인터가 없던 비대칭 해소)
+
+**문서**
+- README 상단 버전 요약·버전 표·상세 블록 갱신. AGENTS.md 갱신. (CLAUDE.md는 기존 서술과 이미 일치)
+
+---
+
 ## 1.12 (2026-06-29) — test-runner·api-doc-writer 트렌드 반영 (Playwright E2E / FastAPI Annotated)
 
 웹 조사로 확인한 두 에이전트의 트렌드 공백을 반영. ① Next.js 테스트는 유닛(Vitest)과 **E2E(Playwright)**가 분리됐고 Vitest는 **async Server Component**를 렌더 못 함, ② FastAPI는 **`Annotated[...]` 의존성/파라미터 문법**(0.95.0+ 권장)이 표준이고 OpenAPI 3.1을 기본 생성.
