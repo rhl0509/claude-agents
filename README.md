@@ -6,7 +6,7 @@
 - 에이전트 수: **13종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `test-runner` **v1.4**, `code-reviewer`·`security-reviewer` **v1.3**, `perf-auditor`·`devops-reviewer`·`test-strategy`·`migration-reviewer` **v1.1**(신규 4종), 그 외 **v1.2** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `test-runner` **v1.4**, `code-reviewer`·`security-reviewer`·`design-system-architect` **v1.3**, `perf-auditor`·`devops-reviewer`·`test-strategy`·`migration-reviewer` **v1.1**(신규 4종), 그 외 **v1.2** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -36,7 +36,7 @@
 | 7 | `db-optimizer` | `/db` | DB | 1.2 | opus | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
 | 8 | `migration-reviewer` | `/migrate` | DB | 1.1 | opus | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
 | 9 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.2 | opus | UI/UX·접근성·반응형 점검 | Read, Grep, Glob |
-| 10 | `design-system-architect` | `/dsystem` | 디자인 | 1.2 | opus | 디자인 토큰·컴포넌트 설계 | Read, Grep, Glob, Context7 |
+| 10 | `design-system-architect` | `/dsystem` | 디자인 | 1.3 | opus | 디자인 토큰·컴포넌트 설계 (DESIGN.md) | Read, Grep, Glob, Context7 |
 | 11 | `data-modeler` | `/datamodel` | 설계 | 1.2 | opus | 데이터 모델/스키마 설계 | Read, Grep, Glob |
 | 12 | `system-architect` | `/arch` | 설계 | 1.2 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
 | 13 | `devops-reviewer` | `/devops` | 운영 | 1.1 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
@@ -138,9 +138,10 @@
 <details>
 <summary><b>10. design-system-architect</b> (<code>/dsystem</code>) — 디자인 시스템 설계</summary>
 
-- **언제**: 흩어진 스타일을 일관된 시스템으로 정비
+- **언제**: 흩어진 스타일을 일관된 시스템으로 정비, 디자인 시스템을 `DESIGN.md` 단일 소스로 정리
 - **설계**: 디자인 토큰(색/타이포/스페이싱/래디우스/섀도), 테마(다크모드), 컴포넌트 계층·variant, 네이밍, Tailwind 토큰화, 중복 통합, 문서화(Storybook)
-- **출력**: 현황 진단 → 제안 토큰 세트 → 컴포넌트 구조 → 마이그레이션 단계
+- **DESIGN.md(v1.3)**: [google-labs-code/design.md](https://github.com/google-labs-code/design.md) 포맷(프런트매터 토큰 + 산문 근거)으로 단일 소스 초안 작성. 토큰 참조 `{colors.primary}`, WCAG 대비 명시. `@google/design.md` CLI(`lint`/`export` → Tailwind v3 JSON·v4 `@theme`·DTCG/`diff`)는 실행하지 않고 다음 단계로 안내
+- **출력**: 현황 진단 → 제안 토큰 세트(DESIGN.md 형태) → DESIGN.md 초안 → 컴포넌트 구조 → 마이그레이션 단계
 </details>
 
 ### 🏗 설계

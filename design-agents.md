@@ -37,7 +37,7 @@ Next.js + FastAPI + MySQL 스택을 위해 추가한 **설계/디자인 전용 �
 
 ## 2. design-system-architect (`/dsystem`)
 
-**언제 쓰나**: 흩어진 스타일을 일관된 디자인 시스템으로 정비할 때.
+**언제 쓰나**: 흩어진 스타일을 일관된 디자인 시스템으로 정비할 때, 디자인 시스템을 `DESIGN.md` 단일 소스로 정리할 때.
 
 **분석/설계 항목**
 - 디자인 토큰(색/타이포/스페이싱/래디우스/섀도/z-index)
@@ -46,9 +46,11 @@ Next.js + FastAPI + MySQL 스택을 위해 추가한 **설계/디자인 전용 �
 - 네이밍·규칙 일관성(의미 기반 vs 값 기반)
 - Tailwind 설정 토큰화, 임의값 남용 점검
 - 중복 컴포넌트/스타일 통합
-- 문서화(Storybook 등)
+- 문서화(Storybook 등) / **단일 소스 `DESIGN.md`**
 
-**출력**: 현황 진단 → 제안 토큰 세트 → 컴포넌트 구조 → 마이그레이션 단계.
+**DESIGN.md 포맷 (v1.3)**: [google-labs-code/design.md](https://github.com/google-labs-code/design.md) 포맷으로 토큰을 한 파일에 모은다 — 프런트매터(기계가 읽는 토큰: `colors`/`typography`/`rounded`/`spacing`/`components`, 참조 `{colors.primary}`) + 산문(사람이 읽는 근거: Overview→Colors→Typography→Layout & Spacing→Elevation & Depth→Shapes→Components→Do's and Don'ts). 색 토큰은 WCAG 대비 명시. `@google/design.md` CLI(`lint`/`export`→Tailwind v3 JSON·v4 `@theme`·DTCG/`diff`)는 **실행하지 않고** 다음 단계로 안내(읽기 전용). Tailwind 프로젝트는 DESIGN.md를 단일 소스로 두고 export 권장.
+
+**출력**: 현황 진단 → 제안 토큰 세트(DESIGN.md 형태) → DESIGN.md 초안 → 컴포넌트 구조 → 마이그레이션 단계.
 
 **구분**: 개별 화면 점검은 `ui-ux-reviewer`.
 

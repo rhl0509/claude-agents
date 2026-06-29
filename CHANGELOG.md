@@ -8,6 +8,22 @@
 
 ---
 
+## 1.8 (2026-06-29) — design-system-architect에 DESIGN.md 포맷 도입
+
+Google Labs의 [google-labs-code/design.md](https://github.com/google-labs-code/design.md)(코딩 에이전트에게 디자인 시스템을 전달하는 단일 소스 포맷)를 참고해, `design-system-architect`가 흩어진 토큰을 **`DESIGN.md` 한 파일**(기계가 읽는 YAML 프런트매터 토큰 + 사람이 읽는 산문 근거)로 정리·작성하도록 보강. 겹치는 영역이라 새 에이전트를 만들지 않고 기존에 흡수(Footprint Ladder).
+
+**기존 에이전트 보강**
+- `design-system-architect` 1.2 → 1.3
+  - **DESIGN.md 포맷 섹션 추가**: 프런트매터 토큰 스키마(`colors`/`typography`/`rounded`/`spacing`/`components`), 토큰 참조 `{경로.토큰}`, 산문 섹션 순서(Overview→Colors→Typography→Layout & Spacing→Elevation & Depth→Shapes→Components→Do's and Don'ts), WCAG 대비 검증 규칙
+  - **CLI 안내(실행 안 함, 읽기 전용 유지)**: `@google/design.md` `lint`/`export`(Tailwind v3 `theme.extend` JSON·v4 `@theme` CSS·DTCG)/`diff`. Tailwind 프로젝트는 DESIGN.md를 단일 소스로 두고 export하는 흐름 권장
+  - **출력 형식**에 "DESIGN.md 초안" 단계 추가, 제안 토큰 세트를 기본적으로 DESIGN.md 프런트매터 형태로 제시
+  - **description**(라우팅 신호)에 "DESIGN.md 단일 소스 정리" 트리거 추가
+
+**문서**
+- README 상단 버전 요약·버전 표(design-system-architect 1.3)·상세 블록 갱신. AGENTS.md·design-agents.md·CLAUDE.md 표 갱신.
+
+---
+
 ## 1.7 (2026-06-26) — security-reviewer 체크리스트를 OWASP API Top 10로 보강
 
 공개 보안 스킬 라이브러리(Anthropic-Cybersecurity-Skills의 웹/API·인젝션 탐지 스킬)를 참고해, `security-reviewer`가 놓치던 **OWASP API Security Top 10** 항목들을 체크리스트에 흡수. 코드만 추가하던 기존 항목을 공격 클래스 단위로 구체화했다.
