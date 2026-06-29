@@ -6,7 +6,7 @@
 - 에이전트 수: **13종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `code-reviewer`·`test-runner` **v1.4**, `security-reviewer`·`db-optimizer`·`data-modeler`·`system-architect`·`ui-ux-reviewer`·`design-system-architect` **v1.3**, `perf-auditor`·`api-doc-writer` **v1.2**, `test-strategy`·`migration-reviewer`·`devops-reviewer` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `code-reviewer`·`test-runner`·`security-reviewer` **v1.4**, `db-optimizer`·`data-modeler`·`system-architect`·`ui-ux-reviewer`·`design-system-architect` **v1.3**, `perf-auditor`·`api-doc-writer`·`devops-reviewer` **v1.2**, `test-strategy`·`migration-reviewer` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -28,7 +28,7 @@
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|---|
 | 1 | `code-reviewer` | `/review` | 품질 | 1.4 | opus | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
-| 2 | `security-reviewer` | `/sec` | 품질 | 1.3 | opus | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
+| 2 | `security-reviewer` | `/sec` | 품질 | 1.4 | opus | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
 | 3 | `test-runner` | `/test` | 품질 | 1.4 | haiku | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
 | 4 | `test-strategy` | `/coverage` | 품질 | 1.1 | opus | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
 | 5 | `perf-auditor` | `/perf` | 품질 | 1.2 | opus | Next.js 프론트 성능 점검 | Read, Grep, Glob |
@@ -39,7 +39,7 @@
 | 10 | `design-system-architect` | `/dsystem` | 디자인 | 1.3 | opus | 디자인 토큰·컴포넌트 설계 (DESIGN.md) | Read, Grep, Glob, Context7 |
 | 11 | `data-modeler` | `/datamodel` | 설계 | 1.3 | opus | 데이터 모델/스키마 설계 | Read, Grep, Glob |
 | 12 | `system-architect` | `/arch` | 설계 | 1.3 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
-| 13 | `devops-reviewer` | `/devops` | 운영 | 1.1 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
+| 13 | `devops-reviewer` | `/devops` | 운영 | 1.2 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
 
 ### 🔍 품질 / QA
 
@@ -60,7 +60,8 @@
 
 - **언제**: PR/새 기능 머지 전, 보안 점검 필요 시
 - **기준**: OWASP Top 10
-- **점검**: 인증/인가(라우터 레벨 의존성까지 확인해 오탐 방지), IDOR/BOLA·BFLA·WebSocket(CSWSH), RBAC, 경로 탐색, JWT(알고리즘 고정·alg confusion·kid/jku 헤더 주입·exp·저장 위치), 인젝션(SQL·SSTI·OS/NoSQL), XSS, 과잉 응답(API3, response_model), CSRF/SSRF, Mass Assignment/BOPLA, LLM 연동 시 간접 프롬프트 인젝션, CORS
+- **점검**: 인증/인가(라우터 레벨 의존성까지 확인해 오탐 방지), IDOR/BOLA·BFLA·WebSocket(CSWSH), **Next.js 미들웨어 인가 우회(CVE-2025-29927)**, RBAC, 경로 탐색, JWT(알고리즘 고정·alg confusion·kid/jku 헤더 주입·exp·저장 위치), 인젝션(SQL·SSTI·OS/NoSQL), XSS, 과잉 응답(API3, response_model), CSRF/SSRF, Mass Assignment/BOPLA, CORS
+- **LLM 보안(v1.4, OWASP LLM Top 10 2025)**: 간접 프롬프트 인젝션(LLM01), 출력 처리(LLM05), 과도한 행위성(LLM06, 도구 권한·human-in-the-loop), 벡터/임베딩 약점(LLM08, RAG 포이즈닝·테넌트 격리), 시스템 프롬프트 유출(LLM02), 무제한 소비(LLM10)
 - **출력**: 심각도(Critical~Low)순 + "즉시 고쳐야 할 Top 3"
 </details>
 
@@ -176,6 +177,7 @@
 
 - **언제**: 머지·배포 전 인프라/파이프라인 설정 점검
 - **점검**: Dockerfile(이미지 핀·멀티스테이지·비루트·HEALTHCHECK), 시크릿/환경변수(하드코딩·이미지 잔존·.env 커밋), docker-compose(포트 노출·헬스체크), CI/CD(액션 핀·권한·시크릿 노출·게이트), 배포 안전성(롤백·무중단), 빌드 재현성(락파일)
+- **공급망·OIDC(v1.2)**: 장기 시크릿 대신 GitHub OIDC 키리스 인증, SBOM 생성, 이미지 서명·출처 증명(cosign/sigstore·provenance), digest 핀, 의존성 자동 업데이트
 - **전제**: 대상 레포에 Docker/CI 설정 파일이 있어야 의미가 있음 — 없으면 그 사실을 보고
 - **출력**: 요약(안전 배포 가능 여부) → 위험 Top 3(안전한 대안) → 주의 → 제안
 - **구분**: 코드 보안은 `security-reviewer`, 마이그레이션 안전성은 `migration-reviewer`, 구조 설계는 `system-architect`

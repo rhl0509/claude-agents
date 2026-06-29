@@ -8,6 +8,23 @@
 
 ---
 
+## 1.11 (2026-06-29) — 보안·DevOps 최신 트렌드 반영 (Next.js CVE / OWASP LLM 2025 / 공급망·OIDC)
+
+웹 조사로 확인한 보안·운영 영역의 트렌드 공백을 2개 에이전트에 반영. ① **Next.js 미들웨어 인가 우회(CVE-2025-29927)**, ② **OWASP LLM Top 10 2025** 확장(기존 LLM01만 → 과도한 행위성·벡터/임베딩 약점 등), ③ CI/CD **공급망 보안**(SBOM·이미지 서명·OIDC 키리스 인증).
+
+**기존 에이전트 보강**
+- `security-reviewer` 1.3 → 1.4
+  - **인증/인가**: Next.js 미들웨어 인가 우회(CVE-2025-29927, `x-middleware-subrequest`) — 버전 패치 확인 + 인가를 미들웨어에만 의존하지 말 것 추가
+  - **LLM 연동을 OWASP LLM Top 10 2025로 확장**: LLM01(프롬프트 인젝션)·LLM05(출력 처리)에 더해 **LLM06 과도한 행위성**(도구 권한·human-in-the-loop), **LLM08 벡터/임베딩 약점**(RAG 포이즈닝·테넌트 격리), **LLM02 시스템 프롬프트 유출**, **LLM10 무제한 소비** 추가
+- `devops-reviewer` 1.1 → 1.2
+  - **CI/CD**: OIDC 키리스 인증(장기 시크릿 대신 `id-token: write` 단기 자격증명), 워크플로 명시적 최소 권한 블록 추가
+  - **신규 항목 — 공급망 보안**: SBOM 생성, 이미지 서명·출처 증명(cosign/sigstore·Rekor·provenance/attestation), digest 핀, 의존성 자동 업데이트(Dependabot/Renovate)
+
+**문서**
+- README 상단 버전 요약·버전 표(2종)·상세 블록 갱신. AGENTS.md·CLAUDE.md 갱신.
+
+---
+
 ## 1.10 (2026-06-29) — 최신 스택 트렌드 반영 (Next.js 16 / MySQL 9 VECTOR / LLM 연동)
 
 웹 조사로 확인한 두 가지 실질적 트렌드 공백을 5개 에이전트에 반영. ① **Next.js 16**의 캐싱·렌더 모델 변화(Cache Components·`use cache` opt-in, PPR, React Compiler 1.0 stable, Turbopack 기본), ② **MySQL 9.0**의 `VECTOR` 타입(임베딩·시맨틱 검색). 버전 가정은 단정하지 않고 "해당 버전이면 / 확인 필요"로 조건부 서술.

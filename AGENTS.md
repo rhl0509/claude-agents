@@ -48,7 +48,7 @@ Next.js + FastAPI 코드의 품질·가독성·버그 가능성 리뷰. `git dif
 → 보안 전용은 `security-reviewer`.
 
 **2. security-reviewer (`/sec`)**
-OWASP 기준 보안 점검. 인증/인가(라우터 레벨 의존성까지 확인해 오탐 방지), IDOR, RBAC, 경로 탐색, JWT, 인젝션, XSS, 민감정보 노출, CSRF/SSRF, Pydantic 과잉 수용(Mass Assignment), CORS. 출력: 심각도순 + "즉시 고쳐야 할 Top 3".
+OWASP 기준 보안 점검. 인증/인가(라우터 레벨 의존성까지 확인해 오탐 방지), IDOR/BOLA·BFLA, Next.js 미들웨어 인가 우회(CVE-2025-29927), RBAC, 경로 탐색, JWT(alg confusion·헤더 주입), 인젝션(SQL·SSTI·OS/NoSQL), XSS, 과잉 응답(API3), CSRF/SSRF, Mass Assignment, CORS, LLM 보안(OWASP LLM Top 10 2025: 프롬프트 인젝션·과도한 행위성·벡터/임베딩 약점 등). 출력: 심각도순 + "즉시 고쳐야 할 Top 3".
 
 **3. test-runner (`/test`)**
 pytest / Jest / Vitest 실행 후 실패 분석. 환경 준비(설치·venv)는 임의로 하지 않고 사전 조건으로 보고. 통과/실패 무관하게 테스트 품질 스캔(change-detector·목 그린)도 수행하며 green을 품질 증거로 칭찬하지 않음. 출력: 통과/실패/스킵 집계 → 실패별 원인 분류·제안, 플레이키·약한 테스트 표시.
@@ -95,7 +95,7 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 ### 🚀 운영 (DevOps)
 
 **13. devops-reviewer (`/devops`)**
-배포/운영 설정 점검. Dockerfile(레이어·캐시·이미지 크기·비루트·멀티스테이지), 시크릿/환경변수 취급, docker-compose(헬스체크·의존 순서·볼륨), CI/CD(GitHub Actions 권한·캐시·시크릿 노출), 배포 안전성, 빌드 재현성. 대상 파일이 없으면 그 사실을 보고. 출력: 요약 → 위험 Top 3 → 주의 → 제안.
+배포/운영 설정 점검. Dockerfile(레이어·캐시·이미지 크기·비루트·멀티스테이지), 시크릿/환경변수 취급, docker-compose(헬스체크·의존 순서·볼륨), CI/CD(GitHub Actions 권한·캐시·시크릿 노출·OIDC 키리스 인증), 공급망 보안(SBOM·이미지 서명/cosign·provenance·digest 핀), 배포 안전성, 빌드 재현성. 대상 파일이 없으면 그 사실을 보고. 출력: 요약 → 위험 Top 3 → 주의 → 제안.
 → 코드 보안은 `security-reviewer`, 마이그레이션은 `migration-reviewer`, 구조 설계는 `system-architect`.
 
 ---
