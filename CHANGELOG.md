@@ -8,6 +8,20 @@
 
 ---
 
+## 1.18 (2026-06-29) — devops-reviewer에 아티팩트 레지스트리·개발환경(devcontainer/Gitspaces) 점검 추가
+
+Harness Open Source의 나머지 두 축(아티팩트 레지스트리, Gitspaces)을 devops-reviewer로 마저 흡수. 둘 다 devops-reviewer 범위(공급망 보안·인프라 설정)에 자연스럽게 들어가 신규 에이전트 없이 기존 항목 확장.
+
+**기존 에이전트 보강**
+- `devops-reviewer` 1.3 → 1.4
+  - 공급망 보안 항목에 **아티팩트 레지스트리**(Harness OSS·GHCR·ECR·Nexus 등) 하위 점검 추가: ① 불변 태그/버전(published 덮어쓰기 금지 → 재현성 붕괴 방지), ② 업스트림 프록시로 공개 레지스트리(Docker Hub·Maven Central·npm) 풀 통제·캐시, ③ 레지스트리단 취약점 스캔(Trivy 등)·정책 강제, ④ 푸시/풀 자격증명 최소 권한
+  - 신규 항목 **개발 환경 설정 (devcontainer / Gitspaces)** 추가: `.devcontainer/devcontainer.json` 베이스 이미지/`features` 버전 핀, `postCreateCommand`/`postStartCommand` 신뢰 못 할 스크립트 자동 실행, env·`secrets` 하드코딩, 호스트 `docker.sock`·`privileged`(컨테이너 탈출), 불필요한 포트 포워딩 — 개발 환경도 시크릿·격리 경계를 프로덕션급으로
+
+**문서**
+- README 상단 버전 요약·버전 표·상세 블록 갱신. AGENTS.md·CLAUDE.md 갱신.
+
+---
+
 ## 1.17 (2026-06-29) — devops-reviewer에 GHA 외 파이프라인 인식 추가 (Harness Open Source/Drone)
 
 [harness/harness](https://github.com/harness/harness)(Harness Open Source = SCM+CI/CD+Gitspaces+아티팩트 레지스트리, Drone의 차세대)를 읽고, 우리 스택(Next.js+FastAPI+MySQL) 리뷰 셋에 실제로 전이되는 부분을 점검. Harness는 Go 기반 DevOps 플랫폼이라 **genuine fit은 devops-reviewer 하나**였고(나머지 12종은 앱 코드/DB/디자인 대상이라 Harness 고유 내용 흡수 여지 없음 — 억지 보강 안 함), CI/CD 점검 범위를 GitHub Actions 너머로 확장.

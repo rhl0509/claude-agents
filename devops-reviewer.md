@@ -3,7 +3,7 @@ name: devops-reviewer
 description: 배포/운영 설정 파일을 점검할 때 사용. Dockerfile·docker-compose, GitHub Actions·Harness·Drone·GitLab CI 등 CI/CD 파이프라인, 환경변수/시크릿 취급, 빌드 캐시·이미지 크기, 헬스체크·재시작 정책, 배포 안전성을 본다. 머지·배포 전 인프라 설정 점검에 적합. 애플리케이션 코드 보안은 security-reviewer, DB 마이그레이션 안전성은 migration-reviewer, 시스템 구조 설계는 system-architect를 쓴다. 설정을 직접 수정하지 않고 점검·제안만 한다.
 tools: Read, Grep, Glob
 model: opus
-version: 1.3
+version: 1.4
 updated: 2026-06-29
 ---
 
@@ -26,8 +26,10 @@ updated: 2026-06-29
      - **권한·격리**: `privileged` 스텝, `/var/run/docker.sock` 마운트(DinD) 같은 컨테이너 탈출 위험, `connectorRef`(레지스트리 인증) 최소 권한
      - **트리거/클론**: `when`/트리거 조건과 클론 깊이가 과도하지 않은지
 5. **공급망 보안** — 이미지 digest 핀(태그 변조 방지), 의존성 자동 업데이트(Dependabot/Renovate), 취약점 스캔(이미지·의존성), **SBOM 생성**, **이미지 서명·출처 증명**(cosign/sigstore 키리스 + Rekor, 빌드 provenance/attestation)으로 배포물의 출처를 검증 가능한지. 도입 안 됐으면 위험도에 맞춰 제안(필수는 아니나 운영 등급에 따라 권장)
-6. **배포 안전성** — 마이그레이션과 코드 배포 순서(migration-reviewer 영역과 연계), 롤백 전략, 헬스체크/레디니스, 무중단(롤링) 여부, 환경 분리(stage/prod)
-7. **빌드 재현성** — 락파일 사용(`npm ci` vs `install`, pip 핀), 빌드 캐시 키, 결정적 빌드
+   - **아티팩트 레지스트리** (Harness OSS·GHCR·ECR·Nexus 등): ① **불변 태그/버전**(published 아티팩트를 덮어쓰지 못하게 — "어제는 됐는데" 류 재현성 붕괴 방지), ② **업스트림 프록시**로 공개 레지스트리(Docker Hub·Maven Central·npm) 풀을 통제·캐시하는지(무통제 직접 풀 vs 프록시 경유), ③ 레지스트리단 취약점 스캔(Trivy 등)·정책 강제, ④ 푸시/풀 자격증명 최소 권한(읽기 전용 풀 토큰 vs 광범위 푸시 토큰), 레지스트리 인증 시크릿 노출
+6. **개발 환경 설정 (devcontainer / Gitspaces 등)** — `.devcontainer/devcontainer.json`이 있으면: 베이스 이미지/`features` 버전 핀(미지정 시 기본 이미지 상속), `postCreateCommand`/`postStartCommand`가 신뢰 못 할 스크립트를 자동 실행하는지, devcontainer env·`secrets`에 자격증명 하드코딩, 호스트 `docker.sock` 마운트·`privileged`(컨테이너 탈출), 불필요한 포트 포워딩. 개발 환경도 시크릿·격리 경계가 프로덕션만큼 중요
+7. **배포 안전성** — 마이그레이션과 코드 배포 순서(migration-reviewer 영역과 연계), 롤백 전략, 헬스체크/레디니스, 무중단(롤링) 여부, 환경 분리(stage/prod)
+8. **빌드 재현성** — 락파일 사용(`npm ci` vs `install`, pip 핀), 빌드 캐시 키, 결정적 빌드
 
 ## 분석 원칙 (Hermes 반영)
 - **결함 클래스 전체를 본다.** 같은 위험(미핀 이미지/액션, 루트 실행 등)이 여러 파일에 있으면 묶어 지적한다.
