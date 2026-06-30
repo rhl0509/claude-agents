@@ -118,7 +118,9 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 
 ---
 
-## 역할이 겹치기 쉬운 쌍 (구분 기준)
+## 역할이 겹치기 쉬운 쌍 (양방향 위임)
+
+아래 16쌍은 **양쪽 description이 서로를 가리키는 대칭 위임**(`↔`).
 
 | 쌍 | 구분 |
 |---|---|
@@ -138,6 +140,19 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 | dependency-auditor ↔ devops-reviewer | 의존성 "건강성"(매니페스트·lockfile) ↔ CI/공급망 "설정"(SBOM·서명) |
 | observability-reviewer ↔ devops-reviewer | 앱 런타임 "로깅·트레이싱·계측" ↔ 로그 수집·대시보드 "인프라 설정" |
 | observability-reviewer ↔ code-reviewer | 관측성 "공백"(로깅·추적) ↔ 일반 "예외 처리·코드 품질" |
+
+## 일방향 위임 포인터
+
+특화 → 일반/최상위로만 가리키는 단방향(`→`). 역방향은 의도적으로 없음(일반 에이전트가 모든 특화를 역으로 나열하면 description 비대).
+
+| 위임 | 역방향이 없는 이유 |
+|---|---|
+| test-strategy → code-reviewer | `code-reviewer`는 일반 폴백, 개별 특화로 되돌리지 않음 |
+| perf-auditor → code-reviewer | 동일(일반 품질·버그 폴백) |
+| devops-reviewer → migration-reviewer | 마이그레이션 리뷰는 DB 영역 집중 |
+| devops-reviewer → system-architect | `system-architect`는 위임을 내보내지 않는 최상위 설계 에이전트 |
+
+> `system-architect`는 내보내는·받는 위임이 모두 없는 최상위 설계 에이전트(여러 곳이 가리키지만 단방향).
 
 ---
 

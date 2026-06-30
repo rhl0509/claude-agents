@@ -8,6 +8,16 @@
 
 ---
 
+## 1.37 (2026-06-30) — 위임 그래프 문서화(양방향/일방향 표 분리), 문서만 변경
+
+`README.md`·`AGENTS.md`의 "역할이 겹치기 쉬운 쌍" 표를 **양방향 위임(대칭 16쌍)**으로 명시하고, 그 아래 **일방향 위임 포인터** 표(4건)를 신설. 어느 에이전트가 어디로 위임하는지 한눈에 보이게 정리. 에이전트 정의·버전·도구 변경 없음(문서만).
+
+**문서**
+- `README.md`: "역할이 겹치기 쉬운 쌍" 제목에 (양방향 위임) 명시·설명 문장 추가, "일방향 위임 포인터" 표(test-strategy→code, perf→code, devops→migration, devops→system-architect)와 system-architect 단방향 주석 추가.
+- `AGENTS.md`: 동일하게 양방향 표 명시 + 일방향 포인터 표·주석 추가.
+
+---
+
 ## 1.36 (2026-06-30) — db-optimizer ↔ perf-auditor 대칭 위임 보강 (db-optimizer 1.7 → 1.8)
 
 전체 위임 그래프를 "겹치는 쌍" 표(의도된 대칭 16쌍)와 대조한 결과, `perf-auditor ↔ db-optimizer`만 비대칭이었다. perf-auditor는 "MySQL 쿼리·인덱스 성능은 db-optimizer"로 위임하지만 db-optimizer에는 역방향 포인터가 없어, "느리다"는 요청이 프론트/DB 중 어디인지 가르는 길이 한쪽만 있었다. 나머지 15쌍은 이미 양방향. 도구·역할 변경 없음(description 위임 문구만).
