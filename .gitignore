@@ -1,3 +1,3 @@
 # 로컬 Claude Code 설정 및 프로젝트 레벨 에이전트 사본(중복)
-# 단일 원본은 이 폴더의 *.md 이며, 전역 등록은 sync.ps1 으로 한다.
+# 단일 원본은 이 레포(에이전트 *.md·commands/·launchers/)이며, 전역 등록은 sync.ps1 으로 한다.
 .claude/

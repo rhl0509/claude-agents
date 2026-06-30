@@ -8,6 +8,15 @@
 
 ---
 
+## 1.31 (2026-06-30) — .gitignore 주석 정확화 (소스 범위)
+
+.gitignore 재점검 결과 무시 규칙(`.claude/`)은 정합 — 해당 폴더엔 환경별 `settings.local.json`만 있어 무시가 타당(CLAUDE.md와 일치). 다만 주석이 "단일 원본은 이 폴더의 *.md"로만 적혀 1.29·1.30에서 추가된 `commands/`·`launchers/` 소스를 반영하지 못해 정확화. 에이전트 정의 변경 없음(문서만).
+
+**문서**
+- `.gitignore` 주석: 단일 원본 범위를 "에이전트 *.md·commands/·launchers/"로 명시(CLAUDE.md Locations & sync와 일치).
+
+---
+
 ## 1.30 (2026-06-30) — 바탕화면 런처 레포 편입 (1.29 런처 제거 복구)
 
 1.29에서 `launchers/claude.bat`가 레포에 없어 "바탕화면 런처" 문서를 제거했으나, 런처는 글로벌(`~/.claude/launchers/claude.bat`)에 실재하며 계속 사용 중. 제거 대신 commands와 동일하게 레포 단일 소스로 편입. 에이전트 정의 변경 없음.
