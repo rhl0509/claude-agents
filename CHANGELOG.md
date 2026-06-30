@@ -8,6 +8,15 @@
 
 ---
 
+## 1.32 (2026-06-30) — AGENTS.md test-strategy 위임 줄 보강 (code-reviewer 누락)
+
+전체 재점검 결과 버전(frontmatter↔README 요약·표)·모델·도구(Context7 3종 포함 AGENTS·CLAUDE·README 일치)·슬래시 명령(commands 13↔README 표)·런처·sync 모두 정합. 위임 줄 1건만 비대칭: AGENTS의 test-strategy 화살표가 `test-runner`만 적고 `code-reviewer`가 빠져 frontmatter description·README 구분(둘 다 두 대상 명시)과 어긋남. 보강. 에이전트 정의 변경 없음(문서만).
+
+**문서**
+- `AGENTS.md` test-strategy 위임 줄에 `일반 코드 품질은 code-reviewer` 추가 — frontmatter·README와 일치.
+
+---
+
 ## 1.31 (2026-06-30) — .gitignore 주석 정확화 (소스 범위)
 
 .gitignore 재점검 결과 무시 규칙(`.claude/`)은 정합 — 해당 폴더엔 환경별 `settings.local.json`만 있어 무시가 타당(CLAUDE.md와 일치). 다만 주석이 "단일 원본은 이 폴더의 *.md"로만 적혀 1.29·1.30에서 추가된 `commands/`·`launchers/` 소스를 반영하지 못해 정확화. 에이전트 정의 변경 없음(문서만).

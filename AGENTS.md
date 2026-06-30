@@ -56,7 +56,7 @@ pytest / Vitest·Jest(유닛) / Playwright·Cypress(E2E) 실행 후 실패 분�
 
 **4. test-strategy (`/coverage`)**
 테스트 커버리지 공백·약한 테스트 **진단 및 케이스 설계**(테스트 코드는 직접 작성 안 함). 안 짠 경로, 약한 단언(change-detector·목 그린·단언 약함), 테스트 구조, 스택별 핵심 경로 누락, 보강 우선순위. 출력: 요약 → 커버리지 공백(입력→기대결과) → 약한 테스트 → 제안.
-→ 실행·실패 진단은 `test-runner`.
+→ 실행·실패 진단은 `test-runner`, 일반 코드 품질은 `code-reviewer`.
 
 **5. perf-auditor (`/perf`)**
 Next.js 프론트 **성능** 정적 분석(빌드 실행 안 함). 번들/코드 스플리팅, 서버/클라 경계(RSC), 데이터 페칭·캐싱, 이미지/폰트, 렌더 비용, Core Web Vitals(LCP/CLS/INP), 서드파티. Next.js 15/16이면 Cache Components/`use cache` opt-in·PPR 경계·React Compiler 중복 메모도 점검. 측정 필요 항목은 "확인 필요"로 표시. 출력: 요약 → 위험 Top 3(작용 지표) → 주의 → 제안.
