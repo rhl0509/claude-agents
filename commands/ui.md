@@ -1,0 +1,9 @@
+---
+description: ui-ux-reviewer로 UI/UX·접근성 점검
+argument-hint: [경로(선택)]
+---
+ui-ux-reviewer 서브에이전트를 사용해 UI/UX와 접근성을 점검해줘.
+
+대상: $ARGUMENTS
+
+경로가 비어 있으면 프론트엔드(컴포넌트/페이지) 전반을 점검한다.

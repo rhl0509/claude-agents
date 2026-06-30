@@ -1,0 +1,9 @@
+---
+description: db-optimizer로 MySQL 쿼리·인덱스·스키마 점검
+argument-hint: [경로 또는 쿼리(선택)]
+---
+db-optimizer 서브에이전트를 사용해 MySQL 성능을 점검해줘.
+
+대상: $ARGUMENTS
+
+대상이 비어 있으면 백엔드 코드의 쿼리·스키마 전반을 점검한다.

@@ -8,6 +8,21 @@
 
 ---
 
+## 1.29 (2026-06-30) — 슬래시 명령 레포 편입 + sync.ps1 확장, stale 런처/배치 정리
+
+지금까지 13개 슬래시 명령(`/review` 등)이 글로벌(`~/.claude/commands/`)에만 있고 레포엔 소스가 없었음. 단일 소스로 편입하고 동기화 자동화. 더불어 stale 보조 파일/문구 정리. 에이전트 정의 변경 없음(구조·문서·도구).
+
+**구조**
+- `commands/` 디렉터리 신설 — 13개 슬래시 명령 정의를 레포에 편입(글로벌 사본을 가져와 버전 관리 단일 소스화). 명령 파일은 frontmatter(`description`/`argument-hint`) + 해당 서브에이전트 호출 본문으로 구성, 슬래시명↔에이전트가 README 표와 일치.
+- `sync.ps1`: 에이전트(`*.md`)에 더해 `commands/*.md`도 `~/.claude/commands/`로 복사하도록 확장. 출력 라벨을 `synced agent:`/`synced command:`로 구분.
+- `sync-agents.bat` 삭제 — 9종만 복사하던 stale 배치(현재 13종·`sync.ps1`과 충돌, 중복).
+
+**문서**
+- `README.md`: `commands/` 안내를 "별도 복사 불필요, sync.ps1로 함께 등록"으로 정정, 저장소 구조 블록에 `commands/` 추가, 업데이트 워크플로 5단계에 commands 경로 반영. 존재하지 않는 `launchers/claude.bat`를 가리키던 "바탕화면 런처" 섹션·목차 항목 제거.
+- `CLAUDE.md`: Locations & sync에 슬래시 명령 소스(`commands/*.md`)·런타임(`~/.claude/commands/`)·sync 대상 추가.
+
+---
+
 ## 1.28 (2026-06-30) — design-agents.md "구분" 줄 보강 (frontmatter description과 동기화)
 
 보조 문서 design-agents.md 재점검 결과 한눈에 보기 표(4종 opus·슬래시)·항목·design-system-architect·system-architect 구분은 정합. "구분" 줄 2건만 frontmatter description보다 덜 완전해 누락 위임 보강(1.25 README 보강과 동일 패턴). 에이전트 정의 변경 없음(문서만).
