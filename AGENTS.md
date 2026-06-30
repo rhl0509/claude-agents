@@ -14,8 +14,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 |---|---|---|
 | 전역 에이전트 | `C:\Users\PC\.claude\agents\` | 모든 프로젝트(D 파티션 포함)에서 사용 |
 | 전역 슬래시 명령 | `C:\Users\PC\.claude\commands\` | `/명령`으로 호출 |
-| 소스 사본 | `d:\auto_agent\*.md` | 편집용 원본 보관 |
-| 프로젝트 사본 | `d:\auto_agent\.claude\agents\` | 이 프로젝트 한정(전역과 중복) |
+| 소스(원본) | `d:\auto_agent\*.md` | 편집용 단일 소스. 여기서만 편집 |
 
 ---
 
@@ -84,6 +83,7 @@ MySQL/Alembic 스키마 마이그레이션 **안전성** 점검(대형 테이블
 
 **10. design-system-architect (`/dsystem`)**
 디자인 시스템 설계. 디자인 토큰(색/타이포/스페이싱/래디우스/섀도), 테마(다크모드), 컴포넌트 계층·variant, 네이밍, Tailwind 설정 토큰화, 중복 통합, 문서화. 디자인 시스템을 **`DESIGN.md`**([google-labs-code/design.md](https://github.com/google-labs-code/design.md) 포맷: 프런트매터 토큰 + 산문 근거) 단일 소스로 정리·작성. 토큰 참조 `{colors.primary}`, WCAG 대비 명시. `@google/design.md` CLI(`lint`/`export`→Tailwind v3·v4·DTCG/`diff`)는 실행 안 하고 안내만. 출력: 현황 진단 → 제안 토큰 세트(DESIGN.md 형태) → DESIGN.md 초안 → 컴포넌트 구조 → 마이그레이션 단계.
+→ 개별 화면 UI/UX 점검은 `ui-ux-reviewer`.
 
 ### 🏗 설계
 

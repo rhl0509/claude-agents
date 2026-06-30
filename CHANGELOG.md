@@ -8,6 +8,16 @@
 
 ---
 
+## 1.24 (2026-06-30) — AGENTS.md 일관성 정리 (등록 위치 표·대칭 위임)
+
+AGENTS.md 재점검 결과 기계적 불일치 2건 정리. 에이전트 정의 변경 없음(문서만).
+
+**문서**
+- `AGENTS.md` 등록/사용 위치 표: 존재하지도 않고 CLAUDE.md(레포 안 `.claude/agents/` 사본 두지 말 것)와 충돌하던 "프로젝트 사본 `d:\auto_agent\.claude\agents\`" 행 제거. "소스 사본" 행은 단일 소스 의미가 분명하도록 "소스(원본) … 여기서만 편집"으로 정정.
+- `AGENTS.md` design-system-architect(10번) 항목에 빠져 있던 `→ 개별 화면 UI/UX 점검은 ui-ux-reviewer.` 위임 줄 추가 — ui-ux-reviewer↔design-system-architect 대칭 위임 복원(겹치는 쌍 표·frontmatter description과 일치).
+
+---
+
 ## 1.23 (2026-06-30) — CHANGELOG 작업 규칙 문구 정확화
 
 상단 "작업 규칙" ③단계가 `README.md` 버전 표만 언급했으나, 실제 워크플로는 README(요약·표·상세)와 함께 `AGENTS.md`·`CLAUDE.md`도 갱신하고 `sync.ps1`을 돌린다. 실제 관행에 맞게 문구를 정확화. 에이전트 정의 변경 없음(문서·메타만).
