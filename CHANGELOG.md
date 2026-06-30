@@ -8,6 +8,25 @@
 
 ---
 
+## 1.35 (2026-06-30) — devops-reviewer에 OTel Collector·Alloy 관측성 수집 파이프라인 점검 항목 추가 (1.5 → 1.6)
+
+1.34에서 observability-reviewer가 수집·샘플링 파이프라인을 devops-reviewer로 위임하게 했으니, devops-reviewer가 실제로 그 영역을 커버하도록 점검 항목을 추가해 대칭을 완성. 신규 에이전트나 도구 변경은 없음(devops-reviewer 프롬프트 내용만 보강).
+
+**devops-reviewer 1.5 → 1.6**
+- 점검 항목 #7 **관측성 수집 파이프라인 (OTel Collector / Grafana Alloy 등)** 신설(기존 #7 배포 안전성→#8, #8 빌드 재현성→#9). 수집기 설정 파일(`config.alloy`·`*.river`·Collector `config.yaml`·Helm `values`·인라인 매니페스트)을 대상으로:
+  - 익스포터 인증 시크릿 하드코딩 vs `sys.env(...)`/시크릿 참조(평문 토큰 노출은 위험으로 강하게).
+  - 익스포터 엔드포인트 TLS(`insecure`)·전송 대상 검증, 수집기 이미지·Helm 차트 버전 핀.
+  - `batch`·큐/재시도·메모리 리미터·컨테이너 리소스 `limits`(텔레메트리 폭주 OOM 방지).
+  - tail sampling 토폴로지: 샘플러 계층 headless Service(`clusterIP: None`)·`loadbalancing` `routing_key="traceID"`·spanmetrics 게이트웨이(샘플링 이전) 배치.
+  - 컴포넌트 `stabilityLevel`(또는 Collector feature gate) 게이팅 적정성, 수집기 헬스/레디니스 노출.
+  - 앱 측 계측(SDK·스팬·속성)은 `observability-reviewer` 영역으로 명시 구분.
+
+**문서**
+- `README.md`: 상단 버전 요약(devops 1.6), 표 14행 버전, 상세 블록에 관측성 수집 파이프라인(v1.6) 항목 추가.
+- `AGENTS.md`: devops 상세 항목에 관측성 수집 파이프라인 추가(표는 버전 비표기라 변경 없음).
+
+---
+
 ## 1.34 (2026-06-30) — observability-reviewer 트레이싱 경계·전파 포맷 보강 (1.0 → 1.1)
 
 Grafana Agent→Alloy(OTel Collector 배포판) 파이프라인을 살펴본 맥락에서, 앱 측 트레이싱과 수집·샘플링 파이프라인의 경계를 명확히 하고 컨텍스트 전파 포맷 점검을 추가. 신규 에이전트나 도구 변경은 없음(observability-reviewer 프롬프트 내용만 보강).

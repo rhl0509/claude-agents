@@ -6,7 +6,7 @@
 - 에이전트 수: **16종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `security-reviewer` **v1.9**, `test-runner`·`db-optimizer` **v1.7**, `code-reviewer` **v1.7**, `data-modeler`·`devops-reviewer`·`ui-ux-reviewer`·`api-doc-writer` **v1.4**, `system-architect`·`design-system-architect` **v1.3**, `perf-auditor`·`test-strategy` **v1.2**, `migration-reviewer`·`observability-reviewer` **v1.1**, `api-contract-reviewer`·`dependency-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `security-reviewer` **v1.9**, `test-runner`·`db-optimizer` **v1.7**, `code-reviewer` **v1.7**, `devops-reviewer` **v1.6**, `data-modeler`·`ui-ux-reviewer`·`api-doc-writer` **v1.4**, `system-architect`·`design-system-architect` **v1.3**, `perf-auditor`·`test-strategy` **v1.2**, `migration-reviewer`·`observability-reviewer` **v1.1**, `api-contract-reviewer`·`dependency-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -40,7 +40,7 @@
 | 11 | `design-system-architect` | `/dsystem` | 디자인 | 1.3 | opus | 디자인 토큰·컴포넌트 설계 (DESIGN.md) | Read, Grep, Glob, Context7 |
 | 12 | `data-modeler` | `/datamodel` | 설계 | 1.4 | opus | 데이터 모델/스키마 설계 | Read, Grep, Glob |
 | 13 | `system-architect` | `/arch` | 설계 | 1.3 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
-| 14 | `devops-reviewer` | `/devops` | 운영 | 1.5 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
+| 14 | `devops-reviewer` | `/devops` | 운영 | 1.6 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
 | 15 | `dependency-auditor` | `/deps` | 운영 | 1.0 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
 | 16 | `observability-reviewer` | `/obs` | 운영 | 1.1 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
 
@@ -199,6 +199,7 @@
 - **공급망·OIDC(v1.2)**: 장기 시크릿 대신 GitHub OIDC 키리스 인증, SBOM 생성, 이미지 서명·출처 증명(cosign/sigstore·provenance), digest 핀, 의존성 자동 업데이트
 - **GHA 외 파이프라인(v1.3)**: Harness Open Source/Drone(`.harness/*.yaml`·`.drone.yml`, `kind: pipeline`)·GitLab CI·CircleCI도 같은 렌즈로 — 플러그인/스텝 이미지 핀, 시크릿 참조(`secrets.get`/`from_secret`) vs 하드코딩, `privileged`·docker.sock(DinD) 격리, 트리거/클론 범위
 - **레지스트리·개발환경(v1.4)**: 아티팩트 레지스트리(Harness OSS·GHCR·ECR·Nexus) 불변 태그·업스트림 프록시·레지스트리단 스캔·풀/푸시 최소 권한; devcontainer/Gitspaces(`.devcontainer/devcontainer.json`) 베이스 이미지·`features` 핀·`postCreateCommand` 신뢰성·docker.sock/`privileged`·시크릿 하드코딩
+- **관측성 수집 파이프라인(v1.6)**: OTel Collector·Grafana Alloy 등 수집기 설정(`config.alloy`·`*.river`·Collector `config.yaml`·Helm `values`)을 점검 — 익스포터 인증 시크릿 하드코딩 vs `sys.env`, 엔드포인트 TLS, 수집기 이미지 핀, batch/큐/리소스 limits, tail sampling 토폴로지(headless Service·`routing_key="traceID"`·spanmetrics 위치), 컴포넌트 `stabilityLevel` 게이팅. **앱 측 계측(SDK·스팬)은 `observability-reviewer`**, 여기선 수집기/파이프라인 설정만
 - **전제**: 대상 레포에 Docker/CI 설정 파일이 있어야 의미가 있음 — 없으면 그 사실을 보고
 - **출력**: 요약(안전 배포 가능 여부) → 위험 Top 3(안전한 대안) → 주의 → 제안
 - **구분**: 코드 보안은 `security-reviewer`, 마이그레이션 안전성은 `migration-reviewer`, 구조 설계는 `system-architect`, 의존성 자체의 취약·버전·라이선스는 `dependency-auditor`, 앱 런타임 로깅·트레이싱은 `observability-reviewer`
