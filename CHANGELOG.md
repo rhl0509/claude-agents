@@ -8,6 +8,21 @@
 
 ---
 
+## 1.25 (2026-06-30) — README 상세 블록 "구분" 줄 보강 (frontmatter description과 동기화)
+
+README 재점검 결과 버전(상단 요약·표·frontmatter 일치)·도구·겹치는 쌍 표는 모두 정합. 다만 에이전트 상세 `<details>`의 "구분" 줄이 frontmatter `description`(라우팅 단일 소스)·AGENTS 화살표보다 덜 완전한 블록이 6건 있어, 누락 위임을 채워 전부 동기화. 에이전트 정의 변경 없음(문서만).
+
+**문서**
+- `README.md` 상세 블록 "구분" 줄을 frontmatter description 위임과 일치하도록 보강:
+  - code-reviewer: 시각·접근성·UX → `ui-ux-reviewer` 추가
+  - security-reviewer: 배포·CI 설정·시크릿 → `devops-reviewer` 추가
+  - test-runner: 구분 줄 신설 — 커버리지·약한 테스트 진단은 `test-strategy`
+  - ui-ux-reviewer: 코드 로직·버그 → `code-reviewer`, 로드·렌더 성능 → `perf-auditor` 추가
+  - data-modeler: 마이그레이션 안전성 → `migration-reviewer` 추가
+  - design-system-architect: 구분 줄 신설 — 개별 화면 점검은 `ui-ux-reviewer`
+
+---
+
 ## 1.24 (2026-06-30) — AGENTS.md 일관성 정리 (등록 위치 표·대칭 위임)
 
 AGENTS.md 재점검 결과 기계적 불일치 2건 정리. 에이전트 정의 변경 없음(문서만).
