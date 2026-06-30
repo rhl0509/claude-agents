@@ -8,6 +8,31 @@
 
 ---
 
+## 1.33 (2026-06-30) — 신규 에이전트 3종 추가 (api-contract-reviewer·dependency-auditor·observability-reviewer), 13종 → 16종
+
+풀스택 운영에 자주 필요한 세 영역을 새 에이전트로 추가하고, 기존 컨벤션(신뢰 경계 5요소, 영향도순 출력, `파일:줄` 앵커, 대칭 위임, 최소 권한)을 그대로 따른다. 겹치는 기존 에이전트 4종에 **역방향 위임**을 추가하고 버전을 올렸다.
+
+**신규 에이전트 (모두 opus, v1.0)**
+- `api-contract-reviewer` (`/contract`, 품질) — Next.js↔FastAPI **API 계약 정합성** 점검. 요청/응답 필드·타입, 옵셔널/널/enum 차이, 타입 드리프트(OpenAPI 생성 타입 동기화), 경로·메서드·상태코드, 깨지는 변경. 도구 `Read, Grep, Glob`. 위임: 한쪽 코드 품질은 `code-reviewer`, 엔드포인트 카탈로그는 `api-doc-writer`.
+- `dependency-auditor` (`/deps`, 운영) — 의존성 **건강성** 감사. CVE, 버전 신선도, lockfile 무결성, 미사용·누락, dev/runtime 오분류, 라이선스·공급망 신호. 도구 `Read, Grep, Glob, Bash`(`npm audit`/`pip-audit` 등 읽기 전용 진단은 명시 요청 시만, 설치·업그레이드 안 함 — db-optimizer EXPLAIN 패턴). 위임: 앱 코드 보안은 `security-reviewer`, CI/공급망 설정은 `devops-reviewer`.
+- `observability-reviewer` (`/obs`, 운영) — 애플리케이션 **관측성** 점검. 구조적 로깅, 상관관계 ID 전파, 에러 캡처·리포팅(Sentry), 메트릭, 분산 트레이싱, 민감정보 로그 노출. 도구 `Read, Grep, Glob`. 위임: 인프라(로그 수집·대시보드)는 `devops-reviewer`, 일반 예외 처리·코드 품질은 `code-reviewer`.
+
+**기존 에이전트 버전업 (대칭 위임 추가)**
+- `code-reviewer` 1.6 → 1.7: description에 `api-contract-reviewer`(계약 정합)·`observability-reviewer`(로깅·관측성) 위임 추가.
+- `api-doc-writer` 1.3 → 1.4: description에 `api-contract-reviewer`(계약 정합 검증) 위임 추가.
+- `security-reviewer` 1.8 → 1.9: description에 `dependency-auditor`(의존성 취약·버전·라이선스) 위임 추가.
+- `devops-reviewer` 1.4 → 1.5: description에 `dependency-auditor`(의존성 건강성)·`observability-reviewer`(앱 런타임 로깅·트레이싱) 위임 추가.
+
+**구조**
+- 신규 에이전트 정의 3개, 슬래시 명령 3개(`commands/contract.md`·`deps.md`·`obs.md`) 추가. `sync.ps1`은 글로빙 방식이라 수정 불필요.
+
+**문서**
+- `README.md`: 에이전트 수 13→16, 상단 버전 요약, 에이전트 표(16행·번호 재정렬), 상세 블록 3개 추가·번호 재정렬, 겹치는 쌍 6쌍 추가, 슬래시 표·설치 안내(16개)·저장소 구조(에이전트·commands 16개) 갱신.
+- `AGENTS.md`: 제목 13종→16종, 한눈에 보기 표(16행), 분류별 상세 3개 추가·번호 재정렬, 겹치는 쌍 6쌍 추가, 사용 예 갱신.
+- `CLAUDE.md`: 에이전트 표 3행 추가, 모델 티어 문장 opus 11→14, Bash 최소 권한 설명에 dependency-auditor 추가.
+
+---
+
 ## 1.32 (2026-06-30) — AGENTS.md test-strategy 위임 줄 보강 (code-reviewer 누락)
 
 전체 재점검 결과 버전(frontmatter↔README 요약·표)·모델·도구(Context7 3종 포함 AGENTS·CLAUDE·README 일치)·슬래시 명령(commands 13↔README 표)·런처·sync 모두 정합. 위임 줄 1건만 비대칭: AGENTS의 test-strategy 화살표가 `test-runner`만 적고 `code-reviewer`가 빠져 frontmatter description·README 구분(둘 다 두 대상 명시)과 어긋남. 보강. 에이전트 정의 변경 없음(문서만).

@@ -3,15 +3,15 @@
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
 코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다.
 
-- 에이전트 수: **13종**
+- 에이전트 수: **16종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `security-reviewer` **v1.8**, `test-runner`·`db-optimizer` **v1.7**, `code-reviewer` **v1.6**, `data-modeler`·`devops-reviewer`·`ui-ux-reviewer` **v1.4**, `system-architect`·`design-system-architect`·`api-doc-writer` **v1.3**, `perf-auditor`·`test-strategy` **v1.2**, `migration-reviewer` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `security-reviewer` **v1.9**, `test-runner`·`db-optimizer` **v1.7**, `code-reviewer` **v1.7**, `data-modeler`·`devops-reviewer`·`ui-ux-reviewer`·`api-doc-writer` **v1.4**, `system-architect`·`design-system-architect` **v1.3**, `perf-auditor`·`test-strategy` **v1.2**, `migration-reviewer` **v1.1**, `api-contract-reviewer`·`dependency-auditor`·`observability-reviewer` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
 ## 목차
-- [에이전트 13종](#에이전트-13종)
+- [에이전트 16종](#에이전트-16종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -23,23 +23,26 @@
 
 ---
 
-## 에이전트 13종
+## 에이전트 16종
 
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|---|
-| 1 | `code-reviewer` | `/review` | 품질 | 1.6 | opus | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
-| 2 | `security-reviewer` | `/sec` | 품질 | 1.8 | opus | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
+| 1 | `code-reviewer` | `/review` | 품질 | 1.7 | opus | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
+| 2 | `security-reviewer` | `/sec` | 품질 | 1.9 | opus | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
 | 3 | `test-runner` | `/test` | 품질 | 1.7 | haiku | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
 | 4 | `test-strategy` | `/coverage` | 품질 | 1.2 | opus | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
 | 5 | `perf-auditor` | `/perf` | 품질 | 1.2 | opus | Next.js 프론트 성능 점검 | Read, Grep, Glob |
-| 6 | `api-doc-writer` | `/apidoc` | 문서 | 1.3 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
-| 7 | `db-optimizer` | `/db` | DB | 1.7 | opus | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
-| 8 | `migration-reviewer` | `/migrate` | DB | 1.1 | opus | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
-| 9 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.4 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
-| 10 | `design-system-architect` | `/dsystem` | 디자인 | 1.3 | opus | 디자인 토큰·컴포넌트 설계 (DESIGN.md) | Read, Grep, Glob, Context7 |
-| 11 | `data-modeler` | `/datamodel` | 설계 | 1.4 | opus | 데이터 모델/스키마 설계 | Read, Grep, Glob |
-| 12 | `system-architect` | `/arch` | 설계 | 1.3 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
-| 13 | `devops-reviewer` | `/devops` | 운영 | 1.4 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
+| 6 | `api-contract-reviewer` | `/contract` | 품질 | 1.0 | opus | 프론트-백 API 계약 정합성 점검 | Read, Grep, Glob |
+| 7 | `api-doc-writer` | `/apidoc` | 문서 | 1.4 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
+| 8 | `db-optimizer` | `/db` | DB | 1.7 | opus | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
+| 9 | `migration-reviewer` | `/migrate` | DB | 1.1 | opus | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
+| 10 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.4 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
+| 11 | `design-system-architect` | `/dsystem` | 디자인 | 1.3 | opus | 디자인 토큰·컴포넌트 설계 (DESIGN.md) | Read, Grep, Glob, Context7 |
+| 12 | `data-modeler` | `/datamodel` | 설계 | 1.4 | opus | 데이터 모델/스키마 설계 | Read, Grep, Glob |
+| 13 | `system-architect` | `/arch` | 설계 | 1.3 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
+| 14 | `devops-reviewer` | `/devops` | 운영 | 1.5 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
+| 15 | `dependency-auditor` | `/deps` | 운영 | 1.0 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
+| 16 | `observability-reviewer` | `/obs` | 운영 | 1.0 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
 
 ### 🔍 품질 / QA
 
@@ -52,7 +55,7 @@
 - **프론트(Next.js)**: 서버/클라 컴포넌트 경계, 데이터 페칭·캐싱, useEffect 의존성, 로딩/에러 처리, 타입 안전성
 - **Next.js 15/16(v1.4)**: Server Actions 보안(서버 재검증·인가), `use cache`/Cache Components 오캐시, React Compiler 도입 시 중복 수동 메모 (버전 불명확하면 "확인 필요")
 - **출력**: 요약 → Must fix → Should fix → Nit (분류 내 영향도순, `파일:줄` 명시)
-- **구분**: 보안 전용은 `security-reviewer`, 시각·접근성·UX는 `ui-ux-reviewer`
+- **구분**: 보안 전용은 `security-reviewer`, 시각·접근성·UX는 `ui-ux-reviewer`, 프론트-백 API 계약 정합은 `api-contract-reviewer`, 로깅·관측성은 `observability-reviewer`
 </details>
 
 <details>
@@ -63,7 +66,7 @@
 - **점검**: 인증/인가(라우터 레벨 의존성까지 확인해 오탐 방지), IDOR/BOLA·BFLA·WebSocket(CSWSH), **Next.js 미들웨어 인가 우회(CVE-2025-29927)**, RBAC, 경로 탐색, JWT(알고리즘 고정·alg confusion·kid/jku 헤더 주입·exp·저장 위치), 인젝션(SQL·SSTI·OS/NoSQL), XSS, 과잉 응답(API3, response_model), CSRF/SSRF, Mass Assignment/BOPLA, CORS
 - **LLM 보안(v1.4, OWASP LLM Top 10 2025)**: 간접 프롬프트 인젝션(LLM01), 출력 처리(LLM05), 과도한 행위성(LLM06, 도구 권한·human-in-the-loop), 벡터/임베딩 약점(LLM08, RAG 포이즈닝·테넌트 격리), 시스템 프롬프트 유출(LLM02), 무제한 소비(LLM10)
 - **출력**: 심각도(Critical~Low)순 + "즉시 고쳐야 할 Top 3"
-- **구분(v1.5)**: 일반 코드 품질·버그는 `code-reviewer`, 배포·CI 설정·시크릿 취급은 `devops-reviewer`
+- **구분(v1.5)**: 일반 코드 품질·버그는 `code-reviewer`, 배포·CI 설정·시크릿 취급은 `devops-reviewer`, 의존성 취약·버전·라이선스는 `dependency-auditor`
 </details>
 
 <details>
@@ -99,19 +102,30 @@
 - **구분**: 시각·접근성은 `ui-ux-reviewer`, MySQL 성능은 `db-optimizer`, 정확성·버그는 `code-reviewer`
 </details>
 
+<details>
+<summary><b>6. api-contract-reviewer</b> (<code>/contract</code>) — 프론트-백 API 계약 정합성 점검</summary>
+
+- **언제**: 프론트-백 연동 직후, API 계약 변경 머지 전
+- **가정**: 프론트와 백엔드는 서로 다른 시점·다른 사람이 고친다 → 한쪽만 바뀌면 런타임에서 깨진다
+- **점검**: 요청/응답 필드·타입 일치, 필수/옵셔널·널·enum 차이, 타입 드리프트(수기 중복 vs OpenAPI 생성 타입 동기화), 경로·메서드·상태코드, 깨지는 변경(필드 제거·이름·타입 축소·필수화), 페이지네이션·공통 래퍼·인증/Content-Type
+- **출력**: 요약 → 불일치 Top 3(`프론트:줄` ↔ `백엔드:줄`, 어느 쪽을 맞출지) → 주의 → 제안
+- **구분**: 한쪽 코드 품질·버그는 `code-reviewer`, 백엔드 엔드포인트 카탈로그·문서화는 `api-doc-writer`
+</details>
+
 ### 📚 문서 / DB
 
 <details>
-<summary><b>6. api-doc-writer</b> (<code>/apidoc</code>) — API 문서화</summary>
+<summary><b>7. api-doc-writer</b> (<code>/apidoc</code>) — API 문서화</summary>
 
 - **언제**: 프론트 연동 전 API 명세 파악, 미문서화 엔드포인트 발견
 - **수집**: 라우터/WebSocket 데코레이터, 다단계(중첩) prefix 합성, 라우터/앱 레벨 의존성까지 본 인증 판정, `tags`/`response_model`/`deprecated` 반영
 - **현대 문법(v1.3)**: `Annotated[User, Depends(...)]`·`Annotated[str|None, Query()/Header()]`(FastAPI 0.95.0+ 권장) 양식을 구식 기본값 문법과 동등 인식. prefix 합성 불확실 시 OpenAPI 3.1 `/openapi.json` 교차 점검을 제안(직접 실행 불가 → "확인 필요")
 - **출력**: 리소스/태그별 표 + 미인증·무응답모델·deprecated 엔드포인트 목록
+- **구분**: 프론트-백 계약 정합 검증은 `api-contract-reviewer`
 </details>
 
 <details>
-<summary><b>7. db-optimizer</b> (<code>/db</code>) — MySQL 성능 튜닝</summary>
+<summary><b>8. db-optimizer</b> (<code>/db</code>) — MySQL 성능 튜닝</summary>
 
 - **언제**: 느린 쿼리 진단, N+1, 인덱스 설계, 마이그레이션의 성능·인덱스 영향 검토
 - **점검**: N+1, 인덱스(복합 컬럼 순서·중복), SELECT */함수 래핑/OFFSET 페이지네이션, 타입 적정성, 트랜잭션·락, 커넥션 풀, 벡터 검색(MySQL 9 `VECTOR_DISTANCE` k-NN·사전필터)
@@ -121,7 +135,7 @@
 </details>
 
 <details>
-<summary><b>8. migration-reviewer</b> (<code>/migrate</code>) — 마이그레이션 안전성 점검</summary>
+<summary><b>9. migration-reviewer</b> (<code>/migrate</code>) — 마이그레이션 안전성 점검</summary>
 
 - **언제**: 스키마 마이그레이션(Alembic 등) 머지·배포 전 안전성 리뷰
 - **가정**: 운영 데이터가 많은 큰 테이블 + 마이그레이션 도중에도 트래픽이 흐른다
@@ -134,7 +148,7 @@
 ### 🎨 디자인
 
 <details>
-<summary><b>9. ui-ux-reviewer</b> (<code>/ui</code>) — UI/UX·접근성 점검</summary>
+<summary><b>10. ui-ux-reviewer</b> (<code>/ui</code>) — UI/UX·접근성 점검</summary>
 
 - **언제**: 화면 머지 전 디자인 품질 점검
 - **점검**: 레이아웃/간격, 타이포 위계, 색 대비(WCAG AA), 반응형·터치 타깃, 접근성(시맨틱·aria·키보드·alt·label·reduced-motion), 상태 표현(로딩/빈/에러), 컴포넌트 일관성
@@ -144,7 +158,7 @@
 </details>
 
 <details>
-<summary><b>10. design-system-architect</b> (<code>/dsystem</code>) — 디자인 시스템 설계</summary>
+<summary><b>11. design-system-architect</b> (<code>/dsystem</code>) — 디자인 시스템 설계</summary>
 
 - **언제**: 흩어진 스타일을 일관된 시스템으로 정비, 디자인 시스템을 `DESIGN.md` 단일 소스로 정리
 - **설계**: 디자인 토큰(색/타이포/스페이싱/래디우스/섀도), 테마(다크모드), 컴포넌트 계층·variant, 네이밍, Tailwind 토큰화, 중복 통합, 문서화(Storybook)
@@ -156,7 +170,7 @@
 ### 🏗 설계
 
 <details>
-<summary><b>11. data-modeler</b> (<code>/datamodel</code>) — 데이터 모델 설계</summary>
+<summary><b>12. data-modeler</b> (<code>/datamodel</code>) — 데이터 모델 설계</summary>
 
 - **언제**: 새 도메인 테이블/관계 설계, 기존 모델 재설계 (ERP 등 복잡 도메인)
 - **설계**: 엔터티/관계(N:M 연결 테이블), 정규화, 키 전략(대리키/자연키/FK 동작), 타입 선택, 제약·무결성, 이력/감사/soft delete/채번, 확장성
@@ -166,7 +180,7 @@
 </details>
 
 <details>
-<summary><b>12. system-architect</b> (<code>/arch</code>) — 시스템 아키텍처 설계</summary>
+<summary><b>13. system-architect</b> (<code>/arch</code>) — 시스템 아키텍처 설계</summary>
 
 - **언제**: 기능 구현 전 구조 설계, 기존 아키텍처 점검
 - **설계**: 계층 분리, 모듈 경계·의존성, API 계약, 인증 구조, 비동기/작업(큐·워커), 캐싱, 폴더 구조, 확장성
@@ -178,7 +192,7 @@
 ### 🚀 운영 (DevOps)
 
 <details>
-<summary><b>13. devops-reviewer</b> (<code>/devops</code>) — Docker·CI/CD·배포 설정 점검</summary>
+<summary><b>14. devops-reviewer</b> (<code>/devops</code>) — Docker·CI/CD·배포 설정 점검</summary>
 
 - **언제**: 머지·배포 전 인프라/파이프라인 설정 점검
 - **점검**: Dockerfile(이미지 핀·멀티스테이지·비루트·HEALTHCHECK), 시크릿/환경변수(하드코딩·이미지 잔존·.env 커밋), docker-compose(포트 노출·헬스체크), CI/CD(액션 핀·권한·시크릿 노출·게이트), 배포 안전성(롤백·무중단), 빌드 재현성(락파일)
@@ -187,7 +201,27 @@
 - **레지스트리·개발환경(v1.4)**: 아티팩트 레지스트리(Harness OSS·GHCR·ECR·Nexus) 불변 태그·업스트림 프록시·레지스트리단 스캔·풀/푸시 최소 권한; devcontainer/Gitspaces(`.devcontainer/devcontainer.json`) 베이스 이미지·`features` 핀·`postCreateCommand` 신뢰성·docker.sock/`privileged`·시크릿 하드코딩
 - **전제**: 대상 레포에 Docker/CI 설정 파일이 있어야 의미가 있음 — 없으면 그 사실을 보고
 - **출력**: 요약(안전 배포 가능 여부) → 위험 Top 3(안전한 대안) → 주의 → 제안
-- **구분**: 코드 보안은 `security-reviewer`, 마이그레이션 안전성은 `migration-reviewer`, 구조 설계는 `system-architect`
+- **구분**: 코드 보안은 `security-reviewer`, 마이그레이션 안전성은 `migration-reviewer`, 구조 설계는 `system-architect`, 의존성 자체의 취약·버전·라이선스는 `dependency-auditor`, 앱 런타임 로깅·트레이싱은 `observability-reviewer`
+</details>
+
+<details>
+<summary><b>15. dependency-auditor</b> (<code>/deps</code>) — 의존성 취약점·버전·라이선스 점검</summary>
+
+- **언제**: 머지·배포 전 또는 정기 의존성 점검
+- **점검**: 알려진 취약점(CVE, 직접/전이 경로), 버전 신선도·방치/deprecated, lockfile 무결성·드리프트, 미사용·누락 의존성, dependencies/devDependencies 오분류, 라이선스 위험(GPL/AGPL·불명), 공급망 신호(타이포스쿼팅·postinstall·비공식 레지스트리)
+- **안전장치**: 매니페스트·lockfile 정적 분석이 기본. `npm audit`·`pip-audit` 등 읽기 전용 진단은 명시 요청 시만, 설치·업그레이드는 안 함
+- **출력**: 요약(취약점 개수·lockfile 상태) → 위험 Top 3(패키지·현재/권장 버전·조치) → 주의 → 제안
+- **구분**: 앱 코드 보안 취약점은 `security-reviewer`, CI/공급망(SBOM·서명) 설정은 `devops-reviewer`
+</details>
+
+<details>
+<summary><b>16. observability-reviewer</b> (<code>/obs</code>) — 로깅·트레이싱·관측성 점검</summary>
+
+- **언제**: "장애가 나도 추적이 안 된다", 운영 투입·머지 전 관측성 점검
+- **가정**: 새벽 3시 장애 알림 — 로그·트레이스만으로 "어떤 요청이, 누가/무엇에서, 어디서, 왜 실패했는가"를 답할 수 있는가
+- **점검**: 구조적 로깅(맥락·레벨·노이즈), 상관관계 ID(request/trace) 전파, 에러 캡처·리포팅(예외 삼킴·Sentry·4xx/5xx 구분), 메트릭, 분산 트레이싱(OpenTelemetry), 민감정보 로그 노출, 프론트 에러 바운더리·웹 바이탈
+- **출력**: 요약(장애 추적 가능성) → 위험 Top 3(민감정보 로그·예외 삼킴·추적 불가) → 주의 → 제안
+- **구분**: 배포·인프라(로그 수집 파이프라인·대시보드) 설정은 `devops-reviewer`, 일반 예외 처리·코드 품질은 `code-reviewer`
 </details>
 
 ### 역할이 겹치기 쉬운 쌍
@@ -204,6 +238,12 @@
 | perf-auditor ↔ db-optimizer | 프론트 "성능"(번들·렌더) ↔ MySQL 쿼리·인덱스 "성능" |
 | test-strategy ↔ test-runner | 커버리지 공백·약한 테스트 "진단·설계" ↔ 테스트 "실행·실패 분석" |
 | devops-reviewer ↔ security-reviewer | 배포/파이프라인 설정 "운영 보안" ↔ 애플리케이션 "코드 보안" |
+| api-contract-reviewer ↔ api-doc-writer | 프론트-백 계약 "정합성 검증" ↔ 백엔드 엔드포인트 "카탈로그·문서화" |
+| api-contract-reviewer ↔ code-reviewer | 양쪽 "계약 일치" ↔ 한쪽 "코드 품질·버그" |
+| dependency-auditor ↔ security-reviewer | 의존성 자체 "취약·버전·라이선스" ↔ 앱 "코드 보안 취약점" |
+| dependency-auditor ↔ devops-reviewer | 의존성 "건강성"(매니페스트·lockfile) ↔ CI/공급망 "설정"(SBOM·서명) |
+| observability-reviewer ↔ devops-reviewer | 앱 런타임 "로깅·트레이싱·계측" ↔ 로그 수집·대시보드 "인프라 설정" |
+| observability-reviewer ↔ code-reviewer | 관측성 "공백"(로깅·추적) ↔ 일반 "예외 처리·코드 품질" |
 
 ---
 
@@ -235,11 +275,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 13개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 16개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 13개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 13개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다.
+> `sync.ps1`은 16개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 16개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -280,6 +320,7 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/test` | test-runner | 테스트 경로/패턴 |
 | `/coverage` | test-strategy | 경로/모듈(선택) |
 | `/perf` | perf-auditor | 경로/컴포넌트(선택) |
+| `/contract` | api-contract-reviewer | 엔드포인트/경로(선택) |
 | `/apidoc` | api-doc-writer | 경로 |
 | `/db` | db-optimizer | 경로/쿼리 |
 | `/migrate` | migration-reviewer | 마이그레이션 경로(선택) |
@@ -288,6 +329,8 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/datamodel` | data-modeler | 요구사항/경로 |
 | `/arch` | system-architect | 기능 설명/경로 |
 | `/devops` | devops-reviewer | 파일/경로(선택) |
+| `/deps` | dependency-auditor | 매니페스트/경로(선택) |
+| `/obs` | observability-reviewer | 기능/경로(선택) |
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
 
@@ -313,7 +356,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-13종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-16종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
@@ -336,26 +379,27 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
-├─ AGENTS.md                     # 13개 에이전트 통합 정리
+├─ AGENTS.md                     # 16개 에이전트 통합 정리
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
 ├─ .gitignore
 │
-├─ commands/                     # ── 슬래시 명령 정의 (13개) ──
+├─ commands/                     # ── 슬래시 명령 정의 (16개) ──
 │  ├─ review.md  ├─ sec.md       ├─ test.md      ├─ coverage.md
-│  ├─ perf.md    ├─ apidoc.md    ├─ db.md        ├─ migrate.md
-│  ├─ ui.md      ├─ dsystem.md   ├─ datamodel.md ├─ arch.md
-│  └─ devops.md
+│  ├─ perf.md    ├─ contract.md  ├─ apidoc.md    ├─ db.md
+│  ├─ migrate.md ├─ ui.md        ├─ dsystem.md   ├─ datamodel.md
+│  ├─ arch.md    ├─ devops.md    ├─ deps.md      └─ obs.md
 │
 ├─ launchers/                    # ── 바탕화면 런처 ──
 │  └─ claude.bat
 │
-├─ code-reviewer.md              # ── 에이전트 정의 (13개) ──
+├─ code-reviewer.md              # ── 에이전트 정의 (16개) ──
 ├─ security-reviewer.md
 ├─ test-runner.md
 ├─ test-strategy.md
 ├─ perf-auditor.md
+├─ api-contract-reviewer.md
 ├─ api-doc-writer.md
 ├─ db-optimizer.md
 ├─ migration-reviewer.md
@@ -363,7 +407,9 @@ claude-agents/
 ├─ design-system-architect.md
 ├─ data-modeler.md
 ├─ system-architect.md
-└─ devops-reviewer.md
+├─ devops-reviewer.md
+├─ dependency-auditor.md
+└─ observability-reviewer.md
 ```
 
 ---
