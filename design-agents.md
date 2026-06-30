@@ -38,7 +38,7 @@ Next.js + FastAPI + MySQL 스택을 위해 추가한 **설계/디자인 전용 �
 
 > 점검 렌즈: 실무 디자인 감사 카테고리 + Nielsen 사용성 휴리스틱 10 (참고: GitHub Claude Design 생태계의 디자인 감사 룰셋).
 
-**구분**: 코드 로직 버그는 `code-reviewer`, 토큰/시스템 설계는 `design-system-architect`.
+**구분**: 코드 로직 버그는 `code-reviewer`, 토큰/시스템 설계는 `design-system-architect`, 로드·렌더 성능(번들·CWV)은 `perf-auditor`.
 
 ---
 
@@ -78,7 +78,7 @@ Next.js + FastAPI + MySQL 스택을 위해 추가한 **설계/디자인 전용 �
 
 **출력**: 텍스트 ERD → 테이블별 설계(DDL 예시) → 트레이드오프 → 가정/확인 필요.
 
-**구분**: 기존 쿼리/인덱스 성능 튜닝은 `db-optimizer`. 이 에이전트는 "어떻게 설계할지"를 다룸.
+**구분**: 기존 쿼리/인덱스 성능 튜닝은 `db-optimizer`, 마이그레이션 안전성(락·백필·롤백)은 `migration-reviewer`. 이 에이전트는 "어떻게 설계할지"를 다룸.
 
 ---
 

@@ -8,6 +8,17 @@
 
 ---
 
+## 1.28 (2026-06-30) — design-agents.md "구분" 줄 보강 (frontmatter description과 동기화)
+
+보조 문서 design-agents.md 재점검 결과 한눈에 보기 표(4종 opus·슬래시)·항목·design-system-architect·system-architect 구분은 정합. "구분" 줄 2건만 frontmatter description보다 덜 완전해 누락 위임 보강(1.25 README 보강과 동일 패턴). 에이전트 정의 변경 없음(문서만).
+
+**문서**
+- `design-agents.md` "구분" 줄 보강:
+  - ui-ux-reviewer: 로드·렌더 성능(번들·CWV) → `perf-auditor` 추가
+  - data-modeler: 마이그레이션 안전성(락·백필·롤백) → `migration-reviewer` 추가
+
+---
+
 ## 1.27 (2026-06-30) — sync.ps1 사용법 주석 통일 (실행 명령)
 
 sync.ps1 재점검 결과 핵심 로직은 정합: 스킵 목록(`AGENTS.md`·`README.md`·`CHANGELOG.md`·`CLAUDE.md`·`design-agents.md` 5개 비-에이전트 문서)이 실제 최상위 `.md`와 정확히 일치 → 에이전트 13종만 복사, 대상 경로도 `%USERPROFILE%\.claude\agents`로 README/CLAUDE와 일치. 주석의 실행 명령 1건만 불일치 정정. 에이전트 정의 변경 없음.
