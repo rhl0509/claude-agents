@@ -8,6 +8,19 @@
 
 ---
 
+## 1.36 (2026-06-30) — db-optimizer ↔ perf-auditor 대칭 위임 보강 (db-optimizer 1.7 → 1.8)
+
+전체 위임 그래프를 "겹치는 쌍" 표(의도된 대칭 16쌍)와 대조한 결과, `perf-auditor ↔ db-optimizer`만 비대칭이었다. perf-auditor는 "MySQL 쿼리·인덱스 성능은 db-optimizer"로 위임하지만 db-optimizer에는 역방향 포인터가 없어, "느리다"는 요청이 프론트/DB 중 어디인지 가르는 길이 한쪽만 있었다. 나머지 15쌍은 이미 양방향. 도구·역할 변경 없음(description 위임 문구만).
+
+**db-optimizer 1.7 → 1.8**
+- description에 "프론트엔드 렌더·번들 등 화면 성능은 `perf-auditor`를 쓴다" 역위임 추가.
+
+**문서**
+- `README.md`: 상단 버전 요약(db-optimizer 1.8), 표 8행 버전, 상세 블록 구분 줄에 perf-auditor 위임 추가.
+- `AGENTS.md`: db-optimizer 상세 위임 줄에 perf-auditor 추가(표는 버전 비표기라 변경 없음).
+
+---
+
 ## 1.35 (2026-06-30) — devops-reviewer에 OTel Collector·Alloy 관측성 수집 파이프라인 점검 항목 추가 (1.5 → 1.6)
 
 1.34에서 observability-reviewer가 수집·샘플링 파이프라인을 devops-reviewer로 위임하게 했으니, devops-reviewer가 실제로 그 영역을 커버하도록 점검 항목을 추가해 대칭을 완성. 신규 에이전트나 도구 변경은 없음(devops-reviewer 프롬프트 내용만 보강).

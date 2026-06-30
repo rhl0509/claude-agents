@@ -6,7 +6,7 @@
 - 에이전트 수: **16종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `security-reviewer` **v1.9**, `test-runner`·`db-optimizer` **v1.7**, `code-reviewer` **v1.7**, `devops-reviewer` **v1.6**, `data-modeler`·`ui-ux-reviewer`·`api-doc-writer` **v1.4**, `system-architect`·`design-system-architect` **v1.3**, `perf-auditor`·`test-strategy` **v1.2**, `migration-reviewer`·`observability-reviewer` **v1.1**, `api-contract-reviewer`·`dependency-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `security-reviewer` **v1.9**, `db-optimizer` **v1.8**, `test-runner`·`code-reviewer` **v1.7**, `devops-reviewer` **v1.6**, `data-modeler`·`ui-ux-reviewer`·`api-doc-writer` **v1.4**, `system-architect`·`design-system-architect` **v1.3**, `perf-auditor`·`test-strategy` **v1.2**, `migration-reviewer`·`observability-reviewer` **v1.1**, `api-contract-reviewer`·`dependency-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -34,7 +34,7 @@
 | 5 | `perf-auditor` | `/perf` | 품질 | 1.2 | opus | Next.js 프론트 성능 점검 | Read, Grep, Glob |
 | 6 | `api-contract-reviewer` | `/contract` | 품질 | 1.0 | opus | 프론트-백 API 계약 정합성 점검 | Read, Grep, Glob |
 | 7 | `api-doc-writer` | `/apidoc` | 문서 | 1.4 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
-| 8 | `db-optimizer` | `/db` | DB | 1.7 | opus | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
+| 8 | `db-optimizer` | `/db` | DB | 1.8 | opus | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
 | 9 | `migration-reviewer` | `/migrate` | DB | 1.1 | opus | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
 | 10 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.4 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
 | 11 | `design-system-architect` | `/dsystem` | 디자인 | 1.3 | opus | 디자인 토큰·컴포넌트 설계 (DESIGN.md) | Read, Grep, Glob, Context7 |
@@ -131,7 +131,7 @@
 - **점검**: N+1, 인덱스(복합 컬럼 순서·중복), SELECT */함수 래핑/OFFSET 페이지네이션, 타입 적정성, 트랜잭션·락, 커넥션 풀, 벡터 검색(MySQL 9 `VECTOR_DISTANCE` k-NN·사전필터)
 - **안전장치**: ALTER/DROP 직접 실행 안 함. `EXPLAIN`/`EXPLAIN ANALYZE`는 명시 요청 시만
 - **출력**: 영향도별 문제 + "가장 효과 큰 개선 3가지"
-- **구분(v1.4)**: 스키마 "설계"는 `data-modeler`, 마이그레이션 안전성(락·무중단·롤백)은 `migration-reviewer`
+- **구분**: 스키마 "설계"는 `data-modeler`, 마이그레이션 안전성(락·무중단·롤백)은 `migration-reviewer`, 프론트엔드 렌더·번들 등 화면 성능은 `perf-auditor`(v1.8)
 </details>
 
 <details>
