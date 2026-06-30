@@ -8,6 +8,15 @@
 
 ---
 
+## 1.27 (2026-06-30) — sync.ps1 사용법 주석 통일 (실행 명령)
+
+sync.ps1 재점검 결과 핵심 로직은 정합: 스킵 목록(`AGENTS.md`·`README.md`·`CHANGELOG.md`·`CLAUDE.md`·`design-agents.md` 5개 비-에이전트 문서)이 실제 최상위 `.md`와 정확히 일치 → 에이전트 13종만 복사, 대상 경로도 `%USERPROFILE%\.claude\agents`로 README/CLAUDE와 일치. 주석의 실행 명령 1건만 불일치 정정. 에이전트 정의 변경 없음.
+
+**문서**
+- `sync.ps1` 사용법 주석: `pwsh -File sync.ps1` → `powershell -ExecutionPolicy Bypass -File sync.ps1`로 통일(README 설치 안내·실제 실행 형태와 일치).
+
+---
+
 ## 1.26 (2026-06-30) — CLAUDE.md 도구 표 정정 (system-architect Context7 누락)
 
 CLAUDE.md 재점검 결과 모델 티어 문장(opus 11종)·역할·"코드 미수정" 열은 정합. 도구 칸 1건만 불일치: `system-architect`의 frontmatter는 Context7(`mcp__context7__*`)를 포함하는데 CLAUDE.md 표만 `Read, Grep, Glob`로 누락(README·AGENTS는 정상). 표를 frontmatter에 맞춰 정정. 에이전트 정의 변경 없음(문서만).

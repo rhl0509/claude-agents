@@ -1,5 +1,5 @@
 # Sync agent definitions (source of truth) -> Claude Code global runtime dir.
-# Usage:  pwsh -File sync.ps1   (or right-click > Run with PowerShell)
+# Usage:  powershell -ExecutionPolicy Bypass -File sync.ps1   (or right-click > Run with PowerShell)
 $src = $PSScriptRoot
 $dst = Join-Path $env:USERPROFILE '.claude\agents'
 New-Item -ItemType Directory -Force -Path $dst | Out-Null
