@@ -6,7 +6,7 @@
 - 에이전트 수: **16종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `security-reviewer` **v1.9**, `test-runner`·`db-optimizer` **v1.7**, `code-reviewer` **v1.7**, `data-modeler`·`devops-reviewer`·`ui-ux-reviewer`·`api-doc-writer` **v1.4**, `system-architect`·`design-system-architect` **v1.3**, `perf-auditor`·`test-strategy` **v1.2**, `migration-reviewer` **v1.1**, `api-contract-reviewer`·`dependency-auditor`·`observability-reviewer` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `security-reviewer` **v1.9**, `test-runner`·`db-optimizer` **v1.7**, `code-reviewer` **v1.7**, `data-modeler`·`devops-reviewer`·`ui-ux-reviewer`·`api-doc-writer` **v1.4**, `system-architect`·`design-system-architect` **v1.3**, `perf-auditor`·`test-strategy` **v1.2**, `migration-reviewer`·`observability-reviewer` **v1.1**, `api-contract-reviewer`·`dependency-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -42,7 +42,7 @@
 | 13 | `system-architect` | `/arch` | 설계 | 1.3 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
 | 14 | `devops-reviewer` | `/devops` | 운영 | 1.5 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
 | 15 | `dependency-auditor` | `/deps` | 운영 | 1.0 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
-| 16 | `observability-reviewer` | `/obs` | 운영 | 1.0 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
+| 16 | `observability-reviewer` | `/obs` | 운영 | 1.1 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
 
 ### 🔍 품질 / QA
 
@@ -220,8 +220,9 @@
 - **언제**: "장애가 나도 추적이 안 된다", 운영 투입·머지 전 관측성 점검
 - **가정**: 새벽 3시 장애 알림 — 로그·트레이스만으로 "어떤 요청이, 누가/무엇에서, 어디서, 왜 실패했는가"를 답할 수 있는가
 - **점검**: 구조적 로깅(맥락·레벨·노이즈), 상관관계 ID(request/trace) 전파, 에러 캡처·리포팅(예외 삼킴·Sentry·4xx/5xx 구분), 메트릭, 분산 트레이싱(OpenTelemetry), 민감정보 로그 노출, 프론트 에러 바운더리·웹 바이탈
+- **트레이싱 경계(v1.1)**: 컨텍스트 전파 포맷 일관성(W3C `traceparent`/`tracestate` vs B3)까지 본다. 점검 범위는 **앱 측 계측**까지 — 수집·샘플링 파이프라인(OTel Collector·Grafana Alloy의 익스포터·tail sampling·배치)은 `devops-reviewer` 영역으로 구분
 - **출력**: 요약(장애 추적 가능성) → 위험 Top 3(민감정보 로그·예외 삼킴·추적 불가) → 주의 → 제안
-- **구분**: 배포·인프라(로그 수집 파이프라인·대시보드) 설정은 `devops-reviewer`, 일반 예외 처리·코드 품질은 `code-reviewer`
+- **구분**: 배포·인프라(로그·트레이스 수집·샘플링 파이프라인·대시보드: OTel Collector·Grafana Alloy 등) 설정은 `devops-reviewer`, 일반 예외 처리·코드 품질은 `code-reviewer`
 </details>
 
 ### 역할이 겹치기 쉬운 쌍

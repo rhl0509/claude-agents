@@ -113,8 +113,8 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 → 앱 코드 보안 취약점은 `security-reviewer`, CI/공급망(SBOM·서명) 설정은 `devops-reviewer`.
 
 **16. observability-reviewer (`/obs`)**
-애플리케이션 **관측성** 점검("장애 시 추적 가능한가"가 기준). 구조적 로깅(맥락·레벨·노이즈), 상관관계 ID(request/trace) 전파, 에러 캡처·리포팅(예외 삼킴·Sentry·4xx/5xx 구분), 메트릭, 분산 트레이싱(OpenTelemetry), 민감정보 로그 노출, 프론트 에러 바운더리·웹 바이탈. 출력: 요약(장애 추적 가능성) → 위험 Top 3(민감정보 로그·예외 삼킴·추적 불가) → 주의 → 제안.
-→ 배포·인프라(로그 수집 파이프라인·대시보드) 설정은 `devops-reviewer`, 일반 예외 처리·코드 품질은 `code-reviewer`.
+애플리케이션 **관측성** 점검("장애 시 추적 가능한가"가 기준). 구조적 로깅(맥락·레벨·노이즈), 상관관계 ID(request/trace) 전파(W3C `traceparent`/B3 포맷 일관성 포함), 에러 캡처·리포팅(예외 삼킴·Sentry·4xx/5xx 구분), 메트릭, 분산 트레이싱(OpenTelemetry **앱 측 계측**까지), 민감정보 로그 노출, 프론트 에러 바운더리·웹 바이탈. 수집·샘플링 파이프라인(OTel Collector·Alloy의 익스포터·tail sampling·배치)은 범위 밖. 출력: 요약(장애 추적 가능성) → 위험 Top 3(민감정보 로그·예외 삼킴·추적 불가) → 주의 → 제안.
+→ 배포·인프라(로그·트레이스 수집·샘플링 파이프라인·대시보드: OTel Collector·Alloy 등) 설정은 `devops-reviewer`, 일반 예외 처리·코드 품질은 `code-reviewer`.
 
 ---
 

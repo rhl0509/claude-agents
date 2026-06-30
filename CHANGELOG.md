@@ -8,6 +8,21 @@
 
 ---
 
+## 1.34 (2026-06-30) — observability-reviewer 트레이싱 경계·전파 포맷 보강 (1.0 → 1.1)
+
+Grafana Agent→Alloy(OTel Collector 배포판) 파이프라인을 살펴본 맥락에서, 앱 측 트레이싱과 수집·샘플링 파이프라인의 경계를 명확히 하고 컨텍스트 전파 포맷 점검을 추가. 신규 에이전트나 도구 변경은 없음(observability-reviewer 프롬프트 내용만 보강).
+
+**observability-reviewer 1.0 → 1.1**
+- 점검 항목 #2(상관관계 ID)에 **컨텍스트 전파 포맷 일관성**(W3C `traceparent`/`tracestate` vs B3) 추가 — 서비스 양쪽 포맷이 다르면 트레이스가 끊긴다.
+- 점검 항목 #5(분산 트레이싱)에 범위 경계 명시 — 점검은 **앱 측 계측(SDK·스팬·속성·전파)**까지이며, 수집·샘플링 파이프라인(OTel Collector·Grafana Alloy의 익스포터·tail sampling·배치)은 devops-reviewer 영역. "앱 코드에 샘플링이 없다"를 결함으로 단정하지 않는다.
+- description의 devops 위임 문구를 "로그·트레이스 수집·샘플링 파이프라인(OTel Collector·Alloy 등)"으로 확장(기존 devops-reviewer→observability 위임과 대칭 유지).
+
+**문서**
+- `README.md`: 상단 버전 요약(observability 1.1), 표 16행 버전, 상세 블록에 트레이싱 경계(v1.1) 항목·구분 줄 갱신.
+- `AGENTS.md`: observability 상세 항목·위임 줄 갱신(표는 버전 비표기라 변경 없음).
+
+---
+
 ## 1.33 (2026-06-30) — 신규 에이전트 3종 추가 (api-contract-reviewer·dependency-auditor·observability-reviewer), 13종 → 16종
 
 풀스택 운영에 자주 필요한 세 영역을 새 에이전트로 추가하고, 기존 컨벤션(신뢰 경계 5요소, 영향도순 출력, `파일:줄` 앵커, 대칭 위임, 최소 권한)을 그대로 따른다. 겹치는 기존 에이전트 4종에 **역방향 위임**을 추가하고 버전을 올렸다.
