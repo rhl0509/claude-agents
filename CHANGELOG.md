@@ -8,6 +8,20 @@
 
 ---
 
+## 1.30 (2026-06-30) — 바탕화면 런처 레포 편입 (1.29 런처 제거 복구)
+
+1.29에서 `launchers/claude.bat`가 레포에 없어 "바탕화면 런처" 문서를 제거했으나, 런처는 글로벌(`~/.claude/launchers/claude.bat`)에 실재하며 계속 사용 중. 제거 대신 commands와 동일하게 레포 단일 소스로 편입. 에이전트 정의 변경 없음.
+
+**구조**
+- `launchers/claude.bat` 신설 — 글로벌 런처를 레포에 편입(폴더 선택 다이얼로그 → 해당 폴더에서 `claude` 실행, ASCII 전용).
+- `sync.ps1`: `launchers/*.bat`도 `~/.claude/launchers/`로 복사하도록 확장.
+
+**문서**
+- `README.md`: "바탕화면 런처" 섹션·목차 복구하되 문구를 정확화(레포 `launchers/claude.bat` → sync로 글로벌 복사 → 바로가기 사용). 저장소 구조 블록에 `launchers/` 추가, sync 안내·워크플로 5단계에 launchers 경로 반영.
+- `CLAUDE.md`: Locations & sync에 런처 소스(`launchers/*.bat`)·런타임 추가.
+
+---
+
 ## 1.29 (2026-06-30) — 슬래시 명령 레포 편입 + sync.ps1 확장, stale 런처/배치 정리
 
 지금까지 13개 슬래시 명령(`/review` 등)이 글로벌(`~/.claude/commands/`)에만 있고 레포엔 소스가 없었음. 단일 소스로 편입하고 동기화 자동화. 더불어 stale 보조 파일/문구 정리. 에이전트 정의 변경 없음(구조·문서·도구).

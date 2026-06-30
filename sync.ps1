@@ -1,4 +1,4 @@
-# Sync agent definitions + slash commands (source of truth) -> Claude Code global runtime dirs.
+# Sync agent definitions + slash commands + launchers (source of truth) -> Claude Code global runtime dirs.
 # Usage:  powershell -ExecutionPolicy Bypass -File sync.ps1   (or right-click > Run with PowerShell)
 $src = $PSScriptRoot
 $dst = Join-Path $env:USERPROFILE '.claude\agents'
@@ -26,4 +26,16 @@ if (Test-Path $cmdSrc) {
         }
 }
 
-Write-Host "Done -> $dst , $cmdDst"
+# Desktop launcher(s) -> global launchers dir.
+$lchSrc = Join-Path $src 'launchers'
+$lchDst = Join-Path $env:USERPROFILE '.claude\launchers'
+if (Test-Path $lchSrc) {
+    New-Item -ItemType Directory -Force -Path $lchDst | Out-Null
+    Get-ChildItem -Path $lchSrc -Filter *.bat |
+        ForEach-Object {
+            Copy-Item $_.FullName -Destination $lchDst -Force
+            Write-Host "synced launcher: $($_.Name)"
+        }
+}
+
+Write-Host "Done -> $dst , $cmdDst , $lchDst"

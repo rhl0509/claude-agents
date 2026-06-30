@@ -37,8 +37,8 @@ The agents are authored in **Korean** and all target the same downstream stack t
 
 ## Locations & sync (single source of truth)
 
-- **Source of truth**: the top-level `*.md` files in this directory (`d:\auto_agent`) for agent definitions, and `commands/*.md` for the slash commands that invoke them. Edit both here only.
-- **Runtime location**: Claude Code loads agents from `%USERPROFILE%\.claude\agents\` and slash commands from `%USERPROFILE%\.claude\commands\`. After editing, run `sync.ps1` to copy both there. Do not hand-edit the runtime copies — they get overwritten on sync.
+- **Source of truth**: the top-level `*.md` files in this directory (`d:\auto_agent`) for agent definitions, `commands/*.md` for the slash commands that invoke them, and `launchers/*.bat` for the desktop launcher. Edit them here only.
+- **Runtime location**: Claude Code loads agents from `%USERPROFILE%\.claude\agents\` and slash commands from `%USERPROFILE%\.claude\commands\`; the launcher is copied to `%USERPROFILE%\.claude\launchers\`. After editing, run `sync.ps1` to copy all three there. Do not hand-edit the runtime copies — they get overwritten on sync.
 - Do **not** keep a separate `.claude/agents/` copy inside this repo; it duplicates the global runtime set and drifts. The global set already applies to every project.
 
 ## Settings

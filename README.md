@@ -16,6 +16,7 @@
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
 - [슬래시 명령](#슬래시-명령)
+- [바탕화면 런처](#바탕화면-런처)
 - [버전 관리](#버전-관리)
 - [업데이트 워크플로우](#업데이트-워크플로우)
 - [저장소 구조](#저장소-구조)
@@ -238,7 +239,7 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 13개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 13개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로 복사합니다.
+> `sync.ps1`은 13개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 13개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -292,6 +293,15 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 
 ---
 
+## 바탕화면 런처
+
+VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.bat`에 들어 있습니다.
+`sync.ps1` 실행 시 `%USERPROFILE%\.claude\launchers\`로 복사되며, 그 파일의 바로가기를 바탕화면에 두고 씁니다.
+더블클릭 → 프로젝트 폴더 선택(다이얼로그) → 해당 폴더에서 Claude 실행.
+> `.bat` 파일은 한글이 깨질 수 있어 **ASCII로만** 작성합니다.
+
+---
+
 ## 버전 관리
 
 버전 번호는 `메이저.마이너` 두 자리를 씁니다.
@@ -315,7 +325,7 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 2. frontmatter `version`/`updated` 갱신 (마이너/메이저 판단)
 3. `CHANGELOG.md`에 변경 기록
 4. **`README.md`의 버전 표 갱신** (버전업 시)
-5. `sync.ps1`으로 전역(`~/.claude/agents/`·`~/.claude/commands/`)에 반영
+5. `sync.ps1`으로 전역(`~/.claude/agents/`·`~/.claude/commands/`·`~/.claude/launchers/`)에 반영
 6. `git commit` + `git push`
 
 ---
@@ -337,6 +347,9 @@ claude-agents/
 │  ├─ perf.md    ├─ apidoc.md    ├─ db.md        ├─ migrate.md
 │  ├─ ui.md      ├─ dsystem.md   ├─ datamodel.md ├─ arch.md
 │  └─ devops.md
+│
+├─ launchers/                    # ── 바탕화면 런처 ──
+│  └─ claude.bat
 │
 ├─ code-reviewer.md              # ── 에이전트 정의 (13개) ──
 ├─ security-reviewer.md
