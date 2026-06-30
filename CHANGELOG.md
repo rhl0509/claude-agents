@@ -8,6 +8,15 @@
 
 ---
 
+## 1.26 (2026-06-30) — CLAUDE.md 도구 표 정정 (system-architect Context7 누락)
+
+CLAUDE.md 재점검 결과 모델 티어 문장(opus 11종)·역할·"코드 미수정" 열은 정합. 도구 칸 1건만 불일치: `system-architect`의 frontmatter는 Context7(`mcp__context7__*`)를 포함하는데 CLAUDE.md 표만 `Read, Grep, Glob`로 누락(README·AGENTS는 정상). 표를 frontmatter에 맞춰 정정. 에이전트 정의 변경 없음(문서만).
+
+**문서**
+- `CLAUDE.md` 에이전트 표: `system-architect` 도구에 `Context7` 추가 — frontmatter·README와 일치(Context7 보유 에이전트 3종: api-doc-writer·design-system-architect·system-architect).
+
+---
+
 ## 1.25 (2026-06-30) — README 상세 블록 "구분" 줄 보강 (frontmatter description과 동기화)
 
 README 재점검 결과 버전(상단 요약·표·frontmatter 일치)·도구·겹치는 쌍 표는 모두 정합. 다만 에이전트 상세 `<details>`의 "구분" 줄이 frontmatter `description`(라우팅 단일 소스)·AGENTS 화살표보다 덜 완전한 블록이 6건 있어, 누락 위임을 채워 전부 동기화. 에이전트 정의 변경 없음(문서만).
