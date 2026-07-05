@@ -6,7 +6,7 @@
 - 에이전트 수: **16종**
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `security-reviewer` **v1.9**, `db-optimizer` **v1.8**, `test-runner`·`code-reviewer` **v1.7**, `devops-reviewer` **v1.6**, `data-modeler`·`ui-ux-reviewer`·`api-doc-writer` **v1.4**, `system-architect`·`design-system-architect` **v1.3**, `perf-auditor`·`test-strategy` **v1.2**, `migration-reviewer`·`observability-reviewer` **v1.1**, `api-contract-reviewer`·`dependency-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer`·`security-reviewer` **v1.10**, `test-runner` **v1.9**, `code-reviewer` **v1.8**, `devops-reviewer` **v1.7**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `design-system-architect`·`system-architect` **v1.4**, `perf-auditor`·`test-strategy` **v1.3**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -27,22 +27,22 @@
 
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|---|
-| 1 | `code-reviewer` | `/review` | 품질 | 1.7 | opus | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
-| 2 | `security-reviewer` | `/sec` | 품질 | 1.9 | opus | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
-| 3 | `test-runner` | `/test` | 품질 | 1.7 | haiku | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
-| 4 | `test-strategy` | `/coverage` | 품질 | 1.2 | opus | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
-| 5 | `perf-auditor` | `/perf` | 품질 | 1.2 | opus | Next.js 프론트 성능 점검 | Read, Grep, Glob |
-| 6 | `api-contract-reviewer` | `/contract` | 품질 | 1.0 | opus | 프론트-백 API 계약 정합성 점검 | Read, Grep, Glob |
-| 7 | `api-doc-writer` | `/apidoc` | 문서 | 1.4 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
-| 8 | `db-optimizer` | `/db` | DB | 1.8 | opus | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
-| 9 | `migration-reviewer` | `/migrate` | DB | 1.1 | opus | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
-| 10 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.4 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
-| 11 | `design-system-architect` | `/dsystem` | 디자인 | 1.3 | opus | 디자인 토큰·컴포넌트 설계 (DESIGN.md) | Read, Grep, Glob, Context7 |
-| 12 | `data-modeler` | `/datamodel` | 설계 | 1.4 | opus | 데이터 모델/스키마 설계 | Read, Grep, Glob |
-| 13 | `system-architect` | `/arch` | 설계 | 1.3 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
-| 14 | `devops-reviewer` | `/devops` | 운영 | 1.6 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
-| 15 | `dependency-auditor` | `/deps` | 운영 | 1.0 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
-| 16 | `observability-reviewer` | `/obs` | 운영 | 1.1 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
+| 1 | `code-reviewer` | `/review` | 품질 | 1.8 | opus | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
+| 2 | `security-reviewer` | `/sec` | 품질 | 1.10 | opus | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
+| 3 | `test-runner` | `/test` | 품질 | 1.9 | sonnet | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
+| 4 | `test-strategy` | `/coverage` | 품질 | 1.3 | opus | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
+| 5 | `perf-auditor` | `/perf` | 품질 | 1.3 | opus | Next.js 프론트 성능 점검 | Read, Grep, Glob |
+| 6 | `api-contract-reviewer` | `/contract` | 품질 | 1.1 | opus | 프론트-백 API 계약 정합성 점검 | Read, Grep, Glob |
+| 7 | `api-doc-writer` | `/apidoc` | 문서 | 1.5 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
+| 8 | `db-optimizer` | `/db` | DB | 1.10 | opus | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
+| 9 | `migration-reviewer` | `/migrate` | DB | 1.2 | opus | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
+| 10 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.5 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
+| 11 | `design-system-architect` | `/dsystem` | 디자인 | 1.4 | opus | 디자인 토큰·컴포넌트 설계 (DESIGN.md) | Read, Grep, Glob, Context7 |
+| 12 | `data-modeler` | `/datamodel` | 설계 | 1.6 | opus | 데이터 모델/스키마 설계 | Read, Grep, Glob |
+| 13 | `system-architect` | `/arch` | 설계 | 1.4 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
+| 14 | `devops-reviewer` | `/devops` | 운영 | 1.7 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
+| 15 | `dependency-auditor` | `/deps` | 운영 | 1.1 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
+| 16 | `observability-reviewer` | `/obs` | 운영 | 1.2 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
 
 ### 🔍 품질 / QA
 
@@ -62,8 +62,8 @@
 <summary><b>2. security-reviewer</b> (<code>/sec</code>) — 보안 취약점 점검</summary>
 
 - **언제**: PR/새 기능 머지 전, 보안 점검 필요 시
-- **기준**: OWASP Top 10
-- **점검**: 인증/인가(라우터 레벨 의존성까지 확인해 오탐 방지), IDOR/BOLA·BFLA·WebSocket(CSWSH), **Next.js 미들웨어 인가 우회(CVE-2025-29927)**, RBAC, 경로 탐색, JWT(알고리즘 고정·alg confusion·kid/jku 헤더 주입·exp·저장 위치), 인젝션(SQL·SSTI·OS/NoSQL), XSS, 과잉 응답(API3, response_model), CSRF/SSRF, Mass Assignment/BOPLA, CORS
+- **기준**: OWASP Top 10 (2025) — A03 공급망·A10 예외 처리 오류(fail-open) 포함
+- **점검**: 인증/인가(라우터 레벨 의존성까지 확인해 오탐 방지), IDOR/BOLA·BFLA·WebSocket(CSWSH), **Next.js 미들웨어 인가 우회(CVE-2025-29927)**, **Server Actions/Route Handler 내부 인가·입력 재검증(v1.10)**, RBAC, 경로 탐색, JWT(알고리즘 고정·alg confusion·kid/jku 헤더 주입·exp·저장 위치), 인젝션(SQL·SSTI·OS/NoSQL), XSS, 과잉 응답(API3, response_model), CSRF/SSRF, Mass Assignment/BOPLA, CORS
 - **LLM 보안(v1.4, OWASP LLM Top 10 2025)**: 간접 프롬프트 인젝션(LLM01), 출력 처리(LLM05), 과도한 행위성(LLM06, 도구 권한·human-in-the-loop), 벡터/임베딩 약점(LLM08, RAG 포이즈닝·테넌트 격리), 시스템 프롬프트 유출(LLM02), 무제한 소비(LLM10)
 - **출력**: 심각도(Critical~Low)순 + "즉시 고쳐야 할 Top 3"
 - **구분(v1.5)**: 일반 코드 품질·버그는 `code-reviewer`, 배포·CI 설정·시크릿 취급은 `devops-reviewer`, 의존성 취약·버전·라이선스는 `dependency-auditor`
@@ -128,7 +128,7 @@
 <summary><b>8. db-optimizer</b> (<code>/db</code>) — MySQL 성능 튜닝</summary>
 
 - **언제**: 느린 쿼리 진단, N+1, 인덱스 설계, 마이그레이션의 성능·인덱스 영향 검토
-- **점검**: N+1, 인덱스(복합 컬럼 순서·중복), SELECT */함수 래핑/OFFSET 페이지네이션, 타입 적정성, 트랜잭션·락, 커넥션 풀, 벡터 검색(MySQL 9 `VECTOR_DISTANCE` k-NN·사전필터)
+- **점검**: N+1, 인덱스(복합 컬럼 순서·중복), SELECT */함수 래핑/OFFSET 페이지네이션, 타입 적정성, 트랜잭션·락, 커넥션 풀, 벡터 검색(MySQL 9 `VECTOR` k-NN·사전필터, 거리 함수·인덱스 지원은 엔진별 확인)
 - **안전장치**: ALTER/DROP 직접 실행 안 함. `EXPLAIN`/`EXPLAIN ANALYZE`는 명시 요청 시만
 - **출력**: 영향도별 문제 + "가장 효과 큰 개선 3가지"
 - **구분**: 스키마 "설계"는 `data-modeler`, 마이그레이션 안전성(락·무중단·롤백)은 `migration-reviewer`, 프론트엔드 렌더·번들 등 화면 성능은 `perf-auditor`(v1.8)
@@ -174,7 +174,7 @@
 
 - **언제**: 새 도메인 테이블/관계 설계, 기존 모델 재설계 (ERP 등 복잡 도메인)
 - **설계**: 엔터티/관계(N:M 연결 테이블), 정규화, 키 전략(대리키/자연키/FK 동작), 타입 선택, 제약·무결성, 이력/감사/soft delete/채번, 확장성
-- **AI 데이터(v1.3)**: 임베딩/시맨틱 검색을 위한 MySQL 9 `VECTOR(N)` 타입·저장 구조(MySQL 8 이하면 외부 벡터 DB 트레이드오프)
+- **AI 데이터(v1.3)**: 임베딩/시맨틱 검색을 위한 MySQL 9 `VECTOR(N)` 타입·저장 구조(거리 함수·벡터 인덱스 지원은 엔진별 상이 — HeatWave vs 커뮤니티, 함수명 단정 금지·"확인 필요"; MySQL 8 이하나 미지원 시 외부 벡터 DB 트레이드오프)
 - **출력**: 텍스트 ERD → 테이블별 설계(DDL) → 트레이드오프 → 가정/확인 필요
 - **구분**: 기존 쿼리 성능 튜닝은 `db-optimizer`, 마이그레이션 안전성(락·백필·롤백)은 `migration-reviewer`
 </details>
@@ -209,7 +209,7 @@
 <summary><b>15. dependency-auditor</b> (<code>/deps</code>) — 의존성 취약점·버전·라이선스 점검</summary>
 
 - **언제**: 머지·배포 전 또는 정기 의존성 점검
-- **점검**: 알려진 취약점(CVE, 직접/전이 경로), 버전 신선도·방치/deprecated, lockfile 무결성·드리프트, 미사용·누락 의존성, dependencies/devDependencies 오분류, 라이선스 위험(GPL/AGPL·불명), 공급망 신호(타이포스쿼팅·postinstall·비공식 레지스트리)
+- **점검**: 알려진 취약점(CVE, 직접/전이 경로), 버전 신선도·방치/deprecated, lockfile 무결성·드리프트(npm/pnpm/yarn·poetry·**uv.lock·PEP 751 pylock.toml**(v1.1)), 미사용·누락 의존성, dependencies/devDependencies 오분류, 라이선스 위험(GPL/AGPL·불명), 공급망 신호(타이포스쿼팅·postinstall·비공식 레지스트리·**lockfile 포이즈닝·provenance/Trusted Publishing·릴리스 숙성**(v1.1))
 - **안전장치**: 매니페스트·lockfile 정적 분석이 기본. `npm audit`·`pip-audit` 등 읽기 전용 진단은 명시 요청 시만, 설치·업그레이드는 안 함
 - **출력**: 요약(취약점 개수·lockfile 상태) → 위험 Top 3(패키지·현재/권장 버전·조치) → 주의 → 제안
 - **구분**: 앱 코드 보안 취약점은 `security-reviewer`, CI/공급망(SBOM·서명) 설정은 `devops-reviewer`
@@ -260,7 +260,7 @@
 | devops-reviewer → migration-reviewer | 운영 → DB 도메인 | 마이그레이션 리뷰는 DB 영역에 집중 |
 | devops-reviewer → system-architect | 운영 → 최상위 설계 | `system-architect`는 위임을 내보내지 않는 최상위 설계 에이전트 |
 
-> `system-architect`는 다른 에이전트로 내보내는 위임도, 받는 위임도 없는 최상위 설계 에이전트다(여러 곳이 가리키지만 단방향).
+> `system-architect`는 다른 에이전트로 내보내는 위임이 없는 최상위 설계 에이전트다. 받는 쪽으로는 devops-reviewer 등 여러 곳이 단방향으로 가리킨다.
 
 ---
 
@@ -296,7 +296,7 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 16개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 16개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다.
+> `sync.ps1`은 16개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 16개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 

@@ -15,7 +15,11 @@ if not defined PROJ (
   exit /b
 )
 
-cd /d "%PROJ%"
+cd /d "%PROJ%" || (
+  echo Failed to enter "%PROJ%". Exiting.
+  timeout /t 3 >nul
+  exit /b 1
+)
 cls
 echo.
 echo  Project: %PROJ%

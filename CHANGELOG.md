@@ -4,7 +4,122 @@
 - 마이너 올림 (1.2 → 1.3): 체크 항목 추가, 표현 다듬기 등 작은 개선
 - 메이저 올림 (1.x → 2.0): 역할·출력 형식·동작이 크게 바뀔 때
 
-**작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync.ps1`을 실행해 전역(`C:\Users\PC\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`(상단 버전 요약·버전 표·해당 상세 블록)와 `AGENTS.md`·`CLAUDE.md`의 관련 내용을 갱신한 뒤 ④ `sync.ps1` 실행 후 `git commit` + `git push` 한다.
+**작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync.ps1`을 실행해 전역(`%USERPROFILE%\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`(상단 버전 요약·버전 표·해당 상세 블록)와 `AGENTS.md`·`CLAUDE.md`의 관련 내용을 갱신한 뒤 ④ `sync.ps1` 실행 후 `git commit` + `git push` 한다.
+
+---
+
+## 1.42 (2026-07-05) — 보류 항목 전면 적용: 능동 위임 + memory + hooks(읽기전용 강제) + 공용 skill
+
+1.41에서 위험을 이유로 보류했던 공식 서브에이전트 기능들을, **각 위험을 스스로 안전하게 해결하는 형태로** 전부 적용했다. 16개 frontmatter는 수정 후 자체 YAML 파서로 구조를 전수 검증(ALL PASS)해 로딩 깨짐을 차단했다. `color`와 마찬가지로 비behavioral 인프라 변경이라 `version` 번호는 올리지 않음(모두 `updated: 2026-07-05`).
+
+**1) 능동 위임 (use proactively)** — 리뷰 계열 11개(code/security/test-runner/migration/api-contract/dependency/observability/devops/perf/ui-ux/db-optimizer) description에 **서로 겹치지 않는 좁은 트리거**로 추가(예: 보안민감 코드 변경→security, 마이그레이션 파일 추가→migration, 화면 머지 전→ui-ux). 트리거가 상호 배타적이라 동시 과잉 호출을 방지 — 이것이 "위험 해결" 방식. 설계·생성 계열(data-modeler/system-architect/design-system-architect/api-doc-writer/test-strategy)은 의도적 호출 대상이라 제외.
+
+**2) 지속 메모리 (memory: user)** — 16개 전원. **`user` 스코프**를 골라 메모리를 `~/.claude/agent-memory/<name>/`에 두어 **리뷰 대상 저장소를 오염시키지 않음**(project 스코프는 대상 repo에 파일 생성 → read-only 정체성과 충돌하므로 회피).
+
+**3) 읽기전용 강제 훅 (hooks.PreToolUse)** — 16개 전원에 `hooks/agent-guard.ps1`를 PreToolUse(matcher `Write|Edit|Bash`)로 연결. memory가 Write/Edit를 자동 부여하는 리스크를 프레임워크 레벨에서 봉인:
+   - Write/Edit: 경로가 `*-memory` 밖이면 차단(대상 코드베이스 수정 불가).
+   - Bash: SQL DDL/DML·`rm -rf`·git 쓰기 등 명백한 상태 변경 차단(진단 명령·`git diff`·테스트·EXPLAIN은 통과).
+   - **fail-open 설계**: 긍정 매칭에만 exit 2, 그 외(파싱오류·미매칭·스크립트 부재·실행정책 차단)는 전부 허용. 따라서 기존 동작을 절대 못 깨고 오직 위험한 호출만 막음 — 이것이 "위험 해결" 방식.
+
+**4) 공용 스킬 프리로드 (skills: [agent-conventions])** — 16개 전원. `skills/agent-conventions/SKILL.md`에 공용 운영 규범(정직한 발견 보고, 증거 기반 심각도, 불확실 표기, 읽기전용·메모리 위생 — wshobson 등 GitHub 베스트프랙티스 반영)을 두고 프리로드. **기존 개별 프롬프트 섹션은 삭제하지 않음**(추가만) → 단일파일 가독성 유지, dedup 아닌 보강.
+
+**의도적 미적용 (위험이 이득을 초과 → 제외가 곧 해결)**
+- `permissionMode: plan` — memory의 Write와 진단 Bash를 둘 다 막아 충돌. allowlist+가드 훅이 읽기전용을 더 정확히 커버.
+- `disallowedTools` — allowlist가 이미 Write/Edit를 배제(중복).
+- 이슈 #44385(frontmatter `model` 무시 가능성) — 파일 변경 대신 CLAUDE.md에 precedence와 per-invocation 우회를 문서화.
+
+**인프라**
+- `hooks/agent-guard.ps1`, `skills/agent-conventions/SKILL.md` 신설.
+- `sync.ps1`: `hooks/*.ps1` → `~/.claude/hooks/`, `skills/<dir>` → `~/.claude/skills/` 배포 추가(오류 시 exit 1에 포함).
+- `CLAUDE.md`: frontmatter 스키마에 color/memory/skills/hooks, 읽기전용 강제·model precedence·permissionMode/disallowedTools 미사용 근거, 소스·런타임 위치(hooks·skills) 반영.
+
+---
+
+## 1.41 (2026-07-05) — Fable-5 GitHub 스펙 대조: 공식 서브에이전트 frontmatter 정합 확인 + `color` 채택
+
+Fable-5 리서처 2명이 **공식 Claude Code 서브에이전트 문서(code.claude.com/docs/en/sub-agents)와 GitHub 커뮤니티 컬렉션(wshobson/agents 등)**을 조사하고, 공식 스펙 필드 목록을 직접 WebFetch로 재검증했다.
+
+**핵심 결론 — 우리 포맷은 이미 현행 스펙에 완전 정합. 깨지거나 구식인 부분 없음.**
+- `model: opus/sonnet/haiku` 별칭은 현행 유효(`fable`·전체 ID·`inherit`도 허용, 미지정 시 기본 `inherit`). 변경 불필요.
+- `tools`를 명시하면 그 allowlist로 제한되고 생략 시 전체 상속. 우리 리뷰어는 `Read, Grep, Glob[, Bash]`만 부여 → **Write/Edit가 애초에 불가**, "파일 수정 안 함" 계약이 프레임워크 레벨에서 이미 강제됨. 커뮤니티가 권한 `disallowedTools`로 읽기전용을 걸라는 제안은 우리에겐 **불필요(중복)**.
+- `version`/`updated`는 비표준 필드지만 무시될 뿐 무해 → 유지.
+
+**적용한 변경**
+- 16개 에이전트 전원에 공식 `color` 필드 추가(카테고리별): 품질=blue, 문서=cyan, DB=orange, 설계=green, 디자인=purple, 운영=pink. 병렬 실행 시 task list·transcript에서 에이전트를 색으로 구분. **비behavioral 메타데이터라 `version` 번호는 올리지 않음**(버전은 리뷰 동작·출력 기준). `updated`는 이미 2026-07-05.
+- `CLAUDE.md`: frontmatter 스키마 설명에 `color`(공식) 및 `version`/`updated`(비표준·무해) 명시.
+
+**조사했으나 적용 보류(위험·판단 필요)**: description의 "use proactively" 능동 위임 문구(오케스트레이터/슬래시 커맨드 기반 우리 라우팅과 충돌 가능 — 과잉 호출 위험), `memory`(활성 시 Read/Write/Edit 자동 부여로 읽기전용 원칙과 충돌), `hooks`/`permissionMode`(플러그인 배포 시 무시됨), `skills` 프리로드로 공통 섹션 단일화(파일만 봐선 전체 프롬프트가 안 보이는 단점). 알려진 이슈 #44385(frontmatter `model:` 무시 가능성)는 실사용 검증 필요 — 파일은 그대로 두는 게 옳음.
+
+---
+
+## 1.40 (2026-07-05) — test-runner 모델 상향 haiku → sonnet (모델 티어 규칙 조정)
+
+test-runner의 실제 작업(실패 원인 4분류 — 프로덕션 버그 vs 테스트 오류 vs 환경·픽스처 vs 외부 의존성 — 과 통과 테스트의 품질 스캔)이 "명령만 실행하는 기계적 작업"이 아니라 판단을 요구한다는 1.39 리뷰 지적을 반영. haiku 오분류 시 "프로덕션 버그"를 "환경 문제"로 넘기는 비용이 커, 중간 티어(sonnet)로 상향.
+
+**test-runner 1.8 → 1.9**
+- frontmatter `model`: `haiku` → `sonnet`.
+
+**모델 티어 규칙**
+- `CLAUDE.md`: 티어 문장을 갱신. 이제 `haiku`에 해당하는 에이전트는 없음(순수 기계적 작업 전용으로 예약), `sonnet`은 api-doc-writer·test-runner. 현재 분포 opus 14 / sonnet 2 / haiku 0.
+
+**문서**
+- `README.md`: 상단 버전 요약(test-runner v1.9)·표 3행(버전 1.9, 모델 sonnet) 갱신.
+
+---
+
+## 1.39 (2026-07-05) — Fable-5 셀프리뷰 Med/Low 반영: 커버리지 공백·최신성·라우팅·용어 (에이전트 13종 + 문서)
+
+1.38의 High에 이어 Fable-5 리뷰의 **Med 등급과 확실한 Low**를 반영. 커버리지 공백 보강, 2026-07 최신성, 라우팅 경계, 용어 통일이 주축.
+
+**code-reviewer 1.7 → 1.8** — Pydantic v1/v2 혼용 점검 추가, Next.js 캐싱을 16 기준선으로, 출력에 "Top 3" 요약 추가(세트 일관성).
+**perf-auditor 1.2 → 1.3** — Next 16을 기준선으로 승격, **Turbopack** 점검 항목 신설(webpack 잔재·내장 Bundle Analyzer 16.1+ 우선, `@next/bundle-analyzer`는 webpack 한정). description에 Turbopack·use cache/PPR 키워드.
+**observability-reviewer 1.1 → 1.2** — Next.js 서버 측 계측(`instrumentation.ts`/`onRequestError`), FastAPI 비동기 컨텍스트(`contextvars`) ID 유실, 로그↔트레이스 상호연결(trace_id 첨부), Sentry 소스맵.
+**api-contract-reviewer 1.0 → 1.1** — 점검 범위를 서버 측 호출(RSC·Route Handler·Server Action)로 확장, snake_case↔camelCase alias 변환 드리프트, 생성 타입 대안(orval 등)·CI diff 강제, SSE 스트리밍 계약.
+**migration-reviewer 1.1 → 1.2** — MySQL 비트랜잭션 DDL(암묵 커밋) 원자성, Alembic 리비전 그래프(multiple heads), `default=` vs `server_default=` 함정. 항목 번호 재정렬.
+**data-modeler 1.5 → 1.6** — 키 전략에 UUIDv7(RFC 9562)·`BINARY(16)`·InnoDB 클러스터드 인덱스 단편화 트레이드오프.
+**db-optimizer 1.9 → 1.10** — 암묵적 타입 변환·JOIN 콜레이션 불일치로 인한 인덱스 무력화 점검, description에서 migration-reviewer와 경계(결과물 vs 적용과정) 명시.
+**api-doc-writer 1.4 → 1.5** — 인증 판정에 `Security(...)`(OAuth2 스코프) 추가(스코프 인증 오탐 방지), `add_api_route`/`mount` 수집, `include_in_schema=False`·`status_code=` 수집.
+**devops-reviewer 1.6 → 1.7** — description에 OTel/Alloy 파이프라인 명시(obs-reviewer와 대칭), GitHub Actions 불변 릴리스·불변 액션·OIDC 신뢰정책 claim·워크플로 정적분석, BuildKit `--mount=type=secret` 대안.
+**test-runner 1.7 → 1.8** — test-strategy와 경계 명시(약점은 플래그만, 심층 진단은 위임), uv/poetry·pnpm 모노레포·Vitest workspace 러너 인식, Vitest async Server Component 우회책. (model=haiku 유지 — 필요 시 재검토)
+**test-strategy 1.2 → 1.3** — Server Action/Route Handler/미들웨어 핵심 경로, 속성 기반 테스트(Hypothesis·fast-check)·뮤테이션 테스트(mutmut·Stryker), test-runner 인수인계 문구.
+**system-architect 1.3 → 1.4** — description에 defer 추가(api-contract-reviewer·data-modeler·devops-reviewer·security-reviewer), RAG에 청킹·하이브리드 검색·리랭킹·평가 루프, 프롬프트/시맨틱 캐싱, Next.js 캐시 계층, 용어 "검토 필요"→"확인 필요" 통일.
+**ui-ux-reviewer 1.4 → 1.5** — "WCAG 2.2 AA" 명시, 터치 타깃 표준(24×24 AA)/권장(44×44) 분리, WCAG 2.2 신규 SC(포커스 가림·드래그 대안·중복 입력·접근 가능한 인증), 헤딩 위계·skip link.
+**design-system-architect** — Tailwind 점검 v4 재작성은 1.38(1.4)에서 반영됨. 여기선 검증 규칙의 "WCAG 2.2" 표기만 정정.
+
+**용어/일관성** — 섹션 제목 "분석 원칙 (Hermes 반영)"의 미설명 고유명사 **Hermes 제거**(migration/perf/test-strategy/devops).
+
+**문서**
+- `README.md`: 상단 버전 요약·표 13개 행 갱신, sync 동작 설명(allowlist·manifest delete-sync·exit code) 반영.
+- `CLAUDE.md`: sync.ps1 동작(allowlist·manifest 삭제·exit 1)과 버전/문서 워크플로 포인터 추가.
+- `AGENTS.md`: 등록 위치 표에 전역 런처 행 추가, 소스 범위를 `commands/`·`launchers/`까지 확장.
+
+---
+
+## 1.38 (2026-07-05) — Fable-5 전체 셀프리뷰: 사실오류·계약모순·최신성 High 수정 (에이전트 5종 + sync.ps1)
+
+Fable-5 리뷰어 5명이 16개 에이전트 정의·16개 커맨드·공유 문서 전체를 파일:줄 단위로 점검(2026-07 웹 검증 포함). 그중 **High 등급(사실 오류·무수정 계약 모순·구식 사실)**만 우선 반영. Med/Low는 별도 배치 예정.
+
+**security-reviewer 1.9 → 1.10**
+- 기준을 **OWASP Top 10 (2025)**로 명시(A03 공급망 확대·A10 예외 처리 오류/fail-open 유의).
+- 점검 항목 1(인증/인가)에 **Next.js Server Actions/Route Handler 내부 인가·입력 재검증** 추가 — 공개 POST 엔드포인트인데 기존엔 미들웨어/FastAPI만 다뤄 커버리지 구멍. 최신 취약 버전 권고(RSC 역직렬화·캐시 포이즈닝)는 WebSearch로 확인 안내.
+
+**dependency-auditor 1.0 → 1.1**
+- description의 **모순 수정**: "설치/업그레이드 명령은 사용자가 명시할 때만 실행" → 본문(설치·업그레이드 절대 미실행)과 일치하도록 "설치·업그레이드는 하지 않고, 읽기 전용 진단만 명시 시 실행".
+- Python lockfile에 **uv.lock·PEP 751 pylock.toml** 추가(uv 프로젝트를 "lockfile 없음"으로 오진하던 문제) + 매니저 혼용 판별 신호.
+- 공급망 신호에 **lockfile 포이즈닝(resolved URL)·의존성 혼동·provenance/Trusted Publishing·릴리스 숙성** 추가.
+
+**db-optimizer 1.8 → 1.9 / data-modeler 1.4 → 1.5**
+- 벡터 검색에서 **`VECTOR_DISTANCE()` 함수 존재를 단정하던 서술 정정**. 거리 함수·네이티브 벡터 인덱스는 엔진별 상이(HeatWave `DISTANCE()` vs 커뮤니티 서버 미지원 가능)임을 명시하고 함수명 단정 대신 "확인 필요" 검증을 강제.
+
+**design-system-architect 1.3 → 1.4**
+- Tailwind 설정 점검 항목을 **v4 CSS-first(`@theme`/`@custom-variant`)** 기준으로 재작성하고 v3(`theme.extend`)를 분기로 분리(현행 기본 버전과 불일치 해소, 같은 파일 16·65줄과 정합).
+
+**인프라**
+- `sync.ps1`: delete-sync를 **manifest 기반**으로 변경(`.claude\agents\.auto_agent_manifest.txt`). 이 레포가 이전에 배포한 에이전트만 stale 삭제 대상으로 삼아, 사용자가 직접 만든 개인 에이전트 정의가 삭제되던 위험 제거. 주석의 잘못된 보장 문구도 정정.
+
+**문서**
+- `README.md`: 상단 버전 요약·표(2·8·11·12·15행) 갱신, security/dependency/data-modeler 상세 블록에 변경 내용 반영.
+- `AGENTS.md`·`README.md`: db-optimizer 벡터 검색 설명의 `VECTOR_DISTANCE` 단정 표현 정정.
 
 ---
 

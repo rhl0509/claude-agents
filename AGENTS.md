@@ -12,9 +12,10 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 ## 등록/사용 위치
 | 항목 | 경로 | 비고 |
 |---|---|---|
-| 전역 에이전트 | `C:\Users\PC\.claude\agents\` | 모든 프로젝트(D 파티션 포함)에서 사용 |
-| 전역 슬래시 명령 | `C:\Users\PC\.claude\commands\` | `/명령`으로 호출 |
-| 소스(원본) | `d:\auto_agent\*.md` | 편집용 단일 소스. 여기서만 편집 |
+| 전역 에이전트 | `%USERPROFILE%\.claude\agents\` | 모든 프로젝트(D 파티션 포함)에서 사용 |
+| 전역 슬래시 명령 | `%USERPROFILE%\.claude\commands\` | `/명령`으로 호출 |
+| 전역 런처 | `%USERPROFILE%\.claude\launchers\` | 데스크톱 실행용 `claude.bat` |
+| 소스(원본) | `d:\auto_agent`의 `*.md`·`commands/*.md`·`launchers/*.bat` | 편집용 단일 소스. 여기서만 편집 |
 
 ---
 
@@ -76,7 +77,7 @@ FastAPI 엔드포인트를 빠짐없이 카탈로그화. 라우터/WebSocket 데
 → 프론트-백 계약 정합 검증은 `api-contract-reviewer`.
 
 **8. db-optimizer (`/db`)**
-MySQL 쿼리·인덱스·스키마 **성능 튜닝**. N+1, 인덱스 설계, SELECT * / 함수 래핑 / OFFSET 페이지네이션, 타입 적정성, 트랜잭션·락, 커넥션 풀, 벡터 검색(MySQL 9 `VECTOR_DISTANCE` k-NN·사전필터). `EXPLAIN`/`EXPLAIN ANALYZE`는 명시 요청 시만 실행. 출력: 영향도별 문제 + "가장 효과 큰 개선 3가지".
+MySQL 쿼리·인덱스·스키마 **성능 튜닝**. N+1, 인덱스 설계, SELECT * / 함수 래핑 / OFFSET 페이지네이션, 타입 적정성, 트랜잭션·락, 커넥션 풀, 벡터 검색(MySQL 9 `VECTOR` k-NN·사전필터, 거리 함수·인덱스 지원은 엔진별 확인). `EXPLAIN`/`EXPLAIN ANALYZE`는 명시 요청 시만 실행. 출력: 영향도별 문제 + "가장 효과 큰 개선 3가지".
 → 스키마 "설계"는 `data-modeler`, 마이그레이션 안전성(락·무중단·롤백)은 `migration-reviewer`, 프론트엔드 렌더·번들 등 화면 성능은 `perf-auditor`.
 
 **9. migration-reviewer (`/migrate`)**
@@ -152,7 +153,7 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 | devops-reviewer → migration-reviewer | 마이그레이션 리뷰는 DB 영역 집중 |
 | devops-reviewer → system-architect | `system-architect`는 위임을 내보내지 않는 최상위 설계 에이전트 |
 
-> `system-architect`는 내보내는·받는 위임이 모두 없는 최상위 설계 에이전트(여러 곳이 가리키지만 단방향).
+> `system-architect`는 내보내는 위임이 없는 최상위 설계 에이전트. 받는 쪽으로는 devops-reviewer 등 여러 곳이 단방향으로 가리킨다.
 
 ---
 
