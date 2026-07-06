@@ -8,6 +8,21 @@
 
 ---
 
+## 1.47 (2026-07-07) — 보안 방어 2종 추가: threat-modeler·llm-ai-security-reviewer, 23종 → 25종
+
+기존 보안 계열은 전부 **사후(코드 리뷰)**였다(`security-reviewer`/`dependency-auditor`/`devops-reviewer`, 모두 07-05 최신 갱신). 진짜 공백 2개를 메운다: ① 구현 전 **설계 단계 위협 모델링**, ② `security-reviewer` #8에 얹혀 있던 AI/LLM 보안의 **분리·심화**. 둘 다 model `opus`, 읽기전용, `memory: user` + `agent-conventions` + `agent-guard.ps1` 상속.
+
+**색상 결정**: 공식 8색이 모두 소진(품질=blue·문서=cyan·DB=orange·설계=green·디자인=purple·운영=pink·메타=yellow·콘텐츠=red)돼 신규 색을 만들 수 없으므로, 두 에이전트는 **품질 카테고리(color `blue`)**로 두고 문서에서 "보안 심화" 클러스터로 묶었다. `security-reviewer`(품질)와 함께 **설계→코드→AI**의 3단 보안 방어를 형성.
+
+- **threat-modeler** (`/threat`) v1.0 — 구현 전 STRIDE 위협 모델링. 자산·진입점·신뢰 경계(텍스트 DFD)·STRIDE per element·악용 시나리오·위험 순위·완화책·보안 요구사항 체크리스트. `security-reviewer`(사후 코드)와 명확히 구분. tools에 WebSearch/WebFetch(공격 패턴·CWE 확인).
+- **llm-ai-security-reviewer** (`/aisec`) v1.0 — OWASP LLM Top 10 2025 심화: 프롬프트 인젝션(직접·간접)·부적절한 출력 처리·과도한 행위성·민감정보/시스템 프롬프트 유출·RAG/벡터 포이즈닝·공급망·무제한 소비(Denial of Wallet)·가드레일/레드팀. `security-reviewer` #8(LLM 요약)의 확장판. AI 앱(local_LLM·minip_AI) 대비.
+- **위임 경계** — threat-modeler(설계) ↔ security-reviewer(코드) ↔ llm-ai-security-reviewer(AI). `devops-reviewer`(시크릿·모델 서빙 인프라)와 분기.
+- **기존 3종(security/dependency/devops)은 미변경** — 07-05 갱신으로 이미 최신이라 억지 리프레시하지 않음(정직한 판단, CHANGELOG 오염 방지).
+- **커맨드** — `commands/threat.md`·`aisec.md` 신설.
+- **문서** — `README.md`·`AGENTS.md`(에이전트 수 23→25·소개·표 25행·🔒 보안 심화 클러스터·슬래시 표·저장소 구조·사용 예), `CLAUDE.md`(에이전트 표 2행·opus 티어) 갱신.
+
+---
+
 ## 1.46 (2026-07-06) — 브랜드 보이스 가디언 추가: brand-voice-guardian, 22종 → 23종
 
 콘텐츠 계열에 **채널 톤 일관성** 축을 추가. model `opus`, color `red`, 읽기전용, `memory: user` + `agent-conventions` + `agent-guard.ps1` 상속.

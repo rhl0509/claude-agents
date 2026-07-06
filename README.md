@@ -1,17 +1,17 @@
 # claude-agents
 
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
-코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다.
+코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다.
 
-- 에이전트 수: **23종** (개발 스택 리뷰 16종 + 메타 1종 + 콘텐츠/마케팅 6종)
+- 에이전트 수: **25종** (개발 스택 리뷰 16종 + 메타 1종 + 콘텐츠/마케팅 6종 + 보안 심화 2종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer`·`security-reviewer` **v1.10**, `test-runner` **v1.9**, `code-reviewer` **v1.8**, `devops-reviewer` **v1.7**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `design-system-architect`·`system-architect` **v1.4**, `perf-auditor`·`test-strategy` **v1.3**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2**, 콘텐츠 6종 `copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer`·`security-reviewer` **v1.10**, `test-runner` **v1.9**, `code-reviewer` **v1.8**, `devops-reviewer` **v1.7**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `design-system-architect`·`system-architect` **v1.4**, `perf-auditor`·`test-strategy` **v1.3**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2**, 콘텐츠 6종 `copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
 ## 목차
-- [에이전트 23종](#에이전트-23종)
+- [에이전트 25종](#에이전트-25종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -23,7 +23,7 @@
 
 ---
 
-## 에이전트 23종
+## 에이전트 25종
 
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|---|
@@ -50,6 +50,8 @@
 | 21 | `fact-checker` | `/factcheck` | 콘텐츠 | 1.0 | opus | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
 | 22 | `content-repurposer` | `/repurpose` | 콘텐츠 | 1.0 | opus | 1소스 → 멀티 포맷 재활용 | Read, Grep, Glob |
 | 23 | `brand-voice-guardian` | `/voice` | 콘텐츠 | 1.0 | opus | 브랜드 보이스(문체·톤) 일관성 점검 | Read, Grep, Glob |
+| 24 | `threat-modeler` | `/threat` | 품질 | 1.0 | opus | 설계 단계 위협 모델링(STRIDE) | Read, Grep, Glob, WebSearch, WebFetch |
+| 25 | `llm-ai-security-reviewer` | `/aisec` | 품질 | 1.0 | opus | AI/LLM 보안 심화(OWASP LLM Top 10) | Read, Grep, Glob, WebSearch, WebFetch |
 
 ### 🔍 품질 / QA
 
@@ -303,6 +305,28 @@
 - **구분**: 일반 카피 품질(후킹·CTA)은 `copy-reviewer`, 보이스 정의·시스템 설계는 `ai-workspace-architect`
 </details>
 
+### 🔒 품질 / QA — 보안 심화
+
+> `security-reviewer`(`/sec`, 위 품질 카테고리)와 함께 보안 방어를 이룬다: 설계 단계(threat-modeler) → 코드 취약점(security-reviewer) → AI/LLM 특화(llm-ai-security-reviewer).
+
+<details>
+<summary><b>24. threat-modeler</b> (<code>/threat</code>) — 설계 단계 위협 모델링(STRIDE)</summary>
+
+- **언제**: 새 기능·인증/결제/파일업로드/외부연동을 **구현하기 전** 또는 큰 변경 전
+- **절차**: 자산 식별 → 진입점·공격 표면 → 신뢰 경계·데이터 흐름(텍스트 DFD) → STRIDE(스푸핑·변조·부인·정보노출·DoS·권한상승) per element → 악용 시나리오 → 위험 순위 → 완화책·보안 요구사항
+- **출력**: 범위·가정 → 자산 → 진입점·신뢰 경계 → STRIDE 위협 표 → 악용 시나리오 Top → 보안 요구사항 체크리스트(구현·리뷰 시 확인용)
+- **구분**: 이미 있는 코드의 취약점은 `security-reviewer`, AI/LLM 특화 위협은 `llm-ai-security-reviewer`, 시스템 구조 설계는 `system-architect`
+</details>
+
+<details>
+<summary><b>25. llm-ai-security-reviewer</b> (<code>/aisec</code>) — AI/LLM 보안 심화(OWASP LLM Top 10)</summary>
+
+- **언제**: 앱이 LLM/AI 기능(챗봇·RAG·에이전트·툴 호출·파인튜닝)을 포함하고, 머지 전 AI 보안을 깊게 볼 때
+- **점검**(OWASP LLM Top 10 2025): 프롬프트 인젝션(직접·**간접**: RAG·문서·외부페이지), 부적절한 출력 처리(SQL/명령/HTML/툴 전파), 과도한 행위성(도구 권한·human-in-the-loop), 민감정보·시스템 프롬프트 유출, 벡터/RAG 포이즈닝·멀티테넌시, 모델·데이터 공급망, 무제한 소비(Denial of Wallet), 가드레일·평가/레드팀
+- **출력**: 심각도별(LLMxx 표기) 발견 → 즉시 고칠 Top 3
+- **구분**: 웹 앱 일반 보안(인증·인젝션·XSS·IDOR)은 `security-reviewer`, 배포·시크릿·모델 서빙 인프라는 `devops-reviewer`, 설계 단계 위협은 `threat-modeler`
+</details>
+
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
 아래 16쌍은 **양쪽 description에서 서로를 가리키는 대칭 위임**이다(`↔`). 어느 쪽으로 호출해도 인접 영역으로 안내된다.
@@ -369,11 +393,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 23개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 25개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 23개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 23개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 25개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 25개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -432,6 +456,8 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/factcheck` | fact-checker | 파일/경로(선택) |
 | `/repurpose` | content-repurposer | 소스 파일 + 목표 포맷(선택) |
 | `/voice` | brand-voice-guardian | 파일/경로(선택) |
+| `/threat` | threat-modeler | 기능 설명/경로 |
+| `/aisec` | llm-ai-security-reviewer | 파일/경로(선택) |
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
 
@@ -457,7 +483,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-23종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-25종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
@@ -480,24 +506,25 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
-├─ AGENTS.md                     # 23개 에이전트 통합 정리
+├─ AGENTS.md                     # 25개 에이전트 통합 정리
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
 ├─ .gitignore
 │
-├─ commands/                     # ── 슬래시 명령 정의 (23개) ──
+├─ commands/                     # ── 슬래시 명령 정의 (25개) ──
 │  ├─ review.md  ├─ sec.md       ├─ test.md      ├─ coverage.md
 │  ├─ perf.md    ├─ contract.md  ├─ apidoc.md    ├─ db.md
 │  ├─ migrate.md ├─ ui.md        ├─ dsystem.md   ├─ datamodel.md
 │  ├─ arch.md    ├─ devops.md    ├─ deps.md      ├─ obs.md
 │  ├─ fable.md   ├─ copy.md      ├─ landing.md   ├─ seo.md
-│  ├─ factcheck.md  ├─ repurpose.md   └─ voice.md
+│  ├─ factcheck.md  ├─ repurpose.md   ├─ voice.md
+│  ├─ threat.md   └─ aisec.md
 │
 ├─ launchers/                    # ── 바탕화면 런처 ──
 │  └─ claude.bat
 │
-├─ code-reviewer.md              # ── 에이전트 정의 (23개) ──
+├─ code-reviewer.md              # ── 에이전트 정의 (25개) ──
 ├─ security-reviewer.md
 ├─ test-runner.md
 ├─ test-strategy.md
@@ -519,7 +546,9 @@ claude-agents/
 ├─ seo-optimizer.md
 ├─ fact-checker.md
 ├─ content-repurposer.md
-└─ brand-voice-guardian.md
+├─ brand-voice-guardian.md
+├─ threat-modeler.md
+└─ llm-ai-security-reviewer.md
 ```
 
 ---

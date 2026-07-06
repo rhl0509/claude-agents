@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (23종)
+# 서브에이전트 전체 정리 (25종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다.
+> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다. 2종(`threat-modeler`·`llm-ai-security-reviewer`)은 **설계 단계 위협 모델링·AI/LLM 보안 심화**를 담당한다(품질 카테고리, `security-reviewer`와 보안 방어 클러스터 형성).
 
 ## 공통 규칙
 - 발견/제안은 **영향도(심각도) 순으로 정렬**
@@ -48,6 +48,8 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 21 | `fact-checker` | `/factcheck` | 콘텐츠 | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
 | 22 | `content-repurposer` | `/repurpose` | 콘텐츠 | 1소스 → 멀티 포맷 재활용 | Read, Grep, Glob |
 | 23 | `brand-voice-guardian` | `/voice` | 콘텐츠 | 브랜드 보이스 일관성 점검 | Read, Grep, Glob |
+| 24 | `threat-modeler` | `/threat` | 품질 | 설계 단계 위협 모델링(STRIDE) | Read, Grep, Glob, WebSearch, WebFetch |
+| 25 | `llm-ai-security-reviewer` | `/aisec` | 품질 | AI/LLM 보안 심화(OWASP LLM Top 10) | Read, Grep, Glob, WebSearch, WebFetch |
 
 ---
 
@@ -158,6 +160,16 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 콘텐츠가 브랜드 보이스(문체·톤·어휘·거리감·시그니처)에 맞는지 점검. 기준 소스: voice.md → 확정 예시글 → 제공 예시 추론 → 부재 시 `/fable`로 voice.md부터 만들라고 안내(보이스 지어내지 않음). 문장 습관·호칭·금지 표현·시그니처·톤 일관성·번역투 점검. 출력: 요약(기준·부합도) → 벗어난 구간(원문→교정) → 보강 제안.
 → 일반 카피 품질은 `copy-reviewer`, 보이스 정의·시스템 설계는 `ai-workspace-architect`.
 
+### 🔒 품질 / QA — 보안 심화
+
+**24. threat-modeler (`/threat`)**
+설계 단계 위협 모델링. 자산 → 진입점·공격 표면 → 신뢰 경계·데이터 흐름(텍스트 DFD) → STRIDE per element → 악용 시나리오 → 위험 순위 → 완화책·보안 요구사항. 구현 전 선제 방어. 출력: 범위·가정 → 자산 → 진입점·신뢰경계 → STRIDE 위협 표 → 악용 시나리오 → 보안 요구사항 체크리스트.
+→ 이미 있는 코드의 취약점은 `security-reviewer`, AI/LLM 특화 위협은 `llm-ai-security-reviewer`, 구조 설계는 `system-architect`.
+
+**25. llm-ai-security-reviewer (`/aisec`)**
+AI/LLM 보안 심화(OWASP LLM Top 10 2025). 프롬프트 인젝션(직접·간접: RAG·문서·외부페이지), 부적절한 출력 처리, 과도한 행위성(도구 권한·human-in-the-loop), 민감정보·시스템 프롬프트 유출, 벡터/RAG 포이즈닝·멀티테넌시, 공급망, 무제한 소비(Denial of Wallet), 가드레일·레드팀. 출력: 심각도별(LLMxx) → Top 3.
+→ 웹 앱 일반 보안은 `security-reviewer`, 배포·시크릿·모델 서빙은 `devops-reviewer`, 설계 단계 위협은 `threat-modeler`.
+
 ---
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
@@ -224,6 +236,8 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 /factcheck                    # 콘텐츠 사실·수치·출처 검증
 /repurpose blog/post.md 릴스,카드뉴스   # 1소스 → 멀티 포맷 재활용
 /voice                        # 브랜드 보이스(문체·톤) 일관성 점검
+/threat 결제 연동 기능        # 설계 단계 위협 모델링(STRIDE)
+/aisec                        # AI/LLM 보안 심화(OWASP LLM Top 10)
 ```
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
