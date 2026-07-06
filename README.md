@@ -1,17 +1,17 @@
 # claude-agents
 
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
-코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다.
+코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)이 포함됩니다.
 
-- 에이전트 수: **16종**
+- 에이전트 수: **17종** (개발 스택 리뷰 16종 + 메타/워크플로우 1종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer`·`security-reviewer` **v1.10**, `test-runner` **v1.9**, `code-reviewer` **v1.8**, `devops-reviewer` **v1.7**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `design-system-architect`·`system-architect` **v1.4**, `perf-auditor`·`test-strategy` **v1.3**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer`·`security-reviewer` **v1.10**, `test-runner` **v1.9**, `code-reviewer` **v1.8**, `devops-reviewer` **v1.7**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `design-system-architect`·`system-architect` **v1.4**, `perf-auditor`·`test-strategy` **v1.3**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
 ## 목차
-- [에이전트 16종](#에이전트-16종)
+- [에이전트 17종](#에이전트-17종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -23,7 +23,7 @@
 
 ---
 
-## 에이전트 16종
+## 에이전트 17종
 
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|---|
@@ -43,6 +43,7 @@
 | 14 | `devops-reviewer` | `/devops` | 운영 | 1.7 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
 | 15 | `dependency-auditor` | `/deps` | 운영 | 1.1 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
 | 16 | `observability-reviewer` | `/obs` | 운영 | 1.2 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
+| 17 | `ai-workspace-architect` | `/fable` | 메타 | 1.2 | opus | AI 작업환경 진단·재설계(프롬프트·지침·CLAUDE.md·SKILL.md·모델별 전략) | Read, Grep, Glob, WebSearch, WebFetch |
 
 ### 🔍 품질 / QA
 
@@ -226,6 +227,19 @@
 - **구분**: 배포·인프라(로그·트레이스 수집·샘플링 파이프라인·대시보드: OTel Collector·Grafana Alloy 등) 설정은 `devops-reviewer`, 일반 예외 처리·코드 품질은 `code-reviewer`
 </details>
 
+### 🧭 메타 / 워크플로우
+
+<details>
+<summary><b>17. ai-workspace-architect</b> (<code>/fable</code>) — AI 작업환경 진단·재설계</summary>
+
+- **언제**: 프롬프트·지침·`CLAUDE.md`·`SKILL.md`·커스텀 인스트럭션·반복 업무 규칙을 상위 수준으로 재설계할 때
+- **성격**: 다른 16종과 달리 특정 개발 스택이 아니라 **AI 작업환경 자체**를 다루는 메타 에이전트. 마케팅·콘텐츠 제작(릴스·카드뉴스·블로그·상세페이지·강의자료) 결과물 품질을 시스템화
+- **범위**: 여러 모델(Claude/GPT/Gemini/Cursor)에서 일관되게 작동하는 범용 AI 운영체제 설계 — 바로 붙여넣을 커스텀 인스트럭션·CLAUDE.md·SKILL.md 초안 + 모델별 사용 전략
+- **품질 엔진(모델 무관)**: 실행 모델과 무관하게 뼈대→초안→자가채점 루브릭(완성형·밀도·구체성·구조·근거·신뢰도)→재작성 절차를 강제. 도장찍기 금지(각 점수 근거 인용 + 진짜 약점 1개 이상 발굴·수정)
+- **출력**: 총평 → 진단표 → 병목 5 → A.커스텀 인스트럭션 → B.CLAUDE.md → C.SKILL.md → D.모델별 전략 → 운영 규칙 → 자기비판 후 최종본
+- **구분**: 개발 스택 아키텍처는 `system-architect`, 디자인 시스템은 `design-system-architect`. 파일 직접 수정 없이 진단·초안만 제시
+</details>
+
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
 아래 16쌍은 **양쪽 description에서 서로를 가리키는 대칭 위임**이다(`↔`). 어느 쪽으로 호출해도 인접 영역으로 안내된다.
@@ -292,11 +306,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 16개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 17개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 16개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 16개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 17개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 17개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -348,6 +362,7 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/devops` | devops-reviewer | 파일/경로(선택) |
 | `/deps` | dependency-auditor | 매니페스트/경로(선택) |
 | `/obs` | observability-reviewer | 기능/경로(선택) |
+| `/fable` | ai-workspace-architect | 진단 대상/맥락(선택) |
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
 
@@ -373,7 +388,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-16종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-17종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
@@ -396,22 +411,23 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
-├─ AGENTS.md                     # 16개 에이전트 통합 정리
+├─ AGENTS.md                     # 17개 에이전트 통합 정리
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
 ├─ .gitignore
 │
-├─ commands/                     # ── 슬래시 명령 정의 (16개) ──
+├─ commands/                     # ── 슬래시 명령 정의 (17개) ──
 │  ├─ review.md  ├─ sec.md       ├─ test.md      ├─ coverage.md
 │  ├─ perf.md    ├─ contract.md  ├─ apidoc.md    ├─ db.md
 │  ├─ migrate.md ├─ ui.md        ├─ dsystem.md   ├─ datamodel.md
-│  ├─ arch.md    ├─ devops.md    ├─ deps.md      └─ obs.md
+│  ├─ arch.md    ├─ devops.md    ├─ deps.md      ├─ obs.md
+│  └─ fable.md
 │
 ├─ launchers/                    # ── 바탕화면 런처 ──
 │  └─ claude.bat
 │
-├─ code-reviewer.md              # ── 에이전트 정의 (16개) ──
+├─ code-reviewer.md              # ── 에이전트 정의 (17개) ──
 ├─ security-reviewer.md
 ├─ test-runner.md
 ├─ test-strategy.md
@@ -426,7 +442,8 @@ claude-agents/
 ├─ system-architect.md
 ├─ devops-reviewer.md
 ├─ dependency-auditor.md
-└─ observability-reviewer.md
+├─ observability-reviewer.md
+└─ ai-workspace-architect.md
 ```
 
 ---

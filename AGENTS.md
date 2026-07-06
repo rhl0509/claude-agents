@@ -1,7 +1,9 @@
-# 서브에이전트 전체 정리 (16종)
+# 서브에이전트 전체 정리 (17종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
+
+> 16종은 위 개발 스택 전용 리뷰/설계 에이전트이고, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트다.
 
 ## 공통 규칙
 - 발견/제안은 **영향도(심각도) 순으로 정렬**
@@ -39,6 +41,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 14 | `devops-reviewer` | `/devops` | 운영 | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
 | 15 | `dependency-auditor` | `/deps` | 운영 | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
 | 16 | `observability-reviewer` | `/obs` | 운영 | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
+| 17 | `ai-workspace-architect` | `/fable` | 메타 | AI 작업환경 진단·재설계 | Read, Grep, Glob, WebSearch, WebFetch |
 
 ---
 
@@ -117,6 +120,12 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 애플리케이션 **관측성** 점검("장애 시 추적 가능한가"가 기준). 구조적 로깅(맥락·레벨·노이즈), 상관관계 ID(request/trace) 전파(W3C `traceparent`/B3 포맷 일관성 포함), 에러 캡처·리포팅(예외 삼킴·Sentry·4xx/5xx 구분), 메트릭, 분산 트레이싱(OpenTelemetry **앱 측 계측**까지), 민감정보 로그 노출, 프론트 에러 바운더리·웹 바이탈. 수집·샘플링 파이프라인(OTel Collector·Alloy의 익스포터·tail sampling·배치)은 범위 밖. 출력: 요약(장애 추적 가능성) → 위험 Top 3(민감정보 로그·예외 삼킴·추적 불가) → 주의 → 제안.
 → 배포·인프라(로그·트레이스 수집·샘플링 파이프라인·대시보드: OTel Collector·Alloy 등) 설정은 `devops-reviewer`, 일반 예외 처리·코드 품질은 `code-reviewer`.
 
+### 🧭 메타 / 워크플로우
+
+**17. ai-workspace-architect (`/fable`)**
+프롬프트·지침·`CLAUDE.md`·`SKILL.md`·커스텀 인스트럭션·반복 업무 규칙을 진단·재설계하는 **메타 에이전트**. 다른 16종과 달리 특정 개발 스택이 아니라 AI 작업환경 자체를 다루며, 마케팅·콘텐츠 제작(릴스·카드뉴스·블로그·상세페이지·강의자료) 결과물 품질을 시스템화. 여러 모델(Claude/GPT/Gemini/Cursor)에서 일관되게 작동하는 범용 AI 운영체제 설계 — 바로 붙여넣을 커스텀 인스트럭션·CLAUDE.md·SKILL.md 초안 + 모델별 전략. 실행 모델과 무관하게 뼈대→초안→자가채점→재작성 품질 엔진을 강제(도장찍기 금지: 근거 인용 + 약점 1개 이상 발굴·수정). 출력: 총평 → 진단표 → 병목 5 → A·B·C·D → 운영 규칙 → 자기비판 후 최종본.
+→ 개발 스택 아키텍처는 `system-architect`, 디자인 시스템은 `design-system-architect`.
+
 ---
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
@@ -176,6 +185,7 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 /devops                       # Docker·CI/CD·배포 설정 점검
 /deps                         # 의존성 취약점·버전·라이선스 점검
 /obs                          # 로깅·트레이싱·관측성 점검
+/fable                        # AI 작업환경 진단·재설계(프롬프트·지침·모델별 전략)
 ```
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
