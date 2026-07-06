@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (22종)
+# 서브에이전트 전체 정리 (23종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 5종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`)은 **카피·전환·SEO·팩트체크·콘텐츠 재활용**을 다루는 콘텐츠 에이전트다.
+> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다.
 
 ## 공통 규칙
 - 발견/제안은 **영향도(심각도) 순으로 정렬**
@@ -47,6 +47,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 20 | `seo-optimizer` | `/seo` | 콘텐츠 | 블로그·페이지 SEO 점검 | Read, Grep, Glob, WebSearch, WebFetch |
 | 21 | `fact-checker` | `/factcheck` | 콘텐츠 | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
 | 22 | `content-repurposer` | `/repurpose` | 콘텐츠 | 1소스 → 멀티 포맷 재활용 | Read, Grep, Glob |
+| 23 | `brand-voice-guardian` | `/voice` | 콘텐츠 | 브랜드 보이스 일관성 점검 | Read, Grep, Glob |
 
 ---
 
@@ -153,6 +154,10 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 1소스(블로그·영상 스크립트·강의·뉴스레터) → 멀티 포맷(릴스·카드뉴스·스레드·뉴스레터·상세페이지 섹션) 재활용. 소스에서 핵심 추출 → 매체별 관행에 맞춤, 포맷마다 다른 각도, 원본 사실 왜곡·새 사실 창작 금지. 출력: 핵심 메시지 → 포맷별 완성형 초안 → 재활용 맵.
 → 카피 품질은 `copy-reviewer`, 검색 최적화는 `seo-optimizer`, 사실 검증은 `fact-checker`.
 
+**23. brand-voice-guardian (`/voice`)**
+콘텐츠가 브랜드 보이스(문체·톤·어휘·거리감·시그니처)에 맞는지 점검. 기준 소스: voice.md → 확정 예시글 → 제공 예시 추론 → 부재 시 `/fable`로 voice.md부터 만들라고 안내(보이스 지어내지 않음). 문장 습관·호칭·금지 표현·시그니처·톤 일관성·번역투 점검. 출력: 요약(기준·부합도) → 벗어난 구간(원문→교정) → 보강 제안.
+→ 일반 카피 품질은 `copy-reviewer`, 보이스 정의·시스템 설계는 `ai-workspace-architect`.
+
 ---
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
@@ -218,6 +223,7 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 /seo                          # 블로그·페이지 SEO 점검
 /factcheck                    # 콘텐츠 사실·수치·출처 검증
 /repurpose blog/post.md 릴스,카드뉴스   # 1소스 → 멀티 포맷 재활용
+/voice                        # 브랜드 보이스(문체·톤) 일관성 점검
 ```
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.

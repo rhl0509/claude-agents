@@ -8,6 +8,19 @@
 
 ---
 
+## 1.46 (2026-07-06) — 브랜드 보이스 가디언 추가: brand-voice-guardian, 22종 → 23종
+
+콘텐츠 계열에 **채널 톤 일관성** 축을 추가. model `opus`, color `red`, 읽기전용, `memory: user` + `agent-conventions` + `agent-guard.ps1` 상속.
+
+- **brand-voice-guardian** (`/voice`) v1.0 — 초안이 브랜드 보이스(문장 습관·종결어미·거리감·호칭·자주 쓰는/금지 표현·시그니처·톤 일관성·번역투)에 맞는지 점검하고 벗어난 구간을 **원문→교정**으로 제시. 기준 소스는 `voice.md` → `voice/examples/` 확정글 → 제공 예시 추론(근거 명시) → 부재 시 보이스를 지어내지 않고 `ai-workspace-architect`(`/fable`)로 `voice.md`부터 만들라고 안내. tools `Read, Grep, Glob`.
+- **위임 경계** — 일반 카피 품질(후킹·CTA)은 `copy-reviewer`, 보이스 정의·시스템 설계는 `ai-workspace-architect`로 분기.
+- **커맨드** — `commands/voice.md` 신설.
+- **문서** — `README.md`·`AGENTS.md`(에이전트 수 22→23·소개·표 23행·📣 콘텐츠 상세·슬래시 표·저장소 구조·사용 예), `CLAUDE.md`(에이전트 표·예외 문단·opus 티어) 갱신.
+
+> 이 에이전트는 `ai-workspace-architect`가 만드는 `voice.md`와 짝을 이룬다: `/fable`로 보이스를 정의하고, `/voice`로 매 초안이 그 정의를 지키는지 점검하는 흐름.
+
+---
+
 ## 1.45 (2026-07-06) — 콘텐츠 계열 2종 추가: fact-checker·content-repurposer, 20종 → 22종
 
 📣 콘텐츠 카테고리를 **신뢰도(검증)·재활용** 축으로 확장. 둘 다 model `opus`, color `red`, 읽기전용(파일 미수정, 텍스트 출력), `memory: user` + `agent-conventions` + `agent-guard.ps1` 상속.
