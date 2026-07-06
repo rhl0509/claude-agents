@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (25종)
+# 서브에이전트 전체 정리 (27종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다. 2종(`threat-modeler`·`llm-ai-security-reviewer`)은 **설계 단계 위협 모델링·AI/LLM 보안 심화**를 담당한다(품질 카테고리, `security-reviewer`와 보안 방어 클러스터 형성).
+> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다. 2종(`threat-modeler`·`llm-ai-security-reviewer`)은 **설계 단계 위협 모델링·AI/LLM 보안 심화**를 담당한다(품질 카테고리, `security-reviewer`와 보안 방어 클러스터 형성). 2종(`unity-code-reviewer`·`game-design-architect`)은 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트다(🎮 게임 클러스터, 색상 `cyan` 공유).
 
 ## 공통 규칙
 - 발견/제안은 **영향도(심각도) 순으로 정렬**
@@ -50,6 +50,8 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 23 | `brand-voice-guardian` | `/voice` | 콘텐츠 | 브랜드 보이스 일관성 점검 | Read, Grep, Glob |
 | 24 | `threat-modeler` | `/threat` | 품질 | 설계 단계 위협 모델링(STRIDE) | Read, Grep, Glob, WebSearch, WebFetch |
 | 25 | `llm-ai-security-reviewer` | `/aisec` | 품질 | AI/LLM 보안 심화(OWASP LLM Top 10) | Read, Grep, Glob, WebSearch, WebFetch |
+| 26 | `unity-code-reviewer` | `/ureview` | 게임 | Unity C# 게임 코드 리뷰(수명주기·GC·프레임/물리) | Read, Grep, Glob, Bash |
+| 27 | `game-design-architect` | `/gdd` | 게임 | 2D 캐주얼 게임 디자인·시스템 설계 | Read, Grep, Glob |
 
 ---
 
@@ -170,6 +172,16 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 AI/LLM 보안 심화(OWASP LLM Top 10 2025). 프롬프트 인젝션(직접·간접: RAG·문서·외부페이지), 부적절한 출력 처리, 과도한 행위성(도구 권한·human-in-the-loop), 민감정보·시스템 프롬프트 유출, 벡터/RAG 포이즈닝·멀티테넌시, 공급망, 무제한 소비(Denial of Wallet), 가드레일·레드팀. 출력: 심각도별(LLMxx) → Top 3.
 → 웹 앱 일반 보안은 `security-reviewer`, 배포·시크릿·모델 서빙은 `devops-reviewer`, 설계 단계 위협은 `threat-modeler`.
 
+### 🎮 게임 (Unity + C#)
+
+**26. unity-code-reviewer (`/ureview`)**
+Unity + C# 게임 코드(싱글플레이어 2D 캐주얼)의 게임 엔진 고유 결함 리뷰. `git diff`로 `Assets/` 하위 `.cs` 변경분에 집중(Bash는 범위 식별 전용). MonoBehaviour 수명주기(OnDisable 구독 해제 누락), 프레임 루프 비용(Update 내 GetComponent/Find), GC 할당(매 프레임 new·박싱·LINQ·풀링 부재), 코루틴/async 취소 누수, 물리·프레임률 의존(Time.deltaTime·Rigidbody2D), fake-null(파괴된 오브젝트 참조), ScriptableObject 원본 오염. 성능·GC는 정적 리뷰로 의심 지점만, 실제 수치는 Profiler 측정 권고로 분리. 출력: 요약 → Must/Should/Nit → 측정 권고 → Top 3.
+→ 일반 웹 코드 리뷰는 `code-reviewer`, 게임 설계·코어 루프는 `game-design-architect`.
+
+**27. game-design-architect (`/gdd`)**
+구현 전 2D 캐주얼 게임 디자인·시스템 구조 설계. 코어 게임플레이 루프·재미 가설, 난이도 곡선·페이싱, 시스템 분해(상태머신·이벤트·SO 데이터 경계·세이브), 수직 슬라이스·MVP·컷 후보. 솔로 개발 최대 리스크 "미완성"을 겨냥해 야심 기능마다 컷 후보 강제, 재미는 단정 않고 "가설 + 플레이테스트 검증 질문"으로. 출력(설계): 요구/가정 → 코어 루프·재미 가설 → 시스템 분해 → 진행·난이도 → 수직 슬라이스·컷 라인 → 검증 질문.
+→ Unity C# 코드 품질·프레임 리뷰는 `unity-code-reviewer`, 풀스택 웹 아키텍처는 `system-architect`.
+
 ---
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
@@ -238,6 +250,8 @@ AI/LLM 보안 심화(OWASP LLM Top 10 2025). 프롬프트 인젝션(직접·간�
 /voice                        # 브랜드 보이스(문체·톤) 일관성 점검
 /threat 결제 연동 기능        # 설계 단계 위협 모델링(STRIDE)
 /aisec                        # AI/LLM 보안 심화(OWASP LLM Top 10)
+/ureview src/Player.cs        # Unity C# 게임 코드 리뷰
+/gdd 원터치 점프 퍼즐 설계해줘   # 2D 캐주얼 게임 디자인·시스템 설계
 ```
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.

@@ -1,17 +1,17 @@
 # claude-agents
 
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
-코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다.
+코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 2종(`unity-code-reviewer`·`game-design-architect`)이 시범 추가되었습니다(🎮 게임 클러스터).
 
-- 에이전트 수: **25종** (개발 스택 리뷰 16종 + 메타 1종 + 콘텐츠/마케팅 6종 + 보안 심화 2종)
+- 에이전트 수: **27종** (개발 스택 리뷰 16종 + 메타 1종 + 콘텐츠/마케팅 6종 + 보안 심화 2종 + 게임 2종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.9**, `code-reviewer` **v1.8**, `devops-reviewer` **v1.7**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `design-system-architect`·`system-architect` **v1.4**, `perf-auditor`·`test-strategy` **v1.3**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2**, 콘텐츠 6종 `copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.9**, `code-reviewer` **v1.8**, `devops-reviewer` **v1.7**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `design-system-architect`·`system-architect` **v1.4**, `perf-auditor`·`test-strategy` **v1.3**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2**, 콘텐츠 6종 `copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 2종 `unity-code-reviewer`·`game-design-architect` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
 ## 목차
-- [에이전트 25종](#에이전트-25종)
+- [에이전트 27종](#에이전트-27종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -23,7 +23,7 @@
 
 ---
 
-## 에이전트 25종
+## 에이전트 27종
 
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|---|
@@ -52,6 +52,8 @@
 | 23 | `brand-voice-guardian` | `/voice` | 콘텐츠 | 1.0 | opus | 브랜드 보이스(문체·톤) 일관성 점검 | Read, Grep, Glob |
 | 24 | `threat-modeler` | `/threat` | 품질 | 1.1 | opus | 설계 단계 위협 모델링(STRIDE) | Read, Grep, Glob, WebSearch, WebFetch |
 | 25 | `llm-ai-security-reviewer` | `/aisec` | 품질 | 1.1 | opus | AI/LLM 보안 심화(OWASP LLM Top 10) | Read, Grep, Glob, WebSearch, WebFetch |
+| 26 | `unity-code-reviewer` | `/ureview` | 게임 | 1.0 | opus | Unity C# 게임 코드 리뷰(수명주기·GC·프레임/물리) | Read, Grep, Glob, Bash |
+| 27 | `game-design-architect` | `/gdd` | 게임 | 1.0 | opus | 2D 캐주얼 게임 디자인·시스템 설계 | Read, Grep, Glob |
 
 ### 🔍 품질 / QA
 
@@ -327,6 +329,31 @@
 - **구분**: 웹 앱 일반 보안(인증·인젝션·XSS·IDOR)은 `security-reviewer`, 배포·시크릿·모델 서빙 인프라는 `devops-reviewer`, 설계 단계 위협은 `threat-modeler`
 </details>
 
+### 🎮 게임 (Unity + C#)
+
+> 웹 스택과 별개인 **게임 개발 도메인**의 시작점(싱글플레이어 2D 캐주얼). 색상은 8색 소진으로 `cyan`(문서 카테고리)을 공유하되 문서에서 게임 클러스터로 묶는다. 로드맵: game-feel-reviewer·unity-perf-auditor·playtest-designer·unity-build-auditor(같은 필요 3회 반복 시 승격).
+
+<details>
+<summary><b>26. unity-code-reviewer</b> (<code>/ureview</code>) — Unity C# 게임 코드 리뷰</summary>
+
+- **언제**: Unity + C# 코드를 커밋·머지하기 직전 셀프 리뷰 (2D 캐주얼 — 퍼즐/플랫포머)
+- **범위 결정**: `git diff`로 변경분의 `Assets/` 하위 `.cs`에 집중 (Bash는 범위 식별 전용, 실행·수정 금지)
+- **점검(게임 엔진 고유)**: ① MonoBehaviour 수명주기(Awake/OnEnable/Start 혼동, OnDisable 구독 해제 누락), ② 프레임 루프 비용(Update 내 GetComponent/Find/Camera.main), ③ GC 할당(매 프레임 new·박싱·문자열·LINQ·풀링 부재), ④ 코루틴/async 취소 누수, ⑤ 물리·프레임률 의존(Time.deltaTime·FixedUpdate·Rigidbody2D), ⑥ fake-null(파괴된 오브젝트 참조·`?.` 우회), ⑦ ScriptableObject 런타임 원본 오염
+- **원칙**: 성능·GC는 정적 리뷰로 의심 지점만 짚고 실제 수치는 **Profiler 측정 권고**로 분리(단정 금지)
+- **출력**: 요약 → Must fix → Should fix → Nit → 측정 권고 (분류 내 영향도순, `파일:줄`), 가장 먼저 고칠 Top 3
+- **구분**: 일반 웹 코드 리뷰는 `code-reviewer`, 게임 설계·코어 루프·시스템 분해는 `game-design-architect`
+</details>
+
+<details>
+<summary><b>27. game-design-architect</b> (<code>/gdd</code>) — 2D 캐주얼 게임 디자인·시스템 설계</summary>
+
+- **언제**: 새 게임·메카닉·레벨 시스템을 구현하기 전 설계, 기존 설계 점검
+- **설계**: 코어 게임플레이 루프(핵심 동사·재미 가설), 난이도 곡선·페이싱·진행(메카닉 도입→연습→응용→조합), 시스템 분해(GameManager 상태머신·이벤트 흐름·씬 구성·세이브), ScriptableObject 데이터 경계, 게임필 피드백 계획
+- **원칙**: 솔로 개발 최대 리스크는 "미완성" — 모든 야심 기능에 **컷 후보** 강제, 재미부터(수직 슬라이스) 콘텐츠는 나중. 재미는 단정하지 않고 "가설 + 플레이테스트로 검증할 질문"으로
+- **출력(설계)**: 요구/가정 → 코어 루프·재미 가설 → 시스템 분해 → 진행·난이도 → 수직 슬라이스·컷 라인 → 플레이테스트 검증 질문. (점검): 진단 → 문제 → 개선 설계 → 범위 재조정
+- **구분**: Unity C# 코드 품질·프레임 리뷰는 `unity-code-reviewer`, 풀스택 웹 아키텍처는 `system-architect`
+</details>
+
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
 아래 16쌍은 **양쪽 description에서 서로를 가리키는 대칭 위임**이다(`↔`). 어느 쪽으로 호출해도 인접 영역으로 안내된다.
@@ -393,11 +420,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 25개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 27개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 25개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 25개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 27개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 27개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -458,6 +485,8 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/voice` | brand-voice-guardian | 파일/경로(선택) |
 | `/threat` | threat-modeler | 기능 설명/경로 |
 | `/aisec` | llm-ai-security-reviewer | 파일/경로(선택) |
+| `/ureview` | unity-code-reviewer | 경로/스크립트(선택) |
+| `/gdd` | game-design-architect | 게임·메카닉 설명(선택) |
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
 
@@ -483,7 +512,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-25종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-27종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
@@ -506,25 +535,25 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
-├─ AGENTS.md                     # 25개 에이전트 통합 정리
+├─ AGENTS.md                     # 27개 에이전트 통합 정리
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
 ├─ .gitignore
 │
-├─ commands/                     # ── 슬래시 명령 정의 (25개) ──
+├─ commands/                     # ── 슬래시 명령 정의 (27개) ──
 │  ├─ review.md  ├─ sec.md       ├─ test.md      ├─ coverage.md
 │  ├─ perf.md    ├─ contract.md  ├─ apidoc.md    ├─ db.md
 │  ├─ migrate.md ├─ ui.md        ├─ dsystem.md   ├─ datamodel.md
 │  ├─ arch.md    ├─ devops.md    ├─ deps.md      ├─ obs.md
 │  ├─ fable.md   ├─ copy.md      ├─ landing.md   ├─ seo.md
 │  ├─ factcheck.md  ├─ repurpose.md   ├─ voice.md
-│  ├─ threat.md   └─ aisec.md
+│  ├─ threat.md   ├─ aisec.md    ├─ ureview.md   └─ gdd.md
 │
 ├─ launchers/                    # ── 바탕화면 런처 ──
 │  └─ claude.bat
 │
-├─ code-reviewer.md              # ── 에이전트 정의 (25개) ──
+├─ code-reviewer.md              # ── 에이전트 정의 (27개) ──
 ├─ security-reviewer.md
 ├─ test-runner.md
 ├─ test-strategy.md
@@ -548,7 +577,9 @@ claude-agents/
 ├─ content-repurposer.md
 ├─ brand-voice-guardian.md
 ├─ threat-modeler.md
-└─ llm-ai-security-reviewer.md
+├─ llm-ai-security-reviewer.md
+├─ unity-code-reviewer.md
+└─ game-design-architect.md
 ```
 
 ---

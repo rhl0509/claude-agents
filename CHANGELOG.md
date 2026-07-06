@@ -8,6 +8,22 @@
 
 ---
 
+## 1.49 (2026-07-07) — 게임 개발 도메인 시작: unity-code-reviewer·game-design-architect, 25종 → 27종 (🎮 게임 클러스터 신설)
+
+기존 25종은 전부 웹 스택(Next.js+FastAPI+MySQL)·콘텐츠·보안 도메인이었다. 사용자의 **Unity + C# 싱글플레이어 2D 캐주얼(퍼즐/플랫포머)** 개발을 미리 준비하기 위해 게임 도메인의 첫 2종을 시범 추가한다. 노린 병목은 **라우팅 오염**(웹 `code-reviewer`가 Unity 코드를 흡수)과 **설계 단계 공백**. 둘 다 model `opus`, 읽기전용, `memory: user` + `agent-conventions` + `agent-guard.ps1` 상속, `code-reviewer` 골격 계승.
+
+**색상 결정**: 공식 8색이 모두 소진(품질=blue·문서=cyan·DB=orange·설계=green·디자인=purple·운영=pink·메타=yellow·콘텐츠=red)돼 신규 색을 만들 수 없으므로, 게임 2종은 혼잡도가 가장 낮은 **cyan**(문서 카테고리 api-doc-writer 1종만 사용)을 공유하고 문서에서 "🎮 게임" 클러스터로 묶었다(보안 심화 클러스터 전례 계승).
+
+- **unity-code-reviewer** (`/ureview`) v1.0 — Unity C# 코드의 게임 엔진 고유 결함 리뷰: ① MonoBehaviour 수명주기(구독 해제 누락), ② 프레임 루프 비용(Update 내 GetComponent/Find), ③ GC 할당(매 프레임 new·박싱·LINQ·풀링 부재), ④ 코루틴/async 취소 누수, ⑤ 물리·프레임률 의존(Time.deltaTime 누락), ⑥ fake-null(파괴된 오브젝트 참조), ⑦ ScriptableObject 원본 오염. 성능은 "Profiler 측정 권고"로 분리(정적 단정 금지). tools `Read, Grep, Glob, Bash`(git diff 범위 식별 전용).
+- **game-design-architect** (`/gdd`) v1.0 — 구현 전 게임 디자인·시스템 구조 설계: 코어 루프·재미 가설, 난이도 곡선·페이싱, 시스템 분해(상태머신·이벤트·SO 데이터 경계), 수직 슬라이스·MVP·컷 후보. 솔로 개발 최대 리스크인 "미완성"을 겨냥해 모든 야심 기능에 컷 후보를 강제. 재미는 단정하지 않고 "가설 + 플레이테스트로 검증할 질문"으로 표현. tools `Read, Grep, Glob`.
+- **위임 경계** — Unity 코드 품질·프레임 리뷰는 `unity-code-reviewer`(웹은 `code-reviewer`), 게임 설계·코어 루프는 `game-design-architect`(웹 구조는 `system-architect`). 스토어/마케팅은 기존 콘텐츠 6종 재사용(신설 안 함).
+- **로드맵(예약)** — game-feel-reviewer(`/feel`)·unity-perf-auditor(`/uperf`)·playtest-designer(`/playtest`)·unity-build-auditor(`/ubuild`). 같은 필요가 3회 반복되면 승격 제작.
+- **게임 도메인 정직성 조항**(후속 에이전트에 상속) — 성능은 "프로파일러 측정 권고", 재미는 "프로토타입 검증 항목"으로 분리해 정적으로 단정하지 않는다.
+- **커맨드** — `commands/ureview.md`·`gdd.md` 신설.
+- **문서** — `README.md`·`AGENTS.md`(에이전트 수 25→27·소개·표 27행·🎮 게임 클러스터·슬래시 표·저장소 구조·사용 예), `CLAUDE.md`(에이전트 표 2행·opus 티어·예외 문단에 게임 도메인) 갱신.
+
+---
+
 ## 1.48 (2026-07-07) — 보안 2종 Fable 적대적 레드팀 반영 (threat-modeler 1.1 · llm-ai-security-reviewer 1.1 · security-reviewer 1.11)
 
 Fable-5로 신규 보안 2종을 적대적 레드팀(OWASP LLM Top 10 2025 항목명 웹 교차검증 포함 — **매핑 오류 없음** 확인)한 뒤 High 3 + Med/Low를 반영했다. 에이전트 수는 25종 그대로.
