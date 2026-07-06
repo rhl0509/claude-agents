@@ -1,17 +1,17 @@
 # claude-agents
 
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
-코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO**를 리뷰하는 콘텐츠 에이전트 3종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`)이 포함됩니다.
+코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용**을 다루는 콘텐츠 에이전트 5종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`)이 포함됩니다.
 
-- 에이전트 수: **20종** (개발 스택 리뷰 16종 + 메타 1종 + 콘텐츠/마케팅 3종)
+- 에이전트 수: **22종** (개발 스택 리뷰 16종 + 메타 1종 + 콘텐츠/마케팅 5종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer`·`security-reviewer` **v1.10**, `test-runner` **v1.9**, `code-reviewer` **v1.8**, `devops-reviewer` **v1.7**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `design-system-architect`·`system-architect` **v1.4**, `perf-auditor`·`test-strategy` **v1.3**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2**, 콘텐츠 3종 `copy-reviewer`·`landing-reviewer`·`seo-optimizer` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer`·`security-reviewer` **v1.10**, `test-runner` **v1.9**, `code-reviewer` **v1.8**, `devops-reviewer` **v1.7**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `design-system-architect`·`system-architect` **v1.4**, `perf-auditor`·`test-strategy` **v1.3**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2**, 콘텐츠 5종 `copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
 ## 목차
-- [에이전트 20종](#에이전트-20종)
+- [에이전트 22종](#에이전트-22종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -23,7 +23,7 @@
 
 ---
 
-## 에이전트 20종
+## 에이전트 22종
 
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|---|
@@ -47,6 +47,8 @@
 | 18 | `copy-reviewer` | `/copy` | 콘텐츠 | 1.0 | opus | 마케팅 카피 품질 리뷰(후킹·CTA·과장/윤리) | Read, Grep, Glob |
 | 19 | `landing-reviewer` | `/landing` | 콘텐츠 | 1.0 | opus | 상세페이지·랜딩 전환 구조 리뷰 | Read, Grep, Glob |
 | 20 | `seo-optimizer` | `/seo` | 콘텐츠 | 1.0 | opus | 블로그·페이지 SEO 점검 | Read, Grep, Glob, WebSearch, WebFetch |
+| 21 | `fact-checker` | `/factcheck` | 콘텐츠 | 1.0 | opus | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
+| 22 | `content-repurposer` | `/repurpose` | 콘텐츠 | 1.0 | opus | 1소스 → 멀티 포맷 재활용 | Read, Grep, Glob |
 
 ### 🔍 품질 / QA
 
@@ -272,6 +274,24 @@
 - **구분**: 설득·문장은 `copy-reviewer`, 전환 구조는 `landing-reviewer`, 렌더·번들 등 기술 성능(CWV)은 `perf-auditor`
 </details>
 
+<details>
+<summary><b>21. fact-checker</b> (<code>/factcheck</code>) — 콘텐츠 사실·수치·출처 검증</summary>
+
+- **언제**: 통계·수치·인용이 든 마케팅·블로그·강의자료·제안서를 발행하기 전
+- **검증**: 검증 가능한 진술만 추출(의견·일반론 제외) → ✅확인 / ⚠️부분사실 / ❌틀림 / ❓출처없음 / 🔒검증불가로 판정 + 출처(발행처·URL·날짜). 통계·가격·날짜·연구 인용·비교 최상급("업계 1위")·법률/의료/금융 주장을 특히 주의. 미확인은 사실로 단정하지 않음
+- **출력**: 요약(진술 수·위험 건수) → 위험 Top 3(진술·판정·출처·수정안) → 진술별 검증표
+- **구분**: 문장 설득력·톤은 `copy-reviewer`, 검색 최적화는 `seo-optimizer`, 전환 구조는 `landing-reviewer`
+</details>
+
+<details>
+<summary><b>22. content-repurposer</b> (<code>/repurpose</code>) — 1소스 → 멀티 포맷 재활용</summary>
+
+- **언제**: 블로그·영상 스크립트·강의·뉴스레터 등 기존 자산을 릴스·카드뉴스·스레드·뉴스레터·상세페이지 섹션으로 재활용할 때
+- **원칙**: 소스에서 핵심 추출 → 매체별 관행(릴스 훅3초·카드뉴스 1장1메시지·스레드 연쇄·뉴스레터 구조)에 맞춤. 포맷마다 다른 각도로(중복 파생 금지), 원본 수치·주장 왜곡·새 사실 창작 금지(변동 정보 `⚠️검증필요`)
+- **출력**: 핵심 메시지 정리 → 포맷별 완성형 초안(+왜 이 각도로) → 재활용 맵(1소스→N파생)
+- **구분**: 카피 품질은 `copy-reviewer`, 검색 최적화는 `seo-optimizer`, 사실 검증은 `fact-checker`
+</details>
+
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
 아래 16쌍은 **양쪽 description에서 서로를 가리키는 대칭 위임**이다(`↔`). 어느 쪽으로 호출해도 인접 영역으로 안내된다.
@@ -338,11 +358,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 20개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 22개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 20개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 20개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 22개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 22개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -398,6 +418,8 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/copy` | copy-reviewer | 파일/경로(선택) |
 | `/landing` | landing-reviewer | 파일/경로(선택) |
 | `/seo` | seo-optimizer | 파일/경로 또는 키워드(선택) |
+| `/factcheck` | fact-checker | 파일/경로(선택) |
+| `/repurpose` | content-repurposer | 소스 파일 + 목표 포맷(선택) |
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
 
@@ -423,7 +445,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-20종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-22종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
@@ -446,23 +468,24 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
-├─ AGENTS.md                     # 20개 에이전트 통합 정리
+├─ AGENTS.md                     # 22개 에이전트 통합 정리
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
 ├─ .gitignore
 │
-├─ commands/                     # ── 슬래시 명령 정의 (20개) ──
+├─ commands/                     # ── 슬래시 명령 정의 (22개) ──
 │  ├─ review.md  ├─ sec.md       ├─ test.md      ├─ coverage.md
 │  ├─ perf.md    ├─ contract.md  ├─ apidoc.md    ├─ db.md
 │  ├─ migrate.md ├─ ui.md        ├─ dsystem.md   ├─ datamodel.md
 │  ├─ arch.md    ├─ devops.md    ├─ deps.md      ├─ obs.md
-│  ├─ fable.md   ├─ copy.md      ├─ landing.md   └─ seo.md
+│  ├─ fable.md   ├─ copy.md      ├─ landing.md   ├─ seo.md
+│  ├─ factcheck.md  └─ repurpose.md
 │
 ├─ launchers/                    # ── 바탕화면 런처 ──
 │  └─ claude.bat
 │
-├─ code-reviewer.md              # ── 에이전트 정의 (20개) ──
+├─ code-reviewer.md              # ── 에이전트 정의 (22개) ──
 ├─ security-reviewer.md
 ├─ test-runner.md
 ├─ test-strategy.md
@@ -481,7 +504,9 @@ claude-agents/
 ├─ ai-workspace-architect.md
 ├─ copy-reviewer.md
 ├─ landing-reviewer.md
-└─ seo-optimizer.md
+├─ seo-optimizer.md
+├─ fact-checker.md
+└─ content-repurposer.md
 ```
 
 ---

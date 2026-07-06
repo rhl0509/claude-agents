@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (20종)
+# 서브에이전트 전체 정리 (22종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 3종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`)은 **마케팅 카피·상세페이지 전환·SEO**를 다루는 콘텐츠 에이전트다.
+> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 5종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`)은 **카피·전환·SEO·팩트체크·콘텐츠 재활용**을 다루는 콘텐츠 에이전트다.
 
 ## 공통 규칙
 - 발견/제안은 **영향도(심각도) 순으로 정렬**
@@ -45,6 +45,8 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 18 | `copy-reviewer` | `/copy` | 콘텐츠 | 마케팅 카피 품질 리뷰 | Read, Grep, Glob |
 | 19 | `landing-reviewer` | `/landing` | 콘텐츠 | 상세페이지·랜딩 전환 리뷰 | Read, Grep, Glob |
 | 20 | `seo-optimizer` | `/seo` | 콘텐츠 | 블로그·페이지 SEO 점검 | Read, Grep, Glob, WebSearch, WebFetch |
+| 21 | `fact-checker` | `/factcheck` | 콘텐츠 | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
+| 22 | `content-repurposer` | `/repurpose` | 콘텐츠 | 1소스 → 멀티 포맷 재활용 | Read, Grep, Glob |
 
 ---
 
@@ -143,6 +145,14 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 블로그·페이지 SEO 점검. 검색 의도, 타이틀·메타, 헤딩 구조, 키워드 배치·과최적화, 링크, 이미지 alt, 슬러그, 구조화 데이터, E-E-A-T·스니펫, 카니발라이제이션. 키워드·SERP는 WebSearch로 확인(미확인 "추정"). 출력: 요약 → 개선 Top 3(문안 예시) → 주의·제안.
 → 설득·문장은 `copy-reviewer`, 전환은 `landing-reviewer`, 기술 성능(CWV)은 `perf-auditor`.
 
+**21. fact-checker (`/factcheck`)**
+콘텐츠 사실·수치·출처 검증. 검증 가능한 진술만 추출(의견·일반론 제외) → ✅확인/⚠️부분사실/❌틀림/❓출처없음/🔒검증불가로 판정 + 출처. 통계·가격·날짜·연구 인용·비교 최상급·법률/의료/금융 주장 주의. 미확인은 사실로 단정 안 함. 출력: 요약 → 위험 Top 3 → 진술별 검증표.
+→ 문장 설득력·톤은 `copy-reviewer`, 검색 최적화는 `seo-optimizer`, 전환은 `landing-reviewer`.
+
+**22. content-repurposer (`/repurpose`)**
+1소스(블로그·영상 스크립트·강의·뉴스레터) → 멀티 포맷(릴스·카드뉴스·스레드·뉴스레터·상세페이지 섹션) 재활용. 소스에서 핵심 추출 → 매체별 관행에 맞춤, 포맷마다 다른 각도, 원본 사실 왜곡·새 사실 창작 금지. 출력: 핵심 메시지 → 포맷별 완성형 초안 → 재활용 맵.
+→ 카피 품질은 `copy-reviewer`, 검색 최적화는 `seo-optimizer`, 사실 검증은 `fact-checker`.
+
 ---
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
@@ -206,6 +216,8 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 /copy src/content             # 마케팅 카피 품질 리뷰
 /landing                      # 상세페이지·랜딩 전환 구조 리뷰
 /seo                          # 블로그·페이지 SEO 점검
+/factcheck                    # 콘텐츠 사실·수치·출처 검증
+/repurpose blog/post.md 릴스,카드뉴스   # 1소스 → 멀티 포맷 재활용
 ```
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.

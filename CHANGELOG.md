@@ -8,6 +8,18 @@
 
 ---
 
+## 1.45 (2026-07-06) — 콘텐츠 계열 2종 추가: fact-checker·content-repurposer, 20종 → 22종
+
+📣 콘텐츠 카테고리를 **신뢰도(검증)·재활용** 축으로 확장. 둘 다 model `opus`, color `red`, 읽기전용(파일 미수정, 텍스트 출력), `memory: user` + `agent-conventions` + `agent-guard.ps1` 상속.
+
+- **fact-checker** (`/factcheck`) v1.0 — 콘텐츠의 검증 가능한 진술(통계·가격·날짜·연구 인용·비교 최상급·법률/의료/금융 주장)을 추출·판정(✅확인/⚠️부분사실/❌틀림/❓출처없음/🔒검증불가)하고 출처 확인. 미확인은 사실로 단정하지 않고 `⚠️검증필요`/추정 표시. WebSearch/WebFetch로 확인. 출력: 요약 → 위험 Top 3 → 진술별 검증표. tools `Read, Grep, Glob, WebSearch, WebFetch`.
+- **content-repurposer** (`/repurpose`) v1.0 — 1소스(블로그·영상 스크립트·강의·뉴스레터)를 릴스·카드뉴스·스레드·뉴스레터·상세페이지 섹션으로 파생. 매체별 관행 준수, 포맷마다 각도 분산, 원본 사실 왜곡·새 사실 창작 금지. 출력: 핵심 메시지 → 포맷별 완성형 초안 → 재활용 맵. tools `Read, Grep, Glob`.
+- **위임 경계** — 사실 검증→`fact-checker`, 재활용→`content-repurposer`로 분기. copy(문장)·landing(전환)·seo(검색)와 상호 안내.
+- **커맨드** — `commands/factcheck.md`·`repurpose.md` 신설.
+- **문서** — `README.md`·`AGENTS.md`(에이전트 수 20→22·소개·표 22행·📣 콘텐츠 상세 2블록·슬래시 표·저장소 구조·사용 예), `CLAUDE.md`(에이전트 표 2행·예외 문단·opus 티어) 갱신.
+
+---
+
 ## 1.44 (2026-07-06) — 콘텐츠/마케팅 리뷰 3종 추가, 17종 → 20종 (📣 콘텐츠 카테고리 신설)
 
 메타 에이전트(`ai-workspace-architect`)가 "AI 작업환경 시스템"을 설계한다면, 실제로 매일 만드는 **개별 산출물을 리뷰·강화**할 실무 계열이 비어 있었다. 개발 세트의 code/security/perf-reviewer 구조를 콘텐츠로 옮긴 읽기 전용 리뷰어 3종을 추가한다. 모두 model `opus`, color `red`(신규 콘텐츠 카테고리), `memory: user` + `agent-conventions` 프리로드 + `agent-guard.ps1` 훅 상속, 파일 직접 수정 없이 점검·제안만.
