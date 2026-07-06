@@ -8,6 +8,19 @@
 
 ---
 
+## 1.44 (2026-07-06) — 콘텐츠/마케팅 리뷰 3종 추가, 17종 → 20종 (📣 콘텐츠 카테고리 신설)
+
+메타 에이전트(`ai-workspace-architect`)가 "AI 작업환경 시스템"을 설계한다면, 실제로 매일 만드는 **개별 산출물을 리뷰·강화**할 실무 계열이 비어 있었다. 개발 세트의 code/security/perf-reviewer 구조를 콘텐츠로 옮긴 읽기 전용 리뷰어 3종을 추가한다. 모두 model `opus`, color `red`(신규 콘텐츠 카테고리), `memory: user` + `agent-conventions` 프리로드 + `agent-guard.ps1` 훅 상속, 파일 직접 수정 없이 점검·제안만.
+
+- **copy-reviewer** (`/copy`) v1.0 — 릴스·카드뉴스·블로그·상세페이지·제안서·광고 카피 품질. 후킹·1메시지·독자 언어·구체성·CTA·신뢰도/윤리(과장·허위·다크패턴)·톤·포맷. 출력: 요약 → Must/Should/Nit(위치·문제·근거·리라이트 예시). tools `Read, Grep, Glob`.
+- **landing-reviewer** (`/landing`) v1.0 — 상세페이지·랜딩 전환 구조. 히어로 가치 제안·문제공감해결·benefit 번역·사회적 증거·반론 처리·CTA 전략·오퍼/가격·긴급성 윤리·스캔 가능성. 출력: 요약 → 전환 저해 Top 3 → 주의·제안. tools `Read, Grep, Glob`.
+- **seo-optimizer** (`/seo`) v1.0 — 블로그·페이지 SEO. 검색 의도·타이틀/메타·헤딩·키워드/과최적화·링크·alt·슬러그·구조화 데이터·E-E-A-T/스니펫·카니발라이제이션. 키워드·SERP는 WebSearch로 확인(미확인 "추정"). tools `Read, Grep, Glob, WebSearch, WebFetch`.
+- **위임 경계** — copy(문장)↔landing(전환)↔seo(검색)↔`ui-ux-reviewer`(시각)↔`perf-auditor`(기술 성능)로 좁게 분리해 과잉 호출 방지.
+- **커맨드** — `commands/copy.md`·`landing.md`·`seo.md` 신설.
+- **문서** — `README.md`·`AGENTS.md`(에이전트 수 17→20·소개·표 20행·📣 콘텐츠 카테고리 상세·슬래시 표·저장소 구조·사용 예), `CLAUDE.md`(에이전트 표 3행·예외 문단·opus 티어) 갱신.
+
+---
+
 ## 1.43 (2026-07-06) — 신규 메타 에이전트 추가: ai-workspace-architect (`/fable`), 16종 → 17종
 
 기존 16종은 모두 Next.js+FastAPI+MySQL 개발 스택 전용 리뷰/설계 에이전트다. 여기에 스택과 무관하게 **사용자의 AI 작업환경 자체**(프롬프트·지침·CLAUDE.md·SKILL.md·커스텀 인스트럭션·반복 업무 규칙)를 진단·재설계하는 첫 **메타/워크플로우** 카테고리 에이전트를 추가했다. 마케팅·콘텐츠 제작 결과물 품질을 시스템화하는 것이 목적.

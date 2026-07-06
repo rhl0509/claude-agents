@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (17종)
+# 서브에이전트 전체 정리 (20종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> 16종은 위 개발 스택 전용 리뷰/설계 에이전트이고, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트다.
+> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 3종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`)은 **마케팅 카피·상세페이지 전환·SEO**를 다루는 콘텐츠 에이전트다.
 
 ## 공통 규칙
 - 발견/제안은 **영향도(심각도) 순으로 정렬**
@@ -42,6 +42,9 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 15 | `dependency-auditor` | `/deps` | 운영 | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
 | 16 | `observability-reviewer` | `/obs` | 운영 | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
 | 17 | `ai-workspace-architect` | `/fable` | 메타 | AI 작업환경 진단·재설계 | Read, Grep, Glob, WebSearch, WebFetch |
+| 18 | `copy-reviewer` | `/copy` | 콘텐츠 | 마케팅 카피 품질 리뷰 | Read, Grep, Glob |
+| 19 | `landing-reviewer` | `/landing` | 콘텐츠 | 상세페이지·랜딩 전환 리뷰 | Read, Grep, Glob |
+| 20 | `seo-optimizer` | `/seo` | 콘텐츠 | 블로그·페이지 SEO 점검 | Read, Grep, Glob, WebSearch, WebFetch |
 
 ---
 
@@ -126,6 +129,20 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 프롬프트·지침·`CLAUDE.md`·`SKILL.md`·커스텀 인스트럭션·반복 업무 규칙을 진단·재설계하는 **메타 에이전트**. 다른 16종과 달리 특정 개발 스택이 아니라 AI 작업환경 자체를 다루며, 마케팅·콘텐츠 제작(릴스·카드뉴스·블로그·상세페이지·강의자료) 결과물 품질을 시스템화. 여러 모델(Claude/GPT/Gemini/Cursor)에서 일관되게 작동하는 범용 AI 운영체제 설계 — 바로 붙여넣을 커스텀 인스트럭션·CLAUDE.md·SKILL.md 초안 + 모델별 전략. 실행 모델과 무관하게 뼈대→초안→자가채점→재작성 품질 엔진을 강제(도장찍기 금지: 근거 인용 + 약점 1개 이상 발굴·수정). 출력: 총평 → 진단표 → 병목 5 → A·B·C·D → 운영 규칙 → 자기비판 후 최종본.
 → 개발 스택 아키텍처는 `system-architect`, 디자인 시스템은 `design-system-architect`.
 
+### 📣 콘텐츠 / 마케팅
+
+**18. copy-reviewer (`/copy`)**
+마케팅 카피 품질 리뷰. 후킹(첫 3초/첫 줄), 1메시지 집중, 독자 언어, 구체성(추상어·공허한 최상급), CTA 명확성·마찰, 신뢰도·윤리(근거 없는 보장·허위·다크패턴), 톤 일관성, 포맷 적합. 변동 수치엔 `⚠️검증필요`. 출력: 요약 → Must/Should/Nit(위치·문제·근거·리라이트 예시).
+→ 화면 시각·접근성은 `ui-ux-reviewer`, 전환 구조는 `landing-reviewer`, 검색 최적화는 `seo-optimizer`.
+
+**19. landing-reviewer (`/landing`)**
+상세페이지·랜딩 **전환** 리뷰. 히어로 가치 제안, 문제-공감-해결, 차별점 benefit 번역, 사회적 증거, 반론 처리, CTA 전략, 오퍼·가격 표현, 긴급성·희소성 윤리(다크패턴), 스캔 가능성. 출력: 요약 → 전환 저해 Top 3 → 주의·제안.
+→ 문장 카피는 `copy-reviewer`, 시각·접근성은 `ui-ux-reviewer`, 검색 유입은 `seo-optimizer`.
+
+**20. seo-optimizer (`/seo`)**
+블로그·페이지 SEO 점검. 검색 의도, 타이틀·메타, 헤딩 구조, 키워드 배치·과최적화, 링크, 이미지 alt, 슬러그, 구조화 데이터, E-E-A-T·스니펫, 카니발라이제이션. 키워드·SERP는 WebSearch로 확인(미확인 "추정"). 출력: 요약 → 개선 Top 3(문안 예시) → 주의·제안.
+→ 설득·문장은 `copy-reviewer`, 전환은 `landing-reviewer`, 기술 성능(CWV)은 `perf-auditor`.
+
 ---
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
@@ -186,6 +203,9 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 /deps                         # 의존성 취약점·버전·라이선스 점검
 /obs                          # 로깅·트레이싱·관측성 점검
 /fable                        # AI 작업환경 진단·재설계(프롬프트·지침·모델별 전략)
+/copy src/content             # 마케팅 카피 품질 리뷰
+/landing                      # 상세페이지·랜딩 전환 구조 리뷰
+/seo                          # 블로그·페이지 SEO 점검
 ```
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
