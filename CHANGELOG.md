@@ -8,6 +8,21 @@
 
 ---
 
+## 1.50 (2026-07-07) — 게임 도메인 2차 확장: game-ui-reviewer·game-feel-reviewer, 27종 → 29종
+
+게임 클러스터에 "디자인" 레이어 2종을 추가. 웹 `ui-ux-reviewer`(WCAG 폼·i18n·DOM)로는 대체 불가한 **게임 엔진 UI 고유 결함**(캔버스 스케일링·세이프 에어리어·EventSystem 내비게이션)과, `game-design-architect`(설계 수준)·`unity-code-reviewer`(코드) 어디에도 안 잡히던 **게임플레이 손맛(juice)** 축을 메운다. 둘 다 model `opus`, cyan, 읽기전용, `memory: user` + `agent-conventions` + `agent-guard.ps1` 상속, 기존 게임 2종 골격 계승.
+
+**경계 설계(핵심)**: 두 신규 에이전트의 충돌을 막는 규칙은 **"피드백의 원인" 기준 대칭 위임** — UI 조작(버튼 눌림·메뉴 전환)에 대한 피드백은 game-ui-reviewer, 게임플레이 동작(점프·타격·수집)에 대한 피드백은 **표시 위치가 HUD여도** game-feel-reviewer가 주관. 위치 기준("HUD면 UI")이 아니라 원인 기준이라, "코인 수집 시 HUD 점수 펀치 연출" 같은 접점이 한쪽으로 명확히 귀속된다. 양쪽 description·본문·commands에 동일 규칙 명시.
+
+- **game-ui-reviewer** (`/gui`) v1.0 — 게임 UI/UX 레이어: HUD·메뉴 레이아웃/정보 위계, CanvasScaler 해상도·종횡비 스케일링(`m_UiScaleMode` 등 YAML 직접 확인), 세이프 에어리어(노치), 캔버스 렌더 모드, 게임패드·터치 내비게이션·포커스(EventSystem·explicit navigation), 움직이는 화면 위 가독성·색약/명도 대비, UI 상태, 온보딩 UI, (수익화 시) F2P 다크패턴. 실제 보임새는 "기기 확인 권고"로 분리(화면 못 봄). tools `Read, Grep, Glob`.
+- **game-feel-reviewer** (`/feel`) v1.0 — 게임플레이 손맛/juice: 입력 관대성(코요테 타임·점프 버퍼·입력 버퍼링·가변 점프), 히트스톱/타임프리즈(timeScale 복원 누락 등 버그성 결함 확정 보고), 화면 흔들림·카메라 추적/룩어헤드, 스쿼시&스트레치·파티클·플래시, 사운드/햅틱 타이밍, 가감속 커브, 페이싱. **핵심 동사 × 피드백 채널 매트릭스**가 핵심 산출물(빈 칸 = 작업 목록). 튜닝값·체감은 "프로토타입 검증 항목"으로 분리(정적 단정 금지 — 게임 도메인 정직성 조항). tools `Read, Grep, Glob`.
+- **game-design-architect 1.0 → 1.1** — §5 게임필 위임 문구를 "로드맵의 game-feel-reviewer" → "game-feel-reviewer(/feel)"로 교정(실재 에이전트를 로드맵이라 부르면 라우팅 신호 약화).
+- **잔여 로드맵 3종**: unity-perf-auditor(`/uperf`)·playtest-designer(`/playtest`)·unity-build-auditor(`/ubuild`). 확장 트리거 "같은 필요 3회 반복".
+- **커맨드** — `commands/gui.md`·`feel.md` 신설.
+- **문서** — `README.md`·`AGENTS.md`(에이전트 수 27→29·소개·표 29행·🎮 클러스터 2블록·슬래시·저장소 구조·사용 예), `CLAUDE.md`(에이전트 표 2행·opus 티어·게임 예외 문단에 UI↔feel 원인 기준 경계) 갱신.
+
+---
+
 ## 1.49 (2026-07-07) — 게임 개발 도메인 시작: unity-code-reviewer·game-design-architect, 25종 → 27종 (🎮 게임 클러스터 신설)
 
 기존 25종은 전부 웹 스택(Next.js+FastAPI+MySQL)·콘텐츠·보안 도메인이었다. 사용자의 **Unity + C# 싱글플레이어 2D 캐주얼(퍼즐/플랫포머)** 개발을 미리 준비하기 위해 게임 도메인의 첫 2종을 시범 추가한다. 노린 병목은 **라우팅 오염**(웹 `code-reviewer`가 Unity 코드를 흡수)과 **설계 단계 공백**. 둘 다 model `opus`, 읽기전용, `memory: user` + `agent-conventions` + `agent-guard.ps1` 상속, `code-reviewer` 골격 계승.
