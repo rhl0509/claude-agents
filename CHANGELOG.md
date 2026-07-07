@@ -8,6 +8,32 @@
 
 ---
 
+## 1.51 (2026-07-07) — 게임 로드맵 완성 3종: unity-perf-auditor·playtest-designer·unity-build-auditor, 29종 → 32종
+
+예약해 둔 게임 로드맵 3종을 마저 추가해 게임 도메인 파이프라인(설계 → 구현/코드 → UI → 게임필 → **성능 → 플레이테스트 → 빌드/스토어**)을 닫았다. 셋 다 model `opus`, cyan, 읽기전용, `memory: user` + `agent-conventions` + `agent-guard.ps1` 상속, 기존 게임 4종 골격 계승. 신규 3종이 서로/기존 6개와 겹치기 쉬운 경계 3곳을 대칭 위임으로 카빙했다.
+
+- **unity-perf-auditor** (`/uperf`) v1.0 — Unity 런타임 성능·렌더링: 드로우콜·배칭(SpriteAtlas·머티리얼/소팅), 오버드로우·필레이트(모바일 2D GPU 병목), 텍스처 압축(ASTC/ETC2)·`.meta` 임포트·텍스처/오디오 메모리, Fixed Timestep·2D 충돌 비용, 퀄리티/프로젝트 설정, Profiler/Frame Debugger 캡처 수치 해석. 정적/캡처 2모드, "느리다" 단정 금지·측정 계획 분리. **`.meta`를 1차 증거로 읽는 것**을 명시적 예외로 선언(다른 게임 리뷰어와 다름). tools `Read, Grep, Glob`.
+- **playtest-designer** (`/playtest`) v1.0 — 플레이테스트 **설계**(실행 아님): 검증 질문→행동 지표→판정 기준, 참가자·회차(신선한 눈 배분), 세션 프로토콜(콜드 스타트·진행자 스크립트·개입 규칙), 관찰 지표(FTUE·막힘·이탈·재시도·리텐션 프록시), 설문(유도 질문 배제), 텔레메트리 이벤트, 결과 해석. "재미의 판정자는 데이터"·"관찰이 진술을 이긴다"·소규모 n 백분율 포장 금지의 정직성 조항. tools `Read, Grep, Glob`.
+- **unity-build-auditor** (`/ubuild`) v1.0 — 빌드/릴리스·스토어 제출 준비: Player Settings(번들 ID·버전·IL2CPP/ARM64·managed stripping), 빌드 크기(Resources 남용·압축 용량·AAB), 빌드 씬 목록, 매니페스트 권한, 서명/keystore 커밋 여부, development build 플래그 잔존, Addressables. 파일 판정은 확정, **스토어 정책 수치는 변동이 커 단정 금지**(웹 검색 도구 없음 → 확인 목록 ⚠️로 분리). tools `Read, Grep, Glob`.
+
+**경계 카빙(3곳)**
+- unity-perf ↔ unity-code-reviewer: GC의 **코드 원인**은 unity-code-reviewer, **프레임 예산 증상·프로파일러 수치 해석**은 unity-perf-auditor(원인/증상 대칭).
+- unity-perf ↔ unity-build: 텍스처 압축을 **런타임 메모리·GPU 관점**은 unity-perf, **빌드 용량 관점**은 unity-build로 분리(상호 위임).
+- unity-build ↔ devops-reviewer: keystore·시크릿의 **커밋·존재 판정**까지만 unity-build, **안전 보관·CI 주입**은 devops-reviewer.
+- playtest ↔ game-design-architect/game-feel-reviewer: 이 둘이 "무엇을 검증할지"를 낳고 playtest는 "어떻게 검증할지"를 설계(파이프라인 수신자). 자동 테스트(test-strategy/test-runner)와도 "사람 vs 소프트웨어"로 구분.
+
+**크로스링크/버전업(기존 3종)**
+- `unity-code-reviewer` 1.0 → 1.1 — description·측정 권고·출력 5에 "측정 설계·캡처 해석은 unity-perf-auditor로 위임" 명시(측정 권고 섹션은 유지, uperf 입력으로 연결).
+- `game-design-architect` 1.1 → 1.2 — description·출력 6에 "검증 질문을 실행 프로토콜로 전환은 playtest-designer" 추가.
+- `game-feel-reviewer` 1.0 → 1.1 — description·출력 6에 "프로토타입 검증 항목을 참가자 테스트로 설계는 playtest-designer" 추가.
+
+**로드맵 완료**: 게임 도메인 로드맵의 예약 항목이 모두 실물화됐다(게임 7종). 향후 확장은 기존 원칙대로 "같은 필요 3회 반복" 시 판단. (fable 자기비판이 제안한 웹 역방향 한 줄 — perf-auditor→unity-perf-auditor 등 — 은 대기 중인 역방향 위임 배치와 함께 별도 커밋 후보로 남김.)
+
+- **커맨드** — `commands/uperf.md`·`playtest.md`·`ubuild.md` 신설.
+- **문서** — `README.md`·`AGENTS.md`(에이전트 수 29→32·소개·표 32행·🎮 클러스터 3블록·슬래시·저장소 구조·사용 예), `CLAUDE.md`(에이전트 표 3행·opus 티어·게임 예외 문단에 3종·GC 원인/증상 경계), `CHANGELOG` 1.51 갱신.
+
+---
+
 ## 1.50 (2026-07-07) — 게임 도메인 2차 확장: game-ui-reviewer·game-feel-reviewer, 27종 → 29종
 
 게임 클러스터에 "디자인" 레이어 2종을 추가. 웹 `ui-ux-reviewer`(WCAG 폼·i18n·DOM)로는 대체 불가한 **게임 엔진 UI 고유 결함**(캔버스 스케일링·세이프 에어리어·EventSystem 내비게이션)과, `game-design-architect`(설계 수준)·`unity-code-reviewer`(코드) 어디에도 안 잡히던 **게임플레이 손맛(juice)** 축을 메운다. 둘 다 model `opus`, cyan, 읽기전용, `memory: user` + `agent-conventions` + `agent-guard.ps1` 상속, 기존 게임 2종 골격 계승.

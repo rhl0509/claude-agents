@@ -1,17 +1,17 @@
 # claude-agents
 
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
-코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 4종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`)이 시범 추가되었습니다(🎮 게임 클러스터).
+코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터).
 
-- 에이전트 수: **29종** (개발 스택 리뷰 16종 + 메타 1종 + 콘텐츠/마케팅 6종 + 보안 심화 2종 + 게임 4종)
+- 에이전트 수: **32종** (개발 스택 리뷰 16종 + 메타 1종 + 콘텐츠/마케팅 6종 + 보안 심화 2종 + 게임 7종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.9**, `code-reviewer` **v1.8**, `devops-reviewer` **v1.7**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `design-system-architect`·`system-architect` **v1.4**, `perf-auditor`·`test-strategy` **v1.3**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2**, 콘텐츠 6종 `copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 4종 `unity-code-reviewer` **v1.0**·`game-design-architect` **v1.1**·`game-ui-reviewer`·`game-feel-reviewer` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.9**, `code-reviewer` **v1.8**, `devops-reviewer` **v1.7**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `design-system-architect`·`system-architect` **v1.4**, `perf-auditor`·`test-strategy` **v1.3**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2**, 콘텐츠 6종 `copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 7종 `unity-code-reviewer` **v1.1**·`game-design-architect` **v1.2**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
 ## 목차
-- [에이전트 29종](#에이전트-29종)
+- [에이전트 32종](#에이전트-32종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -23,7 +23,7 @@
 
 ---
 
-## 에이전트 29종
+## 에이전트 32종
 
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|---|
@@ -52,10 +52,13 @@
 | 23 | `brand-voice-guardian` | `/voice` | 콘텐츠 | 1.0 | opus | 브랜드 보이스(문체·톤) 일관성 점검 | Read, Grep, Glob |
 | 24 | `threat-modeler` | `/threat` | 품질 | 1.1 | opus | 설계 단계 위협 모델링(STRIDE) | Read, Grep, Glob, WebSearch, WebFetch |
 | 25 | `llm-ai-security-reviewer` | `/aisec` | 품질 | 1.1 | opus | AI/LLM 보안 심화(OWASP LLM Top 10) | Read, Grep, Glob, WebSearch, WebFetch |
-| 26 | `unity-code-reviewer` | `/ureview` | 게임 | 1.0 | opus | Unity C# 게임 코드 리뷰(수명주기·GC·프레임/물리) | Read, Grep, Glob, Bash |
-| 27 | `game-design-architect` | `/gdd` | 게임 | 1.1 | opus | 2D 캐주얼 게임 디자인·시스템 설계 | Read, Grep, Glob |
+| 26 | `unity-code-reviewer` | `/ureview` | 게임 | 1.1 | opus | Unity C# 게임 코드 리뷰(수명주기·GC·프레임/물리) | Read, Grep, Glob, Bash |
+| 27 | `game-design-architect` | `/gdd` | 게임 | 1.2 | opus | 2D 캐주얼 게임 디자인·시스템 설계 | Read, Grep, Glob |
 | 28 | `game-ui-reviewer` | `/gui` | 게임 | 1.0 | opus | 게임 UI/UX(HUD·메뉴·스케일링·내비·가독성) 점검 | Read, Grep, Glob |
-| 29 | `game-feel-reviewer` | `/feel` | 게임 | 1.0 | opus | 게임플레이 손맛/juice(입력 관대성·히트스톱·카메라·피드백) 점검 | Read, Grep, Glob |
+| 29 | `game-feel-reviewer` | `/feel` | 게임 | 1.1 | opus | 게임플레이 손맛/juice(입력 관대성·히트스톱·카메라·피드백) 점검 | Read, Grep, Glob |
+| 30 | `unity-perf-auditor` | `/uperf` | 게임 | 1.0 | opus | Unity 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler 해석) | Read, Grep, Glob |
+| 31 | `playtest-designer` | `/playtest` | 게임 | 1.0 | opus | 플레이테스트 프로토콜 설계(가설·참가자·지표·설문·텔레메트리) | Read, Grep, Glob |
+| 32 | `unity-build-auditor` | `/ubuild` | 게임 | 1.0 | opus | 빌드/릴리스·스토어 제출 점검(PlayerSettings·크기·서명·권한) | Read, Grep, Glob |
 
 ### 🔍 품질 / QA
 
@@ -376,6 +379,36 @@
 - **구분(경계)**: 게임플레이 동작 피드백(HUD 표시 포함)은 이 에이전트, UI 조작·위젯 배치는 `game-ui-reviewer`. 재미 가설·난이도는 `game-design-architect`, 코드·GC는 `unity-code-reviewer`
 </details>
 
+<details>
+<summary><b>30. unity-perf-auditor</b> (<code>/uperf</code>) — Unity 런타임 성능·렌더링 점검</summary>
+
+- **언제**: "프레임이 떨어진다"·"기기가 뜨겁다", Profiler 캡처를 들고 왔을 때, 릴리스 전 성능 패스
+- **점검**: 드로우콜·배칭(SpriteAtlas·머티리얼/소팅), 오버드로우·필레이트(모바일 2D GPU 병목), 텍스처 압축(ASTC/ETC2)·`.meta` 임포트·텍스처/오디오 메모리, Fixed Timestep·2D 충돌 비용, 퀄리티/프로젝트 설정, Profiler/Frame Debugger 캡처 수치 해석
+- **원칙**: 정적 리뷰로 "느리다" 단정 금지 — 설정 존재/부재는 확정, 실제 비용은 **측정 계획**으로 분리(수치 제공 시 수치가 근거)
+- **출력**: 요약 → Must/Should/Nit → 측정 계획 → 캡처 해석 → 위임, Top 3
+- **구분(경계)**: GC 유발 코드 원인은 `unity-code-reviewer`(증상·측정 해석이 이 에이전트), 빌드 용량은 `unity-build-auditor`, 웹 성능은 `perf-auditor`, 카메라 지터의 손맛은 `game-feel-reviewer`
+</details>
+
+<details>
+<summary><b>31. playtest-designer</b> (<code>/playtest</code>) — 플레이테스트 프로토콜 설계</summary>
+
+- **언제**: 검증 질문 목록이 생겼거나 빌드를 외부인에게 처음 보여주기 직전 (수직 슬라이스/프로토타입)
+- **설계**: 검증 질문→행동 지표→판정 기준, 참가자·회차(타깃·신선한 눈 배분), 세션 프로토콜(콜드 스타트·진행자 스크립트·개입 규칙), 관찰 지표(FTUE·막힘·이탈·재시도·리텐션 프록시), 설문(유도 질문 배제), 텔레메트리 이벤트, 결과 해석·우선순위화
+- **원칙**: 재미의 판정자는 데이터 — 관찰이 진술을 이긴다, 소규모 n을 백분율로 포장 안 함, 테스트를 직접 실행 안 함(설계만)
+- **출력**: 검증 가설 표 → 참가자·회차 계획 → 세션 프로토콜 → 관찰 시트 → 설문 문항 → 텔레메트리 목록 → 결과 해석 가이드
+- **구분(경계)**: "무엇을 검증할지"(코어 루프·재미 가설)는 `game-design-architect`, 손맛 장치는 `game-feel-reviewer`(이 에이전트는 "어떻게 검증할지"). 소프트웨어 자동 테스트는 `test-strategy`/`test-runner`
+</details>
+
+<details>
+<summary><b>32. unity-build-auditor</b> (<code>/ubuild</code>) — 빌드/릴리스·스토어 제출 점검</summary>
+
+- **언제**: 스토어 제출·릴리스 빌드 직전, ProjectSettings·빌드 구성 변경 시
+- **점검**: Player Settings(번들 ID·버전·IL2CPP/ARM64·managed stripping), 빌드 크기(Resources 남용·압축 용량·AAB), 빌드 씬 목록, 매니페스트 권한, 스토어 요건(64bit·개인정보·데이터 안전), 서명/keystore 커밋 여부, development build 플래그 잔존, Addressables 구성
+- **원칙**: 파일 판정(설정·씬·keystore·플래그)은 확정, **스토어 정책 수치는 변동이 커서 단정 금지** → 확인 목록(⚠️)으로 분리(웹 검색 도구 없음)
+- **출력**: 요약 → 제출 차단·보안 Must → Should → Nit → 스토어 정책 확인 목록 → 위임, Top 3
+- **구분(경계)**: 일반 CI/CD·시크릿 보관·파이프라인은 `devops-reviewer`(이 에이전트는 keystore "커밋·존재 판정"까지), 코드는 `unity-code-reviewer`, 런타임 성능은 `unity-perf-auditor`
+</details>
+
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
 아래 16쌍은 **양쪽 description에서 서로를 가리키는 대칭 위임**이다(`↔`). 어느 쪽으로 호출해도 인접 영역으로 안내된다.
@@ -442,11 +475,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 29개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 32개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 29개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 29개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 32개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 32개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -511,6 +544,9 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/gdd` | game-design-architect | 게임·메카닉 설명(선택) |
 | `/gui` | game-ui-reviewer | 씬/프리팹/UI 스크립트(선택) |
 | `/feel` | game-feel-reviewer | 컨트롤러/카메라/이펙트(선택) |
+| `/uperf` | unity-perf-auditor | 경로·설정 또는 Profiler 캡처(선택) |
+| `/playtest` | playtest-designer | 검증 질문·빌드 범위(선택) |
+| `/ubuild` | unity-build-auditor | ProjectSettings·플랫폼(선택) |
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
 
@@ -536,7 +572,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-29종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-32종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
@@ -559,13 +595,13 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
-├─ AGENTS.md                     # 29개 에이전트 통합 정리
+├─ AGENTS.md                     # 32개 에이전트 통합 정리
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
 ├─ .gitignore
 │
-├─ commands/                     # ── 슬래시 명령 정의 (29개) ──
+├─ commands/                     # ── 슬래시 명령 정의 (32개) ──
 │  ├─ review.md  ├─ sec.md       ├─ test.md      ├─ coverage.md
 │  ├─ perf.md    ├─ contract.md  ├─ apidoc.md    ├─ db.md
 │  ├─ migrate.md ├─ ui.md        ├─ dsystem.md   ├─ datamodel.md
@@ -573,12 +609,13 @@ claude-agents/
 │  ├─ fable.md   ├─ copy.md      ├─ landing.md   ├─ seo.md
 │  ├─ factcheck.md  ├─ repurpose.md   ├─ voice.md
 │  ├─ threat.md   ├─ aisec.md    ├─ ureview.md   ├─ gdd.md
-│  ├─ gui.md      └─ feel.md
+│  ├─ gui.md      ├─ feel.md     ├─ uperf.md     ├─ playtest.md
+│  └─ ubuild.md
 │
 ├─ launchers/                    # ── 바탕화면 런처 ──
 │  └─ claude.bat
 │
-├─ code-reviewer.md              # ── 에이전트 정의 (29개) ──
+├─ code-reviewer.md              # ── 에이전트 정의 (32개) ──
 ├─ security-reviewer.md
 ├─ test-runner.md
 ├─ test-strategy.md
@@ -606,7 +643,10 @@ claude-agents/
 ├─ unity-code-reviewer.md
 ├─ game-design-architect.md
 ├─ game-ui-reviewer.md
-└─ game-feel-reviewer.md
+├─ game-feel-reviewer.md
+├─ unity-perf-auditor.md
+├─ playtest-designer.md
+└─ unity-build-auditor.md
 ```
 
 ---

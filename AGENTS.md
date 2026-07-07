@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (29종)
+# 서브에이전트 전체 정리 (32종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다. 2종(`threat-modeler`·`llm-ai-security-reviewer`)은 **설계 단계 위협 모델링·AI/LLM 보안 심화**를 담당한다(품질 카테고리, `security-reviewer`와 보안 방어 클러스터 형성). 4종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`)은 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트다(🎮 게임 클러스터, 색상 `cyan` 공유).
+> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다. 2종(`threat-modeler`·`llm-ai-security-reviewer`)은 **설계 단계 위협 모델링·AI/LLM 보안 심화**를 담당한다(품질 카테고리, `security-reviewer`와 보안 방어 클러스터 형성). 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)은 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트다(🎮 게임 클러스터, 색상 `cyan` 공유).
 
 ## 공통 규칙
 - 발견/제안은 **영향도(심각도) 순으로 정렬**
@@ -54,6 +54,9 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 27 | `game-design-architect` | `/gdd` | 게임 | 2D 캐주얼 게임 디자인·시스템 설계 | Read, Grep, Glob |
 | 28 | `game-ui-reviewer` | `/gui` | 게임 | 게임 UI/UX(HUD·메뉴·스케일링·내비·가독성) 점검 | Read, Grep, Glob |
 | 29 | `game-feel-reviewer` | `/feel` | 게임 | 게임플레이 손맛/juice(입력 관대성·히트스톱·피드백) 점검 | Read, Grep, Glob |
+| 30 | `unity-perf-auditor` | `/uperf` | 게임 | Unity 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler 해석) | Read, Grep, Glob |
+| 31 | `playtest-designer` | `/playtest` | 게임 | 플레이테스트 프로토콜 설계(가설·참가자·지표·설문·텔레메트리) | Read, Grep, Glob |
+| 32 | `unity-build-auditor` | `/ubuild` | 게임 | 빌드/릴리스·스토어 제출 점검(PlayerSettings·크기·서명·권한) | Read, Grep, Glob |
 
 ---
 
@@ -192,6 +195,18 @@ Unity 게임 **UI/UX 레이어**(HUD·메뉴·팝업·튜토리얼 화면) 점�
 게임플레이 동작의 **손맛(game feel·juice)** 점검. 입력 응답 관대성(코요테 타임·점프 버퍼·입력 버퍼링·가변 점프), 히트스톱/타임프리즈, 화면 흔들림·카메라 추적/룩어헤드, 스쿼시&스트레치·파티클·플래시, 사운드/햅틱 타이밍, 가감속 커브, 페이싱. 장치의 유무·구조는 확정 보고, 손맛 체감·세부 튜닝값은 프로토타입 검증 항목으로 분리(정적 단정 금지). 출력: 요약 → Must/Should/Nit → 핵심 동사×피드백 채널 매트릭스 → 프로토타입 검증 항목 → 위임 → Top 3.
 → 게임플레이 동작 피드백(HUD 표시 포함)은 이 에이전트, UI 조작·위젯 배치는 `game-ui-reviewer`. 재미 가설·난이도는 `game-design-architect`, 코드·GC는 `unity-code-reviewer`.
 
+**30. unity-perf-auditor (`/uperf`)**
+Unity 게임 런타임 성능·렌더링 감사(모바일 2D 타깃). 드로우콜·배칭(SpriteAtlas), 오버드로우·필레이트, 텍스처 압축(ASTC/ETC2)·`.meta` 임포트·메모리, Fixed Timestep·2D 충돌 비용, 퀄리티/프로젝트 설정, Profiler/Frame Debugger 캡처 수치 해석. 정적 리뷰로 "느리다" 단정 않고 측정 계획으로 분리(수치 제공 시 수치가 근거). 출력: 요약 → Must/Should/Nit → 측정 계획 → 캡처 해석 → 위임 → Top 3.
+→ GC 유발 코드 원인은 `unity-code-reviewer`(증상·측정 해석이 이 에이전트), 빌드 용량은 `unity-build-auditor`, 웹 성능은 `perf-auditor`, 카메라 지터 손맛은 `game-feel-reviewer`.
+
+**31. playtest-designer (`/playtest`)**
+플레이테스트 프로토콜 설계(실행 아님). game-design-architect의 검증 질문·game-feel-reviewer의 프로토타입 검증 항목을 실행 가능한 프로토콜로: 가설→행동 지표→판정 기준, 참가자·회차(신선한 눈 배분), 세션(콜드 스타트·진행자 스크립트·개입 규칙), 관찰 지표(FTUE·막힘·이탈·재시도·리텐션 프록시), 설문(유도 질문 배제), 텔레메트리 이벤트, 결과 해석. 재미의 판정자는 데이터 — 관찰이 진술을 이기고 소규모 n을 백분율로 포장 안 함. 출력: 검증 가설 표 → 참가자·회차 → 세션 프로토콜 → 관찰 시트 → 설문 → 텔레메트리 → 해석 가이드.
+→ "무엇을 검증할지"는 `game-design-architect`·`game-feel-reviewer`(이 에이전트는 "어떻게 검증할지"). 소프트웨어 자동 테스트는 `test-strategy`/`test-runner`.
+
+**32. unity-build-auditor (`/ubuild`)**
+Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Player Settings(번들 ID·버전·IL2CPP/ARM64·managed stripping), 빌드 크기(Resources 남용·압축 용량·AAB), 빌드 씬 목록, 매니페스트 권한, 스토어 요건(64bit·개인정보), 서명/keystore 커밋 여부, development build 플래그 잔존, Addressables. 파일 판정은 확정, 스토어 정책 수치는 변동이 커 확인 목록(⚠️)으로 분리(웹 검색 도구 없음). 출력: 요약 → 제출 차단·보안 Must → Should → Nit → 스토어 정책 확인 목록 → 위임 → Top 3.
+→ 일반 CI/CD·시크릿 보관·파이프라인은 `devops-reviewer`(이 에이전트는 keystore 커밋·존재 판정까지), 코드는 `unity-code-reviewer`, 런타임 성능은 `unity-perf-auditor`.
+
 ---
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
@@ -264,6 +279,9 @@ Unity 게임 **UI/UX 레이어**(HUD·메뉴·팝업·튜토리얼 화면) 점�
 /gdd 원터치 점프 퍼즐 설계해줘   # 2D 캐주얼 게임 디자인·시스템 설계
 /gui Assets/UI               # 게임 UI/UX(HUD·스케일링·내비) 점검
 /feel Assets/Player          # 게임플레이 손맛(코요테·점프버퍼·피드백) 점검
+/uperf ProjectSettings       # Unity 런타임 성능·렌더링 점검
+/playtest 튜토리얼 없이 규칙 이해되나   # 플레이테스트 프로토콜 설계
+/ubuild                      # 빌드/릴리스·스토어 제출 준비 점검
 ```
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
