@@ -6,7 +6,7 @@
 - 에이전트 수: **32종** (개발 스택 리뷰 16종 + 메타 1종 + 콘텐츠/마케팅 6종 + 보안 심화 2종 + 게임 7종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.9**, `code-reviewer` **v1.8**, `devops-reviewer` **v1.7**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `design-system-architect`·`system-architect` **v1.4**, `perf-auditor`·`test-strategy` **v1.3**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2**, 콘텐츠 6종 `copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 7종 `unity-code-reviewer` **v1.1**·`game-design-architect` **v1.2**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.9**, `code-reviewer` **v1.9**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2**, 콘텐츠 6종 `copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 7종 `unity-code-reviewer` **v1.1**·`game-design-architect` **v1.2**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -27,11 +27,11 @@
 
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|---|
-| 1 | `code-reviewer` | `/review` | 품질 | 1.8 | opus | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
+| 1 | `code-reviewer` | `/review` | 품질 | 1.9 | opus | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
 | 2 | `security-reviewer` | `/sec` | 품질 | 1.11 | opus | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
 | 3 | `test-runner` | `/test` | 품질 | 1.9 | sonnet | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
-| 4 | `test-strategy` | `/coverage` | 품질 | 1.3 | opus | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
-| 5 | `perf-auditor` | `/perf` | 품질 | 1.3 | opus | Next.js 프론트 성능 점검 | Read, Grep, Glob |
+| 4 | `test-strategy` | `/coverage` | 품질 | 1.4 | opus | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
+| 5 | `perf-auditor` | `/perf` | 품질 | 1.4 | opus | Next.js 프론트 성능 점검 | Read, Grep, Glob |
 | 6 | `api-contract-reviewer` | `/contract` | 품질 | 1.1 | opus | 프론트-백 API 계약 정합성 점검 | Read, Grep, Glob |
 | 7 | `api-doc-writer` | `/apidoc` | 문서 | 1.5 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
 | 8 | `db-optimizer` | `/db` | DB | 1.10 | opus | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
@@ -39,8 +39,8 @@
 | 10 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.5 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
 | 11 | `design-system-architect` | `/dsystem` | 디자인 | 1.4 | opus | 디자인 토큰·컴포넌트 설계 (DESIGN.md) | Read, Grep, Glob, Context7 |
 | 12 | `data-modeler` | `/datamodel` | 설계 | 1.6 | opus | 데이터 모델/스키마 설계 | Read, Grep, Glob |
-| 13 | `system-architect` | `/arch` | 설계 | 1.4 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
-| 14 | `devops-reviewer` | `/devops` | 운영 | 1.7 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
+| 13 | `system-architect` | `/arch` | 설계 | 1.5 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
+| 14 | `devops-reviewer` | `/devops` | 운영 | 1.8 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
 | 15 | `dependency-auditor` | `/deps` | 운영 | 1.1 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
 | 16 | `observability-reviewer` | `/obs` | 운영 | 1.2 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
 | 17 | `ai-workspace-architect` | `/fable` | 메타 | 1.2 | opus | AI 작업환경 진단·재설계(프롬프트·지침·CLAUDE.md·SKILL.md·모델별 전략) | Read, Grep, Glob, WebSearch, WebFetch |

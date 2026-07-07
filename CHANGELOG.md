@@ -8,6 +8,20 @@
 
 ---
 
+## 1.52 (2026-07-07) — 웹→게임 역방향 위임 5건 (라우팅 오염 양방향 차단), 에이전트 수 32종 유지
+
+게임 도메인 7종을 추가하며 게임→웹 위임은 각 게임 에이전트 description에 박았지만, 반대 방향(웹 에이전트가 Unity/게임 요청을 흡수)은 비어 있었다. 이름·역할이 인접한 웹 에이전트 5종에 게임 에이전트로의 단방향 위임 한 줄씩 추가해 대칭을 완성했다. 신규 에이전트·도구 변경은 없고 description 문구만(각 +0.1).
+
+- `code-reviewer` 1.8 → 1.9 — "Unity + C# 게임 코드(MonoBehaviour·프레임 루프·GC·물리 의존)는 unity-code-reviewer" 추가.
+- `perf-auditor` 1.3 → 1.4 — "Unity 게임 런타임 성능·렌더링(드로우콜·배칭·오버드로우·텍스처 메모리·프레임 예산)은 unity-perf-auditor" 추가(이름 충돌 "perf" 직접 해소).
+- `system-architect` 1.4 → 1.5 — "게임 디자인·코어 루프·게임 시스템 구조(2D 캐주얼)는 game-design-architect" 추가(위임을 내보내지 않던 최상위 설계 에이전트의 첫 게임 예외).
+- `devops-reviewer` 1.7 → 1.8 — "Unity 빌드·릴리스 설정·스토어 제출(Player Settings·빌드 크기·서명)은 unity-build-auditor" 추가.
+- `test-strategy` 1.3 → 1.4 — "사람 대상 게임 플레이테스트 설계(자동 테스트 아님)는 playtest-designer" 추가("테스트" 용어 충돌 해소).
+
+**문서** — `README.md`(상단 버전 요약·표 5행 갱신). AGENTS 표는 버전 비표기라 변경 없음. 게임 에이전트 쪽 description은 이미 웹으로의 위임을 담고 있어 이번 5건으로 게임↔웹 라우팅이 양방향으로 닫혔다.
+
+---
+
 ## 1.51 (2026-07-07) — 게임 로드맵 완성 3종: unity-perf-auditor·playtest-designer·unity-build-auditor, 29종 → 32종
 
 예약해 둔 게임 로드맵 3종을 마저 추가해 게임 도메인 파이프라인(설계 → 구현/코드 → UI → 게임필 → **성능 → 플레이테스트 → 빌드/스토어**)을 닫았다. 셋 다 model `opus`, cyan, 읽기전용, `memory: user` + `agent-conventions` + `agent-guard.ps1` 상속, 기존 게임 4종 골격 계승. 신규 3종이 서로/기존 6개와 겹치기 쉬운 경계 3곳을 대칭 위임으로 카빙했다.
