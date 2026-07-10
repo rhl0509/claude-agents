@@ -6,6 +6,8 @@
 
 **작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync.ps1`을 실행해 전역(`%USERPROFILE%\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`(상단 버전 요약·버전 표·해당 상세 블록)와 `AGENTS.md`·`CLAUDE.md`의 관련 내용을 갱신한 뒤 ④ `sync.ps1` 실행 후 `git commit` + `git push` 한다.
 
+**effort 튜닝 요약(1.57~1.59)**: opus 30종 `high` 일괄 채택(1.57) → 보안 3종 `xhigh`(1.58) → fable `xhigh`(1.59). 현재 **`xhigh` 4종**(security-reviewer·threat-modeler·llm-ai-security-reviewer·ai-workspace-architect), 나머지 opus 26종 `high`, sonnet·haiku는 세션 상속. `effort`는 실행 정책 필드라 개별 `version` 미bump.
+
 ---
 
 ## 1.59 (2026-07-11) — ai-workspace-architect(/fable) `effort` high→xhigh 상향
