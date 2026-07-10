@@ -3,15 +3,15 @@
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
 코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터).
 
-- 에이전트 수: **32종** (개발 스택 리뷰 16종 + 메타 1종 + 콘텐츠/마케팅 6종 + 보안 심화 2종 + 게임 7종)
+- 에이전트 수: **33종** (개발 스택 리뷰 16종 + 메타 1종 + 콘텐츠/마케팅 6종 + 보안 심화 2종 + 게임 7종 + 인프라 1종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.9**, `code-reviewer` **v1.9**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2**, 콘텐츠 6종 `copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 7종 `unity-code-reviewer` **v1.1**·`game-design-architect` **v1.2**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.9**, `code-reviewer` **v1.9**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2**, 콘텐츠 6종 `copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 7종 `unity-code-reviewer` **v1.1**·`game-design-architect` **v1.2**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor` **v1.0**, 인프라 `memory-recaller` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
 ## 목차
-- [에이전트 32종](#에이전트-32종)
+- [에이전트 33종](#에이전트-33종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -23,7 +23,7 @@
 
 ---
 
-## 에이전트 32종
+## 에이전트 33종
 
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|---|
@@ -59,6 +59,7 @@
 | 30 | `unity-perf-auditor` | `/uperf` | 게임 | 1.0 | opus | Unity 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler 해석) | Read, Grep, Glob |
 | 31 | `playtest-designer` | `/playtest` | 게임 | 1.0 | opus | 플레이테스트 프로토콜 설계(가설·참가자·지표·설문·텔레메트리) | Read, Grep, Glob |
 | 32 | `unity-build-auditor` | `/ubuild` | 게임 | 1.0 | opus | 빌드/릴리스·스토어 제출 점검(PlayerSettings·크기·서명·권한) | Read, Grep, Glob |
+| 33 | `memory-recaller` | 자동 호출 | 인프라 | 1.1 | haiku | 파일 기반 장기기억 회상(E:\claude_memory 인덱스·토픽) — 값싼 Haiku 회상 | Read, Grep, Glob |
 
 ### 🔍 품질 / QA
 
@@ -409,6 +410,20 @@
 - **구분(경계)**: 일반 CI/CD·시크릿 보관·파이프라인은 `devops-reviewer`(이 에이전트는 keystore "커밋·존재 판정"까지), 코드는 `unity-code-reviewer`, 런타임 성능은 `unity-perf-auditor`
 </details>
 
+### 🧠 인프라 (개인 메모리)
+
+> 웹·게임·콘텐츠 리뷰와 별개로, **사용자 개인의 파일 기반 장기기억**(`E:\claude_memory\`)을 값싼 모델로 대신 읽는 인프라 에이전트. 저장소의 첫 `haiku` 에이전트다. 슬래시 명령 없이 메모리 회상 훅(세션 시작·"예전에 뭐라고 정했더라")으로 자동 호출된다.
+
+<details>
+<summary><b>33. memory-recaller</b> (자동 호출) — 파일 기반 장기기억 회상</summary>
+
+- **언제**: "예전에 뭐라고 정했더라", "그 프로젝트 메모리 찾아줘", 세션 시작 시 관련 컨텍스트 회상
+- **성격**: 리뷰/설계가 아니라 사용자 개인 메모리 저장소를 대신 읽는 인프라. 무거운 모델(Opus/Fable)이 인덱스를 통째로 읽는 토큰 낭비를 없애려 값싼 `haiku`로 회상만 수행
+- **회상 절차(폴백 3단)**: 인덱스 진입점 탐색 — ① `YYYYMMDD_MEMORY.md` 최신 날짜 → ② 날짜형이 없으면 `*MEMORY*`·`*INDEX*` 등 다른 이름 인덱스 폴백(토픽 파일 오인 금지) → ③ 그래도 없으면 `Grep` 전체 검색. 최신→과거 순 회상, 관련 토픽 파일 확인, `20260624_MEMORY.md`가 하한
+- **출력**: `- <사실 한 줄> (출처: <파일명>)` 형식으로 관련 사실만 압축(원문 붙여넣기 금지). 없으면 "관련 메모리 없음"으로 정직 보고, 날짜·수치·결정은 보존
+- **원칙**: 읽기 전용 — 메모리를 쓰거나 고치지 않음(저장·수정은 메인 세션이 담당)
+</details>
+
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
 아래 16쌍은 **양쪽 description에서 서로를 가리키는 대칭 위임**이다(`↔`). 어느 쪽으로 호출해도 인접 영역으로 안내된다.
@@ -475,11 +490,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 32개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 33개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 32개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 32개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 33개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 32개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -572,7 +587,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-32종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-33종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
@@ -595,7 +610,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
-├─ AGENTS.md                     # 32개 에이전트 통합 정리
+├─ AGENTS.md                     # 33개 에이전트 통합 정리
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
@@ -615,7 +630,7 @@ claude-agents/
 ├─ launchers/                    # ── 바탕화면 런처 ──
 │  └─ claude.bat
 │
-├─ code-reviewer.md              # ── 에이전트 정의 (32개) ──
+├─ code-reviewer.md              # ── 에이전트 정의 (33개) ──
 ├─ security-reviewer.md
 ├─ test-runner.md
 ├─ test-strategy.md
@@ -646,7 +661,8 @@ claude-agents/
 ├─ game-feel-reviewer.md
 ├─ unity-perf-auditor.md
 ├─ playtest-designer.md
-└─ unity-build-auditor.md
+├─ unity-build-auditor.md
+└─ memory-recaller.md            # 인프라(개인 메모리 회상, haiku)
 ```
 
 ---
