@@ -59,7 +59,7 @@
 | 30 | `unity-perf-auditor` | `/uperf` | 게임 | 1.0 | opus | Unity 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler 해석) | Read, Grep, Glob |
 | 31 | `playtest-designer` | `/playtest` | 게임 | 1.0 | opus | 플레이테스트 프로토콜 설계(가설·참가자·지표·설문·텔레메트리) | Read, Grep, Glob |
 | 32 | `unity-build-auditor` | `/ubuild` | 게임 | 1.0 | opus | 빌드/릴리스·스토어 제출 점검(PlayerSettings·크기·서명·권한) | Read, Grep, Glob |
-| 33 | `memory-recaller` | 자동 호출 | 인프라 | 1.1 | haiku | 파일 기반 장기기억 회상(E:\claude_memory 인덱스·토픽) — 값싼 Haiku 회상 | Read, Grep, Glob |
+| 33 | `memory-recaller` | `/recall` | 인프라 | 1.1 | haiku | 파일 기반 장기기억 회상(E:\claude_memory 인덱스·토픽) — 값싼 Haiku 회상 | Read, Grep, Glob |
 
 ### 🔍 품질 / QA
 
@@ -412,12 +412,12 @@
 
 ### 🧠 인프라 (개인 메모리)
 
-> 웹·게임·콘텐츠 리뷰와 별개로, **사용자 개인의 파일 기반 장기기억**(`E:\claude_memory\`)을 값싼 모델로 대신 읽는 인프라 에이전트. 저장소의 첫 `haiku` 에이전트다. 슬래시 명령 없이 메모리 회상 훅(세션 시작·"예전에 뭐라고 정했더라")으로 자동 호출된다.
+> 웹·게임·콘텐츠 리뷰와 별개로, **사용자 개인의 파일 기반 장기기억**(`E:\claude_memory\`)을 값싼 모델로 대신 읽는 인프라 에이전트. 저장소의 첫 `haiku` 에이전트다. 메모리 회상 훅(세션 시작·"예전에 뭐라고 정했더라")으로 자동 호출되며, `/recall`로 수동 호출도 된다.
 
 <details>
-<summary><b>33. memory-recaller</b> (자동 호출) — 파일 기반 장기기억 회상</summary>
+<summary><b>33. memory-recaller</b> (<code>/recall</code>) — 파일 기반 장기기억 회상</summary>
 
-- **언제**: "예전에 뭐라고 정했더라", "그 프로젝트 메모리 찾아줘", 세션 시작 시 관련 컨텍스트 회상
+- **언제**: "예전에 뭐라고 정했더라", "그 프로젝트 메모리 찾아줘", 세션 시작 시 관련 컨텍스트 회상. 수동 회상은 `/recall <주제>`
 - **성격**: 리뷰/설계가 아니라 사용자 개인 메모리 저장소를 대신 읽는 인프라. 무거운 모델(Opus/Fable)이 인덱스를 통째로 읽는 토큰 낭비를 없애려 값싼 `haiku`로 회상만 수행
 - **회상 절차(폴백 3단)**: 인덱스 진입점 탐색 — ① `YYYYMMDD_MEMORY.md` 최신 날짜 → ② 날짜형이 없으면 `*MEMORY*`·`*INDEX*` 등 다른 이름 인덱스 폴백(토픽 파일 오인 금지) → ③ 그래도 없으면 `Grep` 전체 검색. 최신→과거 순 회상, 관련 토픽 파일 확인, `20260624_MEMORY.md`가 하한
 - **출력**: `- <사실 한 줄> (출처: <파일명>)` 형식으로 관련 사실만 압축(원문 붙여넣기 금지). 없으면 "관련 메모리 없음"으로 정직 보고, 날짜·수치·결정은 보존
@@ -494,7 +494,7 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 33개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 32개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 33개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 33개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -562,8 +562,10 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/uperf` | unity-perf-auditor | 경로·설정 또는 Profiler 캡처(선택) |
 | `/playtest` | playtest-designer | 검증 질문·빌드 범위(선택) |
 | `/ubuild` | unity-build-auditor | ProjectSettings·플랫폼(선택) |
+| `/recall` | memory-recaller | 회상할 주제/질문(선택) |
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
+> `/recall`은 메모리 회상 훅으로 자동 호출되기도 하지만, 수동으로 직접 부를 수도 있습니다.
 
 ---
 
@@ -616,7 +618,7 @@ claude-agents/
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
 ├─ .gitignore
 │
-├─ commands/                     # ── 슬래시 명령 정의 (32개) ──
+├─ commands/                     # ── 슬래시 명령 정의 (33개) ──
 │  ├─ review.md  ├─ sec.md       ├─ test.md      ├─ coverage.md
 │  ├─ perf.md    ├─ contract.md  ├─ apidoc.md    ├─ db.md
 │  ├─ migrate.md ├─ ui.md        ├─ dsystem.md   ├─ datamodel.md
@@ -625,7 +627,7 @@ claude-agents/
 │  ├─ factcheck.md  ├─ repurpose.md   ├─ voice.md
 │  ├─ threat.md   ├─ aisec.md    ├─ ureview.md   ├─ gdd.md
 │  ├─ gui.md      ├─ feel.md     ├─ uperf.md     ├─ playtest.md
-│  └─ ubuild.md
+│  ├─ ubuild.md   └─ recall.md
 │
 ├─ launchers/                    # ── 바탕화면 런처 ──
 │  └─ claude.bat
