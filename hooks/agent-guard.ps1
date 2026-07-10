@@ -38,6 +38,12 @@ if ($tool -eq 'Write' -or $tool -eq 'Edit') {
 if ($tool -eq 'Bash') {
     $c = [string]$in.command
     if ($c) {
+        # NOTE: these patterns match the keyword anywhere in the command string, so a
+        #   read-only diagnostic that merely CONTAINS a keyword (e.g. `grep "CREATE TABLE"
+        #   schema.sql`, `git log --grep=DELETE`) can be false-blocked. Accepted on purpose:
+        #   the guard only ever ADDS a block, agents normally use the Grep tool (not shell
+        #   grep), and narrowing to SQL context would open a real gap. If a legitimate
+        #   read-only command is blocked, run it yourself.
         $sqlMutate = '(?i)\b(INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|TRUNCATE|GRANT|REVOKE)\b'
         $fsDestroy = '(?i)\brm\s+-[rf]'
         $gitWrite  = '(?i)\bgit\s+(push|commit|reset|checkout|clean|merge|rebase|apply|restore|stash)\b'

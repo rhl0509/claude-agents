@@ -426,39 +426,84 @@
 
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
-아래 16쌍은 **양쪽 description에서 서로를 가리키는 대칭 위임**이다(`↔`). 어느 쪽으로 호출해도 인접 영역으로 안내된다.
+양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 아래는 33개 description을 **전수 스캔해 재구성한 34쌍 전량**이며 클러스터별로 나눈다(2026-07 재검증, 1.56).
 
+**웹 스택 (17쌍)**
 | 쌍 | 구분 |
 |---|---|
 | code-reviewer ↔ security-reviewer | 일반 품질/버그 ↔ 보안 전용 |
+| code-reviewer(프론트) ↔ ui-ux-reviewer | 로직·타입·구조 ↔ 시각·사용성·접근성 |
+| code-reviewer ↔ api-contract-reviewer | 한쪽 "코드 품질·버그" ↔ 양쪽 "계약 일치" |
+| code-reviewer ↔ observability-reviewer | 일반 "예외 처리·코드 품질" ↔ 관측성 "공백"(로깅·추적) |
 | db-optimizer ↔ data-modeler | 기존 쿼리·인덱스 "튜닝" ↔ 테이블·관계 "설계" |
 | migration-reviewer ↔ data-modeler | 스키마 변경 "적용 안전성" ↔ 스키마 "설계" |
 | migration-reviewer ↔ db-optimizer | 마이그레이션 "락·롤백·배포 안전" ↔ 런타임 쿼리 "성능" |
-| ui-ux-reviewer ↔ design-system-architect | 개별 화면 "점검" ↔ 토큰·컴포넌트 "시스템 설계" |
-| code-reviewer(프론트) ↔ ui-ux-reviewer | 로직·타입·구조 ↔ 시각·사용성·접근성 |
-| perf-auditor ↔ ui-ux-reviewer | 로드·렌더 "성능"(번들·CWV) ↔ 시각·사용성·접근성 |
 | perf-auditor ↔ db-optimizer | 프론트 "성능"(번들·렌더) ↔ MySQL 쿼리·인덱스 "성능" |
-| test-strategy ↔ test-runner | 커버리지 공백·약한 테스트 "진단·설계" ↔ 테스트 "실행·실패 분석" |
-| devops-reviewer ↔ security-reviewer | 배포/파이프라인 설정 "운영 보안" ↔ 애플리케이션 "코드 보안" |
-| api-contract-reviewer ↔ api-doc-writer | 프론트-백 계약 "정합성 검증" ↔ 백엔드 엔드포인트 "카탈로그·문서화" |
-| api-contract-reviewer ↔ code-reviewer | 양쪽 "계약 일치" ↔ 한쪽 "코드 품질·버그" |
+| perf-auditor ↔ ui-ux-reviewer | 로드·렌더 "성능"(번들·CWV) ↔ 시각·사용성·접근성 |
+| ui-ux-reviewer ↔ design-system-architect | 개별 화면 "점검" ↔ 토큰·컴포넌트 "시스템 설계" |
 | dependency-auditor ↔ security-reviewer | 의존성 자체 "취약·버전·라이선스" ↔ 앱 "코드 보안 취약점" |
 | dependency-auditor ↔ devops-reviewer | 의존성 "건강성"(매니페스트·lockfile) ↔ CI/공급망 "설정"(SBOM·서명) |
-| observability-reviewer ↔ devops-reviewer | 앱 런타임 "로깅·트레이싱·계측" ↔ 로그 수집·대시보드 "인프라 설정" |
-| observability-reviewer ↔ code-reviewer | 관측성 "공백"(로깅·추적) ↔ 일반 "예외 처리·코드 품질" |
+| devops-reviewer ↔ security-reviewer | 배포/파이프라인 설정 "운영 보안" ↔ 애플리케이션 "코드 보안" |
+| devops-reviewer ↔ observability-reviewer | 로그 수집·대시보드 "인프라 설정" ↔ 앱 런타임 "로깅·트레이싱·계측" |
+| devops-reviewer ↔ system-architect | 배포·인프라 설정 "점검" ↔ 시스템 구조 "설계" ⟵ 1.56에서 일방향→대칭 정정 |
+| api-contract-reviewer ↔ api-doc-writer | 프론트-백 계약 "정합성 검증" ↔ 백엔드 엔드포인트 "카탈로그·문서화" |
+| test-strategy ↔ test-runner | 커버리지 공백·약한 테스트 "진단·설계" ↔ 테스트 "실행·실패 분석" |
+
+**콘텐츠 / 마케팅 (3쌍)**
+| 쌍 | 구분 |
+|---|---|
+| copy-reviewer ↔ landing-reviewer | 문장 카피 품질 ↔ 상세페이지·랜딩 전환 구조 |
+| copy-reviewer ↔ seo-optimizer | 설득·문장 품질 ↔ 검색 최적화 |
+| landing-reviewer ↔ seo-optimizer | 전환 구조 ↔ 검색 유입 |
+
+**보안 (3쌍)**
+| 쌍 | 구분 |
+|---|---|
+| security-reviewer ↔ threat-modeler | 코드 취약점(구현 후) ↔ 설계 단계 위협 모델링 |
+| security-reviewer ↔ llm-ai-security-reviewer | 웹 앱 일반 보안 ↔ AI/LLM 특화 심화 |
+| threat-modeler ↔ llm-ai-security-reviewer | 설계 단계 위협(LLM 포함) ↔ 구현 후 AI/LLM 심화 |
+
+**게임 (Unity + C#, 6쌍)**
+| 쌍 | 구분 |
+|---|---|
+| game-design-architect ↔ unity-code-reviewer | 코어 루프·시스템 "설계" ↔ C# 코드 품질·프레임 "리뷰" |
+| game-design-architect ↔ playtest-designer | "무엇을 검증할지"(재미 가설) ↔ "어떻게 검증할지"(프로토콜) |
+| game-feel-reviewer ↔ game-ui-reviewer | 게임플레이 동작 피드백 ↔ UI 조작 피드백 |
+| game-feel-reviewer ↔ playtest-designer | 손맛 장치·프로토타입 검증 항목 ↔ 검증 프로토콜 |
+| unity-code-reviewer ↔ unity-perf-auditor | GC 유발 코드 "원인" ↔ 프레임 예산 "증상·측정 해석" |
+| unity-build-auditor ↔ unity-perf-auditor | 텍스처 압축 "빌드 용량" ↔ "런타임 메모리·GPU" |
+
+**클러스터 교차 (게임 ↔ 웹, 5쌍)** — 1.52에서 양방향화
+| 쌍 | 구분 |
+|---|---|
+| code-reviewer ↔ unity-code-reviewer | 웹(Next.js/FastAPI) 코드 ↔ Unity C# 게임 코드 |
+| perf-auditor ↔ unity-perf-auditor | 웹 프론트 성능(번들·CWV) ↔ Unity 런타임 성능·렌더링 |
+| system-architect ↔ game-design-architect | 풀스택 웹 아키텍처 ↔ 2D 캐주얼 게임 디자인·시스템 |
+| devops-reviewer ↔ unity-build-auditor | 일반 CI/CD·시크릿·파이프라인 ↔ Unity 빌드/릴리스·스토어 제출 |
+| test-strategy ↔ playtest-designer | 소프트웨어 자동 테스트 ↔ 사람 대상 플레이테스트 |
 
 ### 일방향 위임 포인터
 
-특화 에이전트가 **일반/최상위 에이전트로만** 안내하는 단방향 위임(`→`). 역방향은 의도적으로 두지 않는다 — 일반 에이전트가 모든 특화 에이전트를 역으로 나열하면 description이 비대해지기 때문.
+특화 에이전트가 **허브/일반/상위 에이전트로만** 안내하는 단방향(`→`). 역방향을 두지 않는 이유: 허브 에이전트(code-reviewer 등)가 받는 모든 특화를 역으로 나열하면 description이 비대해진다. 아래는 **의도적 단방향의 대표 예시**이며 전수 목록은 아니다 — 허브로 들어오는 inbound 포인터는 이 외에도 여럿(예: system-architect가 받는 5건, code-reviewer가 받는 다수).
 
 | 위임 | 성격 | 역방향이 없는 이유 |
 |---|---|---|
-| test-strategy → code-reviewer | 특화 → 일반 | `code-reviewer`는 일반 폴백이라 개별 특화로 되돌리지 않음 |
-| perf-auditor → code-reviewer | 특화 → 일반 | 동일(일반 품질·버그 폴백) |
+| test-strategy → code-reviewer | 특화 → 일반 폴백 | `code-reviewer`는 일반 폴백이라 개별 특화로 되돌리지 않음 |
+| perf-auditor → code-reviewer | 특화 → 일반 폴백 | 동일(일반 품질·버그 폴백) |
 | devops-reviewer → migration-reviewer | 운영 → DB 도메인 | 마이그레이션 리뷰는 DB 영역에 집중 |
-| devops-reviewer → system-architect | 운영 → 최상위 설계 | `system-architect`는 위임을 내보내지 않는 최상위 설계 에이전트 |
+| system-architect → api-contract-reviewer / data-modeler / security-reviewer | 최상위 설계 → 특화 검증 | 설계가 구현 후 검증을 특화로 넘김(특화는 설계를 역참조 안 함) |
+| ai-workspace-architect → system-architect / design-system-architect | 메타 → 도메인 설계 | 메타가 스택 설계를 넘길 뿐, 설계 에이전트는 메타를 역참조 안 함 |
+| copy-reviewer → ai-workspace-architect | 콘텐츠 → 메타 | 보이스·프롬프트 시스템 설계로 넘기는 상향 포인터 |
+| content-repurposer → copy-reviewer / seo-optimizer / fact-checker | 생성 → 점검 3종 | 재활용 초안을 각 점검 에이전트로(점검 측은 생성기를 역참조 안 함) |
+| fact-checker → copy-reviewer / seo-optimizer / landing-reviewer | 검증 → 콘텐츠 점검 | 사실 검증 후 문장·전환·검색은 각 특화로 |
+| brand-voice-guardian → copy-reviewer / ai-workspace-architect | 보이스 → 카피·메타 | 일반 카피는 copy, 보이스 정의·시스템은 메타로 |
+| threat-modeler → system-architect | 보안 설계 → 구조 설계 | 위협 모델이 구조 설계로 넘김 |
+| llm-ai-security-reviewer → devops-reviewer | AI 보안 → 인프라 | 모델 서빙·시크릿 인프라를 devops로 |
+| game-ui-reviewer → ui-ux-reviewer | 게임 UI → 웹 UI | 웹 화면·WCAG·i18n은 웹 UI로(웹 UI는 게임을 역참조 안 함) |
+| unity-build-auditor → unity-code-reviewer | 빌드 → 코드 | keystore·설정 판정 후 코드 품질은 코드 리뷰로 |
+| playtest-designer → test-runner | 플레이테스트 → 자동 테스트 | 사람 테스트와 별개인 자동 테스트 러너로 |
 
-> `system-architect`는 다른 에이전트로 내보내는 위임이 없는 최상위 설계 에이전트다. 받는 쪽으로는 devops-reviewer 등 여러 곳이 단방향으로 가리킨다.
+> **정정(1.56)**: 이전 문서는 `system-architect`를 "다른 에이전트로 내보내는 위임이 없는 최상위 설계 에이전트"라 기술하고 `devops-reviewer → system-architect`를 일방향으로 분류했다. 그러나 현재 `system-architect` description은 5개 특화(api-contract-reviewer·data-modeler·devops-reviewer·security-reviewer·game-design-architect)로 위임을 **내보낸다**(1.52의 game-design-architect 추가가 결정타). 따라서 devops ↔ system-architect는 **대칭**(위 웹 표)으로 이동했고, system-architect도 위임을 내보내는 에이전트다.
 
 ---
 

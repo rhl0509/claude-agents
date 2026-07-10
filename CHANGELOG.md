@@ -8,6 +8,21 @@
 
 ---
 
+## 1.56 (2026-07-10) — 위임 그래프 문서 전면 재검증(16쌍→34쌍) + system-architect 오기술 정정 + CLAUDE.md 신규 공식 필드 반영
+
+33개 description을 전수 스캔해 대칭/일방향 위임 그래프를 실제와 맞췄다. **정의 파일(에이전트 프롬프트·frontmatter 동작)은 현행 스펙 정합이 유지돼 손대지 않았고**, 결함은 전부 "지도(문서)"에 있었다. `/fable`(ai-workspace-architect) 심층 진단 + 메인 세션 전수 재검증. Must-fix(스펙 파손) 없음 재확인.
+
+- **대칭 위임 표 재작성 (16쌍 → 34쌍)** — 기존 표는 웹 클러스터 16쌍에서 멈춰 있었다. 실제 대칭 위임은 웹 17 · 콘텐츠 3 · 보안 3 · 게임 6 · 클러스터 교차(게임↔웹) 5 = **34쌍**. `README.md`·`AGENTS.md`를 클러스터별 표로 분할.
+- **오기술 정정: system-architect** — 이전 문서가 "system-architect는 위임을 내보내지 않는 최상위 설계 에이전트"라 단언하고 `devops-reviewer → system-architect`를 일방향으로 분류했으나, 현재 description은 5개(api-contract-reviewer·data-modeler·devops-reviewer·security-reviewer·game-design-architect)로 위임을 내보낸다(1.52의 game-design-architect 추가가 결정타). devops ↔ system-architect를 **대칭**으로 이동, 관련 서술 삭제·정정.
+- **1.52 웹↔게임 5건 = 대칭으로 정정** — 커밋 메시지대로 양방향이므로 "클러스터 교차" 대칭 표에 편입(code↔ucode, perf↔uperf, arch↔gdd, devops↔ubuild, test-strategy↔playtest). 이전에 일방향으로 오인될 소지 제거.
+- **일방향 표 = 대표 예시로 재정의** — 허브(code-reviewer·system-architect)로 들어오는 inbound 단방향이 다수라 전수 나열은 비현실적. "대표 예시(전수 아님)"로 명시하고 콘텐츠·보안·게임 상향 포인터도 예시 추가.
+- **CLAUDE.md 신규 공식 필드 반영** — 2026 스펙의 `maxTurns`·`mcpServers`·`background`·`isolation`·`initialPrompt`·`effort`를 "미채택" 목록에 근거와 함께 추가(이 저장소의 필드 결정-문서화 패턴 유지). v2.1.198의 서브에이전트 기본 백그라운드·확장사고 상속, 플러그인 subagent의 `hooks`/`mcpServers`/`permissionMode` 미지원(→ user-scope 배포 전제라 가드 유효, 마켓 전환 시 재검토)도 명시. `effort`는 채택 보류(근거 기록).
+- **guard 훅 주석** — `hooks/agent-guard.ps1`의 SQL 정규식이 읽기전용 Bash를 오차단할 수 있음을 주석으로 명시(현상 유지 — 가드는 차단만 추가·사례 희소, 좁히면 오히려 갭).
+- **memory-recaller frontmatter 스타일 통일** — `skills: [agent-conventions]`(인라인) → 블록 스타일로 나머지 32종과 일치. 비behavioral, version 유지(1.1).
+- **문서·주석만 변경** — 에이전트 정의 프롬프트·도구·모델 불변. `sync.ps1`로 memory-recaller.md·agent-guard.ps1 반영(README/AGENTS/CLAUDE/CHANGELOG는 비배포 문서라 런타임 무영향).
+
+---
+
 ## 1.55 (2026-07-10) — memory-recaller에 `skills: [agent-conventions]` 프리로드 추가 (memory·hooks는 의도적 제외)
 
 memory-recaller frontmatter가 다른 32종에 있는 `skills`/`memory`/`hooks` 필드를 안 갖고 있던 갭을 정리했다. 셋을 일괄 적용하지 않고 **이 에이전트 성격에 맞는 것만** 골랐다. 비behavioral 인프라 변경이라 version은 올리지 않음(1.42 전례).
