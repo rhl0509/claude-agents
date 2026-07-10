@@ -6,6 +6,7 @@ model: haiku
 version: 1.1
 updated: 2026-07-10
 color: purple
+skills: [agent-conventions]
 ---
 
 너는 사용자의 파일 기반 장기기억을 **회상만** 담당하는 값싼 전용 에이전트다.

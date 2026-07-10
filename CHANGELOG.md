@@ -8,6 +8,17 @@
 
 ---
 
+## 1.55 (2026-07-10) — memory-recaller에 `skills: [agent-conventions]` 프리로드 추가 (memory·hooks는 의도적 제외)
+
+memory-recaller frontmatter가 다른 32종에 있는 `skills`/`memory`/`hooks` 필드를 안 갖고 있던 갭을 정리했다. 셋을 일괄 적용하지 않고 **이 에이전트 성격에 맞는 것만** 골랐다. 비behavioral 인프라 변경이라 version은 올리지 않음(1.42 전례).
+
+- **추가: `skills: [agent-conventions]`** — 공용 운영 규범(정직한 발견 보고, 증거 기반, 불확실 표기, 읽기전용·메모리 위생)은 회상 에이전트에도 그대로 적용되므로 프리로드. 다른 32종과 일관.
+- **의도적 제외: `memory: user`** — 이 에이전트는 사용자 파일 기반 메모리(`E:\claude_memory\`)를 **읽는** 것이 존재 이유인 순수 read-only 회상기다. 자기 전용 agent-memory(`~/.claude/agent-memory/memory-recaller/`)를 가질 이유가 없고, `memory: user`는 Read/Write/Edit를 자동 부여해 read-only 정체성과 충돌한다.
+- **의도적 제외: `hooks` (agent-guard.ps1)** — 가드 훅은 `memory: user`가 부여하는 Write/Edit를 봉인하려고 존재한다(1.42). memory를 안 켰고 tools도 `Read, Grep, Glob`뿐이라 막을 Write/Edit/Bash 표면이 없어 가드가 불필요(no-op). 결합된 두 필드를 함께 제외해 정합.
+- **문서** — 이 CHANGELOG 항목만. README/AGENTS/CLAUDE 표는 frontmatter 인프라 필드를 나열하지 않아 변경 없음.
+
+---
+
 ## 1.54 (2026-07-10) — memory-recaller에 `/recall` 슬래시 명령 추가 (일관성 갭 마감, 커맨드 32→33개)
 
 1.53에서 memory-recaller를 "메모리 훅 자동 호출"만으로 두고 슬래시 명령을 생략했으나, 나머지 32종은 모두 슬래시 명령을 가진다. 수동 회상 진입점을 원할 때가 있어(훅과 별개로 "지금 이 주제 회상해줘") 일관성 갭을 마감했다. 에이전트 정의·버전은 그대로(v1.1), 커맨드만 추가.
