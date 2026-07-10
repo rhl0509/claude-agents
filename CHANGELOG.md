@@ -8,6 +8,16 @@
 
 ---
 
+## 1.59 (2026-07-11) — ai-workspace-architect(/fable) `effort` high→xhigh 상향
+
+메타 설계 에이전트 `ai-workspace-architect`(/fable)를 보안 3종에 이어 `xhigh`로 올렸다. 이 에이전트는 뼈대→초안→자가채점 루브릭→재작성 품질 루프를 강제하는 무거운 설계기라, 추론 깊이가 곧 결과물 품질(존재 이유)로 직결된다. `xhigh` 대상이 이제 4종(보안 3 + fable).
+
+- **상향 (high → xhigh)** — `ai-workspace-architect`. `effort:` 값만 변경.
+- **version 미bump** — 실행 정책 필드라 개별 `version` 안 올림(1.42/1.55/1.57/1.58 전례).
+- **문서** — `CLAUDE.md` effort bullet의 xhigh 예외에 fable 추가. **배포** — `sync.ps1` 반영 + 명시 요청으로 push.
+
+---
+
 ## 1.58 (2026-07-11) — 보안 계열 3종 `effort` high→xhigh 상향
 
 1.57에서 opus 30종을 `effort: high`로 깔면서 "특정 리뷰 부류가 더 필요하면 그 에이전트만 개별 상향"을 예고했다. 그 첫 적용으로 **보안 방어 클러스터 3종**을 `xhigh`로 올린다. 인증 우회·인젝션·STRIDE급 위협을 놓치는 비용이 추가 추론 예산보다 훨씬 크기 때문 — 여기만 깊은 티어를 쓰고 나머지는 `high` 유지.
