@@ -8,6 +8,17 @@
 
 ---
 
+## 1.58 (2026-07-11) — 보안 계열 3종 `effort` high→xhigh 상향
+
+1.57에서 opus 30종을 `effort: high`로 깔면서 "특정 리뷰 부류가 더 필요하면 그 에이전트만 개별 상향"을 예고했다. 그 첫 적용으로 **보안 방어 클러스터 3종**을 `xhigh`로 올린다. 인증 우회·인젝션·STRIDE급 위협을 놓치는 비용이 추가 추론 예산보다 훨씬 크기 때문 — 여기만 깊은 티어를 쓰고 나머지는 `high` 유지.
+
+- **상향 (high → xhigh)** — `security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`. 각 파일 `effort:` 값만 변경.
+- **범위 경계** — `dependency-auditor`(공급망 신호를 보지만 분류는 "운영"이고 정적 매니페스트 분석이 주라 `high` 유지)는 제외. 순수 보안 3종만.
+- **version 미bump** — 1.57과 동일하게 `effort`는 실행 정책 필드라 개별 `version` 안 올림(1.42/1.55 전례). README 표·요약 변경 없음.
+- **문서** — `CLAUDE.md` effort bullet에 보안 클러스터 xhigh 예외 명시. **배포** — `sync.ps1`로 3종 반영(로컬 `~/.claude`). 원격 push는 미실행(명시 요청 시).
+
+---
+
 ## 1.57 (2026-07-10) — `effort: high` 채택: 30개 opus(심층추론) 에이전트 frontmatter에 일괄 적용 (보류→채택)
 
 1.56에서 "보류(deferred)"로 기록했던 공식 `effort` 필드를 실제로 채택했다. 세션 effort가 낮게 설정돼도 리뷰/보안/설계 에이전트의 추론 깊이가 조용히 떨어지지 않도록, **심층추론 opus 30종 전부**에 `effort: high`를 frontmatter로 고정한다.
