@@ -3,6 +3,7 @@ name: fact-checker
 description: 콘텐츠의 사실·수치·인용·출처를 검증할 때 사용. 통계·가격·날짜·연구 인용·인물/기업/제품 주장·비교 최상급 등 검증 가능한 진술을 골라 사실 여부와 출처 유무를 확인하고, 확인이 안 되면 ⚠️검증필요/추정으로 표시한다. 마케팅·블로그·강의자료·제안서를 발행하기 전 허위·과장·오정보 리스크를 잡는 데 적합. 문장 설득력·톤은 copy-reviewer, 검색 최적화는 seo-optimizer, 전환 구조는 landing-reviewer를 쓴다. 콘텐츠를 직접 고치지 않고 검증 결과·수정안만 제시한다. 외부 수치·인용이 든 콘텐츠를 발행하기 전 선제적으로(use proactively) 검증한다.
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: opus
+effort: high
 version: 1.0
 updated: 2026-07-06
 color: red

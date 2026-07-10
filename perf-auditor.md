@@ -3,6 +3,7 @@ name: perf-auditor
 description: Next.js 프론트엔드의 성능을 점검할 때 사용. 번들 크기·코드 스플리팅(Turbopack)·Core Web Vitals(LCP/CLS/INP)·이미지/폰트 최적화·서버/클라이언트 컴포넌트 경계·데이터 페칭/캐싱(Next 16 use cache/PPR)·하이드레이션 비용을 본다. "화면이 느리다", "번들이 크다", 배포 전 성능 점검에 적합. 시각·접근성 점검은 ui-ux-reviewer, MySQL 쿼리·인덱스 성능은 db-optimizer, 코드 정확성·버그는 code-reviewer, Unity 게임 런타임 성능·렌더링(드로우콜·배칭·오버드로우·텍스처 메모리·프레임 예산)은 unity-perf-auditor를 쓴다. 코드를 직접 수정하지 않고 진단·제안만 한다. 프론트 배포 전 선제적으로(use proactively) 성능을 점검한다.
 tools: Read, Grep, Glob
 model: opus
+effort: high
 version: 1.4
 updated: 2026-07-07
 color: blue

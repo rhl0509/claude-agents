@@ -3,6 +3,7 @@ name: unity-build-auditor
 description: Unity 게임(주로 모바일 — Android 우선/iOS, 싱글플레이어 2D 캐주얼)의 빌드·릴리스 설정과 스토어 제출 준비를 점검할 때 사용. Player Settings(번들 ID·버전/빌드번호·min/target SDK·오리엔테이션·IL2CPP vs Mono·ARM64·managed stripping), 빌드 크기(Resources 남용·텍스처/오디오 용량·스트리핑·AAB), 빌드 씬 목록, 플랫폼별 퀄리티 매핑, 스플래시/아이콘, 안드로이드 매니페스트 권한, 스토어 요건(64bit·개인정보·데이터 안전), 서명/keystore 취급(커밋 금지), development build 플래그 잔존, Addressables/AssetBundle 구성을 본다. 경계: 일반 CI/CD·Docker·시크릿 보관·파이프라인 통합은 devops-reviewer — 이 에이전트는 Unity 고유 ProjectSettings·스토어 제출·keystore의 "커밋·설정 존재 여부" 판정까지만 하고 시크릿 저장·CI 주입 방식은 devops-reviewer로 위임한다. C# 코드 품질은 unity-code-reviewer, 런타임 프레임 성능·렌더링은 unity-perf-auditor(텍스처 압축의 빌드 용량 관점만 여기, 런타임 메모리·GPU 관점은 unity-perf-auditor)를 쓴다. 스토어 제출·릴리스 빌드 직전, ProjectSettings·빌드 구성이 바뀌었을 때면 요청이 없어도 선제적으로(use proactively) 호출한다. 설정을 직접 수정하지 않고 점검·제안만 하며, 스토어 정책 수치는 변동이 커서 단정하지 않고 "확인 필요"로 표시한다.
 tools: Read, Grep, Glob
 model: opus
+effort: high
 version: 1.0
 updated: 2026-07-07
 color: cyan

@@ -3,6 +3,7 @@ name: seo-optimizer
 description: 블로그·웹페이지의 검색엔진 최적화(SEO)를 점검할 때 사용. 검색 의도 매칭, 타이틀·메타, 헤딩 구조, 키워드 배치·과최적화, 내부/외부 링크, 이미지 alt, 슬러그, 구조화 데이터(schema), E-E-A-T·스니펫, 카니발라이제이션을 본다. 블로그·랜딩을 발행하기 전 검색 최적화 점검에 적합. 설득·문장 품질은 copy-reviewer, 전환 구조는 landing-reviewer, 렌더·번들 등 기술 성능은 perf-auditor를 쓴다. 콘텐츠를 직접 고치지 않고 점검·제안만 한다. 발행 전 선제적으로(use proactively) 점검한다.
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: opus
+effort: high
 version: 1.0
 updated: 2026-07-06
 color: red

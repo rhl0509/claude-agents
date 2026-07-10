@@ -3,6 +3,7 @@ name: db-optimizer
 description: MySQL 스키마, 쿼리, 인덱스를 점검하고 성능을 개선할 때 사용. 느린 쿼리 진단, N+1 문제, 인덱스 설계, 마이그레이션이 만드는 인덱스가 쿼리 패턴에 맞는지 검토에 적합(적용 시 락·시간·무중단은 migration-reviewer). ERP처럼 테이블이 많고 조인이 복잡한 경우에 특히 유용. 마이그레이션 안전성(락·무중단·롤백)은 migration-reviewer, 스키마 설계는 data-modeler, 프론트엔드 렌더·번들 등 화면 성능은 perf-auditor를 쓴다. 느린 쿼리·N+1 징후가 보이면 선제적으로(use proactively) 점검한다.
 tools: Read, Grep, Glob, Bash
 model: opus
+effort: high
 version: 1.10
 updated: 2026-07-05
 color: orange

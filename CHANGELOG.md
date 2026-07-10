@@ -8,6 +8,20 @@
 
 ---
 
+## 1.57 (2026-07-10) — `effort: high` 채택: 30개 opus(심층추론) 에이전트 frontmatter에 일괄 적용 (보류→채택)
+
+1.56에서 "보류(deferred)"로 기록했던 공식 `effort` 필드를 실제로 채택했다. 세션 effort가 낮게 설정돼도 리뷰/보안/설계 에이전트의 추론 깊이가 조용히 떨어지지 않도록, **심층추론 opus 30종 전부**에 `effort: high`를 frontmatter로 고정한다.
+
+- **적용 대상 (opus 30종)** — code-reviewer·security-reviewer·db-optimizer·migration-reviewer·data-modeler·design-system-architect·system-architect·ui-ux-reviewer·perf-auditor·devops-reviewer·test-strategy·api-contract-reviewer·dependency-auditor·observability-reviewer·ai-workspace-architect·copy-reviewer·landing-reviewer·seo-optimizer·fact-checker·content-repurposer·brand-voice-guardian·threat-modeler·llm-ai-security-reviewer·unity-code-reviewer·game-design-architect·game-ui-reviewer·game-feel-reviewer·unity-perf-auditor·playtest-designer·unity-build-auditor. 각 파일 `model: opus` 바로 다음 줄에 `effort: high` 삽입.
+- **의도적 제외** — `sonnet`(api-doc-writer·test-runner)·`haiku`(memory-recaller)는 세션 effort **상속** 유지. 작업이 중간/기계적이라 하한을 둘 이유가 없다.
+- **왜 `high`인가 (xhigh/max 아님)** — high로도 추론 깊이가 충분히 올라가고, 상위 티어는 정적 리뷰에서 측정된 이득 없이 시간·토큰만 늘린다. 특정 리뷰 부류가 더 필요하다고 판명되면 그 에이전트만 개별 상향.
+- **공식 근거** — docs "Supported frontmatter fields": `effort` = "Effort level when this subagent is active. Overrides the session effort level. Default: inherits from session. Options: `low`, `medium`, `high`, `xhigh`, `max`; available levels depend on the model." opus에서 high 사용 가능 확인.
+- **version 미bump** — `effort`는 에이전트의 지침·출력 계약을 바꾸지 않는 **실행 정책 필드**(`model`과 동류)라, 1.42/1.55 전례(비behavioral frontmatter 변경)에 따라 개별 `version`은 올리지 않았다. 따라서 README 버전 표·요약도 변경 없음.
+- **문서** — `CLAUDE.md`(effort bullet를 "deferred"→"adopted"로 갱신, "미채택" 목록에서 effort 제외). README/AGENTS 표는 effort를 컬럼으로 나열하지 않아 변경 없음.
+- **배포** — `sync.ps1`로 30개 opus 정의 런타임 반영.
+
+---
+
 ## 1.56 (2026-07-10) — 위임 그래프 문서 전면 재검증(16쌍→34쌍) + system-architect 오기술 정정 + CLAUDE.md 신규 공식 필드 반영
 
 33개 description을 전수 스캔해 대칭/일방향 위임 그래프를 실제와 맞췄다. **정의 파일(에이전트 프롬프트·frontmatter 동작)은 현행 스펙 정합이 유지돼 손대지 않았고**, 결함은 전부 "지도(문서)"에 있었다. `/fable`(ai-workspace-architect) 심층 진단 + 메인 세션 전수 재검증. Must-fix(스펙 파손) 없음 재확인.

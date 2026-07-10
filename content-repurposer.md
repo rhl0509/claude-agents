@@ -3,6 +3,7 @@ name: content-repurposer
 description: 하나의 소스 콘텐츠(블로그·영상 스크립트·강의·뉴스레터)를 여러 포맷(릴스·카드뉴스·스레드·뉴스레터·상세페이지 섹션 등)으로 파생·재구성할 때 사용. 핵심 메시지를 유지하며 매체별 관행(길이·구조·훅·CTA)에 맞게 각색해 바로 쓸 완성형 초안을 낸다. 원본 없이 새로 기획하는 게 아니라 기존 자산 재활용에 적합. 카피 품질 점검은 copy-reviewer, 검색 최적화는 seo-optimizer, 사실 검증은 fact-checker를 쓴다. 파일을 직접 만들지 않고 포맷별 초안(텍스트)만 제시한다.
 tools: Read, Grep, Glob
 model: opus
+effort: high
 version: 1.0
 updated: 2026-07-06
 color: red

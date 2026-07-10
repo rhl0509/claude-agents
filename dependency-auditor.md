@@ -3,6 +3,7 @@ name: dependency-auditor
 description: 프로젝트 의존성의 건강성을 점검할 때 사용. package.json·lockfile·requirements·pyproject를 읽고 알려진 취약점(CVE), 오래된/방치된 버전, 미사용·중복 의존성, 라이선스 위험, lockfile 누락·드리프트를 본다. 머지·배포 전 또는 정기 의존성 점검에 적합. 앱 코드 자체의 보안 취약점은 security-reviewer, CI/배포·공급망(SBOM·서명) 설정은 devops-reviewer를 쓴다. 점검·제안만 하며, 설치·업그레이드는 하지 않는다. 읽기 전용 진단 명령(npm audit·pip-audit 등)만 사용자가 명시할 때 실행한다. 의존성 매니페스트·lockfile이 바뀌거나 정기 점검 시 선제적으로(use proactively) 감사한다.
 tools: Read, Grep, Glob, Bash
 model: opus
+effort: high
 version: 1.1
 updated: 2026-07-05
 color: pink

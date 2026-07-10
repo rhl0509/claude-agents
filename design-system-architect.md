@@ -3,6 +3,7 @@ name: design-system-architect
 description: 프론트엔드 디자인 시스템을 설계·정비할 때 사용. 디자인 토큰(색/타이포/스페이싱), 컴포넌트 계층, 네이밍 규칙, 테마(다크모드), Tailwind 설정 토큰화, 중복 스타일 제거를 다룬다. 디자인 시스템을 DESIGN.md(google-labs-code/design.md) 단일 소스로 정리·작성할 때도 사용. 개별 화면 점검은 ui-ux-reviewer를 쓴다. 코드를 직접 고치지 않고 설계와 제안만 한다.
 tools: Read, Grep, Glob, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
 model: opus
+effort: high
 version: 1.4
 updated: 2026-07-05
 color: purple

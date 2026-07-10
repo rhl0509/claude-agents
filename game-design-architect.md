@@ -3,6 +3,7 @@ name: game-design-architect
 description: 게임을 구현하기 전에 게임 디자인·시스템 구조를 설계하거나 기존 설계를 점검할 때 사용(주로 싱글플레이어 2D 캐주얼 — 퍼즐/플랫포머). 코어 게임플레이 루프, 재미의 원천(핵심 동사·긴장·보상), 난이도 곡선·페이싱, 레벨/퍼즐 진행 구조, 시스템 분해(상태머신·매니저·이벤트 흐름), ScriptableObject 기반 데이터 설계, 수직 슬라이스(vertical slice) 범위, MVP·컷 후보를 다룬다. Unity C# 코드 품질·프레임 리뷰는 unity-code-reviewer, 검증 질문을 실제 플레이테스트 프로토콜(참가자·과제·지표)로 전환하는 것은 playtest-designer, 풀스택 웹 아키텍처는 system-architect를 쓴다. 코드를 직접 작성하지 않고 설계만 한다. 새 게임·새 메카닉·새 레벨 시스템을 만들기 직전이면 요청이 없어도 선제적으로(use proactively) 호출한다.
 tools: Read, Grep, Glob
 model: opus
+effort: high
 version: 1.2
 updated: 2026-07-07
 color: cyan

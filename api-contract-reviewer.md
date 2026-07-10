@@ -3,6 +3,7 @@ name: api-contract-reviewer
 description: Next.js(프론트)와 FastAPI(백엔드) 사이의 API 계약 정합성을 점검할 때 사용. 프론트 호출/타입과 백엔드 Pydantic 스키마·OpenAPI가 어긋나는지(타입 드리프트, 응답 모델 불일치, 필드 누락·이름·옵셔널·enum 차이, 깨지는 변경)를 본다. 프론트-백 연동 직후·계약 변경 머지 전에 호출. 한쪽 코드 품질·버그는 code-reviewer, 백엔드 엔드포인트 카탈로그·문서화는 api-doc-writer를 쓴다. 코드를 직접 수정하지 않고 점검·제안만 한다. 프론트-백 계약(스키마·타입)이 바뀌면 머지 전 선제적으로(use proactively) 점검한다.
 tools: Read, Grep, Glob
 model: opus
+effort: high
 version: 1.1
 updated: 2026-07-05
 color: blue

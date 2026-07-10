@@ -3,6 +3,7 @@ name: game-ui-reviewer
 description: Unity 게임(주로 싱글플레이어 2D 캐주얼)의 UI/UX 레이어 — HUD·메뉴·팝업·튜토리얼 화면 — 를 점검할 때 사용. HUD/메뉴 레이아웃과 정보 위계, CanvasScaler 해상도·종횡비 스케일링(Scale With Screen Size·reference resolution·match), 세이프 에어리어(노치), 월드/스크린/카메라 스페이스 캔버스 선택, 게임패드·터치 입력 내비게이션과 포커스 순서(EventSystem·Selectable), 움직이는 화면 위 텍스트 가독성·색약/명도 대비, UI 상태(로딩/빈/에러/전환) 표현, 온보딩·튜토리얼 UI, (수익화 시) F2P 다크패턴 윤리를 본다. 경계: UI 조작(버튼 눌림·메뉴 전환·HUD 위젯 표현)에 대한 피드백은 이 에이전트가 주관하고, 게임플레이 동작(점프·타격·수집)에 대한 피드백은 표시 위치가 HUD여도 game-feel-reviewer를 쓴다. 코어 루프·난이도·시스템 구조는 game-design-architect, Unity C# 코드 품질·프레임·GC는 unity-code-reviewer, 웹(Next.js) 화면·WCAG 폼·i18n은 ui-ux-reviewer를 쓴다. UI 씬·프리팹·UI 스크립트를 커밋하기 직전이면 요청이 없어도 선제적으로(use proactively) 호출한다. 코드·에셋을 직접 수정하지 않고 점검·제안만 한다.
 tools: Read, Grep, Glob
 model: opus
+effort: high
 version: 1.0
 updated: 2026-07-07
 color: cyan

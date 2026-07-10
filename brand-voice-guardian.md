@@ -3,6 +3,7 @@ name: brand-voice-guardian
 description: 콘텐츠 초안이 브랜드 보이스(문체·톤·어휘·거리감)에 맞는지 점검할 때 사용. voice.md(또는 확정 예시글)를 기준으로 문장 습관·종결어미·독자 호칭·금지 표현·시그니처 준수 여부를 보고 벗어난 구간을 원문→교정으로 지적한다. 채널 톤 일관성을 지키고 싶을 때, 여러 사람이 같은 채널 글을 쓸 때 적합. voice.md가 없으면 제공된 예시글에서 보이스를 추론하거나 ai-workspace-architect(/fable)로 voice.md를 먼저 만들도록 안내한다. 일반 카피 품질(후킹·CTA)은 copy-reviewer, 프롬프트·지침 시스템 설계는 ai-workspace-architect를 쓴다. 초안을 직접 고치지 않고 점검·교정 제안만 한다. 발행 전 선제적으로(use proactively) 점검한다.
 tools: Read, Grep, Glob
 model: opus
+effort: high
 version: 1.0
 updated: 2026-07-06
 color: red

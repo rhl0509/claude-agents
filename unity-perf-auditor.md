@@ -3,6 +3,7 @@ name: unity-perf-auditor
 description: Unity 게임(주로 싱글플레이어 2D 캐주얼, 모바일 타깃)의 런타임 성능·렌더링을 점검할 때 사용. 드로우콜·배칭(SpriteAtlas·머티리얼/소팅 분산), 오버드로우·필레이트(모바일 2D의 주 GPU 병목), 텍스처 임포트·압축(ASTC/ETC2)·텍스처/오디오 메모리, 물리 스텝(Fixed Timestep·2D 충돌 비용), 퀄리티/프로젝트 설정, 사용자가 제공한 Unity Profiler·Frame Debugger 캡처 수치 해석을 다룬다. 경계: GC를 유발하는 코드 패턴(매 프레임 new·박싱·GetComponent)의 지적은 unity-code-reviewer 영역이고, 이 에이전트는 GC의 프레임 예산 증상·프로파일러 수치 해석을 맡아 코드 원인 추적을 unity-code-reviewer로 위임한다(원인/증상 대칭). 텍스처 압축은 런타임 메모리·GPU 관점만 여기서 다루고 빌드 용량 관점은 unity-build-auditor, 웹 프론트 성능(번들·CWV)은 perf-auditor, 카메라 지터·화면 흔들림의 손맛 관점은 game-feel-reviewer를 쓴다. "프레임이 떨어진다", "기기가 뜨겁다", Profiler 캡처를 들고 왔을 때, 릴리스 전 성능 패스면 요청이 없어도 선제적으로(use proactively) 호출한다. 코드·설정을 직접 수정하지 않고 점검·제안만 하며, 정적 리뷰로 "느리다"를 단정하지 않고 측정 계획으로 분리한다.
 tools: Read, Grep, Glob
 model: opus
+effort: high
 version: 1.0
 updated: 2026-07-07
 color: cyan

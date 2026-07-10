@@ -3,6 +3,7 @@ name: landing-reviewer
 description: 상세페이지·랜딩페이지의 전환(conversion) 구조를 리뷰할 때 사용. 히어로 가치 제안, 문제-공감-해결 흐름, 차별점의 benefit 번역, 사회적 증거, 반론 처리, CTA 전략, 오퍼·가격 표현, 긴급성·희소성의 윤리(다크패턴), 스캔 가능성을 본다. 판매·전환 페이지를 게시하기 전 점검에 적합. 문장 단위 카피 품질은 copy-reviewer, 시각·레이아웃·접근성은 ui-ux-reviewer, 검색 유입은 seo-optimizer를 쓴다. 페이지를 직접 고치지 않고 점검·제안만 한다. 게시 전 선제적으로(use proactively) 점검한다.
 tools: Read, Grep, Glob
 model: opus
+effort: high
 version: 1.0
 updated: 2026-07-06
 color: red
