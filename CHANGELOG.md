@@ -10,6 +10,16 @@
 
 ---
 
+## 1.62 (2026-07-12) — memory-recaller: project_active·_archive 인지 + 롤링 하한선 (메모리 운영 정비 배선)
+
+사용자 파일 기반 메모리 체계 재편(Phase 4)에 맞춰 recaller를 배선했다. 날짜 인덱스가 "진행 중/다음"을 매일 이월 복붙하던 중복을 `project_active.md`(활성 작업 단일 소스)로 옮기고, 완료·오래된 메모리를 `_archive\`로 분리한 구조를 recaller가 알도록 반영.
+
+- **memory-recaller 1.2 → 1.3** — ①메모리 위치·규칙에 `project_active.md`(활성 작업 단일 소스, "지금/다음 작업" 질의는 여기부터)와 `_archive\`(완료·오래된 메모리 + 월별 과거 인덱스, **기본 회상 범위 밖**) 추가, ②회상 절차 2에 `Grep` 루트 한정(`_archive\` 기본 제외)·"지금/다음 작업"은 project_active 우선, ③하한선을 고정 `20260624` → **루트 최고참 인덱스(롤링)**로. 과거 아카이브는 명시적 요청 시만 descend.
+- **배경(비레포 — 이 커밋 범위 아님)** — `E:\claude_memory\`에서 `project_active.md` 신설, 완료+stale pending 4개·6월 인덱스 7개를 `_archive\`로 이동, SessionStart 훅 `C:\Users\rho\.claude\hooks\memory-map.ps1`을 project_active+최신 인덱스 이중 파싱으로 재작성(PS5.1 UTF-8 BOM 누락으로 헤더가 깨지던 것도 수정). 이 훅·메모리 파일들은 auto_agent 밖이라 커밋 대상이 아니다.
+- **문서** — README 버전 표·상단 요약(memory-recaller v1.3). **배포** — `sync.ps1`. 원격 push 미실행(명시 요청 시).
+
+---
+
 ## 1.61 (2026-07-12) — 1.60 검증 반영(/fable + agent-definition-reviewer 도그푸딩): 경계 대칭화·effort 오기 정정·생성기 브리지
 
 1.60 산출물(신규 3종 + 안전 패스)을 두 각도로 적대적 검증하고 확정 결함만 반영했다. ①`ai-workspace-architect`(/fable)로 사용자 전역 지침을, ②신설된 `agent-definition-reviewer`로 에이전트 정의 자체를 점검(도그푸딩 — 자기 정의의 effort 오기까지 스스로 적발). P1(스펙 파손) 없음, 문서 카운트(36·opus 33·xhigh 4) 정합 재확인.

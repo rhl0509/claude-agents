@@ -6,7 +6,7 @@
 - 에이전트 수: **36종** (개발 스택 리뷰·엔지니어링·문서 18종 + 메타 2종 + 콘텐츠/마케팅 6종 + 보안 심화 2종 + 게임 7종 + 인프라 1종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.9**, `code-reviewer` **v1.10**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 7종 `unity-code-reviewer` **v1.1**·`game-design-architect` **v1.2**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor` **v1.0**, 인프라 `memory-recaller` **v1.2**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.9**, `code-reviewer` **v1.10**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 7종 `unity-code-reviewer` **v1.1**·`game-design-architect` **v1.2**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 - 추론 강도(`effort`): opus 심층추론 33종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
@@ -60,7 +60,7 @@
 | 30 | `unity-perf-auditor` | `/uperf` | 게임 | 1.0 | opus | Unity 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler 해석) | Read, Grep, Glob |
 | 31 | `playtest-designer` | `/playtest` | 게임 | 1.0 | opus | 플레이테스트 프로토콜 설계(가설·참가자·지표·설문·텔레메트리) | Read, Grep, Glob |
 | 32 | `unity-build-auditor` | `/ubuild` | 게임 | 1.0 | opus | 빌드/릴리스·스토어 제출 점검(PlayerSettings·크기·서명·권한) | Read, Grep, Glob |
-| 33 | `memory-recaller` | `/recall` | 인프라 | 1.2 | haiku | 파일 기반 장기기억 회상(E:\claude_memory 인덱스·토픽) — 값싼 Haiku 회상 | Read, Grep, Glob |
+| 33 | `memory-recaller` | `/recall` | 인프라 | 1.3 | haiku | 파일 기반 장기기억 회상(E:\claude_memory 인덱스·토픽) — 값싼 Haiku 회상 | Read, Grep, Glob |
 | 34 | `refactor-strategist` | `/refactor` | 품질 | 1.0 | opus | 동작 보존 리팩터 계획·단계 설계(추출·중복·의존·seam) | Read, Grep, Glob |
 | 35 | `docs-writer` | `/docs` | 문서 | 1.1 | opus | 개발자용 기술문서(README·아키텍처·온보딩·ADR) 작성·정비 | Read, Grep, Glob |
 | 36 | `agent-definition-reviewer` | `/agentdef` | 메타 | 1.1 | opus | 서브에이전트 정의(.md) 스펙·라우팅·경계·규범 점검 | Read, Grep, Glob |
