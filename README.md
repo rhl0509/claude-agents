@@ -3,16 +3,16 @@
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
 코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터).
 
-- 에이전트 수: **33종** (개발 스택 리뷰 16종 + 메타 1종 + 콘텐츠/마케팅 6종 + 보안 심화 2종 + 게임 7종 + 인프라 1종)
+- 에이전트 수: **36종** (개발 스택 리뷰·엔지니어링·문서 18종 + 메타 2종 + 콘텐츠/마케팅 6종 + 보안 심화 2종 + 게임 7종 + 인프라 1종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.9**, `code-reviewer` **v1.9**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 신규 메타 에이전트 `ai-workspace-architect` **v1.2**, 콘텐츠 6종 `copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 7종 `unity-code-reviewer` **v1.1**·`game-design-architect` **v1.2**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor` **v1.0**, 인프라 `memory-recaller` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
-- 추론 강도(`effort`): opus 심층추론 30종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.9**, `code-reviewer` **v1.9**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `ui-ux-reviewer`·`api-doc-writer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.2**·`agent-definition-reviewer` **v1.0**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 7종 `unity-code-reviewer` **v1.1**·`game-design-architect` **v1.2**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor` **v1.0**, 인프라 `memory-recaller` **v1.2**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 추론 강도(`effort`): opus 심층추론 33종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
 
 ## 목차
-- [에이전트 33종](#에이전트-33종)
+- [에이전트 36종](#에이전트-36종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -24,7 +24,7 @@
 
 ---
 
-## 에이전트 33종
+## 에이전트 36종
 
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|---|
@@ -60,7 +60,10 @@
 | 30 | `unity-perf-auditor` | `/uperf` | 게임 | 1.0 | opus | Unity 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler 해석) | Read, Grep, Glob |
 | 31 | `playtest-designer` | `/playtest` | 게임 | 1.0 | opus | 플레이테스트 프로토콜 설계(가설·참가자·지표·설문·텔레메트리) | Read, Grep, Glob |
 | 32 | `unity-build-auditor` | `/ubuild` | 게임 | 1.0 | opus | 빌드/릴리스·스토어 제출 점검(PlayerSettings·크기·서명·권한) | Read, Grep, Glob |
-| 33 | `memory-recaller` | `/recall` | 인프라 | 1.1 | haiku | 파일 기반 장기기억 회상(E:\claude_memory 인덱스·토픽) — 값싼 Haiku 회상 | Read, Grep, Glob |
+| 33 | `memory-recaller` | `/recall` | 인프라 | 1.2 | haiku | 파일 기반 장기기억 회상(E:\claude_memory 인덱스·토픽) — 값싼 Haiku 회상 | Read, Grep, Glob |
+| 34 | `refactor-strategist` | `/refactor` | 품질 | 1.0 | opus | 동작 보존 리팩터 계획·단계 설계(추출·중복·의존·seam) | Read, Grep, Glob |
+| 35 | `docs-writer` | `/docs` | 문서 | 1.0 | opus | 개발자용 기술문서(README·아키텍처·온보딩·ADR) 작성·정비 | Read, Grep, Glob |
+| 36 | `agent-definition-reviewer` | `/agentdef` | 메타 | 1.0 | opus | 서브에이전트 정의(.md) 스펙·라우팅·경계·규범 점검 | Read, Grep, Glob |
 
 ### 🔍 품질 / QA
 
@@ -425,6 +428,36 @@
 - **원칙**: 읽기 전용 — 메모리를 쓰거나 고치지 않음(저장·수정은 메인 세션이 담당)
 </details>
 
+### 🛠 엔지니어링 / 문서 / 메타 (1.60 추가)
+
+<details>
+<summary><b>34. refactor-strategist</b> (<code>/refactor</code>) — 동작 보존 리팩터 계획·단계 설계 (품질)</summary>
+
+- **언제**: "이거 정리하고 싶다", 큰 변경 전 구조 정돈 (기능 변경 없이 구조만)
+- **진단**: 책임 분리(과대 함수·God object), 중복·네이밍·매직 넘버, 의존 구조(순환·잘못된 방향), 데드코드·미사용, 변경 seam(특성화 테스트 경계)
+- **원칙**: 동작 보존 최우선(관찰 가능한 동작 불변), 작고 되돌릴 수 있는 단계(추출→이동→개명→정리)로 쪼개고 각 단계 검증 지점 명시, 동작 바뀌는 개선(버그·기능)은 리팩터와 분리
+- **출력**: 요약 → 리팩터 후보(영향도순·`파일:줄`·목표 구조·왜 안전한가) → 이행 단계(+검증 지점) → 분리 항목 → Top 3
+- **구분**: 버그·정확성 리뷰는 `code-reviewer`, 신규 아키텍처 설계는 `system-architect`, 커버리지 보강은 `test-strategy`
+</details>
+
+<details>
+<summary><b>35. docs-writer</b> (<code>/docs</code>) — 개발자용 기술문서 작성·정비 (문서)</summary>
+
+- **언제**: README·아키텍처 개요·온보딩·CONTRIBUTING·ADR을 코드·구조에서 추출해 정리
+- **원칙**: 코드가 진실원천(확인한 것만, 미확인은 `확인 필요`), 독자별 깊이·용어 조정, 문서 종류별 관행(README/아키텍처/온보딩/CONTRIBUTING/ADR), 드리프트 방지(바뀌어도 유효한 구조·의도 우선)
+- **출력**: 문서 계획 → 완성형 문서 초안(마크다운) → 확인 필요 목록
+- **구분**: FastAPI 엔드포인트 카탈로그는 `api-doc-writer`, 디자인 시스템 문서(DESIGN.md)는 `design-system-architect`, 마케팅·강의 콘텐츠는 `content-repurposer`·`copy-reviewer`
+</details>
+
+<details>
+<summary><b>36. agent-definition-reviewer</b> (<code>/agentdef</code>) — 서브에이전트 정의(.md) 점검 (메타)</summary>
+
+- **언제**: 새 에이전트를 추가하거나 기존 정의를 개정하기 전 (이 라이브러리 자체를 점검)
+- **점검**: frontmatter 스펙 정합(name/description/tools/model/effort 티어), description 라우팅 친화성(트리거·위임 절), tools 최소권한(과대·과소), 경계 중복·공백, 본문 규범 누락(인젝션 방어·읽기전용·증거 기반 보고), 배포 정합(hooks·memory·skills 조합·sync allowlist)
+- **출력**: 요약 → [P1/P2/P3] 발견(`파일:줄`·근거·권장) → 경계 지도 → 개정 초안 → Top 3
+- **구분**: 사용자의 범용 AI 작업환경·마케팅 프롬프트 시스템 설계는 `ai-workspace-architect`(이 에이전트는 이 라이브러리 내부 정의만), 개발 코드 품질은 `code-reviewer`
+</details>
+
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
 양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 아래는 33개 description을 **전수 스캔해 재구성한 34쌍 전량**이며 클러스터별로 나눈다(2026-07 재검증, 1.56).
@@ -536,11 +569,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 33개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 36개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 33개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 33개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 36개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 36개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -609,6 +642,9 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/playtest` | playtest-designer | 검증 질문·빌드 범위(선택) |
 | `/ubuild` | unity-build-auditor | ProjectSettings·플랫폼(선택) |
 | `/recall` | memory-recaller | 회상할 주제/질문(선택) |
+| `/refactor` | refactor-strategist | 경로/대상(선택) |
+| `/docs` | docs-writer | 문서 종류/대상(선택) |
+| `/agentdef` | agent-definition-reviewer | 에이전트 파일/이름(선택) |
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
 > `/recall`은 메모리 회상 훅으로 자동 호출되기도 하지만, 수동으로 직접 부를 수도 있습니다.
@@ -648,7 +684,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 3. `CHANGELOG.md`에 변경 기록
 4. **`README.md`의 버전 표 갱신** (버전업 시)
 5. `sync.ps1`으로 전역(`~/.claude/agents/`·`~/.claude/commands/`·`~/.claude/launchers/`)에 반영
-6. `git commit` + `git push`
+6. `git commit` (원격 `git push`는 **명시 요청 시에만** — public repo에서 push는 곧 공개 게시)
 
 ---
 
@@ -658,13 +694,13 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
-├─ AGENTS.md                     # 33개 에이전트 통합 정리
+├─ AGENTS.md                     # 36개 에이전트 통합 정리
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
 ├─ .gitignore
 │
-├─ commands/                     # ── 슬래시 명령 정의 (33개) ──
+├─ commands/                     # ── 슬래시 명령 정의 (36개) ──
 │  ├─ review.md  ├─ sec.md       ├─ test.md      ├─ coverage.md
 │  ├─ perf.md    ├─ contract.md  ├─ apidoc.md    ├─ db.md
 │  ├─ migrate.md ├─ ui.md        ├─ dsystem.md   ├─ datamodel.md
@@ -673,12 +709,13 @@ claude-agents/
 │  ├─ factcheck.md  ├─ repurpose.md   ├─ voice.md
 │  ├─ threat.md   ├─ aisec.md    ├─ ureview.md   ├─ gdd.md
 │  ├─ gui.md      ├─ feel.md     ├─ uperf.md     ├─ playtest.md
-│  ├─ ubuild.md   └─ recall.md
+│  ├─ ubuild.md   ├─ recall.md   ├─ refactor.md  ├─ docs.md
+│  └─ agentdef.md
 │
 ├─ launchers/                    # ── 바탕화면 런처 ──
 │  └─ claude.bat
 │
-├─ code-reviewer.md              # ── 에이전트 정의 (33개) ──
+├─ code-reviewer.md              # ── 에이전트 정의 (36개) ──
 ├─ security-reviewer.md
 ├─ test-runner.md
 ├─ test-strategy.md
@@ -710,7 +747,10 @@ claude-agents/
 ├─ unity-perf-auditor.md
 ├─ playtest-designer.md
 ├─ unity-build-auditor.md
-└─ memory-recaller.md            # 인프라(개인 메모리 회상, haiku)
+├─ memory-recaller.md            # 인프라(개인 메모리 회상, haiku)
+├─ refactor-strategist.md        # 품질(동작 보존 리팩터 계획)
+├─ docs-writer.md                # 문서(개발자용 기술문서)
+└─ agent-definition-reviewer.md  # 메타(에이전트 정의 점검)
 ```
 
 ---

@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (33종)
+# 서브에이전트 전체 정리 (36종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다. 2종(`threat-modeler`·`llm-ai-security-reviewer`)은 **설계 단계 위협 모델링·AI/LLM 보안 심화**를 담당한다(품질 카테고리, `security-reviewer`와 보안 방어 클러스터 형성). 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)은 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트다(🎮 게임 클러스터, 색상 `cyan` 공유). 마지막 1종(`memory-recaller` · `/recall`)은 리뷰/설계가 아니라 **사용자 개인의 파일 기반 장기기억(`E:\claude_memory\`)을 값싼 `haiku`로 대신 회상**하는 인프라 에이전트다(🧠 인프라, 저장소 첫 haiku·메모리 훅 자동 호출 + `/recall` 수동 호출·읽기 전용).
+> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다. 2종(`threat-modeler`·`llm-ai-security-reviewer`)은 **설계 단계 위협 모델링·AI/LLM 보안 심화**를 담당한다(품질 카테고리, `security-reviewer`와 보안 방어 클러스터 형성). 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)은 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트다(🎮 게임 클러스터, 색상 `cyan` 공유). 1종(`memory-recaller` · `/recall`)은 리뷰/설계가 아니라 **사용자 개인의 파일 기반 장기기억(`E:\claude_memory\`)을 값싼 `haiku`로 대신 회상**하는 인프라 에이전트다(🧠 인프라, 저장소 첫 haiku·메모리 훅 자동 호출 + `/recall` 수동 호출·읽기 전용). 마지막으로 2026-07 추가된 3종은 엔지니어링 `refactor-strategist`(`/refactor`, 동작 보존 리팩터 계획·단계 설계), 문서 `docs-writer`(`/docs`, 개발자용 README·아키텍처·온보딩·ADR), 메타 `agent-definition-reviewer`(`/agentdef`, 이 라이브러리의 에이전트 정의 자체의 스펙·경계·규범 점검)로, 각각 품질·문서·메타 클러스터에 편입된다.
 
 ## 공통 규칙
 - 발견/제안은 **영향도(심각도) 순으로 정렬**
@@ -58,6 +58,9 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 31 | `playtest-designer` | `/playtest` | 게임 | 플레이테스트 프로토콜 설계(가설·참가자·지표·설문·텔레메트리) | Read, Grep, Glob |
 | 32 | `unity-build-auditor` | `/ubuild` | 게임 | 빌드/릴리스·스토어 제출 점검(PlayerSettings·크기·서명·권한) | Read, Grep, Glob |
 | 33 | `memory-recaller` | `/recall` | 인프라 | 파일 기반 장기기억 회상(E:\claude_memory 인덱스·토픽, haiku) | Read, Grep, Glob |
+| 34 | `refactor-strategist` | `/refactor` | 품질 | 동작 보존 리팩터 계획·단계 설계(추출·중복·의존·seam) | Read, Grep, Glob |
+| 35 | `docs-writer` | `/docs` | 문서 | 개발자용 기술문서(README·아키텍처·온보딩·ADR) 작성·정비 | Read, Grep, Glob |
+| 36 | `agent-definition-reviewer` | `/agentdef` | 메타 | 서브에이전트 정의(.md) 스펙·라우팅·경계·규범 점검 | Read, Grep, Glob |
 
 ---
 
@@ -207,6 +210,20 @@ Unity 게임 런타임 성능·렌더링 감사(모바일 2D 타깃). 드로우�
 **32. unity-build-auditor (`/ubuild`)**
 Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Player Settings(번들 ID·버전·IL2CPP/ARM64·managed stripping), 빌드 크기(Resources 남용·압축 용량·AAB), 빌드 씬 목록, 매니페스트 권한, 스토어 요건(64bit·개인정보), 서명/keystore 커밋 여부, development build 플래그 잔존, Addressables. 파일 판정은 확정, 스토어 정책 수치는 변동이 커 확인 목록(⚠️)으로 분리(웹 검색 도구 없음). 출력: 요약 → 제출 차단·보안 Must → Should → Nit → 스토어 정책 확인 목록 → 위임 → Top 3.
 → 일반 CI/CD·시크릿 보관·파이프라인은 `devops-reviewer`(이 에이전트는 keystore 커밋·존재 판정까지), 코드는 `unity-code-reviewer`, 런타임 성능은 `unity-perf-auditor`.
+
+### 🛠 엔지니어링 / 문서 / 메타 (1.60 추가)
+
+**34. refactor-strategist (`/refactor`)** — 품질
+기능 변경 없이 코드 구조를 개선하는 계획 설계. 책임 분리(과대 함수·God object), 중복·네이밍·매직 넘버, 의존 구조(순환·잘못된 방향), 데드코드·미사용, 변경 seam(특성화 테스트 경계)을 진단하고, 동작 보존을 최우선으로 작고 되돌릴 수 있는 이행 단계(추출→이동→개명→정리)와 각 단계 검증 지점을 낸다. 동작 바뀌는 개선(버그·기능)은 리팩터와 분리. 출력: 요약 → 리팩터 후보(영향도순) → 이행 단계(+검증) → 분리 항목 → Top 3.
+→ 버그·정확성 리뷰는 `code-reviewer`, 신규 아키텍처 설계는 `system-architect`, 커버리지 보강은 `test-strategy`.
+
+**35. docs-writer (`/docs`)** — 문서
+코드·구조에서 사실을 추출해 개발자용 기술문서(README·아키텍처 개요·온보딩·CONTRIBUTING·ADR)를 작성·정비. 코드가 진실원천(미확인은 `확인 필요`), 독자별 깊이 조정, 문서 종류별 관행 준수, 드리프트 방지(바뀌어도 유효한 구조·의도 우선). 출력: 문서 계획 → 완성형 문서 초안 → 확인 필요 목록.
+→ FastAPI 엔드포인트 카탈로그는 `api-doc-writer`, 디자인 시스템 문서(DESIGN.md)는 `design-system-architect`, 마케팅·강의 콘텐츠는 `content-repurposer`·`copy-reviewer`.
+
+**36. agent-definition-reviewer (`/agentdef`)** — 메타
+이 라이브러리의 서브에이전트 정의(.md) 자체를 점검. frontmatter 스펙 정합(name/description/tools/model/effort 티어), description 라우팅 친화성(트리거·위임 절), tools 최소권한(과대·과소), 에이전트 간 경계 중복·공백, 본문 규범 누락(인젝션 방어·읽기전용·증거 기반 보고), 배포 정합(hooks·memory·skills 조합·sync allowlist). 새 에이전트 추가·정의 개정 전 점검. 출력: 요약 → [P1/P2/P3] 발견 → 경계 지도 → 개정 초안 → Top 3.
+→ 사용자의 범용 AI 작업환경·마케팅 프롬프트 시스템 설계는 `ai-workspace-architect`(이 에이전트는 라이브러리 내부 정의만), 개발 코드 품질은 `code-reviewer`.
 
 ---
 
