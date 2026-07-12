@@ -10,6 +10,22 @@
 
 ---
 
+## 1.61 (2026-07-12) — 1.60 검증 반영(/fable + agent-definition-reviewer 도그푸딩): 경계 대칭화·effort 오기 정정·생성기 브리지
+
+1.60 산출물(신규 3종 + 안전 패스)을 두 각도로 적대적 검증하고 확정 결함만 반영했다. ①`ai-workspace-architect`(/fable)로 사용자 전역 지침을, ②신설된 `agent-definition-reviewer`로 에이전트 정의 자체를 점검(도그푸딩 — 자기 정의의 effort 오기까지 스스로 적발). P1(스펙 파손) 없음, 문서 카운트(36·opus 33·xhigh 4) 정합 재확인.
+
+- **code-reviewer 1.9 → 1.10** — description의 `"리팩터링 검토에 적합"` 트리거가 refactor-strategist와 동시 매치되던 충돌 해소: `"리팩터 diff의 정확성 셀프리뷰"`로 좁히고 `"동작 보존 리팩터의 구조·단계 설계는 refactor-strategist"` 역위임 추가(대칭화).
+- **agent-definition-reviewer 1.0 → 1.1** — 자체 점검항목의 effort 규칙 오기 정정: `"보안·메타=xhigh"` → `"보안 3종+ai-workspace-architect(재작성 루프)만 xhigh"`. 이 오기대로면 리뷰어가 자신(메타·high)을 규칙 위반으로 잘못 플래그하는 자기모순이었다.
+- **ai-workspace-architect 1.2 → 1.3** — `agent-definition-reviewer` 역위임 추가. "내 에이전트 정의 점검"이 프롬프트 시스템 설계 트리거로 새던 여지 차단(메타 경계 대칭).
+- **api-doc-writer 1.5 → 1.6** — `docs-writer` 역위임 추가("일반 개발문서는 docs-writer"). 문서 경계 대칭.
+- **docs-writer 1.0 → 1.1** — 생성기 산출물 정직성 브리지 문단 추가(content-repurposer와 대칭 — preload된 리뷰어 문법 "발견·심각도"를 "산출물 정직성"으로 보정).
+- **방치 판정(기능 영향 없음)** — 색상 cyan 과밀(docs-writer), copy-reviewer 인젝션 문단이 SKILL 코어와 부분 중복, memory-recaller의 SKILL memory·hooks 절 공회전(haiku라 memory·hooks 제외가 **설계 의도대로 옳음** — 수정 불요).
+- **문서** — README 버전 표·상단 요약(code 1.10·apidoc 1.6·fable 1.3·docs 1.1·agentdef 1.1), README/AGENTS 위임 footer 3쌍(code-reviewer·ai-workspace-architect·api-doc-writer).
+- **별도(비레포)** — 사용자 전역 `~/.claude/CLAUDE.md`(auto_agent 밖 파일)도 /fable 검증으로 4건 반영: §3 sync.ps1/push 과잉일반화를 레포 국한으로·private 백업 예외 복원, §7 "모든 메모리 E:"에 서브에이전트 agent-memory 예외, §5 폰트 포인터 dangling 완화, §2 삭제 전 스냅샷 재확인. 이 커밋 범위와 무관.
+- **배포** — `sync.ps1`로 5종 반영. 원격 push 미실행(명시 요청 시).
+
+---
+
 ## 1.60 (2026-07-12) — 안전·정합 패스(인젝션 방어 코어) + 신규 3종 추가(refactor-strategist·docs-writer·agent-definition-reviewer), 33종 → 36종
 
 사용자 AI 워크스페이스 전면 진단(`/fable` 2갈래 + 메인 종합)의 실행 반영. 두 축이다: ① **P1 안전 결함 봉인** — memory-recaller만 인젝션 방어 문단이 없던 갭(haiku가 임의 메모리를 메인에 중계하는 최대 위험)을, 개별 수정 + 공용 SKILL 코어 승격으로 이중 차단. ② **공백 3종 신설** — 리팩터 전담·개발자 문서·에이전트 정의 메타 리뷰어.

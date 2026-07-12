@@ -70,7 +70,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 
 **1. code-reviewer (`/review`)**
 Next.js + FastAPI 코드의 품질·가독성·버그 가능성 리뷰. `git diff`로 변경분을 파악해 그 범위에 집중(커밋/PR 전 셀프 리뷰). 백엔드(Pydantic·async·DB 세션·예외·계층 분리), 프론트(서버/클라 경계·페칭·useEffect·타입). Next.js 15/16이면 Server Actions 보안·`use cache` 오캐시·React Compiler 중복 수동 메모도 점검(버전 불명확하면 "확인 필요"). 출력: 요약 → Must fix → Should fix → Nit.
-→ 보안 전용은 `security-reviewer`, 시각·접근성·UX는 `ui-ux-reviewer`, 프론트-백 API 계약 정합은 `api-contract-reviewer`, 로깅·관측성은 `observability-reviewer`.
+→ 보안 전용은 `security-reviewer`, 시각·접근성·UX는 `ui-ux-reviewer`, 프론트-백 API 계약 정합은 `api-contract-reviewer`, 로깅·관측성은 `observability-reviewer`, 동작 보존 리팩터 계획은 `refactor-strategist`.
 
 **2. security-reviewer (`/sec`)**
 OWASP 기준 보안 점검. 인증/인가(라우터 레벨 의존성까지 확인해 오탐 방지), IDOR/BOLA·BFLA, Next.js 미들웨어 인가 우회(CVE-2025-29927), RBAC, 경로 탐색, JWT(alg confusion·헤더 주입), 인젝션(SQL·SSTI·OS/NoSQL), XSS, 과잉 응답(API3), CSRF/SSRF, Mass Assignment, CORS, LLM 보안(OWASP LLM Top 10 2025: 프롬프트 인젝션·과도한 행위성·벡터/임베딩 약점 등). 출력: 심각도순 + "즉시 고쳐야 할 Top 3".
@@ -96,7 +96,7 @@ Next.js 프론트와 FastAPI 백엔드의 **API 계약 정합성** 점검(프론
 
 **7. api-doc-writer (`/apidoc`)**
 FastAPI 엔드포인트를 빠짐없이 카탈로그화. 라우터/WebSocket 데코레이터 수집, 다단계 prefix 합성, 라우터 레벨 의존성까지 본 인증 판정, `tags`/`response_model`/`deprecated` 반영. `Annotated[User, Depends(...)]`·`Annotated[..., Query()/Header()]`(0.95.0+ 권장) 양식을 구식 기본값 문법과 동등 인식. prefix 불확실 시 OpenAPI 3.1 `/openapi.json` 교차 점검 제안("확인 필요"). 출력: 리소스/태그별 표 + 미인증·무응답모델·deprecated 목록.
-→ 프론트-백 계약 정합 검증은 `api-contract-reviewer`.
+→ 프론트-백 계약 정합 검증은 `api-contract-reviewer`, 일반 개발문서(README·아키텍처·온보딩·ADR)는 `docs-writer`.
 
 **8. db-optimizer (`/db`)**
 MySQL 쿼리·인덱스·스키마 **성능 튜닝**. N+1, 인덱스 설계, SELECT * / 함수 래핑 / OFFSET 페이지네이션, 타입 적정성, 트랜잭션·락, 커넥션 풀, 벡터 검색(MySQL 9 `VECTOR` k-NN·사전필터, 거리 함수·인덱스 지원은 엔진별 확인). `EXPLAIN`/`EXPLAIN ANALYZE`는 명시 요청 시만 실행. 출력: 영향도별 문제 + "가장 효과 큰 개선 3가지".
@@ -143,7 +143,7 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 
 **17. ai-workspace-architect (`/fable`)**
 프롬프트·지침·`CLAUDE.md`·`SKILL.md`·커스텀 인스트럭션·반복 업무 규칙을 진단·재설계하는 **메타 에이전트**. 다른 16종과 달리 특정 개발 스택이 아니라 AI 작업환경 자체를 다루며, 마케팅·콘텐츠 제작(릴스·카드뉴스·블로그·상세페이지·강의자료) 결과물 품질을 시스템화. 여러 모델(Claude/GPT/Gemini/Cursor)에서 일관되게 작동하는 범용 AI 운영체제 설계 — 바로 붙여넣을 커스텀 인스트럭션·CLAUDE.md·SKILL.md 초안 + 모델별 전략. 실행 모델과 무관하게 뼈대→초안→자가채점→재작성 품질 엔진을 강제(도장찍기 금지: 근거 인용 + 약점 1개 이상 발굴·수정). 출력: 총평 → 진단표 → 병목 5 → A·B·C·D → 운영 규칙 → 자기비판 후 최종본.
-→ 개발 스택 아키텍처는 `system-architect`, 디자인 시스템은 `design-system-architect`.
+→ 개발 스택 아키텍처는 `system-architect`, 디자인 시스템은 `design-system-architect`, 이 라이브러리의 에이전트 정의(.md) 점검은 `agent-definition-reviewer`.
 
 ### 📣 콘텐츠 / 마케팅
 
