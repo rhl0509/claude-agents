@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (36종)
+# 서브에이전트 전체 정리 (37종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다. 2종(`threat-modeler`·`llm-ai-security-reviewer`)은 **설계 단계 위협 모델링·AI/LLM 보안 심화**를 담당한다(품질 카테고리, `security-reviewer`와 보안 방어 클러스터 형성). 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)은 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트다(🎮 게임 클러스터, 색상 `cyan` 공유). 1종(`memory-recaller` · `/recall`)은 리뷰/설계가 아니라 **사용자 개인의 파일 기반 장기기억(`E:\claude_memory\`)을 값싼 `haiku`로 대신 회상**하는 인프라 에이전트다(🧠 인프라, 저장소 첫 haiku·메모리 훅 자동 호출 + `/recall` 수동 호출·읽기 전용). 마지막으로 2026-07 추가된 3종은 엔지니어링 `refactor-strategist`(`/refactor`, 동작 보존 리팩터 계획·단계 설계), 문서 `docs-writer`(`/docs`, 개발자용 README·아키텍처·온보딩·ADR), 메타 `agent-definition-reviewer`(`/agentdef`, 이 라이브러리의 에이전트 정의 자체의 스펙·경계·규범 점검)로, 각각 품질·문서·메타 클러스터에 편입된다.
+> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다. 2종(`threat-modeler`·`llm-ai-security-reviewer`)은 **설계 단계 위협 모델링·AI/LLM 보안 심화**를 담당한다(품질 카테고리, `security-reviewer`와 보안 방어 클러스터 형성). 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)은 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트다(🎮 게임 클러스터, 색상 `cyan` 공유). 1종(`memory-recaller` · `/recall`)은 리뷰/설계가 아니라 **사용자 개인의 파일 기반 장기기억(`E:\claude_memory\`)을 값싼 `haiku`로 대신 회상**하는 인프라 에이전트다(🧠 인프라, 저장소 첫 haiku·메모리 훅 자동 호출 + `/recall` 수동 호출·읽기 전용). 마지막으로 2026-07 추가된 3종은 엔지니어링 `refactor-strategist`(`/refactor`, 동작 보존 리팩터 계획·단계 설계), 문서 `docs-writer`(`/docs`, 개발자용 README·아키텍처·온보딩·ADR), 메타 `agent-definition-reviewer`(`/agentdef`, 이 라이브러리의 에이전트 정의 자체의 스펙·경계·규범 점검)로, 각각 품질·문서·메타 클러스터에 편입된다. 그리고 1종(`storyteller` · `/story`)은 프롬프트(뼈대)에 살을 붙여 **없던 이야기를 새로 짓는** 창작 생성 에이전트로, 저장소 첫 `fable`(창작 특화 모델) 에이전트다(✍️ 창작 클러스터, 기존 자산 재활용인 `content-repurposer`와 구분).
 
 ## 공통 규칙
 - 발견/제안은 **영향도(심각도) 순으로 정렬**
@@ -61,6 +61,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 34 | `refactor-strategist` | `/refactor` | 품질 | 동작 보존 리팩터 계획·단계 설계(추출·중복·의존·seam) | Read, Grep, Glob |
 | 35 | `docs-writer` | `/docs` | 문서 | 개발자용 기술문서(README·아키텍처·온보딩·ADR) 작성·정비 | Read, Grep, Glob |
 | 36 | `agent-definition-reviewer` | `/agentdef` | 메타 | 서브에이전트 정의(.md) 스펙·라우팅·경계·규범 점검 | Read, Grep, Glob |
+| 37 | `storyteller` | `/story` | 창작 | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성(fable) | Read, Grep, Glob |
 
 ---
 
@@ -225,6 +226,12 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 이 라이브러리의 서브에이전트 정의(.md) 자체를 점검. frontmatter 스펙 정합(name/description/tools/model/effort 티어), description 라우팅 친화성(트리거·위임 절), tools 최소권한(과대·과소), 에이전트 간 경계 중복·공백, 본문 규범 누락(인젝션 방어·읽기전용·증거 기반 보고), 배포 정합(hooks·memory·skills 조합·sync allowlist). 새 에이전트 추가·정의 개정 전 점검. 출력: 요약 → [P1/P2/P3] 발견 → 경계 지도 → 개정 초안 → Top 3.
 → 사용자의 범용 AI 작업환경·마케팅 프롬프트 시스템 설계는 `ai-workspace-architect`(이 에이전트는 라이브러리 내부 정의만), 개발 코드 품질은 `code-reviewer`.
 
+### ✍️ 창작 (스토리텔링)
+
+**37. storyteller (`/story`)** — 창작
+프롬프트(뼈대: 한 줄 아이디어·설정·인물·장르·분량)에 살을 붙여 완성형 이야기(단편·서사·시나리오·브랜드 스토리·에피소드)를 짓는다. 저장소 첫 `fable`(창작 특화 모델, +`effort: high`) 에이전트. 작법: ① 뼈대 확정(로그라인·인물 욕망/결핍·갈등·판돈·구조) → ② 살(show-don't-tell·감각 디테일·서브텍스트 대사·시점 일관성·페이싱) → ③ 자가 점검 후 약한 구간 재작성. 표절 금지·사용자 핵심 설정/결말 보존·채운 가정 명시, 유해 실행 지침·미성년 성적 묘사·실존 인물 명예훼손 거부. 출력: 로그라인 → 뼈대 요약 → 이야기 본문(제목) → 채운 가정 & 확장 포인트.
+→ 기존 자산을 매체별로 파생하는 것은 `content-repurposer`, 카피 품질은 `copy-reviewer`, 확정 보이스 준수는 `brand-voice-guardian`, 프롬프트·지침 시스템 설계는 `ai-workspace-architect`.
+
 ---
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
@@ -298,6 +305,7 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 | ai-workspace-architect → system-architect / design-system-architect | 메타가 스택 설계를 넘길 뿐, 설계 에이전트는 메타를 역참조 안 함 |
 | copy-reviewer → ai-workspace-architect | 보이스·프롬프트 시스템 설계로 넘기는 상향 포인터 |
 | content-repurposer → copy-reviewer / seo-optimizer / fact-checker | 재활용 초안을 각 점검 에이전트로(점검 측은 생성기를 역참조 안 함) |
+| storyteller → content-repurposer / copy-reviewer / brand-voice-guardian | 새로 지은 이야기를 매체 파생·카피·보이스로(점검·재활용 측은 창작 생성기를 역참조 안 함) |
 | fact-checker → copy-reviewer / seo-optimizer / landing-reviewer | 사실 검증 후 문장·전환·검색은 각 특화로 |
 | brand-voice-guardian → copy-reviewer / ai-workspace-architect | 일반 카피는 copy, 보이스 정의·시스템은 메타로 |
 | threat-modeler → system-architect | 위협 모델이 구조 설계로 넘김 |

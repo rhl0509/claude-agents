@@ -10,6 +10,19 @@
 
 ---
 
+## 1.63 (2026-07-12) — 신규 창작 에이전트 storyteller 추가 (36종 → 37종, 저장소 첫 `fable`)
+
+프롬프트(뼈대)에 살을 붙여 **없던 이야기를 새로 짓는** 창작 생성 에이전트를 신설했다. 기존 `content-repurposer`가 *있는 소스*를 매체별로 각색하는 것과 달리, storyteller는 한 줄 아이디어·설정·인물에서 완성형 서사(단편·시나리오·브랜드 스토리)를 창작한다. 저장소에서 처음으로 창작 특화 모델 `fable`을 쓰는 에이전트다.
+
+- **storyteller** (`/story`) v1.0 신설 — 창작(color `green`), **model `fable`**(미가용 시 최강 모델 폴백) + `effort: high`, 읽기전용(`Read, Grep, Glob`) + `agent-guard.ps1` + `memory: user` + `agent-conventions`. 작법: ① 뼈대 확정(로그라인·인물 욕망/결핍·갈등·판돈·구조) → ② 살(show-don't-tell·감각 디테일·서브텍스트 대사·시점 일관성·페이싱) → ③ 자가 점검(전제 관통·동기 가시성·상투구·시점 흔들림) 후 약한 구간 재작성. 산출물 정직성: 표절 금지(오마주/패러디 한정)·사용자 핵심 설정/결말 보존·채운 가정 명시, 유해 실행 지침·미성년 성적 묘사·실존 인물 명예훼손 거부. 파일 미생성·이야기 본문(텍스트)만 출력.
+- **모델 티어 확장** — 기존 opus 33 / sonnet 2(api-doc-writer·test-runner) / haiku 1(memory-recaller)에 **fable 1(storyteller)** 추가. `effort`는 opus 심층추론 집합과 동일 논리로 `high`(창작 품질 플로어).
+- **위임 경계** — 생성기 단방향 관례를 따른다: storyteller → content-repurposer(매체 파생)·copy-reviewer(카피)·brand-voice-guardian(보이스)·ai-workspace-architect(프롬프트 시스템). 점검·재활용 측은 창작 생성기를 역참조하지 않음(content-repurposer 전례와 대칭).
+- **커맨드** — `commands/story.md` 신설(36 → 37).
+- **문서** — `README.md`(에이전트 수 36→37·상단 버전 요약·목차 앵커·표 37행·✍️ 창작 섹션 상세 블록·일방향 위임 1행·슬래시 표·설치 문구 36→37·저장소 트리), `AGENTS.md`(제목 36→37·소개·표 37행·✍️ 창작 상세·일방향 위임 1행), `CLAUDE.md`(예외 문단·에이전트 표 1행·모델 티어 fable·effort 문단).
+- **배포** — `sync.ps1`로 37종·37커맨드 반영. **원격 push는 사용자 명시 요청으로 실행**(이 커밋 한정).
+
+---
+
 ## 1.62 (2026-07-12) — memory-recaller: project_active·_archive 인지 + 롤링 하한선 (메모리 운영 정비 배선)
 
 사용자 파일 기반 메모리 체계 재편(Phase 4)에 맞춰 recaller를 배선했다. 날짜 인덱스가 "진행 중/다음"을 매일 이월 복붙하던 중복을 `project_active.md`(활성 작업 단일 소스)로 옮기고, 완료·오래된 메모리를 `_archive\`로 분리한 구조를 recaller가 알도록 반영.
