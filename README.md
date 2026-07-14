@@ -688,6 +688,7 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/agentdef` | agent-definition-reviewer | 에이전트 파일/이름(선택) |
 | `/story` | storyteller | 한 줄 아이디어/설정 + 장르·분량(선택) |
 | `/debug` | debugger | 증상/에러 메시지/재현 절차 |
+| `/디버그` | debugger | 위와 동일(한글 별칭 — 비ASCII 명령어 지원은 검증 중) |
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
 > `/recall`은 메모리 회상 훅으로 자동 호출되기도 하지만, 수동으로 직접 부를 수도 있습니다.
