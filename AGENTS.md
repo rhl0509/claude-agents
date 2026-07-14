@@ -1,4 +1,4 @@
-# 서브에이전트 전체 정리 (39종)
+# 서브에이전트 전체 정리 (40종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
@@ -64,6 +64,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 37 | `storyteller` | `/story` | 창작 | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성(fable) | Read, Grep, Glob |
 | 38 | `debugger` | `/debug` | 품질 | 버그·에러·간헐 실패의 근본 원인 규명(재현·가설 검증·이분 탐색) | Read, Grep, Glob, Bash |
 | 39 | `multiplayer-rule-reviewer` | `/rule` | 게임 | 멀티플레이 룰 정합성·서버 권위 점검(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
+| 40 | `save-data-reviewer` | `/save` | 게임 | 세이브·영속 데이터 호환성(스키마 버전·마이그레이션·직렬화 리네이밍·손상 복구·클라우드 충돌) | Read, Grep, Glob |
 
 ---
 
@@ -238,7 +239,11 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 
 **39. multiplayer-rule-reviewer (`/rule`, `/룰`)** — 게임
 멀티플레이 게임의 **룰이 서버에서 실제로 강제되는가**를 점검한다(주력: MapleStory Worlds `.mlua` 소셜 추리/마피아류, 원칙은 엔진 무관). 두 전제: ①클라이언트는 적대적이다(서버가 검증 안 하면 규칙이 아니다 — UI 차단은 방어가 아님) ②판정은 상태 변화에 걸어야 한다(승패를 특정 페이즈 전환에만 걸면 다른 사망 경로에서 누락). 점검: 상태머신 정합성(페이즈×이벤트 전이표 구멍·타이머 경합·재진입, 판정 함수 호출 지점 전수 카운트), 서버 권위(`@ExecSpace("Server")` = 클라 호출 가능 진입점의 호출자 신원·자격·생존·페이즈·대상 유효성·중복 제출 검증), 은닉 정보 누출(`@Sync`·브로드캐스트로 마피아 정체·밤 행동·투표 집계 유출 — 클라 UI로만 가리면 결함), 로스터 생애주기(이탈·재접속·호스트·최소 인원), 룰·밸런스 정합(시작부터 승리 조건이 성립하는 역할 구성, 자동 지목의 아군 살해, 동점·기권), 결정성·시간. 출력: 요약 → 페이즈 전이표 → 서버 진입점 검증 표 → 심각도순 발견(악용 시나리오 포함) → 경계 케이스 체크리스트 → 확인 필요 → Top 3.
-→ "무엇을 만들지"(코어 루프·재미·난이도)는 `game-design-architect`, Unity C# 엔진 코드는 `unity-code-reviewer`, 이미 난 증상의 원인 규명은 `debugger`(이쪽은 증상 없는 선제 점검), 웹 앱 인증·인가·주입은 `security-reviewer`.
+→ "무엇을 만들지"(코어 루프·재미·난이도)는 `game-design-architect`, Unity C# 엔진 코드는 `unity-code-reviewer`, 이미 난 증상의 원인 규명은 `debugger`(이쪽은 증상 없는 선제 점검), 세이브 스키마 진화·손상 복구는 `save-data-reviewer`, 웹 앱 인증·인가·주입은 `security-reviewer`.
+
+**40. save-data-reviewer (`/save`, `/세이브`)** — 게임
+**이 업데이트를 내보내면 이미 플레이 중인 유저의 진행도가 살아남는가**만 본다(엔진 무관 — Unity PlayerPrefs/JSON/바이너리, MSW 스토리지, 클라우드 세이브). 점검: 스키마 버전 필드와 v1→v2→v3 **순차** 마이그레이션(버전 건너뛴 유저가 가장 흔하다), 직렬화 필드 리네이밍(별칭 없이 바꾸면 값이 조용히 기본값으로 리셋)·enum 중간 삽입(저장된 정수가 다른 의미로 해석)·타입 변경, 손상·변조 세이브의 우아한 거부·백업 복구(시작 즉시 크래시 = 게임 못 켬), 저장의 원자성(임시 파일 → 교체)과 실패의 조용한 무시·마이그레이션 직전 백업, 삭제된 콘텐츠 ID를 참조하는 고아 데이터(인덱스 저장 vs 안정적 ID), 매체별 함정(PlayerPrefs 남용·플랫폼 쿼터·클라우드 충돌 해소 규칙). 출력: 요약(살아남는가) → 데이터 손실 위험(손실 시나리오) → 호환성 리스크 → 스키마 변경 목록 → 마이그레이션 설계 → 구버전 세이브 회귀 시나리오 → Top 3.
+→ 서버 DB(MySQL·Alembic) 마이그레이션은 `migration-reviewer`, 재화 지급의 서버 권위·멱등성은 `multiplayer-rule-reviewer`, 데이터 구조 설계는 `game-design-architect`·`data-modeler`.
 
 ### 🐞 디버깅 (품질)
 
@@ -297,6 +302,8 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 | game-design-architect ↔ multiplayer-rule-reviewer | 룰을 "설계" ↔ 그 룰이 서버에서 "강제되는지" 검증 |
 | unity-code-reviewer ↔ multiplayer-rule-reviewer | Unity C# "엔진 코드" ↔ 엔진 무관 "룰·서버 권위"(MSW mlua) |
 | debugger ↔ multiplayer-rule-reviewer | 이미 난 증상 "원인 규명" ↔ 증상 없이 룰·권위 "선제 점검" |
+| save-data-reviewer ↔ migration-reviewer | 클라이언트·게임 "세이브" ↔ 서버 DB "마이그레이션" |
+| save-data-reviewer ↔ multiplayer-rule-reviewer | 데이터가 "살아남는가" ↔ 값을 "누가 정하는가" |
 | game-design-architect ↔ playtest-designer | "무엇을 검증할지"(재미 가설) ↔ "어떻게 검증할지"(프로토콜) |
 | game-feel-reviewer ↔ game-ui-reviewer | 게임플레이 동작 피드백 ↔ UI 조작 피드백 |
 | game-feel-reviewer ↔ playtest-designer | 손맛 장치·프로토타입 검증 항목 ↔ 검증 프로토콜 |

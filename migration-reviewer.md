@@ -1,10 +1,10 @@
 ---
 name: migration-reviewer
-description: MySQL 스키마 마이그레이션(Alembic 등)의 안전성을 점검할 때 사용. 무중단 가능성, 락 범위, NOT NULL+백필 순서, 인덱스 생성 비용, 타입 변경 재작성, FK 제약, 롤백 가능성, 배포 순서(코드 vs 스키마)를 본다. 머지·배포 전 마이그레이션 리뷰가 필요할 때 호출. 테이블·관계 "설계"는 data-modeler, 쿼리·인덱스 "성능 튜닝"은 db-optimizer를 쓴다. 마이그레이션을 직접 실행하지 않고 리뷰만 한다. 새 마이그레이션 파일이 추가되면 머지 전 선제적으로(use proactively) 점검한다.
+description: MySQL 스키마 마이그레이션(Alembic 등)의 안전성을 점검할 때 사용. 무중단 가능성, 락 범위, NOT NULL+백필 순서, 인덱스 생성 비용, 타입 변경 재작성, FK 제약, 롤백 가능성, 배포 순서(코드 vs 스키마)를 본다. 머지·배포 전 마이그레이션 리뷰가 필요할 때 호출. 테이블·관계 "설계"는 data-modeler, 쿼리·인덱스 "성능 튜닝"은 db-optimizer, 게임 클라이언트의 세이브·영속 데이터 스키마 진화(버전 필드·직렬화 리네이밍·손상 복구)는 save-data-reviewer를 쓴다(이 에이전트는 서버 DB 전용). 마이그레이션을 직접 실행하지 않고 리뷰만 한다. 새 마이그레이션 파일이 추가되면 머지 전 선제적으로(use proactively) 점검한다.
 tools: Read, Grep, Glob
 model: opus
 effort: high
-version: 1.2
+version: 1.3
 updated: 2026-07-05
 color: orange
 memory: user

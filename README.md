@@ -3,16 +3,16 @@
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
 코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터).
 
-- 에이전트 수: **39종** (개발 스택 리뷰·엔지니어링·문서 19종 + 메타 2종 + 콘텐츠/마케팅 6종 + 창작 1종 + 보안 심화 2종 + 게임 8종 + 인프라 1종)
+- 에이전트 수: **40종** (개발 스택 리뷰·엔지니어링·문서 19종 + 메타 2종 + 콘텐츠/마케팅 6종 + 창작 1종 + 보안 심화 2종 + 게임 9종 + 인프라 1종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.12**, `test-runner` **v1.10**, `code-reviewer` **v1.11**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `observability-reviewer` **v1.3**, `migration-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 8종 `unity-code-reviewer`·`game-design-architect` **v1.3**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`·`multiplayer-rule-reviewer` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
-- 추론 강도(`effort`): opus 심층추론 35종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.12**, `test-runner` **v1.10**, `code-reviewer` **v1.12**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `observability-reviewer`·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 9종 `unity-code-reviewer` **v1.4**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.2**·`game-ui-reviewer`·`unity-build-auditor`·`playtest-designer`·`multiplayer-rule-reviewer` **v1.1**·`unity-perf-auditor`·`save-data-reviewer` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 추론 강도(`effort`): opus 심층추론 36종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
 
 ## 목차
-- [에이전트 39종](#에이전트-39종)
+- [에이전트 40종](#에이전트-40종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -24,7 +24,7 @@
 
 ---
 
-## 에이전트 39종
+## 에이전트 40종
 
 **관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했고, `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록은 추가 순서대로 있음).
 
@@ -32,7 +32,7 @@
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 1 | `code-reviewer` | `/review` `/리뷰` | 1.11 | opus | 코드 품질·가독성·버그 리뷰(증상 없는 정적 탐색) | Read, Grep, Glob, Bash |
+| 1 | `code-reviewer` | `/review` `/리뷰` | 1.12 | opus | 코드 품질·가독성·버그 리뷰(증상 없는 정적 탐색 · 타 스택 폴백) | Read, Grep, Glob, Bash |
 | 3 | `test-runner` | `/test` `/테스트` | 1.10 | sonnet | 테스트 실행·실패 분석(1차 원인 분류) | Bash, Read, Grep, Glob |
 | 4 | `test-strategy` | `/coverage` `/커버리지` | 1.4 | opus | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
 | 34 | `refactor-strategist` | `/refactor` `/리팩터` | 1.0 | opus | 동작 보존 리팩터 계획·단계 설계(추출·중복·의존·seam) | Read, Grep, Glob |
@@ -51,7 +51,7 @@
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
 | 8 | `db-optimizer` | `/db` `/디비` | 1.10 | opus | MySQL 쿼리·인덱스 **성능 튜닝** | Read, Grep, Glob, Bash |
-| 9 | `migration-reviewer` | `/migrate` `/마이그레이션` | 1.2 | opus | 스키마 마이그레이션 **안전성**(락·백필·롤백) | Read, Grep, Glob |
+| 9 | `migration-reviewer` | `/migrate` `/마이그레이션` | 1.3 | opus | 스키마 마이그레이션 **안전성**(락·백필·롤백) — 서버 DB 전용 | Read, Grep, Glob |
 | 12 | `data-modeler` | `/datamodel` `/데이터모델` | 1.6 | opus | 데이터 모델/스키마 **설계**(ERD·키·제약) | Read, Grep, Glob |
 
 #### 🏗 아키텍처 · API · 문서
@@ -83,14 +83,16 @@
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 26 | `unity-code-reviewer` | `/ureview` | 1.2 | opus | Unity C# 코드 리뷰(수명주기·GC·프레임/물리) | Read, Grep, Glob, Bash |
-| 27 | `game-design-architect` | `/gdd` | 1.2 | opus | 게임 디자인·시스템 설계(코어 루프·난이도·수직 슬라이스) | Read, Grep, Glob |
-| 28 | `game-ui-reviewer` | `/gui` | 1.0 | opus | 게임 UI/UX(HUD·메뉴·스케일링·내비·가독성) | Read, Grep, Glob |
-| 29 | `game-feel-reviewer` | `/feel` | 1.1 | opus | 게임플레이 손맛/juice(입력 관대성·히트스톱·카메라) | Read, Grep, Glob |
+| 26 | `unity-code-reviewer` | `/ureview` | 1.4 | opus | Unity C# 코드 리뷰(수명주기·GC·프레임/물리 · Fast Enter Play Mode) | Read, Grep, Glob, Bash |
+| 27 | `game-design-architect` | `/gdd` | 1.4 | opus | 게임 디자인·시스템 설계(코어 루프·난이도·수직 슬라이스, 엔진 무관) | Read, Grep, Glob |
+| 28 | `game-ui-reviewer` | `/gui` | 1.1 | opus | 게임 UI/UX(HUD·스케일링·내비·가독성, UGUI/UI Toolkit 분기) | Read, Grep, Glob |
+| 29 | `game-feel-reviewer` | `/feel` | 1.2 | opus | 손맛/juice(입력 관대성·히트스톱·카메라 + 페이즈/턴 기반 피드백) | Read, Grep, Glob |
 | 30 | `unity-perf-auditor` | `/uperf` | 1.0 | opus | 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler) | Read, Grep, Glob |
-| 31 | `playtest-designer` | `/playtest` | 1.0 | opus | 플레이테스트 프로토콜 설계(가설·참가자·지표·텔레메트리) | Read, Grep, Glob |
-| 32 | `unity-build-auditor` | `/ubuild` | 1.0 | opus | 빌드/릴리스·스토어 제출 점검(PlayerSettings·서명·권한) | Read, Grep, Glob |
-| 39 | `multiplayer-rule-reviewer` | `/rule` `/룰` | 1.0 | opus | **멀티플레이 룰 정합성·서버 권위 점검**(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
+| 31 | `playtest-designer` | `/playtest` | 1.1 | opus | 플레이테스트 설계(가설·참가자·지표 + 다인 동시 세션) | Read, Grep, Glob |
+| 32 | `unity-build-auditor` | `/ubuild` | 1.1 | opus | 빌드/릴리스·스토어 제출(+ **2026 정책: API 36·16KB·연령등급**) | Read, Grep, Glob |
+| 40 | `save-data-reviewer` | `/save` `/세이브` | 1.0 | opus | 세이브·영속 데이터 호환성(스키마 버전·마이그레이션·손상 복구) | Read, Grep, Glob |
+| 39 | `multiplayer-rule-reviewer` | `/rule` `/룰` | 1.1 | opus | **멀티플레이 룰 정합성·서버 권위 점검**(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
+| 40 | `save-data-reviewer` | `/save` `/세이브` | 1.0 | opus | **세이브·영속 데이터 호환성**(스키마 버전·마이그레이션·직렬화 리네이밍·손상 복구·클라우드 충돌) | Read, Grep, Glob |
 
 #### 📣 콘텐츠 / 마케팅
 
@@ -469,7 +471,17 @@
 - **전제 2가지**: ① **클라이언트는 적대적이다** — 서버가 검증하지 않으면 존재하지 않는 규칙(UI가 막는 건 방어가 아님). ② **판정은 상태 변화에 걸어야 한다** — 승패 조건을 특정 페이즈 전환에만 걸면 다른 사망 경로에서 조용히 누락
 - **점검**: ① 상태머신 정합성(페이즈 × 이벤트 전이표의 구멍, 타이머·전원제출 경합, 재진입, **판정 함수 호출 지점을 전부 세어본다**) ② 서버 권위(MSW `@ExecSpace("Server")` = 클라 호출 가능 진입점을 열거해 호출자 신원·자격·생존·페이즈·대상 유효성·중복 제출 검증 여부를 표로) ③ 은닉 정보 누출(`@Sync`·브로드캐스트로 마피아 정체·밤 행동·투표 집계가 클라로 — **UI로만 가리면 결함**) ④ 로스터 생애주기(이탈·재접속·호스트·최소 인원) ⑤ 룰·밸런스 정합(시작부터 승리 조건이 성립하는 역할 구성, 자동 지목이 아군을 죽이는지, 동점·기권) ⑥ 결정성·시간(서버 시간 기준, 랜덤 시드 위치)
 - **출력**: 요약 → 페이즈 전이표 → 서버 진입점 검증 표(✅/❌ + `파일:줄`) → 심각도순 발견(**악용 시나리오** 포함) → 경계 케이스 체크리스트 → 확인 필요 → Top 3
-- **구분(경계)**: "무엇을 만들지"(코어 루프·재미·난이도)는 `game-design-architect`, Unity C# 엔진 코드는 `unity-code-reviewer`, **이미 난 증상**의 원인 규명은 `debugger`(이쪽은 증상 없이 선제 점검), 웹 앱 인증·인가·주입은 `security-reviewer`
+- **구분(경계)**: "무엇을 만들지"(코어 루프·재미·난이도)는 `game-design-architect`, Unity C# 엔진 코드는 `unity-code-reviewer`, **이미 난 증상**의 원인 규명은 `debugger`(이쪽은 증상 없이 선제 점검), 세이브 스키마 진화·손상 복구는 `save-data-reviewer`(이쪽은 서버 권위·멱등성), 웹 앱 인증·인가·주입은 `security-reviewer`
+</details>
+
+<details>
+<summary><b>40. save-data-reviewer</b> (<code>/save</code> <code>/세이브</code>) — 세이브·영속 데이터 호환성 점검</summary>
+
+- **언제**: 세이브 구조·저장 키·데이터 클래스를 바꾸는 변경을 배포하기 직전. "업데이트했더니 진행도가 날아갔다". 엔진 무관(Unity PlayerPrefs·JSON·바이너리, MSW 스토리지, 클라우드 세이브)
+- **하나의 질문**: 이 업데이트를 내보내면 **이미 플레이 중인 유저의 진행도가 살아남는가**. 심각도 기준도 "유저 데이터가 손실되는가"
+- **점검**: ① 스키마 버전 필드·v1→v2→v3 **순차** 마이그레이션(버전 건너뛴 유저가 가장 흔하다) ② 직렬화 필드 **리네이밍**(별칭 없이 바꾸면 값이 조용히 기본값으로 리셋)·enum 중간 삽입(저장된 정수가 다른 의미로 해석) ③ 손상·변조 세이브를 **크래시 대신 우아하게 거부**·백업 복구 ④ 저장의 **원자성**(임시 파일 → 교체 vs 원본 덮어쓰기)·실패의 조용한 무시·마이그레이션 직전 백업 ⑤ 삭제된 콘텐츠 ID를 참조하는 고아 데이터(레벨 인덱스 저장 vs 안정적 ID) ⑥ 매체별 함정(PlayerPrefs 남용·플랫폼 쿼터·클라우드 충돌 해소 규칙)
+- **출력**: 요약(살아남는가) → 데이터 손실 위험(**손실 시나리오** 포함) → 호환성 리스크 → 스키마 변경 목록 → 마이그레이션 설계 → **구버전 세이브 회귀 시나리오** → Top 3
+- **구분**: 서버 DB(MySQL·Alembic) 마이그레이션은 `migration-reviewer`(이쪽은 클라이언트·게임 세이브), 재화 지급의 서버 권위·멱등성은 `multiplayer-rule-reviewer`(이쪽은 스키마 진화·손상 복구), 데이터 구조 설계는 `game-design-architect`·`data-modeler`
 </details>
 
 ### 🧠 인프라 (개인 메모리)
@@ -597,6 +609,8 @@
 | game-design-architect ↔ multiplayer-rule-reviewer | 룰을 "설계" ↔ 그 룰이 서버에서 실제로 "강제되는지" 검증 ⟵ 1.67 |
 | unity-code-reviewer ↔ multiplayer-rule-reviewer | Unity C# "엔진 코드" ↔ 엔진 무관 "룰·서버 권위" 층(MSW mlua) ⟵ 1.67 |
 | debugger ↔ multiplayer-rule-reviewer | 이미 난 증상의 "원인 규명" ↔ 증상 없이 룰·권위 결함 "선제 점검" ⟵ 1.67 |
+| save-data-reviewer ↔ migration-reviewer | 클라이언트·게임 "세이브"(스키마 진화·손상 복구) ↔ 서버 DB "마이그레이션"(락·백필·롤백) ⟵ 1.68 |
+| save-data-reviewer ↔ multiplayer-rule-reviewer | 데이터가 "살아남는가"(스키마·손상) ↔ 값을 "누가 정하는가"(서버 권위·멱등성) ⟵ 1.68 |
 | game-design-architect ↔ playtest-designer | "무엇을 검증할지"(재미 가설) ↔ "어떻게 검증할지"(프로토콜) |
 | game-feel-reviewer ↔ game-ui-reviewer | 게임플레이 동작 피드백 ↔ UI 조작 피드백 |
 | game-feel-reviewer ↔ playtest-designer | 손맛 장치·프로토타입 검증 항목 ↔ 검증 프로토콜 |
@@ -668,11 +682,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 39개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 40개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 39개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 39개 슬래시 명령(+ 한글 별칭 21개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 40개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 40개 슬래시 명령(+ 한글 별칭 22개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -747,6 +761,7 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/story` | storyteller | 한 줄 아이디어/설정 + 장르·분량(선택) |
 | `/debug` | debugger | 증상/에러 메시지/재현 절차 |
 | `/rule` | multiplayer-rule-reviewer | 룰·상태머신·서버 핸들러 경로(선택) |
+| `/save` | save-data-reviewer | 세이브·직렬화 코드 경로(선택) |
 
 ### 한글 별칭 (1.65)
 
@@ -755,7 +770,7 @@ Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1
 | 한글 | 영어 | 한글 | 영어 |
 |---|---|---|---|
 | `/디버그` | `/debug` | `/배포` | `/devops` |
-| `/룰` | `/rule` | | |
+| `/룰` | `/rule` | `/세이브` | `/save` |
 | `/리뷰` | `/review` | `/의존성` | `/deps` |
 | `/보안` | `/sec` | `/관측성` | `/obs` |
 | `/테스트` | `/test` | `/리팩터` | `/refactor` |
@@ -875,7 +890,8 @@ claude-agents/
 ├─ agent-definition-reviewer.md  # 메타(에이전트 정의 점검)
 ├─ storyteller.md                # 창작(스토리텔링, fable)
 ├─ debugger.md                   # 품질(버그 근본 원인 규명)
-└─ multiplayer-rule-reviewer.md  # 게임(멀티플레이 룰 정합성·서버 권위, MSW mlua)
+├─ multiplayer-rule-reviewer.md  # 게임(멀티플레이 룰 정합성·서버 권위, MSW mlua)
+└─ save-data-reviewer.md         # 게임(세이브·영속 데이터 호환성)
 ```
 
 ---

@@ -4,7 +4,7 @@ description: Unity + C#로 만든 게임 코드(주로 싱글플레이어 2D 캐
 tools: Read, Grep, Glob, Bash
 model: opus
 effort: high
-version: 1.3
+version: 1.4
 updated: 2026-07-14
 color: cyan
 memory: user
@@ -30,6 +30,7 @@ hooks:
 - 호출자가 대상 파일 목록을 명시했으면 그 범위를 우선한다. `Assets/` 하위 `.cs`가 주 대상이며, `.meta`/라이브러리/패키지 캐시(`Library/`, `Temp/`, `obj/`)는 리뷰하지 않는다.
 - git 저장소가 아니거나 변경분을 확인할 수 없으면 그 사실을 알리고, 지정된 파일만 리뷰한다.
 - Unity 버전·렌더 파이프라인(Built-in/URP)·입력 시스템(구 Input Manager vs 신 Input System)이 코드에서 드러나지 않으면 단정하지 말고 "확인 필요"로 표시한다. 버전 의존적 API 판단은 추정임을 명시한다. ⚠️ 검증 필요
+- **입력 시스템 판별(v1.4)**: Input System이 **엔진 내장 모듈로 전환되는 흐름**(Unity 6.7 예정으로 조사됨 — ⚠️ 검증 필요)이라, `Packages/manifest.json`의 `com.unity.inputsystem` 유무만으로 판별하면 오판할 수 있다. 코드의 `ENABLE_INPUT_SYSTEM`/`ENABLE_LEGACY_INPUT_MANAGER` 분기와 실제 사용 API(`UnityEngine.InputSystem` vs `Input.GetKey`)를 함께 본다. 두 시스템을 섞어 쓰는 코드는 지적 대상.
 
 ## 체크포인트 (게임 엔진 고유)
 
@@ -63,6 +64,12 @@ hooks:
 ### 6. fake-null / 파괴된 오브젝트 참조
 - Unity의 `Object`는 파괴돼도 C# 참조가 살아있고 `== null` 비교가 오버로드돼 있다 — 파괴 후 접근으로 인한 예외/유령 동작을 점검한다. 캐시한 컴포넌트가 씬 전환·파괴 후 무효화되는 경로.
 - `?.`(null 조건 연산자)를 Unity `Object`에 쓰면 fake-null을 우회해 파괴된 객체를 "살아있다"고 오판할 수 있음 — 이 패턴을 지적한다.
+
+### 6-1. 도메인 리로드 없는 플레이 진입 (Fast Enter Play Mode — v1.4)
+Fast Enter Play Mode(도메인·씬 리로드 생략)가 **최근 Unity에서 기본값이 되는 흐름**이다(6.6 기준으로 조사됨 — ⚠️ 검증 필요). 이 모드에선 플레이 종료 시 도메인이 리로드되지 않아 **`static` 상태가 다음 플레이에 그대로 남는다**:
+- `static` 필드·싱글턴 인스턴스·`static` 이벤트 구독이 **재진입 시 초기화되지 않는가**. 초기화 코드가 `[RuntimeInitializeOnLoadMethod]` 없이 `static` 생성자·필드 초기자에만 있으면 두 번째 플레이부터 어긋난다.
+- `static` 이벤트에 붙인 구독이 해제되지 않으면 **플레이할 때마다 핸들러가 누적**된다(§1의 구독 해제 누락과 같은 결함이지만, **에디터에서만** 드러나는 새 경로다 — 빌드에선 안 나므로 "에디터 전용 재현"으로 표시).
+- 이 항목은 프로젝트가 Fast Enter Play Mode를 쓰는지(`ProjectSettings/EditorSettings.asset`) 확인되면 확정, 아니면 "확인 필요".
 
 ### 7. ScriptableObject / 데이터 패턴
 - 런타임에 `ScriptableObject` 인스턴스 필드를 수정하면 **에디터에서 에셋 원본이 오염**되고 플레이 종료 후에도 값이 남는다(빌드에선 리셋). 이 위험한 쓰기를 지적한다.
