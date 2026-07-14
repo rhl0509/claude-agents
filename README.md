@@ -3,16 +3,16 @@
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
 코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터).
 
-- 에이전트 수: **38종** (개발 스택 리뷰·엔지니어링·문서 19종 + 메타 2종 + 콘텐츠/마케팅 6종 + 창작 1종 + 보안 심화 2종 + 게임 7종 + 인프라 1종)
+- 에이전트 수: **39종** (개발 스택 리뷰·엔지니어링·문서 19종 + 메타 2종 + 콘텐츠/마케팅 6종 + 창작 1종 + 보안 심화 2종 + 게임 8종 + 인프라 1종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.10**, `code-reviewer` **v1.11**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `observability-reviewer` **v1.3**, `migration-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 7종 `unity-code-reviewer` **v1.2**·`game-design-architect` **v1.2**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
-- 추론 강도(`effort`): opus 심층추론 34종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.12**, `test-runner` **v1.10**, `code-reviewer` **v1.11**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `observability-reviewer` **v1.3**, `migration-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 8종 `unity-code-reviewer`·`game-design-architect` **v1.3**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`·`multiplayer-rule-reviewer` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 추론 강도(`effort`): opus 심층추론 35종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
 
 ## 목차
-- [에이전트 38종](#에이전트-38종)
+- [에이전트 39종](#에이전트-39종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -24,7 +24,7 @@
 
 ---
 
-## 에이전트 38종
+## 에이전트 39종
 
 **관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했고, `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록은 추가 순서대로 있음).
 
@@ -42,7 +42,7 @@
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 2 | `security-reviewer` | `/sec` `/보안` | 1.11 | opus | 코드 보안 취약점(OWASP) 점검 — 구현 **후** | Read, Grep, Glob, WebSearch, WebFetch |
+| 2 | `security-reviewer` | `/sec` `/보안` | 1.12 | opus | 코드 보안 취약점(OWASP) 점검 — 구현 **후** | Read, Grep, Glob, WebSearch, WebFetch |
 | 24 | `threat-modeler` | `/threat` | 1.1 | opus | 설계 단계 위협 모델링(STRIDE) — 구현 **전** | Read, Grep, Glob, WebSearch, WebFetch |
 | 25 | `llm-ai-security-reviewer` | `/aisec` | 1.1 | opus | AI/LLM 보안 심화(OWASP LLM Top 10) | Read, Grep, Glob, WebSearch, WebFetch |
 
@@ -79,7 +79,7 @@
 | 15 | `dependency-auditor` | `/deps` `/의존성` | 1.1 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
 | 16 | `observability-reviewer` | `/obs` `/관측성` | 1.3 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
 
-#### 🎮 게임 (Unity + C#, 2D 캐주얼)
+#### 🎮 게임 (Unity + C# 싱글플레이 2D 캐주얼 · MSW 멀티플레이)
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
@@ -90,6 +90,7 @@
 | 30 | `unity-perf-auditor` | `/uperf` | 1.0 | opus | 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler) | Read, Grep, Glob |
 | 31 | `playtest-designer` | `/playtest` | 1.0 | opus | 플레이테스트 프로토콜 설계(가설·참가자·지표·텔레메트리) | Read, Grep, Glob |
 | 32 | `unity-build-auditor` | `/ubuild` | 1.0 | opus | 빌드/릴리스·스토어 제출 점검(PlayerSettings·서명·권한) | Read, Grep, Glob |
+| 39 | `multiplayer-rule-reviewer` | `/rule` `/룰` | 1.0 | opus | **멀티플레이 룰 정합성·서버 권위 점검**(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
 
 #### 📣 콘텐츠 / 마케팅
 
@@ -461,6 +462,16 @@
 - **구분(경계)**: 일반 CI/CD·시크릿 보관·파이프라인은 `devops-reviewer`(이 에이전트는 keystore "커밋·존재 판정"까지), 코드는 `unity-code-reviewer`, 런타임 성능은 `unity-perf-auditor`
 </details>
 
+<details>
+<summary><b>39. multiplayer-rule-reviewer</b> (<code>/rule</code> <code>/룰</code>) — 멀티플레이 룰 정합성·서버 권위 점검</summary>
+
+- **언제**: 멀티플레이 룰·상태머신·서버 핸들러 코드를 머지하기 직전. "밤에 죽였는데 게임이 안 끝난다", "죽은 사람을 지목할 수 있다", "마피아가 누군지 보인다". 주력 대상은 **MapleStory Worlds(MSW) mlua**(마피아류 소셜 추리) — 원칙은 엔진 무관
+- **전제 2가지**: ① **클라이언트는 적대적이다** — 서버가 검증하지 않으면 존재하지 않는 규칙(UI가 막는 건 방어가 아님). ② **판정은 상태 변화에 걸어야 한다** — 승패 조건을 특정 페이즈 전환에만 걸면 다른 사망 경로에서 조용히 누락
+- **점검**: ① 상태머신 정합성(페이즈 × 이벤트 전이표의 구멍, 타이머·전원제출 경합, 재진입, **판정 함수 호출 지점을 전부 세어본다**) ② 서버 권위(MSW `@ExecSpace("Server")` = 클라 호출 가능 진입점을 열거해 호출자 신원·자격·생존·페이즈·대상 유효성·중복 제출 검증 여부를 표로) ③ 은닉 정보 누출(`@Sync`·브로드캐스트로 마피아 정체·밤 행동·투표 집계가 클라로 — **UI로만 가리면 결함**) ④ 로스터 생애주기(이탈·재접속·호스트·최소 인원) ⑤ 룰·밸런스 정합(시작부터 승리 조건이 성립하는 역할 구성, 자동 지목이 아군을 죽이는지, 동점·기권) ⑥ 결정성·시간(서버 시간 기준, 랜덤 시드 위치)
+- **출력**: 요약 → 페이즈 전이표 → 서버 진입점 검증 표(✅/❌ + `파일:줄`) → 심각도순 발견(**악용 시나리오** 포함) → 경계 케이스 체크리스트 → 확인 필요 → Top 3
+- **구분(경계)**: "무엇을 만들지"(코어 루프·재미·난이도)는 `game-design-architect`, Unity C# 엔진 코드는 `unity-code-reviewer`, **이미 난 증상**의 원인 규명은 `debugger`(이쪽은 증상 없이 선제 점검), 웹 앱 인증·인가·주입은 `security-reviewer`
+</details>
+
 ### 🧠 인프라 (개인 메모리)
 
 > 웹·게임·콘텐츠 리뷰와 별개로, **사용자 개인의 파일 기반 장기기억**(`E:\claude_memory\`)을 값싼 모델로 대신 읽는 인프라 에이전트. 저장소의 첫 `haiku` 에이전트다. 메모리 회상 훅(세션 시작·"예전에 뭐라고 정했더라")으로 자동 호출되며, `/recall`로 수동 호출도 된다.
@@ -579,10 +590,13 @@
 | security-reviewer ↔ llm-ai-security-reviewer | 웹 앱 일반 보안 ↔ AI/LLM 특화 심화 |
 | threat-modeler ↔ llm-ai-security-reviewer | 설계 단계 위협(LLM 포함) ↔ 구현 후 AI/LLM 심화 |
 
-**게임 (Unity + C#, 6쌍)**
+**게임 (Unity + C# · MSW, 9쌍)**
 | 쌍 | 구분 |
 |---|---|
 | game-design-architect ↔ unity-code-reviewer | 코어 루프·시스템 "설계" ↔ C# 코드 품질·프레임 "리뷰" |
+| game-design-architect ↔ multiplayer-rule-reviewer | 룰을 "설계" ↔ 그 룰이 서버에서 실제로 "강제되는지" 검증 ⟵ 1.67 |
+| unity-code-reviewer ↔ multiplayer-rule-reviewer | Unity C# "엔진 코드" ↔ 엔진 무관 "룰·서버 권위" 층(MSW mlua) ⟵ 1.67 |
+| debugger ↔ multiplayer-rule-reviewer | 이미 난 증상의 "원인 규명" ↔ 증상 없이 룰·권위 결함 "선제 점검" ⟵ 1.67 |
 | game-design-architect ↔ playtest-designer | "무엇을 검증할지"(재미 가설) ↔ "어떻게 검증할지"(프로토콜) |
 | game-feel-reviewer ↔ game-ui-reviewer | 게임플레이 동작 피드백 ↔ UI 조작 피드백 |
 | game-feel-reviewer ↔ playtest-designer | 손맛 장치·프로토타입 검증 항목 ↔ 검증 프로토콜 |
@@ -654,11 +668,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 38개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 39개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 38개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 38개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 39개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 39개 슬래시 명령(+ 한글 별칭 21개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -732,6 +746,7 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/agentdef` | agent-definition-reviewer | 에이전트 파일/이름(선택) |
 | `/story` | storyteller | 한 줄 아이디어/설정 + 장르·분량(선택) |
 | `/debug` | debugger | 증상/에러 메시지/재현 절차 |
+| `/rule` | multiplayer-rule-reviewer | 룰·상태머신·서버 핸들러 경로(선택) |
 
 ### 한글 별칭 (1.65)
 
@@ -740,6 +755,7 @@ Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1
 | 한글 | 영어 | 한글 | 영어 |
 |---|---|---|---|
 | `/디버그` | `/debug` | `/배포` | `/devops` |
+| `/룰` | `/rule` | | |
 | `/리뷰` | `/review` | `/의존성` | `/deps` |
 | `/보안` | `/sec` | `/관측성` | `/obs` |
 | `/테스트` | `/test` | `/리팩터` | `/refactor` |
@@ -777,7 +793,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-38종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-39종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
@@ -858,7 +874,8 @@ claude-agents/
 ├─ docs-writer.md                # 문서(개발자용 기술문서)
 ├─ agent-definition-reviewer.md  # 메타(에이전트 정의 점검)
 ├─ storyteller.md                # 창작(스토리텔링, fable)
-└─ debugger.md                   # 품질(버그 근본 원인 규명)
+├─ debugger.md                   # 품질(버그 근본 원인 규명)
+└─ multiplayer-rule-reviewer.md  # 게임(멀티플레이 룰 정합성·서버 권위, MSW mlua)
 ```
 
 ---

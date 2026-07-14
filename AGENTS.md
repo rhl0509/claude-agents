@@ -1,4 +1,4 @@
-# 서브에이전트 전체 정리 (38종)
+# 서브에이전트 전체 정리 (39종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
@@ -63,6 +63,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 36 | `agent-definition-reviewer` | `/agentdef` | 메타 | 서브에이전트 정의(.md) 스펙·라우팅·경계·규범 점검 | Read, Grep, Glob |
 | 37 | `storyteller` | `/story` | 창작 | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성(fable) | Read, Grep, Glob |
 | 38 | `debugger` | `/debug` | 품질 | 버그·에러·간헐 실패의 근본 원인 규명(재현·가설 검증·이분 탐색) | Read, Grep, Glob, Bash |
+| 39 | `multiplayer-rule-reviewer` | `/rule` | 게임 | 멀티플레이 룰 정합성·서버 권위 점검(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
 
 ---
 
@@ -233,6 +234,12 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 프롬프트(뼈대: 한 줄 아이디어·설정·인물·장르·분량)에 살을 붙여 완성형 이야기(단편·서사·시나리오·브랜드 스토리·에피소드)를 짓는다. 저장소 첫 `fable`(창작 특화 모델, +`effort: high`) 에이전트. 작법: ① 뼈대 확정(로그라인·인물 욕망/결핍·갈등·판돈·구조) → ② 살(show-don't-tell·감각 디테일·서브텍스트 대사·시점 일관성·페이싱) → ③ 자가 점검 후 약한 구간 재작성. 표절 금지·사용자 핵심 설정/결말 보존·채운 가정 명시, 유해 실행 지침·미성년 성적 묘사·실존 인물 명예훼손 거부. 출력: 로그라인 → 뼈대 요약 → 이야기 본문(제목) → 채운 가정 & 확장 포인트.
 → 기존 자산을 매체별로 파생하는 것은 `content-repurposer`, 카피 품질은 `copy-reviewer`, 확정 보이스 준수는 `brand-voice-guardian`, 프롬프트·지침 시스템 설계는 `ai-workspace-architect`.
 
+### 🎮 게임 — 멀티플레이 (MSW)
+
+**39. multiplayer-rule-reviewer (`/rule`, `/룰`)** — 게임
+멀티플레이 게임의 **룰이 서버에서 실제로 강제되는가**를 점검한다(주력: MapleStory Worlds `.mlua` 소셜 추리/마피아류, 원칙은 엔진 무관). 두 전제: ①클라이언트는 적대적이다(서버가 검증 안 하면 규칙이 아니다 — UI 차단은 방어가 아님) ②판정은 상태 변화에 걸어야 한다(승패를 특정 페이즈 전환에만 걸면 다른 사망 경로에서 누락). 점검: 상태머신 정합성(페이즈×이벤트 전이표 구멍·타이머 경합·재진입, 판정 함수 호출 지점 전수 카운트), 서버 권위(`@ExecSpace("Server")` = 클라 호출 가능 진입점의 호출자 신원·자격·생존·페이즈·대상 유효성·중복 제출 검증), 은닉 정보 누출(`@Sync`·브로드캐스트로 마피아 정체·밤 행동·투표 집계 유출 — 클라 UI로만 가리면 결함), 로스터 생애주기(이탈·재접속·호스트·최소 인원), 룰·밸런스 정합(시작부터 승리 조건이 성립하는 역할 구성, 자동 지목의 아군 살해, 동점·기권), 결정성·시간. 출력: 요약 → 페이즈 전이표 → 서버 진입점 검증 표 → 심각도순 발견(악용 시나리오 포함) → 경계 케이스 체크리스트 → 확인 필요 → Top 3.
+→ "무엇을 만들지"(코어 루프·재미·난이도)는 `game-design-architect`, Unity C# 엔진 코드는 `unity-code-reviewer`, 이미 난 증상의 원인 규명은 `debugger`(이쪽은 증상 없는 선제 점검), 웹 앱 인증·인가·주입은 `security-reviewer`.
+
 ### 🐞 디버깅 (품질)
 
 **38. debugger (`/debug`)** — 품질
@@ -287,6 +294,9 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 | 쌍 | 구분 |
 |---|---|
 | game-design-architect ↔ unity-code-reviewer | 코어 루프·시스템 "설계" ↔ C# 코드 품질·프레임 "리뷰" |
+| game-design-architect ↔ multiplayer-rule-reviewer | 룰을 "설계" ↔ 그 룰이 서버에서 "강제되는지" 검증 |
+| unity-code-reviewer ↔ multiplayer-rule-reviewer | Unity C# "엔진 코드" ↔ 엔진 무관 "룰·서버 권위"(MSW mlua) |
+| debugger ↔ multiplayer-rule-reviewer | 이미 난 증상 "원인 규명" ↔ 증상 없이 룰·권위 "선제 점검" |
 | game-design-architect ↔ playtest-designer | "무엇을 검증할지"(재미 가설) ↔ "어떻게 검증할지"(프로토콜) |
 | game-feel-reviewer ↔ game-ui-reviewer | 게임플레이 동작 피드백 ↔ UI 조작 피드백 |
 | game-feel-reviewer ↔ playtest-designer | 손맛 장치·프로토타입 검증 항목 ↔ 검증 프로토콜 |

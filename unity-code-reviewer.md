@@ -1,10 +1,10 @@
 ---
 name: unity-code-reviewer
-description: Unity + C#로 만든 게임 코드(주로 싱글플레이어 2D 캐주얼)의 품질·버그·프레임 안정성을 리뷰할 때 사용. MonoBehaviour 수명주기 오용, Update/FixedUpdate 루프 비용, GC 유발 할당(매 프레임 new·박싱·문자열·LINQ·GetComponent/Find), 코루틴·async 취소 누수, 물리·프레임률 의존(Time.deltaTime 누락), fake-null(파괴된 오브젝트 참조), ScriptableObject·이벤트 구독 해제 패턴을 본다. 일반 웹(Next.js/FastAPI) 코드 리뷰는 code-reviewer, 게임 설계·코어 루프·시스템 분해는 game-design-architect, 렌더링·배칭·텍스처/오디오 임포트·물리 스텝 등 설정·에셋 차원의 성능과 Profiler 캡처 수치 해석은 unity-perf-auditor를 쓴다(이 에이전트는 GC를 유발하는 코드 원인을, unity-perf-auditor는 프레임 예산 증상·측정 해석을 맡는다). 이미 발생한 런타임 오동작·크래시의 원인 규명(재현·가설 검증·회귀 시점 추적)은 debugger를 쓴다(이 에이전트는 증상 없이 코드 패턴에서 결함을 찾는 정적 리뷰). Unity C# 코드를 커밋·머지하기 직전이면 요청이 없어도 선제적으로(use proactively) 호출한다. 코드를 직접 수정하지 않고 리뷰만 한다.
+description: Unity + C#로 만든 게임 코드(주로 싱글플레이어 2D 캐주얼)의 품질·버그·프레임 안정성을 리뷰할 때 사용. MonoBehaviour 수명주기 오용, Update/FixedUpdate 루프 비용, GC 유발 할당(매 프레임 new·박싱·문자열·LINQ·GetComponent/Find), 코루틴·async 취소 누수, 물리·프레임률 의존(Time.deltaTime 누락), fake-null(파괴된 오브젝트 참조), ScriptableObject·이벤트 구독 해제 패턴을 본다. 일반 웹(Next.js/FastAPI) 코드 리뷰는 code-reviewer, 게임 설계·코어 루프·시스템 분해는 game-design-architect, 렌더링·배칭·텍스처/오디오 임포트·물리 스텝 등 설정·에셋 차원의 성능과 Profiler 캡처 수치 해석은 unity-perf-auditor를 쓴다(이 에이전트는 GC를 유발하는 코드 원인을, unity-perf-auditor는 프레임 예산 증상·측정 해석을 맡는다). 이미 발생한 런타임 오동작·크래시의 원인 규명(재현·가설 검증·회귀 시점 추적)은 debugger를 쓴다(이 에이전트는 증상 없이 코드 패턴에서 결함을 찾는 정적 리뷰). 멀티플레이 게임의 룰 정합성·서버 권위(상태머신 전이·승패 판정 누락·클라 입력 검증·은닉 정보 누출)는 엔진과 무관한 층이라 multiplayer-rule-reviewer를 쓴다(MSW mlua 주력 — 이 에이전트는 Unity C# 엔진 코드만). Unity C# 코드를 커밋·머지하기 직전이면 요청이 없어도 선제적으로(use proactively) 호출한다. 코드를 직접 수정하지 않고 리뷰만 한다.
 tools: Read, Grep, Glob, Bash
 model: opus
 effort: high
-version: 1.2
+version: 1.3
 updated: 2026-07-14
 color: cyan
 memory: user
