@@ -3,16 +3,16 @@
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
 코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터).
 
-- 에이전트 수: **37종** (개발 스택 리뷰·엔지니어링·문서 18종 + 메타 2종 + 콘텐츠/마케팅 6종 + 창작 1종 + 보안 심화 2종 + 게임 7종 + 인프라 1종)
+- 에이전트 수: **38종** (개발 스택 리뷰·엔지니어링·문서 19종 + 메타 2종 + 콘텐츠/마케팅 6종 + 창작 1종 + 보안 심화 2종 + 게임 7종 + 인프라 1종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.9**, `code-reviewer` **v1.10**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `migration-reviewer`·`observability-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 7종 `unity-code-reviewer` **v1.1**·`game-design-architect` **v1.2**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
-- 추론 강도(`effort`): opus 심층추론 33종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.11**, `test-runner` **v1.10**, `code-reviewer` **v1.11**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `observability-reviewer` **v1.3**, `migration-reviewer` **v1.2**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 7종 `unity-code-reviewer` **v1.2**·`game-design-architect` **v1.2**·`game-ui-reviewer` **v1.0**·`game-feel-reviewer` **v1.1**·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 추론 강도(`effort`): opus 심층추론 34종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
 
 ## 목차
-- [에이전트 37종](#에이전트-37종)
+- [에이전트 38종](#에이전트-38종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -24,13 +24,13 @@
 
 ---
 
-## 에이전트 37종
+## 에이전트 38종
 
 | # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|---|
-| 1 | `code-reviewer` | `/review` | 품질 | 1.10 | opus | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
+| 1 | `code-reviewer` | `/review` | 품질 | 1.11 | opus | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
 | 2 | `security-reviewer` | `/sec` | 품질 | 1.11 | opus | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
-| 3 | `test-runner` | `/test` | 품질 | 1.9 | sonnet | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
+| 3 | `test-runner` | `/test` | 품질 | 1.10 | sonnet | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
 | 4 | `test-strategy` | `/coverage` | 품질 | 1.4 | opus | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
 | 5 | `perf-auditor` | `/perf` | 품질 | 1.4 | opus | Next.js 프론트 성능 점검 | Read, Grep, Glob |
 | 6 | `api-contract-reviewer` | `/contract` | 품질 | 1.1 | opus | 프론트-백 API 계약 정합성 점검 | Read, Grep, Glob |
@@ -43,7 +43,7 @@
 | 13 | `system-architect` | `/arch` | 설계 | 1.5 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
 | 14 | `devops-reviewer` | `/devops` | 운영 | 1.8 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
 | 15 | `dependency-auditor` | `/deps` | 운영 | 1.1 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
-| 16 | `observability-reviewer` | `/obs` | 운영 | 1.2 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
+| 16 | `observability-reviewer` | `/obs` | 운영 | 1.3 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
 | 17 | `ai-workspace-architect` | `/fable` | 메타 | 1.3 | opus | AI 작업환경 진단·재설계(프롬프트·지침·CLAUDE.md·SKILL.md·모델별 전략) | Read, Grep, Glob, WebSearch, WebFetch |
 | 18 | `copy-reviewer` | `/copy` | 콘텐츠 | 1.0 | opus | 마케팅 카피 품질 리뷰(후킹·CTA·과장/윤리) | Read, Grep, Glob |
 | 19 | `landing-reviewer` | `/landing` | 콘텐츠 | 1.0 | opus | 상세페이지·랜딩 전환 구조 리뷰 | Read, Grep, Glob |
@@ -53,7 +53,7 @@
 | 23 | `brand-voice-guardian` | `/voice` | 콘텐츠 | 1.0 | opus | 브랜드 보이스(문체·톤) 일관성 점검 | Read, Grep, Glob |
 | 24 | `threat-modeler` | `/threat` | 품질 | 1.1 | opus | 설계 단계 위협 모델링(STRIDE) | Read, Grep, Glob, WebSearch, WebFetch |
 | 25 | `llm-ai-security-reviewer` | `/aisec` | 품질 | 1.1 | opus | AI/LLM 보안 심화(OWASP LLM Top 10) | Read, Grep, Glob, WebSearch, WebFetch |
-| 26 | `unity-code-reviewer` | `/ureview` | 게임 | 1.1 | opus | Unity C# 게임 코드 리뷰(수명주기·GC·프레임/물리) | Read, Grep, Glob, Bash |
+| 26 | `unity-code-reviewer` | `/ureview` | 게임 | 1.2 | opus | Unity C# 게임 코드 리뷰(수명주기·GC·프레임/물리) | Read, Grep, Glob, Bash |
 | 27 | `game-design-architect` | `/gdd` | 게임 | 1.2 | opus | 2D 캐주얼 게임 디자인·시스템 설계 | Read, Grep, Glob |
 | 28 | `game-ui-reviewer` | `/gui` | 게임 | 1.0 | opus | 게임 UI/UX(HUD·메뉴·스케일링·내비·가독성) 점검 | Read, Grep, Glob |
 | 29 | `game-feel-reviewer` | `/feel` | 게임 | 1.1 | opus | 게임플레이 손맛/juice(입력 관대성·히트스톱·카메라·피드백) 점검 | Read, Grep, Glob |
@@ -65,6 +65,7 @@
 | 35 | `docs-writer` | `/docs` | 문서 | 1.1 | opus | 개발자용 기술문서(README·아키텍처·온보딩·ADR) 작성·정비 | Read, Grep, Glob |
 | 36 | `agent-definition-reviewer` | `/agentdef` | 메타 | 1.1 | opus | 서브에이전트 정의(.md) 스펙·라우팅·경계·규범 점검 | Read, Grep, Glob |
 | 37 | `storyteller` | `/story` | 창작 | 1.0 | fable | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성 | Read, Grep, Glob |
+| 38 | `debugger` | `/debug` | 품질 | 1.0 | opus | 버그·에러·간헐 실패의 근본 원인 규명(재현·가설 검증·이분 탐색) | Read, Grep, Glob, Bash |
 
 ### 🔍 품질 / QA
 
@@ -77,7 +78,7 @@
 - **프론트(Next.js)**: 서버/클라 컴포넌트 경계, 데이터 페칭·캐싱, useEffect 의존성, 로딩/에러 처리, 타입 안전성
 - **Next.js 15/16(v1.4)**: Server Actions 보안(서버 재검증·인가), `use cache`/Cache Components 오캐시, React Compiler 도입 시 중복 수동 메모 (버전 불명확하면 "확인 필요")
 - **출력**: 요약 → Must fix → Should fix → Nit (분류 내 영향도순, `파일:줄` 명시)
-- **구분**: 보안 전용은 `security-reviewer`, 시각·접근성·UX는 `ui-ux-reviewer`, 프론트-백 API 계약 정합은 `api-contract-reviewer`, 로깅·관측성은 `observability-reviewer`, 동작 보존 리팩터 계획은 `refactor-strategist`
+- **구분**: 보안 전용은 `security-reviewer`, 시각·접근성·UX는 `ui-ux-reviewer`, 프론트-백 API 계약 정합은 `api-contract-reviewer`, 로깅·관측성은 `observability-reviewer`, 동작 보존 리팩터 계획은 `refactor-strategist`, 이미 발생한 증상의 원인 규명은 `debugger`(v1.11 — 코드리뷰는 증상 없이 변경분에서 잠재 결함을 찾음)
 </details>
 
 <details>
@@ -100,7 +101,8 @@
 - **원칙**: 프로덕션 코드·환경(설치·venv)을 임의로 건드리지 않음 — 사전 조건으로 보고, 명시 요청 시만 실행
 - **테스트 품질 스캔(v1.3)**: 통과한 테스트도 훑어 change-detector(리터럴/카운트 동결)·목 그린을 "테스트 자체 약점"으로 표시 — green을 커버리지 양호로 칭찬하지 않음
 - **출력**: 통과/실패/스킵 집계 → 실패별 원인 분류(코드 버그/테스트 오류/환경/외부 의존성)·제안, 플레이키 표시
-- **구분**: 커버리지 공백·약한 테스트 진단·보강 전략은 `test-strategy`
+- **1차 진단 한계(v1.10)**: 위 분류로 안 잡히는 실패(간헐/플레이키, 환경에서만 재현, "어제까진 됐는데" 회귀)는 억지로 결론내지 않고 `debugger`로 넘김
+- **구분**: 커버리지 공백·약한 테스트 진단·보강 전략은 `test-strategy`, 근본 원인 규명(재현·가설 검증·이분 탐색)은 `debugger`
 </details>
 
 <details>
@@ -245,7 +247,7 @@
 - **점검**: 구조적 로깅(맥락·레벨·노이즈), 상관관계 ID(request/trace) 전파, 에러 캡처·리포팅(예외 삼킴·Sentry·4xx/5xx 구분), 메트릭, 분산 트레이싱(OpenTelemetry), 민감정보 로그 노출, 프론트 에러 바운더리·웹 바이탈
 - **트레이싱 경계(v1.1)**: 컨텍스트 전파 포맷 일관성(W3C `traceparent`/`tracestate` vs B3)까지 본다. 점검 범위는 **앱 측 계측**까지 — 수집·샘플링 파이프라인(OTel Collector·Grafana Alloy의 익스포터·tail sampling·배치)은 `devops-reviewer` 영역으로 구분
 - **출력**: 요약(장애 추적 가능성) → 위험 Top 3(민감정보 로그·예외 삼킴·추적 불가) → 주의 → 제안
-- **구분**: 배포·인프라(로그·트레이스 수집·샘플링 파이프라인·대시보드: OTel Collector·Grafana Alloy 등) 설정은 `devops-reviewer`, 일반 예외 처리·코드 품질은 `code-reviewer`
+- **구분**: 배포·인프라(로그·트레이스 수집·샘플링 파이프라인·대시보드: OTel Collector·Grafana Alloy 등) 설정은 `devops-reviewer`, 일반 예외 처리·코드 품질은 `code-reviewer`, 이미 발생한 장애의 원인 규명은 `debugger`(v1.3 — 이 에이전트는 추적 "가능성" 자체의 공백을 점검)
 </details>
 
 ### 🧭 메타 / 워크플로우
@@ -352,7 +354,7 @@
 - **점검(게임 엔진 고유)**: ① MonoBehaviour 수명주기(Awake/OnEnable/Start 혼동, OnDisable 구독 해제 누락), ② 프레임 루프 비용(Update 내 GetComponent/Find/Camera.main), ③ GC 할당(매 프레임 new·박싱·문자열·LINQ·풀링 부재), ④ 코루틴/async 취소 누수, ⑤ 물리·프레임률 의존(Time.deltaTime·FixedUpdate·Rigidbody2D), ⑥ fake-null(파괴된 오브젝트 참조·`?.` 우회), ⑦ ScriptableObject 런타임 원본 오염
 - **원칙**: 성능·GC는 정적 리뷰로 의심 지점만 짚고 실제 수치는 **Profiler 측정 권고**로 분리(단정 금지)
 - **출력**: 요약 → Must fix → Should fix → Nit → 측정 권고 (분류 내 영향도순, `파일:줄`), 가장 먼저 고칠 Top 3
-- **구분**: 일반 웹 코드 리뷰는 `code-reviewer`, 게임 설계·코어 루프·시스템 분해는 `game-design-architect`
+- **구분**: 일반 웹 코드 리뷰는 `code-reviewer`, 게임 설계·코어 루프·시스템 분해는 `game-design-architect`, 이미 발생한 런타임 오동작·크래시의 원인 규명은 `debugger`(v1.2 — 이 에이전트는 증상 없는 정적 리뷰)
 </details>
 
 <details>
@@ -474,11 +476,28 @@
 - **구분**: 기존 자산을 매체별로 파생하는 것은 `content-repurposer`, 카피 품질은 `copy-reviewer`, 확정 보이스 준수는 `brand-voice-guardian`, 프롬프트·지침 시스템 설계는 `ai-workspace-architect`
 </details>
 
+### 🐞 디버깅 (품질 · 1.64 추가)
+
+> 기존 품질 에이전트가 모두 **증상이 없는 상태에서** 코드를 훑는 정적 리뷰(code-reviewer·unity-code-reviewer)이거나 **결과를 집계**하는 실행기(test-runner)인 반면, 이 에이전트는 **이미 나타난 증상에서 거꾸로** 원인을 추적한다(재현 → 가설 → 검증 → 이분 탐색). 스택 무관 — 웹(Next.js/FastAPI/MySQL)이 주력이지만 Unity C# 런타임 증상도 같은 절차로 다룬다.
+
+<details>
+<summary><b>38. debugger</b> (<code>/debug</code>) — 버그·에러·간헐 실패 근본 원인 규명</summary>
+
+- **언제**: "왜 이 에러가 나는지 모르겠다", "가끔만 실패한다", "어제까진 됐는데", 프로덕션 장애 사후 분석. 수동 호출은 `/debug <증상>`
+- **절차**: 증상 확정(기대 vs 실제·재현율·환경) → 최소 재현 → 관찰 수집(스택트레이스는 *우리 코드의 가장 깊은 프레임*부터) → 가설 3~5개(각각 반증 조건 명시) → 검증·축소(코드 경로·시간(`git log`/`blame` 회귀 시점)·입력·환경 이분) → 원인 확정 → 수정 방향·재발 방지
+- **버그 클래스 렌즈**: 간헐·플레이키(경쟁 조건·순서 의존·시간/타임존), 상태·데이터(경계·부분 실패·트랜잭션), 경계 넘김(계약·직렬화·캐시 stale·하이드레이션), 동시성·자원(블로킹 I/O·풀 고갈·누수), 환경차("로컬은 되는데"), Unity 런타임(fake-null·구독 해제·프레임률 의존)
+- **원칙**: 관찰이 추측을 이긴다(각 주장에 `파일:줄`·로그 근거), 첫 가설에 애착 금지, 한 번에 하나만 바꾼다, **못 밝히면 미확정으로 정직 보고**(그럴듯한 범인 창작 금지)
+- **성능 축 카빙**: "무엇이 느린가"(병목 진단·측정 해석)는 `perf-auditor`·`db-optimizer`·`unity-perf-auditor`, **"언제부터·무엇이 바뀌어 느려졌나"(회귀 시점 추적)는 이 에이전트** — 성능 회귀가 무주공산이 되지 않게 축으로 나눔
+- **안전장치**: 코드·데이터 수정 안 함. 워킹트리를 바꾸는 `git bisect`·`checkout`·`stash`는 **직접 실행하지 않고 절차만 제시**. Bash는 재현·조회 전용(테스트 재실행·로그·git 이력). 계측이 필요하면 코드에 심지 않고 **임시 계측 계획**만 제시
+- **출력**: 증상 요약 → 관찰된 사실(해석과 분리) → 가설·검증 표(판정: 확정/반증/미검증) → 근본 원인(인과 사슬·`파일:줄`) → 수정 방향(+형제 결함) → 재발 방지 테스트 → 미해결·다음 관찰
+- **구분(경계)**: 테스트 실행·집계·1차 분류는 `test-runner`(테스트를 아직 안 돌렸으면 거기부터 — 안 풀리는 실패가 이 에이전트 몫), 증상 없는 정적 리뷰는 `code-reviewer`·`unity-code-reviewer`, 추적 인프라 공백은 `observability-reviewer`, 병목 진단은 `perf-auditor`·`db-optimizer`·`unity-perf-auditor`, 취약점은 `security-reviewer`
+</details>
+
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
-양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 아래는 33개 description을 **전수 스캔해 재구성한 34쌍 전량**이며 클러스터별로 나눈다(2026-07 재검증, 1.56).
+양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 아래는 1.56의 전수 스캔 34쌍에 **1.64에서 `debugger` 4쌍을 더한 38쌍**이며 클러스터별로 나눈다.
 
-**웹 스택 (17쌍)**
+**웹 스택 (20쌍)**
 | 쌍 | 구분 |
 |---|---|
 | code-reviewer ↔ security-reviewer | 일반 품질/버그 ↔ 보안 전용 |
@@ -498,6 +517,9 @@
 | devops-reviewer ↔ system-architect | 배포·인프라 설정 "점검" ↔ 시스템 구조 "설계" ⟵ 1.56에서 일방향→대칭 정정 |
 | api-contract-reviewer ↔ api-doc-writer | 프론트-백 계약 "정합성 검증" ↔ 백엔드 엔드포인트 "카탈로그·문서화" |
 | test-strategy ↔ test-runner | 커버리지 공백·약한 테스트 "진단·설계" ↔ 테스트 "실행·실패 분석" |
+| debugger ↔ test-runner | 실패의 "근본 원인 규명"(재현·가설·이분) ↔ 테스트 "실행·집계·1차 분류" ⟵ 1.64 |
+| debugger ↔ code-reviewer | 이미 난 증상에서 "역추적" ↔ 증상 없이 변경분에서 "잠재 결함" 정적 리뷰 ⟵ 1.64 |
+| debugger ↔ observability-reviewer | 지금 있는 로그로 "원인 규명" ↔ 추적 "가능성" 자체의 공백 점검 ⟵ 1.64 |
 
 **콘텐츠 / 마케팅 (3쌍)**
 | 쌍 | 구분 |
@@ -523,10 +545,11 @@
 | unity-code-reviewer ↔ unity-perf-auditor | GC 유발 코드 "원인" ↔ 프레임 예산 "증상·측정 해석" |
 | unity-build-auditor ↔ unity-perf-auditor | 텍스처 압축 "빌드 용량" ↔ "런타임 메모리·GPU" |
 
-**클러스터 교차 (게임 ↔ 웹, 5쌍)** — 1.52에서 양방향화
+**클러스터 교차 (게임 ↔ 웹, 6쌍)** — 1.52에서 양방향화
 | 쌍 | 구분 |
 |---|---|
 | code-reviewer ↔ unity-code-reviewer | 웹(Next.js/FastAPI) 코드 ↔ Unity C# 게임 코드 |
+| debugger ↔ unity-code-reviewer | 이미 난 런타임 오동작·크래시 "원인 규명"(스택 무관) ↔ 엔진 특유 코드 결함 "정적 리뷰" ⟵ 1.64 |
 | perf-auditor ↔ unity-perf-auditor | 웹 프론트 성능(번들·CWV) ↔ Unity 런타임 성능·렌더링 |
 | system-architect ↔ game-design-architect | 풀스택 웹 아키텍처 ↔ 2D 캐주얼 게임 디자인·시스템 |
 | devops-reviewer ↔ unity-build-auditor | 일반 CI/CD·시크릿·파이프라인 ↔ Unity 빌드/릴리스·스토어 제출 |
@@ -553,6 +576,7 @@
 | game-ui-reviewer → ui-ux-reviewer | 게임 UI → 웹 UI | 웹 화면·WCAG·i18n은 웹 UI로(웹 UI는 게임을 역참조 안 함) |
 | unity-build-auditor → unity-code-reviewer | 빌드 → 코드 | keystore·설정 판정 후 코드 품질은 코드 리뷰로 |
 | playtest-designer → test-runner | 플레이테스트 → 자동 테스트 | 사람 테스트와 별개인 자동 테스트 러너로 |
+| debugger → perf-auditor / db-optimizer / unity-perf-auditor / security-reviewer | 회귀 시점 추적 → 병목 진단·보안 특화 | "무엇이 느린가"(병목)는 성능 3종, "취약점"이면 보안으로. **"언제부터 느려졌나"(회귀 시점)는 debugger가 유지** — 성능·보안 측은 디버깅을 역참조 안 함 |
 
 > **정정(1.56)**: 이전 문서는 `system-architect`를 "다른 에이전트로 내보내는 위임이 없는 최상위 설계 에이전트"라 기술하고 `devops-reviewer → system-architect`를 일방향으로 분류했다. 그러나 현재 `system-architect` description은 5개 특화(api-contract-reviewer·data-modeler·devops-reviewer·security-reviewer·game-design-architect)로 위임을 **내보낸다**(1.52의 game-design-architect 추가가 결정타). 따라서 devops ↔ system-architect는 **대칭**(위 웹 표)으로 이동했고, system-architect도 위임을 내보내는 에이전트다.
 
@@ -586,11 +610,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 37개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 38개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 37개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 37개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 38개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 38개 슬래시 명령 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -663,6 +687,7 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/docs` | docs-writer | 문서 종류/대상(선택) |
 | `/agentdef` | agent-definition-reviewer | 에이전트 파일/이름(선택) |
 | `/story` | storyteller | 한 줄 아이디어/설정 + 장르·분량(선택) |
+| `/debug` | debugger | 증상/에러 메시지/재현 절차 |
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
 > `/recall`은 메모리 회상 훅으로 자동 호출되기도 하지만, 수동으로 직접 부를 수도 있습니다.
@@ -689,7 +714,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-37종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-38종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
@@ -712,13 +737,13 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
-├─ AGENTS.md                     # 37개 에이전트 통합 정리
+├─ AGENTS.md                     # 38개 에이전트 통합 정리
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
 ├─ .gitignore
 │
-├─ commands/                     # ── 슬래시 명령 정의 (37개) ──
+├─ commands/                     # ── 슬래시 명령 정의 (38개) ──
 │  ├─ review.md  ├─ sec.md       ├─ test.md      ├─ coverage.md
 │  ├─ perf.md    ├─ contract.md  ├─ apidoc.md    ├─ db.md
 │  ├─ migrate.md ├─ ui.md        ├─ dsystem.md   ├─ datamodel.md
@@ -728,12 +753,12 @@ claude-agents/
 │  ├─ threat.md   ├─ aisec.md    ├─ ureview.md   ├─ gdd.md
 │  ├─ gui.md      ├─ feel.md     ├─ uperf.md     ├─ playtest.md
 │  ├─ ubuild.md   ├─ recall.md   ├─ refactor.md  ├─ docs.md
-│  ├─ agentdef.md └─ story.md
+│  ├─ agentdef.md ├─ story.md    └─ debug.md
 │
 ├─ launchers/                    # ── 바탕화면 런처 ──
 │  └─ claude.bat
 │
-├─ code-reviewer.md              # ── 에이전트 정의 (37개) ──
+├─ code-reviewer.md              # ── 에이전트 정의 (38개) ──
 ├─ security-reviewer.md
 ├─ test-runner.md
 ├─ test-strategy.md
@@ -769,7 +794,8 @@ claude-agents/
 ├─ refactor-strategist.md        # 품질(동작 보존 리팩터 계획)
 ├─ docs-writer.md                # 문서(개발자용 기술문서)
 ├─ agent-definition-reviewer.md  # 메타(에이전트 정의 점검)
-└─ storyteller.md                # 창작(스토리텔링, fable)
+├─ storyteller.md                # 창작(스토리텔링, fable)
+└─ debugger.md                   # 품질(버그 근본 원인 규명)
 ```
 
 ---

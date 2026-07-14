@@ -1,11 +1,11 @@
 ---
 name: code-reviewer
-description: Next.js(프론트)와 FastAPI(백엔드) 코드의 품질, 가독성, 버그 가능성을 리뷰할 때 사용. 커밋/PR 전 셀프 리뷰에 적합. 동작 보존 리팩터의 구조·단계 설계는 refactor-strategist(코드리뷰는 리팩터 diff의 정확성만 본다), 보안 전용 점검은 security-reviewer, 시각·접근성·UX 점검은 ui-ux-reviewer, 프론트-백 API 계약 정합은 api-contract-reviewer, 로깅·관측성은 observability-reviewer, Unity + C# 게임 코드(MonoBehaviour·프레임 루프·GC·물리 의존)는 unity-code-reviewer를 쓴다. 코드를 커밋·머지하기 직전이면 요청이 없어도 선제적으로(use proactively) 호출한다.
+description: Next.js(프론트)와 FastAPI(백엔드) 코드의 품질, 가독성, 버그 가능성을 리뷰할 때 사용. 커밋/PR 전 셀프 리뷰에 적합. 동작 보존 리팩터의 구조·단계 설계는 refactor-strategist(코드리뷰는 리팩터 diff의 정확성만 본다), 보안 전용 점검은 security-reviewer, 시각·접근성·UX 점검은 ui-ux-reviewer, 프론트-백 API 계약 정합은 api-contract-reviewer, 로깅·관측성은 observability-reviewer, 이미 발생한 버그·장애 증상의 근본 원인 규명(재현·가설 검증·이분 탐색)은 debugger(코드리뷰는 증상 없이 변경분에서 잠재 결함을 찾는다), Unity + C# 게임 코드(MonoBehaviour·프레임 루프·GC·물리 의존)는 unity-code-reviewer를 쓴다. 코드를 커밋·머지하기 직전이면 요청이 없어도 선제적으로(use proactively) 호출한다.
 tools: Read, Grep, Glob, Bash
 model: opus
 effort: high
-version: 1.10
-updated: 2026-07-12
+version: 1.11
+updated: 2026-07-14
 color: blue
 memory: user
 skills:

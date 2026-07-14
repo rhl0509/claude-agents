@@ -10,6 +10,24 @@
 
 ---
 
+## 1.64 (2026-07-14) — 신규 디버깅 에이전트 debugger 추가 (37종 → 38종) + 인접 4종 경계 정리
+
+라이브러리에 **증상에서 원인을 역추적하는** 에이전트가 없던 공백을 메웠다. 기존 품질 에이전트는 전부 *증상이 없는 상태에서* 코드를 훑는 정적 리뷰(`code-reviewer`·`unity-code-reviewer`)이거나 *결과를 집계*하는 실행기(`test-runner`)라, "왜 이 에러가 나는지 모르겠다 / 가끔만 실패한다 / 어제까진 됐는데"류 요청을 받아줄 곳이 없었다.
+
+- **debugger** (`/debug`) v1.0 신설 — 품질(color `blue`), `opus` + `effort: high`, `Read, Grep, Glob, Bash` + `agent-guard.ps1` + `memory: user` + `agent-conventions`. 절차: 증상 확정(기대 vs 실제·재현율·환경) → 최소 재현 → 관찰 수집(스택트레이스는 *우리 코드의 가장 깊은 프레임*부터) → 가설 3~5개(각각 반증 조건 명시) → 검증·축소(코드 경로·시간(`git log`/`blame` 회귀 시점)·입력·환경 이분) → 인과 사슬로 원인 확정 → 수정 방향(+형제 결함)·재발 방지 테스트. 버그 클래스 렌즈 6종(간헐·플레이키/상태·데이터/경계 넘김/동시성·자원/환경차/Unity 런타임). 정직성: 원인을 못 밝히면 **미확정 + 다음 관찰**로 보고(범인 창작 금지).
+- **스택 무관** — 웹(Next.js·FastAPI·MySQL)이 주력이지만 재현→가설→이분 절차는 언어·엔진 독립이라 Unity C# 런타임 증상도 같은 절차로 다룬다. 엔진 특유 결함의 *정적* 리뷰만 `unity-code-reviewer`로 위임(원인/증상 대칭 — unity-code ↔ unity-perf 전례와 동형).
+- **Bash 권한 근거(최소권한)** — 디버깅은 재현이 핵심이라 `Bash`를 준다. 용도는 **재현·조회 전용**(실패 테스트 재실행, 로그 조회, `git log`/`blame`/`diff`). 워킹트리를 바꾸는 `git bisect`·`checkout`·`stash`는 **절차만 제시하고 직접 실행하지 않는다** — `agent-guard.ps1`이 이미 git 쓰기·`rm -rf`·SQL DML을 차단하므로 읽기 전용 계약은 훅으로도 이중 봉인된다. 계측이 필요하면 코드에 심지 않고 **임시 계측 계획**(어디에 무엇을 찍으면 어느 가설이 갈리는지)만 낸다.
+- **인접 4종 경계 정리(대칭 위임 4쌍 신설)** — `test-runner` 1.9 → **1.10**(description + 본문 "실패 분석"에 1차 진단 한계 문단: 간헐·환경 의존·회귀는 억지 결론 대신 debugger로 이관), `code-reviewer` 1.10 → **1.11**(증상 없는 정적 탐색 ↔ 증상 역추적), `observability-reviewer` 1.2 → **1.3**(추적 "가능성"의 공백 점검 ↔ 지금 있는 로그로 원인 규명), `unity-code-reviewer` 1.1 → **1.2**(엔진 결함 정적 리뷰 ↔ 런타임 증상 원인 규명).
+- **성능 축 카빙(도그푸딩 반영)** — 초안은 "느림은 전부 성능 에이전트"로 밀어냈으나, `agent-definition-reviewer` 점검에서 **성능 회귀("어제까진 빨랐는데")가 무주공산**임이 드러났다(perf-auditor·db-optimizer는 정적 병목 진단만 하고 git 이력 시점 추적을 주장하지 않음). 축으로 갈랐다 — **"무엇이 느린가"(병목 진단·측정 해석) = `perf-auditor`·`db-optimizer`·`unity-perf-auditor`**, **"언제부터·무엇이 바뀌어 느려졌나"(회귀 시점 추적) = `debugger`**. 같은 점검에서 `unity-perf-auditor` 위임 누락과 `"가끔만 실패한다"` 트리거가 test-runner와 동시 매치되던 누수도 함께 정정(테스트 실행 전이면 test-runner부터).
+- **일방향 위임** — debugger → `perf-auditor`·`db-optimizer`·`unity-perf-auditor`(병목 진단)·`security-reviewer`(취약점). 성능·보안 측은 디버깅을 역참조하지 않는다(허브 비대화 방지 관례).
+- **모델·effort** — opus 심층추론 33종 → **34종**(전원 `effort: high`). `xhigh` 4종은 변동 없음.
+- **가드 훅** — `hooks/agent-guard.ps1`의 `$gitWrite` 패턴에 **`bisect` 추가**(기존: push|commit|reset|checkout|clean|merge|rebase|apply|restore|stash). debugger 본문이 "bisect는 워킹트리를 바꾸므로 절차만 제시"를 약속하는데 훅이 유일하게 안 막던 구멍 — 프롬프트 약속을 훅으로 이중화(레포 관행). 다른 37종은 bisect를 쓰지 않아 부작용 없고, 가드는 fail-open이라 차단만 늘어난다.
+- **커맨드** — `commands/debug.md` 신설(37 → 38).
+- **문서** — `README.md`(에이전트 수 37→38·상단 버전 요약·목차 앵커·표 38행·🐞 디버깅 섹션 상세 블록·대칭 위임 34→38쌍·일방향 위임 1행·슬래시 표·설치 문구·저장소 트리), `AGENTS.md`(제목 37→38·소개·표 38행·🐞 상세·위임 표), `CLAUDE.md`(예외 문단·에이전트 표 1행·모델 티어·Bash 최소권한 근거).
+- **검증** — `agent-definition-reviewer`(/agentdef) 도그푸딩으로 신규 정의 + 인접 4종 description을 점검(1.61 전례).
+
+---
+
 ## 1.63 (2026-07-12) — 신규 창작 에이전트 storyteller 추가 (36종 → 37종, 저장소 첫 `fable`)
 
 프롬프트(뼈대)에 살을 붙여 **없던 이야기를 새로 짓는** 창작 생성 에이전트를 신설했다. 기존 `content-repurposer`가 *있는 소스*를 매체별로 각색하는 것과 달리, storyteller는 한 줄 아이디어·설정·인물에서 완성형 서사(단편·시나리오·브랜드 스토리)를 창작한다. 저장소에서 처음으로 창작 특화 모델 `fable`을 쓰는 에이전트다.

@@ -46,7 +46,7 @@ if ($tool -eq 'Bash') {
         #   read-only command is blocked, run it yourself.
         $sqlMutate = '(?i)\b(INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|TRUNCATE|GRANT|REVOKE)\b'
         $fsDestroy = '(?i)\brm\s+-[rf]'
-        $gitWrite  = '(?i)\bgit\s+(push|commit|reset|checkout|clean|merge|rebase|apply|restore|stash)\b'
+        $gitWrite  = '(?i)\bgit\s+(push|commit|reset|checkout|clean|merge|rebase|apply|restore|stash|bisect)\b'
         if ($c -match $sqlMutate -or $c -match $fsDestroy -or $c -match $gitWrite) {
             [Console]::Error.WriteLine('Blocked: command appears to mutate state. Read-only agents run diagnostics only; run mutating commands yourself if intended.')
             exit 2

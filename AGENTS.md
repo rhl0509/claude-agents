@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (37종)
+# 서브에이전트 전체 정리 (38종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다. 2종(`threat-modeler`·`llm-ai-security-reviewer`)은 **설계 단계 위협 모델링·AI/LLM 보안 심화**를 담당한다(품질 카테고리, `security-reviewer`와 보안 방어 클러스터 형성). 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)은 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트다(🎮 게임 클러스터, 색상 `cyan` 공유). 1종(`memory-recaller` · `/recall`)은 리뷰/설계가 아니라 **사용자 개인의 파일 기반 장기기억(`E:\claude_memory\`)을 값싼 `haiku`로 대신 회상**하는 인프라 에이전트다(🧠 인프라, 저장소 첫 haiku·메모리 훅 자동 호출 + `/recall` 수동 호출·읽기 전용). 마지막으로 2026-07 추가된 3종은 엔지니어링 `refactor-strategist`(`/refactor`, 동작 보존 리팩터 계획·단계 설계), 문서 `docs-writer`(`/docs`, 개발자용 README·아키텍처·온보딩·ADR), 메타 `agent-definition-reviewer`(`/agentdef`, 이 라이브러리의 에이전트 정의 자체의 스펙·경계·규범 점검)로, 각각 품질·문서·메타 클러스터에 편입된다. 그리고 1종(`storyteller` · `/story`)은 프롬프트(뼈대)에 살을 붙여 **없던 이야기를 새로 짓는** 창작 생성 에이전트로, 저장소 첫 `fable`(창작 특화 모델) 에이전트다(✍️ 창작 클러스터, 기존 자산 재활용인 `content-repurposer`와 구분).
+> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다. 2종(`threat-modeler`·`llm-ai-security-reviewer`)은 **설계 단계 위협 모델링·AI/LLM 보안 심화**를 담당한다(품질 카테고리, `security-reviewer`와 보안 방어 클러스터 형성). 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)은 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트다(🎮 게임 클러스터, 색상 `cyan` 공유). 1종(`memory-recaller` · `/recall`)은 리뷰/설계가 아니라 **사용자 개인의 파일 기반 장기기억(`E:\claude_memory\`)을 값싼 `haiku`로 대신 회상**하는 인프라 에이전트다(🧠 인프라, 저장소 첫 haiku·메모리 훅 자동 호출 + `/recall` 수동 호출·읽기 전용). 마지막으로 2026-07 추가된 3종은 엔지니어링 `refactor-strategist`(`/refactor`, 동작 보존 리팩터 계획·단계 설계), 문서 `docs-writer`(`/docs`, 개발자용 README·아키텍처·온보딩·ADR), 메타 `agent-definition-reviewer`(`/agentdef`, 이 라이브러리의 에이전트 정의 자체의 스펙·경계·규범 점검)로, 각각 품질·문서·메타 클러스터에 편입된다. 그리고 1종(`storyteller` · `/story`)은 프롬프트(뼈대)에 살을 붙여 **없던 이야기를 새로 짓는** 창작 생성 에이전트로, 저장소 첫 `fable`(창작 특화 모델) 에이전트다(✍️ 창작 클러스터, 기존 자산 재활용인 `content-repurposer`와 구분). 마지막 1종(`debugger` · `/debug`)은 **이미 발생한 증상에서 거꾸로 원인을 추적**하는 디버깅 에이전트다(🐞 품질 클러스터, 스택 무관 — 정적 리뷰인 `code-reviewer`·`unity-code-reviewer`, 결과 집계인 `test-runner`와 구분).
 
 ## 공통 규칙
 - 발견/제안은 **영향도(심각도) 순으로 정렬**
@@ -62,6 +62,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 35 | `docs-writer` | `/docs` | 문서 | 개발자용 기술문서(README·아키텍처·온보딩·ADR) 작성·정비 | Read, Grep, Glob |
 | 36 | `agent-definition-reviewer` | `/agentdef` | 메타 | 서브에이전트 정의(.md) 스펙·라우팅·경계·규범 점검 | Read, Grep, Glob |
 | 37 | `storyteller` | `/story` | 창작 | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성(fable) | Read, Grep, Glob |
+| 38 | `debugger` | `/debug` | 품질 | 버그·에러·간헐 실패의 근본 원인 규명(재현·가설 검증·이분 탐색) | Read, Grep, Glob, Bash |
 
 ---
 
@@ -71,7 +72,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 
 **1. code-reviewer (`/review`)**
 Next.js + FastAPI 코드의 품질·가독성·버그 가능성 리뷰. `git diff`로 변경분을 파악해 그 범위에 집중(커밋/PR 전 셀프 리뷰). 백엔드(Pydantic·async·DB 세션·예외·계층 분리), 프론트(서버/클라 경계·페칭·useEffect·타입). Next.js 15/16이면 Server Actions 보안·`use cache` 오캐시·React Compiler 중복 수동 메모도 점검(버전 불명확하면 "확인 필요"). 출력: 요약 → Must fix → Should fix → Nit.
-→ 보안 전용은 `security-reviewer`, 시각·접근성·UX는 `ui-ux-reviewer`, 프론트-백 API 계약 정합은 `api-contract-reviewer`, 로깅·관측성은 `observability-reviewer`, 동작 보존 리팩터 계획은 `refactor-strategist`.
+→ 보안 전용은 `security-reviewer`, 시각·접근성·UX는 `ui-ux-reviewer`, 프론트-백 API 계약 정합은 `api-contract-reviewer`, 로깅·관측성은 `observability-reviewer`, 동작 보존 리팩터 계획은 `refactor-strategist`, 이미 발생한 증상의 원인 규명은 `debugger`(코드리뷰는 증상 없는 정적 탐색).
 
 **2. security-reviewer (`/sec`)**
 OWASP 기준 보안 점검. 인증/인가(라우터 레벨 의존성까지 확인해 오탐 방지), IDOR/BOLA·BFLA, Next.js 미들웨어 인가 우회(CVE-2025-29927), RBAC, 경로 탐색, JWT(alg confusion·헤더 주입), 인젝션(SQL·SSTI·OS/NoSQL), XSS, 과잉 응답(API3), CSRF/SSRF, Mass Assignment, CORS, LLM 보안(OWASP LLM Top 10 2025: 프롬프트 인젝션·과도한 행위성·벡터/임베딩 약점 등). 출력: 심각도순 + "즉시 고쳐야 할 Top 3".
@@ -79,7 +80,7 @@ OWASP 기준 보안 점검. 인증/인가(라우터 레벨 의존성까지 확�
 
 **3. test-runner (`/test`)**
 pytest / Vitest·Jest(유닛) / Playwright·Cypress(E2E) 실행 후 실패 분석. 유닛과 E2E를 별개 러너로 인식 — E2E는 실행 비용·서버 기동 전제 때문에 요청 범위 밖이면 임의 실행 안 함. Vitest/jsdom은 async Server Component를 렌더 못 하므로 해당 실패는 프로덕션 버그로 단정하지 말고 Playwright E2E 영역임을 알림. 환경 준비(설치·venv)는 임의로 하지 않고 사전 조건으로 보고. 통과/실패 무관하게 테스트 품질 스캔(change-detector·목 그린)도 수행하며 green을 품질 증거로 칭찬하지 않음. 출력: 통과/실패/스킵 집계 → 실패별 원인 분류·제안, 플레이키·약한 테스트 표시.
-→ 커버리지 공백·약한 테스트 진단·보강 전략은 `test-strategy`.
+→ 커버리지 공백·약한 테스트 진단·보강 전략은 `test-strategy`. 1차 원인 분류로 안 풀리는 실패(간헐·환경 의존·회귀 시점 추적)는 `debugger`로 넘긴다.
 
 **4. test-strategy (`/coverage`)**
 테스트 커버리지 공백·약한 테스트 **진단 및 케이스 설계**(테스트 코드는 직접 작성 안 함). 안 짠 경로, 약한 단언(change-detector·목 그린·단언 약함), 테스트 구조, 스택별 핵심 경로 누락, 보강 우선순위. 출력: 요약 → 커버리지 공백(입력→기대결과) → 약한 테스트 → 제안.
@@ -138,7 +139,7 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 
 **16. observability-reviewer (`/obs`)**
 애플리케이션 **관측성** 점검("장애 시 추적 가능한가"가 기준). 구조적 로깅(맥락·레벨·노이즈), 상관관계 ID(request/trace) 전파(W3C `traceparent`/B3 포맷 일관성 포함), 에러 캡처·리포팅(예외 삼킴·Sentry·4xx/5xx 구분), 메트릭, 분산 트레이싱(OpenTelemetry **앱 측 계측**까지), 민감정보 로그 노출, 프론트 에러 바운더리·웹 바이탈. 수집·샘플링 파이프라인(OTel Collector·Alloy의 익스포터·tail sampling·배치)은 범위 밖. 출력: 요약(장애 추적 가능성) → 위험 Top 3(민감정보 로그·예외 삼킴·추적 불가) → 주의 → 제안.
-→ 배포·인프라(로그·트레이스 수집·샘플링 파이프라인·대시보드: OTel Collector·Alloy 등) 설정은 `devops-reviewer`, 일반 예외 처리·코드 품질은 `code-reviewer`.
+→ 배포·인프라(로그·트레이스 수집·샘플링 파이프라인·대시보드: OTel Collector·Alloy 등) 설정은 `devops-reviewer`, 일반 예외 처리·코드 품질은 `code-reviewer`, 이미 발생한 장애의 원인 규명은 `debugger`(이 에이전트는 추적 "가능성"의 공백을 점검).
 
 ### 🧭 메타 / 워크플로우
 
@@ -186,7 +187,7 @@ AI/LLM 보안 심화(OWASP LLM Top 10 2025). 프롬프트 인젝션(직접·간�
 
 **26. unity-code-reviewer (`/ureview`)**
 Unity + C# 게임 코드(싱글플레이어 2D 캐주얼)의 게임 엔진 고유 결함 리뷰. `git diff`로 `Assets/` 하위 `.cs` 변경분에 집중(Bash는 범위 식별 전용). MonoBehaviour 수명주기(OnDisable 구독 해제 누락), 프레임 루프 비용(Update 내 GetComponent/Find), GC 할당(매 프레임 new·박싱·LINQ·풀링 부재), 코루틴/async 취소 누수, 물리·프레임률 의존(Time.deltaTime·Rigidbody2D), fake-null(파괴된 오브젝트 참조), ScriptableObject 원본 오염. 성능·GC는 정적 리뷰로 의심 지점만, 실제 수치는 Profiler 측정 권고로 분리. 출력: 요약 → Must/Should/Nit → 측정 권고 → Top 3.
-→ 일반 웹 코드 리뷰는 `code-reviewer`, 게임 설계·코어 루프는 `game-design-architect`.
+→ 일반 웹 코드 리뷰는 `code-reviewer`, 게임 설계·코어 루프는 `game-design-architect`, 이미 발생한 런타임 오동작·크래시의 원인 규명은 `debugger`(이 에이전트는 증상 없는 정적 리뷰).
 
 **27. game-design-architect (`/gdd`)**
 구현 전 2D 캐주얼 게임 디자인·시스템 구조 설계. 코어 게임플레이 루프·재미 가설, 난이도 곡선·페이싱, 시스템 분해(상태머신·이벤트·SO 데이터 경계·세이브), 수직 슬라이스·MVP·컷 후보. 솔로 개발 최대 리스크 "미완성"을 겨냥해 야심 기능마다 컷 후보 강제, 재미는 단정 않고 "가설 + 플레이테스트 검증 질문"으로. 출력(설계): 요구/가정 → 코어 루프·재미 가설 → 시스템 분해 → 진행·난이도 → 수직 슬라이스·컷 라인 → 검증 질문.
@@ -232,13 +233,19 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 프롬프트(뼈대: 한 줄 아이디어·설정·인물·장르·분량)에 살을 붙여 완성형 이야기(단편·서사·시나리오·브랜드 스토리·에피소드)를 짓는다. 저장소 첫 `fable`(창작 특화 모델, +`effort: high`) 에이전트. 작법: ① 뼈대 확정(로그라인·인물 욕망/결핍·갈등·판돈·구조) → ② 살(show-don't-tell·감각 디테일·서브텍스트 대사·시점 일관성·페이싱) → ③ 자가 점검 후 약한 구간 재작성. 표절 금지·사용자 핵심 설정/결말 보존·채운 가정 명시, 유해 실행 지침·미성년 성적 묘사·실존 인물 명예훼손 거부. 출력: 로그라인 → 뼈대 요약 → 이야기 본문(제목) → 채운 가정 & 확장 포인트.
 → 기존 자산을 매체별로 파생하는 것은 `content-repurposer`, 카피 품질은 `copy-reviewer`, 확정 보이스 준수는 `brand-voice-guardian`, 프롬프트·지침 시스템 설계는 `ai-workspace-architect`.
 
+### 🐞 디버깅 (품질)
+
+**38. debugger (`/debug`)** — 품질
+**이미 발생한 증상**에서 거꾸로 근본 원인을 추적한다(스택 무관 — 웹이 주력, Unity C# 런타임 증상도 동일 절차). 증상 확정(기대 vs 실제·재현율·환경) → 최소 재현 → 관찰 수집(스택트레이스는 *우리 코드의 가장 깊은 프레임*부터) → 가설 3~5개(각각 반증 조건) → 검증·축소(코드 경로·시간(`git log`/`blame`)·입력·환경 이분) → 원인 확정 → 수정 방향·재발 방지 테스트. 버그 클래스 렌즈: 간헐·플레이키(경쟁 조건·순서 의존), 상태·데이터, 경계 넘김(계약·캐시 stale·하이드레이션), 동시성·자원, 환경차, Unity 런타임(fake-null·구독 해제). 관찰이 추측을 이긴다 — 못 밝히면 **미확정으로 정직 보고**(범인 창작 금지). 코드 수정 안 함, `git bisect`·`checkout` 등 워킹트리 변경은 절차만 제시, Bash는 재현·조회 전용, 계측은 코드에 심지 않고 계획만. 출력: 증상 요약 → 관찰된 사실 → 가설·검증 표 → 근본 원인(인과 사슬) → 수정 방향 → 재발 방지 → 미해결·다음 관찰.
+→ 테스트 실행·집계·1차 분류는 `test-runner`(테스트를 아직 안 돌렸으면 거기부터 — 안 풀리는 실패가 이 에이전트 몫), 증상 없는 정적 리뷰는 `code-reviewer`·`unity-code-reviewer`, 추적 인프라 공백은 `observability-reviewer`, 취약점은 `security-reviewer`. **성능은 축으로 가른다** — "무엇이 느린가"(병목 진단)는 `perf-auditor`·`db-optimizer`·`unity-perf-auditor`, "언제부터·무엇이 바뀌어 느려졌나"(회귀 시점 추적)는 이 에이전트.
+
 ---
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
-양쪽 description이 서로를 가리키는 대칭 위임(`↔`). 33개 description을 **전수 스캔해 재구성한 34쌍 전량**이며 클러스터별로 나눈다(2026-07 재검증, 1.56).
+양쪽 description이 서로를 가리키는 대칭 위임(`↔`). 1.56의 전수 스캔 34쌍에 **1.64에서 `debugger` 4쌍을 더한 38쌍**이며 클러스터별로 나눈다.
 
-**웹 스택 (17쌍)**
+**웹 스택 (20쌍)**
 | 쌍 | 구분 |
 |---|---|
 | code-reviewer ↔ security-reviewer | 일반 품질/버그 ↔ 보안 전용 |
@@ -258,6 +265,9 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 | devops-reviewer ↔ system-architect | 배포·인프라 설정 "점검" ↔ 시스템 구조 "설계" ⟵ 1.56에서 일방향→대칭 정정 |
 | api-contract-reviewer ↔ api-doc-writer | 프론트-백 계약 "정합성 검증" ↔ 백엔드 엔드포인트 "카탈로그·문서화" |
 | test-strategy ↔ test-runner | 커버리지 공백·약한 테스트 "설계" ↔ 실행·실패 "진단" |
+| debugger ↔ test-runner | 실패의 "근본 원인 규명"(재현·가설·이분) ↔ 테스트 "실행·집계·1차 분류" |
+| debugger ↔ code-reviewer | 이미 난 증상에서 "역추적" ↔ 증상 없이 변경분에서 "잠재 결함" 정적 리뷰 |
+| debugger ↔ observability-reviewer | 지금 있는 로그로 "원인 규명" ↔ 추적 "가능성" 자체의 공백 점검 |
 
 **콘텐츠 / 마케팅 (3쌍)**
 | 쌍 | 구분 |
@@ -287,6 +297,7 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 | 쌍 | 구분 |
 |---|---|
 | code-reviewer ↔ unity-code-reviewer | 웹(Next.js/FastAPI) 코드 ↔ Unity C# 게임 코드 |
+| debugger ↔ unity-code-reviewer | 이미 난 런타임 오동작·크래시 "원인 규명"(스택 무관) ↔ 엔진 특유 결함 "정적 리뷰" |
 | perf-auditor ↔ unity-perf-auditor | 웹 프론트 성능(번들·CWV) ↔ Unity 런타임 성능·렌더링 |
 | system-architect ↔ game-design-architect | 풀스택 웹 아키텍처 ↔ 2D 캐주얼 게임 디자인·시스템 |
 | devops-reviewer ↔ unity-build-auditor | 일반 CI/CD·시크릿·파이프라인 ↔ Unity 빌드/릴리스·스토어 제출 |
@@ -313,6 +324,7 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 | game-ui-reviewer → ui-ux-reviewer | 웹 화면·WCAG·i18n은 웹 UI로(웹 UI는 게임을 역참조 안 함) |
 | unity-build-auditor → unity-code-reviewer | keystore·설정 판정 후 코드 품질은 코드 리뷰로 |
 | playtest-designer → test-runner | 사람 테스트와 별개인 자동 테스트 러너로 |
+| debugger → perf-auditor / db-optimizer / unity-perf-auditor / security-reviewer | "무엇이 느린가"(병목)는 성능 3종, "취약점"은 보안으로. "언제부터 느려졌나"(회귀 시점)는 debugger 유지(역참조 없음) |
 
 > **정정(1.56)**: 이전 문서는 `system-architect`를 "내보내는 위임이 없는 최상위 설계 에이전트"라 기술하고 `devops-reviewer → system-architect`를 일방향으로 분류했으나, 현재 `system-architect` description은 5개 특화(api-contract-reviewer·data-modeler·devops-reviewer·security-reviewer·game-design-architect)로 위임을 **내보낸다**. devops ↔ system-architect는 **대칭**(위 웹 표)으로 이동했다.
 
