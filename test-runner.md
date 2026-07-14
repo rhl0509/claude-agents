@@ -1,9 +1,9 @@
 ---
 name: test-runner
-description: 테스트를 실행하고 실패 원인을 분석할 때 사용. pytest(FastAPI), Vitest/Jest 유닛·Playwright/Cypress E2E(Next.js) 등을 돌리고 실패한 케이스를 진단한다. 코드 수정 후 "테스트 돌려봐", "E2E 돌려봐"가 필요할 때 호출. 커버리지 공백·약한 테스트 진단·보강 전략은 test-strategy, 1차 원인 분류로 안 풀리는 실패(간헐·환경 의존·회귀 시점 추적)나 테스트 밖에서 난 버그·장애의 근본 원인 규명은 debugger를 쓴다. 코드 수정 직후 선제적으로(use proactively) 관련 테스트를 돌려 회귀를 잡는다.
+description: 테스트를 실행하고 실패 원인을 분석할 때 사용. pytest(FastAPI), Vitest/Jest 유닛·Playwright/Cypress E2E(Next.js) 등을 돌리고 실패한 케이스를 진단한다. 코드 수정 후 "테스트 돌려봐", "E2E 돌려봐"가 필요할 때 호출. 커버리지 공백·약한 테스트 진단·보강 전략은 test-strategy, 1차 원인 분류로 안 풀리는 실패(간헐·환경 의존·회귀 시점 추적)나 테스트 밖에서 난 버그·장애의 근본 원인 규명은 debugger, 게임 코드(Unity Test Framework의 EditMode/PlayMode·엔진 의존 seam·결정론적 리플레이)의 테스트 전략·케이스 설계는 game-test-strategy를 쓴다(이 에이전트는 pytest·Vitest/Jest·Playwright/Cypress 실행 전제 — Unity 테스트 실행은 담당 에이전트가 없어 사용자·CI가 직접 돌린다). 코드 수정 직후 선제적으로(use proactively) 관련 테스트를 돌려 회귀를 잡는다.
 tools: Bash, Read, Grep, Glob
 model: sonnet
-version: 1.10
+version: 1.11
 updated: 2026-07-14
 color: blue
 memory: user

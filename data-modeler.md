@@ -5,7 +5,7 @@ tools: Read, Grep, Glob
 model: opus
 effort: high
 version: 1.7
-updated: 2026-07-05
+updated: 2026-07-14
 color: green
 memory: user
 skills:

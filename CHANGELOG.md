@@ -6,7 +6,23 @@
 
 **작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync.ps1`을 실행해 전역(`%USERPROFILE%\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`(상단 버전 요약·버전 표·해당 상세 블록)와 `AGENTS.md`·`CLAUDE.md`의 관련 내용을 갱신한 뒤 ④ `sync.ps1` 실행 후 `git commit` 한다. **원격 `git push`는 명시 요청 시에만** 한다(public repo에서 push는 곧 공개 게시 — sync만으로 로컬 에이전트는 이미 작동).
 
-**effort 튜닝 요약(1.57~1.60)**: opus 30종 `high` 일괄 채택(1.57) → 보안 3종 `xhigh`(1.58) → fable `xhigh`(1.59) → 1.60에서 신규 opus 3종(refactor-strategist·docs-writer·agent-definition-reviewer)도 `high`로 신설. 현재 **`xhigh` 4종**(security-reviewer·threat-modeler·llm-ai-security-reviewer·ai-workspace-architect), 나머지 opus 29종 `high`, sonnet·haiku는 세션 상속. `effort`는 실행 정책 필드라 기존 에이전트 개별 `version` 미bump(신규는 v1.0 신설).
+**effort 튜닝 요약(1.57~1.60)**: opus 30종 `high` 일괄 채택(1.57) → 보안 3종 `xhigh`(1.58) → fable `xhigh`(1.59) → 1.60에서 신규 opus 3종(refactor-strategist·docs-writer·agent-definition-reviewer)도 `high`로 신설. 현재 **`xhigh` 4종**(security-reviewer·threat-modeler·llm-ai-security-reviewer·ai-workspace-architect), 나머지 opus 38종 `high`(1.69 기준 opus 총 42종), sonnet·haiku는 세션 상속. `effort`는 실행 정책 필드라 기존 에이전트 개별 `version` 미bump(신규는 v1.0 신설).
+
+---
+
+## 1.70 (2026-07-14) — 1.69 도그푸딩 점검 반영: 폴백 흡수·라우팅 누수·카운트 드리프트 정정
+
+`agent-definition-reviewer`로 신규 6종 + 인접 8종 + 문서를 점검하고 **확정 결함만** 반영했다(1.61·1.67 전례). 신규 6종의 frontmatter·본문 규범 자체는 무결로 판정됐고, 문제는 전부 **묶음 밖의 이웃**에 있었다.
+
+- **[P1] code-reviewer 1.12 → 1.13 — 폴백 조항이 신규 도메인 3종을 흡수하고 있었다.** 1.68에서 넣은 "다른 스택(파이썬 도구·셸 등)의 일반 코드 품질도 폴백으로 맡는다"가, 신규 3종의 대상(학습 스크립트 = 파이썬, 데몬·동기화 = 셸, 회계 = 백엔드 파이썬)을 **정당하게 가져가면서 누출·차대 균형·로그 증발은 못 보는** 구조였다. 6종 중 3종의 라우팅이 새는 최대 구멍. → 폴백을 **일반 코드 품질(버그·가독성·구조)에 한정**하고 도메인 규칙 3종을 카브아웃("코드가 도는지"는 여기, "**결과가 맞는지**"는 전담).
+- **[P1] test-runner 1.10 → 1.11 + game-test-strategy 1.0 → 1.1 — 존재하지 않는 실행 담당자를 가리키고 있었다.** game-test-strategy가 "테스트 실행은 test-runner"로 위임했으나 test-runner의 스택 선언은 pytest·Vitest·Playwright뿐이라 **Unity Test Framework 실행의 소유자가 46종 중 아무도 없었다**. → test-runner에 back-ref 추가(+ "Unity 테스트 실행은 담당 에이전트 없음" 명시), game-test-strategy는 실행을 **사용자·CI로 정직하게 닫음**(⚠️ 실행 자동화가 필요하면 별도 논의).
+- **[P2] debugger 1.1 → 1.2** — "데몬 로그가 12시간 비었다" 류가 들어오면 **로컬 데몬 문제를 웹 앱 전용 observability-reviewer로 오라우팅**하고 있었다(1.69가 만든 경계를 debugger만 몰랐다). → automation-reliability-reviewer 위임 추가.
+- **[P2] automation-reliability-reviewer 1.0 → 1.1** — 트리거의 "워커"가 FastAPI BackgroundTasks·Celery(= observability 영역)와 동시 매치될 수 있었다. → **"독립 프로세스로 도는 워커 — 앱과 별개로 OS가 띄우는 것"**으로 좁히고, 앱 프로세스 내부 태스크는 observability로 명시.
+- **[P2/P3] game-localization-reviewer 1.0 → 1.1** — 게임 내 UI 문구를 마케팅 카피 전용인 `copy-reviewer`로 보내던 오배송 정정(스토어 소개문·마케팅 문구만 copy-reviewer). **game-test-strategy**엔 빠져 있던 본문 규범 2줄(파일 미수정 선언·"추정/확인 필요" 표기) 보강.
+- **[P2] 문서 카운트 드리프트** — 위임 표에서 **도메인 4쌍이 게임 표 안에 잘못 들어가** 있었다(게임 헤더 "9쌍"인데 실제 20행). → 도메인 소표로 분리, 게임 16쌍, 전체 **52쌍**, `game-test-strategy ↔ test-strategy`는 클러스터 교차로 이동. 한글 별칭 프로즈 "20종" → **28종**. CHANGELOG 자체 수치도 정정(1.69 "10쌍" → 9쌍, effort 요약의 "현재 opus 29종" → 38종).
+- **[P2] `updated` 미갱신 5종** — version은 올랐는데 날짜가 그대로였다(test-strategy·devops-reviewer·data-modeler·game-feel-reviewer·unity-perf-auditor) → `2026-07-14`.
+- **보류(의미 변경 — 결정 필요)** — **UI 버튼음의 소유자 공백**: `game-audio-reviewer`가 "UI 버튼음의 UX 일관성은 game-ui-reviewer"로 보내지만 game-ui-reviewer 정의에는 **사운드가 한 글자도 없다**. 개념적으로는 "UI 조작 피드백 → game-ui" 규칙이 맞지만 실제로는 아무도 안 본다. game-ui를 넓힐지, gaudio가 회수할지 결정 후 반영.
+- **tools 최소권한 재확인** — 신규 6종의 `Read, Grep, Glob`은 과소가 아님으로 판정. 특히 `ml-experiment-reviewer`에 Bash 불필요(`.ipynb`는 JSON이라 Read/Grep으로 완독되고, 판정 근거가 전부 정적 구조 — Bash를 주면 학습·실행 유혹으로 읽기전용 계약이 약해진다). `automation`도 셸 스크립트가 분석 대상(인젝션 표면)이라 미부여가 방어적.
 
 ---
 
@@ -24,7 +40,7 @@
 - **game-test-strategy** (`/gtest`, `/게임테스트`) v1.0 — 게임 로직이 테스트 불가능한 건 복잡해서가 아니라 **엔진에 붙어 있어서**다. 그래서 절반은 seam 찾기: 순수 로직 분리(판정·전이·밸런스·직렬화), 시간·난수·저장소 주입, EditMode/PlayMode 분류, 커버리지 공백(종료 조건 전 경로·전이표 예외 칸·저장 왕복·**속성 기반 불변식**), **결정론적 시뮬레이션 + 리플레이 골든 테스트**(게임에서 가성비 최고), 플레이키(씬·`static` 잔존 — Fast Enter Play Mode와 결합 시 특히).
 - **game-audio-reviewer** (`/gaudio`, `/오디오`) v1.0 — 믹서 버스 분리·음량 설정 저장(**로그 스케일 변환**)·믹서 우회 재생, **동시 발음 제한**(같은 SFX 다량 겹침 = 찢어짐), 반복 SFX 랜덤화, BGM 루프·크로스페이드·덕킹, **임포트 설정**(짧은 SFX는 메모리 적재, 긴 BGM은 스트리밍 — 반대면 메모리 폭탄/지연), 음소거로도 게임이 성립하는가. **들을 수 없다**는 한계를 전제로 청취 확인 목록을 분리.
 
-**경계 정리(대칭 위임 10쌍 신설)** — `test-strategy` 1.4 → **1.5**(웹 전제 명시 + game-test-strategy·ml-experiment-reviewer 위임), `observability-reviewer` 1.3 → **1.4**(웹 앱 런타임 ↔ 로컬 데몬), `devops-reviewer` 1.8 → **1.9**(CI/CD ↔ 상시 실행 자동화), `data-modeler` 1.6 → **1.7**(스키마 설계 ↔ 회계 규칙 감사), `game-ui-reviewer` 1.1 → **1.2**(레이아웃 ↔ 문자열·폰트), `game-feel-reviewer` 1.2 → **1.3**(타이밍 ↔ 믹싱 구조), `unity-perf-auditor` 1.0 → **1.1**(오디오 메모리·CPU ↔ 오디오 구조), `playtest-designer` 1.1 → **1.2**(사람 ↔ 기계 테스트).
+**경계 정리(대칭 위임 9쌍 신설)** — `test-strategy` 1.4 → **1.5**(웹 전제 명시 + game-test-strategy·ml-experiment-reviewer 위임), `observability-reviewer` 1.3 → **1.4**(웹 앱 런타임 ↔ 로컬 데몬), `devops-reviewer` 1.8 → **1.9**(CI/CD ↔ 상시 실행 자동화), `data-modeler` 1.6 → **1.7**(스키마 설계 ↔ 회계 규칙 감사), `game-ui-reviewer` 1.1 → **1.2**(레이아웃 ↔ 문자열·폰트), `game-feel-reviewer` 1.2 → **1.3**(타이밍 ↔ 믹싱 구조), `unity-perf-auditor` 1.0 → **1.1**(오디오 메모리·CPU ↔ 오디오 구조), `playtest-designer` 1.1 → **1.2**(사람 ↔ 기계 테스트).
 
 **모델·effort** — opus 36종 → **42종**(전원 `effort: high`). 게임 9 → 12종, 도메인 클러스터 3종 신설. 커맨드 40 → 46(+ 한글 별칭 6개: `/머신러닝`·`/회계`·`/자동화`·`/현지화`·`/게임테스트`·`/오디오`).
 
