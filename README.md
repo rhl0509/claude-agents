@@ -26,46 +26,90 @@
 
 ## 에이전트 38종
 
-| # | 에이전트 | 슬래시 | 분류 | 버전 | 모델 | 역할 | 도구 |
-|---|---|---|---|---|---|---|---|
-| 1 | `code-reviewer` | `/review` | 품질 | 1.11 | opus | 코드 품질·가독성·버그 리뷰 | Read, Grep, Glob, Bash |
-| 2 | `security-reviewer` | `/sec` | 품질 | 1.11 | opus | 보안 취약점(OWASP) 점검 | Read, Grep, Glob, WebSearch, WebFetch |
-| 3 | `test-runner` | `/test` | 품질 | 1.10 | sonnet | 테스트 실행·실패 분석 | Bash, Read, Grep, Glob |
-| 4 | `test-strategy` | `/coverage` | 품질 | 1.4 | opus | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
-| 5 | `perf-auditor` | `/perf` | 품질 | 1.4 | opus | Next.js 프론트 성능 점검 | Read, Grep, Glob |
-| 6 | `api-contract-reviewer` | `/contract` | 품질 | 1.1 | opus | 프론트-백 API 계약 정합성 점검 | Read, Grep, Glob |
-| 7 | `api-doc-writer` | `/apidoc` | 문서 | 1.6 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
-| 8 | `db-optimizer` | `/db` | DB | 1.10 | opus | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
-| 9 | `migration-reviewer` | `/migrate` | DB | 1.2 | opus | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
-| 10 | `ui-ux-reviewer` | `/ui` | 디자인 | 1.5 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
-| 11 | `design-system-architect` | `/dsystem` | 디자인 | 1.4 | opus | 디자인 토큰·컴포넌트 설계 (DESIGN.md) | Read, Grep, Glob, Context7 |
-| 12 | `data-modeler` | `/datamodel` | 설계 | 1.6 | opus | 데이터 모델/스키마 설계 | Read, Grep, Glob |
-| 13 | `system-architect` | `/arch` | 설계 | 1.5 | opus | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
-| 14 | `devops-reviewer` | `/devops` | 운영 | 1.8 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
-| 15 | `dependency-auditor` | `/deps` | 운영 | 1.1 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
-| 16 | `observability-reviewer` | `/obs` | 운영 | 1.3 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
-| 17 | `ai-workspace-architect` | `/fable` | 메타 | 1.3 | opus | AI 작업환경 진단·재설계(프롬프트·지침·CLAUDE.md·SKILL.md·모델별 전략) | Read, Grep, Glob, WebSearch, WebFetch |
-| 18 | `copy-reviewer` | `/copy` | 콘텐츠 | 1.0 | opus | 마케팅 카피 품질 리뷰(후킹·CTA·과장/윤리) | Read, Grep, Glob |
-| 19 | `landing-reviewer` | `/landing` | 콘텐츠 | 1.0 | opus | 상세페이지·랜딩 전환 구조 리뷰 | Read, Grep, Glob |
-| 20 | `seo-optimizer` | `/seo` | 콘텐츠 | 1.0 | opus | 블로그·페이지 SEO 점검 | Read, Grep, Glob, WebSearch, WebFetch |
-| 21 | `fact-checker` | `/factcheck` | 콘텐츠 | 1.0 | opus | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
-| 22 | `content-repurposer` | `/repurpose` | 콘텐츠 | 1.0 | opus | 1소스 → 멀티 포맷 재활용 | Read, Grep, Glob |
-| 23 | `brand-voice-guardian` | `/voice` | 콘텐츠 | 1.0 | opus | 브랜드 보이스(문체·톤) 일관성 점검 | Read, Grep, Glob |
-| 24 | `threat-modeler` | `/threat` | 품질 | 1.1 | opus | 설계 단계 위협 모델링(STRIDE) | Read, Grep, Glob, WebSearch, WebFetch |
-| 25 | `llm-ai-security-reviewer` | `/aisec` | 품질 | 1.1 | opus | AI/LLM 보안 심화(OWASP LLM Top 10) | Read, Grep, Glob, WebSearch, WebFetch |
-| 26 | `unity-code-reviewer` | `/ureview` | 게임 | 1.2 | opus | Unity C# 게임 코드 리뷰(수명주기·GC·프레임/물리) | Read, Grep, Glob, Bash |
-| 27 | `game-design-architect` | `/gdd` | 게임 | 1.2 | opus | 2D 캐주얼 게임 디자인·시스템 설계 | Read, Grep, Glob |
-| 28 | `game-ui-reviewer` | `/gui` | 게임 | 1.0 | opus | 게임 UI/UX(HUD·메뉴·스케일링·내비·가독성) 점검 | Read, Grep, Glob |
-| 29 | `game-feel-reviewer` | `/feel` | 게임 | 1.1 | opus | 게임플레이 손맛/juice(입력 관대성·히트스톱·카메라·피드백) 점검 | Read, Grep, Glob |
-| 30 | `unity-perf-auditor` | `/uperf` | 게임 | 1.0 | opus | Unity 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler 해석) | Read, Grep, Glob |
-| 31 | `playtest-designer` | `/playtest` | 게임 | 1.0 | opus | 플레이테스트 프로토콜 설계(가설·참가자·지표·설문·텔레메트리) | Read, Grep, Glob |
-| 32 | `unity-build-auditor` | `/ubuild` | 게임 | 1.0 | opus | 빌드/릴리스·스토어 제출 점검(PlayerSettings·크기·서명·권한) | Read, Grep, Glob |
-| 33 | `memory-recaller` | `/recall` | 인프라 | 1.3 | haiku | 파일 기반 장기기억 회상(E:\claude_memory 인덱스·토픽) — 값싼 Haiku 회상 | Read, Grep, Glob |
-| 34 | `refactor-strategist` | `/refactor` | 품질 | 1.0 | opus | 동작 보존 리팩터 계획·단계 설계(추출·중복·의존·seam) | Read, Grep, Glob |
-| 35 | `docs-writer` | `/docs` | 문서 | 1.1 | opus | 개발자용 기술문서(README·아키텍처·온보딩·ADR) 작성·정비 | Read, Grep, Glob |
-| 36 | `agent-definition-reviewer` | `/agentdef` | 메타 | 1.1 | opus | 서브에이전트 정의(.md) 스펙·라우팅·경계·규범 점검 | Read, Grep, Glob |
-| 37 | `storyteller` | `/story` | 창작 | 1.0 | fable | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성 | Read, Grep, Glob |
-| 38 | `debugger` | `/debug` | 품질 | 1.0 | opus | 버그·에러·간헐 실패의 근본 원인 규명(재현·가설 검증·이분 탐색) | Read, Grep, Glob, Bash |
+**관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). `#`은 아래 상세 블록의 번호와 같아서, 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록은 추가 순서대로 있음).
+
+#### 🔍 코드 품질 · 디버깅 · 테스트
+
+| # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
+|---|---|---|---|---|---|---|
+| 1 | `code-reviewer` | `/review` `/리뷰` | 1.11 | opus | 코드 품질·가독성·버그 리뷰(증상 없는 정적 탐색) | Read, Grep, Glob, Bash |
+| 38 | `debugger` | `/debug` `/디버그` | 1.0 | opus | 이미 난 버그·에러·간헐 실패의 근본 원인 규명(재현·가설 검증·이분 탐색) | Read, Grep, Glob, Bash |
+| 3 | `test-runner` | `/test` `/테스트` | 1.10 | sonnet | 테스트 실행·실패 분석(1차 원인 분류) | Bash, Read, Grep, Glob |
+| 4 | `test-strategy` | `/coverage` `/커버리지` | 1.4 | opus | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
+| 34 | `refactor-strategist` | `/refactor` `/리팩터` | 1.0 | opus | 동작 보존 리팩터 계획·단계 설계(추출·중복·의존·seam) | Read, Grep, Glob |
+
+#### 🔒 보안 (설계 → 코드 → AI)
+
+| # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
+|---|---|---|---|---|---|---|
+| 24 | `threat-modeler` | `/threat` | 1.1 | opus | 설계 단계 위협 모델링(STRIDE) — 구현 **전** | Read, Grep, Glob, WebSearch, WebFetch |
+| 2 | `security-reviewer` | `/sec` `/보안` | 1.11 | opus | 코드 보안 취약점(OWASP) 점검 — 구현 **후** | Read, Grep, Glob, WebSearch, WebFetch |
+| 25 | `llm-ai-security-reviewer` | `/aisec` | 1.1 | opus | AI/LLM 보안 심화(OWASP LLM Top 10) | Read, Grep, Glob, WebSearch, WebFetch |
+
+#### 🗄 데이터 / DB
+
+| # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
+|---|---|---|---|---|---|---|
+| 12 | `data-modeler` | `/datamodel` `/데이터모델` | 1.6 | opus | 데이터 모델/스키마 **설계**(ERD·키·제약) | Read, Grep, Glob |
+| 8 | `db-optimizer` | `/db` `/디비` | 1.10 | opus | MySQL 쿼리·인덱스 **성능 튜닝** | Read, Grep, Glob, Bash |
+| 9 | `migration-reviewer` | `/migrate` `/마이그레이션` | 1.2 | opus | 스키마 마이그레이션 **안전성**(락·백필·롤백) | Read, Grep, Glob |
+
+#### 🏗 아키텍처 · API · 문서
+
+| # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
+|---|---|---|---|---|---|---|
+| 13 | `system-architect` | `/arch` `/아키텍처` | 1.5 | opus | 시스템 아키텍처 설계(계층·경계·확장성) | Read, Grep, Glob, Context7 |
+| 6 | `api-contract-reviewer` | `/contract` `/계약` | 1.1 | opus | 프론트-백 API 계약 정합성 점검 | Read, Grep, Glob |
+| 7 | `api-doc-writer` | `/apidoc` | 1.6 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
+| 35 | `docs-writer` | `/docs` `/문서` | 1.1 | opus | 개발자용 기술문서(README·아키텍처·온보딩·ADR) | Read, Grep, Glob |
+
+#### 🎨 프론트엔드 (화면 · 디자인 · 성능)
+
+| # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
+|---|---|---|---|---|---|---|
+| 10 | `ui-ux-reviewer` | `/ui` `/화면` | 1.5 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
+| 11 | `design-system-architect` | `/dsystem` | 1.4 | opus | 디자인 토큰·컴포넌트 설계(DESIGN.md) | Read, Grep, Glob, Context7 |
+| 5 | `perf-auditor` | `/perf` `/성능` | 1.4 | opus | Next.js 프론트 성능(번들·CWV·캐싱) | Read, Grep, Glob |
+
+#### 🚀 운영 (배포 · 의존성 · 관측성)
+
+| # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
+|---|---|---|---|---|---|---|
+| 14 | `devops-reviewer` | `/devops` `/배포` | 1.8 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
+| 15 | `dependency-auditor` | `/deps` `/의존성` | 1.1 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
+| 16 | `observability-reviewer` | `/obs` `/관측성` | 1.3 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
+
+#### 🎮 게임 (Unity + C#, 2D 캐주얼)
+
+| # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
+|---|---|---|---|---|---|---|
+| 27 | `game-design-architect` | `/gdd` | 1.2 | opus | 게임 디자인·시스템 설계(코어 루프·난이도·수직 슬라이스) | Read, Grep, Glob |
+| 26 | `unity-code-reviewer` | `/ureview` | 1.2 | opus | Unity C# 코드 리뷰(수명주기·GC·프레임/물리) | Read, Grep, Glob, Bash |
+| 29 | `game-feel-reviewer` | `/feel` | 1.1 | opus | 게임플레이 손맛/juice(입력 관대성·히트스톱·카메라) | Read, Grep, Glob |
+| 28 | `game-ui-reviewer` | `/gui` | 1.0 | opus | 게임 UI/UX(HUD·메뉴·스케일링·내비·가독성) | Read, Grep, Glob |
+| 30 | `unity-perf-auditor` | `/uperf` | 1.0 | opus | 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler) | Read, Grep, Glob |
+| 31 | `playtest-designer` | `/playtest` | 1.0 | opus | 플레이테스트 프로토콜 설계(가설·참가자·지표·텔레메트리) | Read, Grep, Glob |
+| 32 | `unity-build-auditor` | `/ubuild` | 1.0 | opus | 빌드/릴리스·스토어 제출 점검(PlayerSettings·서명·권한) | Read, Grep, Glob |
+
+#### 📣 콘텐츠 / 마케팅
+
+| # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
+|---|---|---|---|---|---|---|
+| 18 | `copy-reviewer` | `/copy` `/카피` | 1.1 | opus | 마케팅 카피 품질 리뷰(후킹·CTA·과장/윤리) | Read, Grep, Glob |
+| 19 | `landing-reviewer` | `/landing` | 1.0 | opus | 상세페이지·랜딩 전환 구조 리뷰 | Read, Grep, Glob |
+| 20 | `seo-optimizer` | `/seo` | 1.0 | opus | 블로그·페이지 SEO 점검 | Read, Grep, Glob, WebSearch, WebFetch |
+| 21 | `fact-checker` | `/factcheck` | 1.0 | opus | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
+| 22 | `content-repurposer` | `/repurpose` | 1.1 | opus | 1소스 → 멀티 포맷 재활용 | Read, Grep, Glob |
+| 23 | `brand-voice-guardian` | `/voice` | 1.0 | opus | 브랜드 보이스(문체·톤) 일관성 점검 | Read, Grep, Glob |
+| 37 | `storyteller` | `/story` `/이야기` | 1.0 | **fable** | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성 | Read, Grep, Glob |
+
+#### 🧭 메타 / 인프라 (내 작업환경 자체)
+
+| # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
+|---|---|---|---|---|---|---|
+| 17 | `ai-workspace-architect` | `/fable` | 1.3 | opus | AI 작업환경 진단·재설계(프롬프트·CLAUDE.md·SKILL.md·모델별 전략) | Read, Grep, Glob, WebSearch, WebFetch |
+| 36 | `agent-definition-reviewer` | `/agentdef` | 1.1 | opus | 이 라이브러리의 에이전트 정의(.md) 스펙·경계·규범 점검 | Read, Grep, Glob |
+| 33 | `memory-recaller` | `/recall` `/회상` | 1.3 | **haiku** | 파일 기반 장기기억 회상(`E:\claude_memory`) — 값싼 Haiku 회상 | Read, Grep, Glob |
 
 ### 🔍 품질 / QA
 
