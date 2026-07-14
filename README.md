@@ -3,16 +3,16 @@
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
 코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터).
 
-- 에이전트 수: **40종** (개발 스택 리뷰·엔지니어링·문서 19종 + 메타 2종 + 콘텐츠/마케팅 6종 + 창작 1종 + 보안 심화 2종 + 게임 9종 + 인프라 1종)
+- 에이전트 수: **46종** (개발 스택 리뷰·엔지니어링·문서 19종 + 도메인 3종(ML·회계·자동화) + 메타 2종 + 콘텐츠/마케팅 6종 + 창작 1종 + 보안 심화 2종 + 게임 12종 + 인프라 1종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
 - 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.12**, `test-runner` **v1.10**, `code-reviewer` **v1.12**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `observability-reviewer`·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 9종 `unity-code-reviewer` **v1.4**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.2**·`game-ui-reviewer`·`unity-build-auditor`·`playtest-designer`·`multiplayer-rule-reviewer` **v1.1**·`unity-perf-auditor`·`save-data-reviewer` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
-- 추론 강도(`effort`): opus 심층추론 36종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
+- 추론 강도(`effort`): opus 심층추론 42종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
 
 ## 목차
-- [에이전트 40종](#에이전트-40종)
+- [에이전트 46종](#에이전트-46종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -24,7 +24,7 @@
 
 ---
 
-## 에이전트 40종
+## 에이전트 46종
 
 **관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했고, `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록은 추가 순서대로 있음).
 
@@ -34,9 +34,10 @@
 |---|---|---|---|---|---|---|
 | 1 | `code-reviewer` | `/review` `/리뷰` | 1.12 | opus | 코드 품질·가독성·버그 리뷰(증상 없는 정적 탐색 · 타 스택 폴백) | Read, Grep, Glob, Bash |
 | 3 | `test-runner` | `/test` `/테스트` | 1.10 | sonnet | 테스트 실행·실패 분석(1차 원인 분류) | Bash, Read, Grep, Glob |
-| 4 | `test-strategy` | `/coverage` `/커버리지` | 1.4 | opus | 테스트 커버리지 공백·약한 테스트 진단 | Read, Grep, Glob |
+| 4 | `test-strategy` | `/coverage` `/커버리지` | 1.5 | opus | 테스트 커버리지 공백·약한 테스트 진단(웹 스택) | Read, Grep, Glob |
 | 34 | `refactor-strategist` | `/refactor` `/리팩터` | 1.0 | opus | 동작 보존 리팩터 계획·단계 설계(추출·중복·의존·seam) | Read, Grep, Glob |
-| 38 | `debugger` | `/debug` `/디버그` | 1.0 | opus | 이미 난 버그·에러·간헐 실패의 근본 원인 규명(재현·가설 검증·이분 탐색) | Read, Grep, Glob, Bash |
+| 38 | `debugger` | `/debug` `/디버그` | 1.1 | opus | 이미 난 버그·에러·간헐 실패의 근본 원인 규명(재현·가설 검증·이분 탐색) | Read, Grep, Glob, Bash |
+| 42 | `ml-experiment-reviewer` | `/ml` `/머신러닝` | 1.0 | opus | **ML 실험 설계 감사**(미래 정보 누출·검증 분할·백테스트 현실성·과적합) | Read, Grep, Glob |
 
 #### 🔒 보안 (설계 단계 → 코드 → AI/LLM 3단 방어)
 
@@ -52,7 +53,8 @@
 |---|---|---|---|---|---|---|
 | 8 | `db-optimizer` | `/db` `/디비` | 1.10 | opus | MySQL 쿼리·인덱스 **성능 튜닝** | Read, Grep, Glob, Bash |
 | 9 | `migration-reviewer` | `/migrate` `/마이그레이션` | 1.3 | opus | 스키마 마이그레이션 **안전성**(락·백필·롤백) — 서버 DB 전용 | Read, Grep, Glob |
-| 12 | `data-modeler` | `/datamodel` `/데이터모델` | 1.6 | opus | 데이터 모델/스키마 **설계**(ERD·키·제약) | Read, Grep, Glob |
+| 12 | `data-modeler` | `/datamodel` `/데이터모델` | 1.7 | opus | 데이터 모델/스키마 **설계**(ERD·키·제약) | Read, Grep, Glob |
+| 41 | `accounting-rule-reviewer` | `/acct` `/회계` | 1.0 | opus | **복식부기 규칙 감사**(차대 균형·역분개·마감 차단·금액 타입·잔액 정합) | Read, Grep, Glob |
 
 #### 🏗 아키텍처 · API · 문서
 
@@ -75,9 +77,10 @@
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 14 | `devops-reviewer` | `/devops` `/배포` | 1.8 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
+| 14 | `devops-reviewer` | `/devops` `/배포` | 1.9 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
 | 15 | `dependency-auditor` | `/deps` `/의존성` | 1.1 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
-| 16 | `observability-reviewer` | `/obs` `/관측성` | 1.3 | opus | 로깅·트레이싱·관측성 점검 | Read, Grep, Glob |
+| 16 | `observability-reviewer` | `/obs` `/관측성` | 1.4 | opus | 로깅·트레이싱·관측성 점검(웹 앱 런타임) | Read, Grep, Glob |
+| 43 | `automation-reliability-reviewer` | `/auto` `/자동화` | 1.0 | opus | **데몬·크론 자동화 신뢰성**(로그 유실·중복 실행·하트비트·멱등성) | Read, Grep, Glob |
 
 #### 🎮 게임 (Unity + C# 싱글플레이 2D 캐주얼 · MSW 멀티플레이)
 
@@ -85,12 +88,15 @@
 |---|---|---|---|---|---|---|
 | 26 | `unity-code-reviewer` | `/ureview` | 1.4 | opus | Unity C# 코드 리뷰(수명주기·GC·프레임/물리 · Fast Enter Play Mode) | Read, Grep, Glob, Bash |
 | 27 | `game-design-architect` | `/gdd` | 1.4 | opus | 게임 디자인·시스템 설계(코어 루프·난이도·수직 슬라이스, 엔진 무관) | Read, Grep, Glob |
-| 28 | `game-ui-reviewer` | `/gui` | 1.1 | opus | 게임 UI/UX(HUD·스케일링·내비·가독성, UGUI/UI Toolkit 분기) | Read, Grep, Glob |
-| 29 | `game-feel-reviewer` | `/feel` | 1.2 | opus | 손맛/juice(입력 관대성·히트스톱·카메라 + 페이즈/턴 기반 피드백) | Read, Grep, Glob |
-| 30 | `unity-perf-auditor` | `/uperf` | 1.0 | opus | 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler) | Read, Grep, Glob |
-| 31 | `playtest-designer` | `/playtest` | 1.1 | opus | 플레이테스트 설계(가설·참가자·지표 + 다인 동시 세션) | Read, Grep, Glob |
+| 28 | `game-ui-reviewer` | `/gui` | 1.2 | opus | 게임 UI/UX(HUD·스케일링·내비·가독성, UGUI/UI Toolkit 분기) | Read, Grep, Glob |
+| 29 | `game-feel-reviewer` | `/feel` | 1.3 | opus | 손맛/juice(입력 관대성·히트스톱·카메라 + 페이즈/턴 기반 피드백) | Read, Grep, Glob |
+| 30 | `unity-perf-auditor` | `/uperf` | 1.1 | opus | 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler) | Read, Grep, Glob |
+| 31 | `playtest-designer` | `/playtest` | 1.2 | opus | 플레이테스트 설계(가설·참가자·지표 + 다인 동시 세션) | Read, Grep, Glob |
 | 32 | `unity-build-auditor` | `/ubuild` | 1.1 | opus | 빌드/릴리스·스토어 제출(+ **2026 정책: API 36·16KB·연령등급**) | Read, Grep, Glob |
 | 40 | `save-data-reviewer` | `/save` `/세이브` | 1.0 | opus | 세이브·영속 데이터 호환성(스키마 버전·마이그레이션·손상 복구) | Read, Grep, Glob |
+| 44 | `game-localization-reviewer` | `/gloc` `/현지화` | 1.0 | opus | **현지화 준비**(하드코딩 문자열·폰트 글리프·길이 팽창·어순·폴백) | Read, Grep, Glob |
+| 45 | `game-test-strategy` | `/gtest` `/게임테스트` | 1.0 | opus | **게임 자동 테스트 전략**(엔진 의존 seam·EditMode/PlayMode·결정론적 리플레이) | Read, Grep, Glob |
+| 46 | `game-audio-reviewer` | `/gaudio` `/오디오` | 1.0 | opus | **오디오 구현**(믹서 버스·동시 발음·반복 피로·임포트·BGM 전환) | Read, Grep, Glob |
 | 39 | `multiplayer-rule-reviewer` | `/rule` `/룰` | 1.1 | opus | **멀티플레이 룰 정합성·서버 권위 점검**(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
 | 40 | `save-data-reviewer` | `/save` `/세이브` | 1.0 | opus | **세이브·영속 데이터 호환성**(스키마 버전·마이그레이션·직렬화 리네이밍·손상 복구·클라우드 충돌) | Read, Grep, Glob |
 
@@ -484,6 +490,69 @@
 - **구분**: 서버 DB(MySQL·Alembic) 마이그레이션은 `migration-reviewer`(이쪽은 클라이언트·게임 세이브), 재화 지급의 서버 권위·멱등성은 `multiplayer-rule-reviewer`(이쪽은 스키마 진화·손상 복구), 데이터 구조 설계는 `game-design-architect`·`data-modeler`
 </details>
 
+<details>
+<summary><b>44. game-localization-reviewer</b> (<code>/gloc</code> <code>/현지화</code>) — 게임 현지화 준비 점검</summary>
+
+- **언제**: 영어·일본어 출시 준비, 번역을 넣기 **전** 구조 점검, UI에 텍스트가 잘려 보일 때
+- **전제**: 현지화 비용의 대부분은 번역료가 아니라 **구조를 뒤늦게 고치는 비용**이다 — 그래서 번역 전에 본다
+- **점검**: 하드코딩 문자열(코드·프리팹·씬 전수 조사)·키 체계, **폰트 글리프 커버리지**(CJK 미포함 시 □ 두부)·아틀라스 방식, **번역 길이 팽창**에 따른 고정 폭 컨테이너 오버플로·CJK 줄바꿈, **문자열 연결로 만든 문장**(어순 다른 언어에서 파손 → 플레이스홀더 완성 문장으로), 복수형·조사, 로케일 포맷·RTL, 이미지 속 텍스트, 로케일 전환 갱신·**미번역 키 노출 폴백**
+- **출력**: 요약(지금 번역본을 받으면 넣을 수 있는가) → 구조적 차단 → 레이아웃·포맷 리스크 → **하드코딩 문자열 목록** → 현지화 체크리스트 → 기기 확인 권고 → Top 3
+- **구분**: 게임 UI 레이아웃·스케일링은 `game-ui-reviewer`, 웹 i18n은 `ui-ux-reviewer`, 문구 품질은 `copy-reviewer`
+</details>
+
+<details>
+<summary><b>45. game-test-strategy</b> (<code>/gtest</code> <code>/게임테스트</code>) — 게임 자동 테스트 전략·seam 설계</summary>
+
+- **언제**: "게임 로직에 테스트를 붙이고 싶다", "리팩터가 무서워서 못 고친다"
+- **전제**: 게임 로직이 테스트 불가능한 건 복잡해서가 아니라 **엔진에 붙어 있어서**다 — 그래서 절반은 "어떤 테스트를 쓸까"가 아니라 "**무엇을 떼어내면 테스트할 수 있는가**"
+- **점검·설계**: 순수 로직 seam(승패 판정·상태 전이·밸런스·직렬화를 엔진 API에서 분리, 시간·난수·저장소 주입), **EditMode vs PlayMode** 분류(순수 로직을 PlayMode에서 돌리지 않기), 커버리지 공백(종료 조건 전 경로·전이표 예외 칸·경계값·저장 왕복·**속성 기반 불변식**), **결정론적 시뮬레이션**(고정 시드+고정 스텝 → 입력 시퀀스 골든 테스트, 게임에서 가성비 최고), 약한 테스트·플레이키(씬/static 잔존·코루틴 타이밍)
+- **출력**: 요약 → 테스트 가능성 진단 → **seam 우선순위 Top 3** → 커버리지 공백(EditMode/PlayMode 표시) → 결정론·리플레이 계획 → Top 3
+- **구분**: 웹 테스트는 `test-strategy`·`test-runner`, **사람** 플레이테스트는 `playtest-designer`, 룰 정적 감사는 `multiplayer-rule-reviewer`, 구조 리팩터는 `refactor-strategist`
+</details>
+
+<details>
+<summary><b>46. game-audio-reviewer</b> (<code>/gaudio</code> <code>/오디오</code>) — 게임 오디오 구현 점검</summary>
+
+- **언제**: "소리가 시끄럽거나 찢어진다", "BGM 루프가 튄다", 오디오를 붙이기 전 구조 설계
+- **점검**: 믹서 버스 분리(BGM/SFX/UI)와 **음량 설정 저장·로그 스케일 변환**·믹서 우회 재생, **동시 발음 제한·보이스 스틸링**(같은 SFX 다량 겹침 = 찢어짐), 반복 SFX의 **피치·볼륨 랜덤화**(동일 파형 반복은 수십 번 만에 거슬린다), BGM 루프·크로스페이드·덕킹, **임포트 설정**(짧은 SFX는 메모리 적재, 긴 BGM은 스트리밍 — 반대면 메모리 폭탄/지연), 일시정지·백그라운드 처리, **음소거로도 게임이 성립하는가**
+- **한계**: **들을 수 없다** — 구조·설정은 확정 판정, 음량 균형·이음새·거슬림은 **청취 확인 목록**으로 분리
+- **구분**: 사운드가 동작과 **동기화되는 타이밍**은 `game-feel-reviewer`, 오디오 **메모리·CPU**는 `unity-perf-auditor`, **빌드 용량**은 `unity-build-auditor`
+</details>
+
+### 🧪 도메인 (ML · 회계 · 자동화) — 1.69 추가
+
+> 웹·게임·콘텐츠와 별개로, **실제 운용 중인 개인 프로젝트의 도메인 규칙**을 보는 3종. 공통점은 "코드는 잘 돌지만 **결과가 조용히 틀리는**" 부류를 잡는다는 것 — 누출된 백테스트, 어긋난 장부, 죽은 줄 모르는 데몬.
+
+<details>
+<summary><b>42. ml-experiment-reviewer</b> (<code>/ml</code> <code>/머신러닝</code>) — ML 실험 설계·데이터 누출 감사</summary>
+
+- **언제**: "백테스트는 잘 나오는데 실전은 안 된다", "검증 점수가 비현실적으로 높다", 모델 재학습·배포 전
+- **전제**: **좋은 점수는 증거가 아니라 용의자다.** 누출은 에러도 경고도 없이 오직 실전에서만 드러나므로 정적으로 잡아야 한다
+- **점검**: ① **미래 정보 누출**(피처 시점·`shift`/`rolling` 방향·전처리를 분할 전에 `fit_transform`·타깃 누출·레이블 off-by-one) ② 검증 설계(시계열에 shuffle/KFold = 미래로 과거 예측, walk-forward·purged/embargo CV, **as-of 재학습이 운용과 일치하는가**, point-in-time 데이터) ③ 백테스트 현실성(생존 편향·수수료/슬리피지·낙관적 체결) ④ 과적합(검증셋 재사용·홀드아웃 부재)·지표 적합성·베이스라인 ⑤ 재현성·training-serving skew
+- **출력**: 요약(이 점수를 믿을 수 있는가) → 누출(Critical) → 검증 설계 결함 → 과적합·지표 → **시점 확인 질문**("이 피처는 t에 알 수 있는가") → 재검증 계획 → Top 3
+- **구분**: 일반 코드 품질은 `code-reviewer`, 소프트웨어 테스트는 `test-strategy`, LLM/RAG 보안은 `llm-ai-security-reviewer`, 파이프라인 운용 신뢰성은 `automation-reliability-reviewer`
+</details>
+
+<details>
+<summary><b>41. accounting-rule-reviewer</b> (<code>/acct</code> <code>/회계</code>) — 복식부기 규칙 감사</summary>
+
+- **언제**: "잔액이 안 맞는다", "마감 후 숫자가 바뀐다", GL·전표·마감 로직 머지 전
+- **불변식 3개**: ① 모든 전표는 **차변 합 = 대변 합** ② 기록은 지우지 않는다(정정은 **역분개**) ③ 마감된 과거는 바뀌지 않는다. 이걸 **코드가 강제하는가**(관행이 아니라 assert·DB 제약·트랜잭션)를 본다
+- **점검**: 균형 검증의 위치(프론트 폼에만 있으면 API 직접 호출로 뚫림)·트랜잭션 원자성, 물리 삭제 경로, 마감 우회, **금액이 float이면 확정 결함**(DECIMAL·정수 최소단위), 반올림·안분 잔차, 계정 유형별 차대 방향, 잔액 캐시와 전표 합계의 정합·시산표 검증, 감사 추적
+- **출력**: 요약(장부가 깨질 수 있는가) → 불변식 파손(**깨지는 시나리오**) → 정합 리스크 → 불변식 체크리스트(✅/❌) → 회계 담당 확인 필요 → Top 3
+- **구분**: 스키마 설계는 `data-modeler`, 마이그레이션은 `migration-reviewer`, 쿼리 성능은 `db-optimizer`, 인가는 `security-reviewer`
+</details>
+
+<details>
+<summary><b>43. automation-reliability-reviewer</b> (<code>/auto</code> <code>/자동화</code>) — 데몬·스케줄 자동화 신뢰성</summary>
+
+- **언제**: "돌고는 있는데 로그가 없다", "언제부터 안 도는지 몰랐다", "두 번 실행돼 중복 데이터가 쌓였다", 자동화를 상시 운용에 올리기 전
+- **하나의 질문**: 아무도 안 보고 있을 때 이게 조용히 죽으면 **언제 알 수 있는가**
+- **점검**: ① 로그가 실제로 남는가 — **셸 리다이렉트·상위 프로세스 stdout 핸들에 의존하면 실행 방식에 따라 로그가 통째로 증발**한다(프로세스는 정상인데 로그만 사라지는 최악의 부류) ② 실패 표면화(예외 삼킴·상태 코드 무시·플레이스홀더 설정으로 조용한 실패) ③ 중복 실행 락·stale lock ④ 멱등성·체크포인트·백오프 ⑤ **하트비트·마지막 성공 시각·알림** ⑥ 재부팅 복구·자원 누수 ⑦ 시크릿 위생
+- **출력**: 요약(죽으면 언제 아는가) → 침묵 실패(**사고 시나리오**) → 복구·멱등 리스크 → 신뢰성 체크리스트(✅/❌) → Top 3
+- **구분**: 웹 앱 런타임 로깅·트레이싱은 `observability-reviewer`, CI/CD·컨테이너는 `devops-reviewer`, 이미 난 장애의 원인 규명은 `debugger`
+</details>
+
 ### 🧠 인프라 (개인 메모리)
 
 > 웹·게임·콘텐츠 리뷰와 별개로, **사용자 개인의 파일 기반 장기기억**(`E:\claude_memory\`)을 값싼 모델로 대신 읽는 인프라 에이전트. 저장소의 첫 `haiku` 에이전트다. 메모리 회상 훅(세션 시작·"예전에 뭐라고 정했더라")으로 자동 호출되며, `/recall`로 수동 호출도 된다.
@@ -611,6 +680,15 @@
 | debugger ↔ multiplayer-rule-reviewer | 이미 난 증상의 "원인 규명" ↔ 증상 없이 룰·권위 결함 "선제 점검" ⟵ 1.67 |
 | save-data-reviewer ↔ migration-reviewer | 클라이언트·게임 "세이브"(스키마 진화·손상 복구) ↔ 서버 DB "마이그레이션"(락·백필·롤백) ⟵ 1.68 |
 | save-data-reviewer ↔ multiplayer-rule-reviewer | 데이터가 "살아남는가"(스키마·손상) ↔ 값을 "누가 정하는가"(서버 권위·멱등성) ⟵ 1.68 |
+| ml-experiment-reviewer ↔ test-strategy | ML "실험 설계"의 타당성(누출·검증 분할) ↔ "소프트웨어 테스트" 커버리지 ⟵ 1.69 |
+| accounting-rule-reviewer ↔ data-modeler | 회계 "규칙이 코드로 강제되는가" ↔ 테이블·관계 "설계" ⟵ 1.69 |
+| automation-reliability-reviewer ↔ observability-reviewer | 로컬 데몬·크론의 "운용 신뢰성" ↔ 웹 앱 런타임의 "추적 가능성" ⟵ 1.69 |
+| automation-reliability-reviewer ↔ devops-reviewer | 상시 실행 자동화의 "생존·복구" ↔ CI/CD·컨테이너 "파이프라인 설정" ⟵ 1.69 |
+| game-localization-reviewer ↔ game-ui-reviewer | "문자열·폰트·번역 파이프라인" ↔ "레이아웃·스케일링·내비게이션" ⟵ 1.69 |
+| game-test-strategy ↔ test-strategy | 게임(엔진 seam·EditMode/PlayMode·결정론) ↔ 웹(pytest·Vitest·Playwright) ⟵ 1.69 |
+| game-test-strategy ↔ playtest-designer | **기계** 테스트(자동) ↔ **사람** 플레이테스트 ⟵ 1.69 |
+| game-audio-reviewer ↔ game-feel-reviewer | 오디오 "믹싱·재생 구조" ↔ 사운드가 동작과 "동기화되는 타이밍" ⟵ 1.69 |
+| game-audio-reviewer ↔ unity-perf-auditor | 오디오 "구조·청감 품질" ↔ 오디오 "메모리·CPU 프레임 예산" ⟵ 1.69 |
 | game-design-architect ↔ playtest-designer | "무엇을 검증할지"(재미 가설) ↔ "어떻게 검증할지"(프로토콜) |
 | game-feel-reviewer ↔ game-ui-reviewer | 게임플레이 동작 피드백 ↔ UI 조작 피드백 |
 | game-feel-reviewer ↔ playtest-designer | 손맛 장치·프로토타입 검증 항목 ↔ 검증 프로토콜 |
@@ -682,11 +760,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 40개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 46개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 40개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 40개 슬래시 명령(+ 한글 별칭 22개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 46개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 46개 슬래시 명령(+ 한글 별칭 28개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -762,6 +840,12 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/debug` | debugger | 증상/에러 메시지/재현 절차 |
 | `/rule` | multiplayer-rule-reviewer | 룰·상태머신·서버 핸들러 경로(선택) |
 | `/save` | save-data-reviewer | 세이브·직렬화 코드 경로(선택) |
+| `/ml` | ml-experiment-reviewer | 학습·피처·백테스트 코드 경로(선택) |
+| `/acct` | accounting-rule-reviewer | GL·전표·마감 코드 경로(선택) |
+| `/auto` | automation-reliability-reviewer | 스크립트·데몬·스케줄 설정 경로(선택) |
+| `/gloc` | game-localization-reviewer | 문자열·UI·폰트 경로(선택) |
+| `/gtest` | game-test-strategy | 게임 로직 경로(선택) |
+| `/gaudio` | game-audio-reviewer | 오디오 코드·믹서·클립 경로(선택) |
 
 ### 한글 별칭 (1.65)
 
@@ -771,6 +855,9 @@ Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1
 |---|---|---|---|
 | `/디버그` | `/debug` | `/배포` | `/devops` |
 | `/룰` | `/rule` | `/세이브` | `/save` |
+| `/머신러닝` | `/ml` | `/회계` | `/acct` |
+| `/자동화` | `/auto` | `/현지화` | `/gloc` |
+| `/게임테스트` | `/gtest` | `/오디오` | `/gaudio` |
 | `/리뷰` | `/review` | `/의존성` | `/deps` |
 | `/보안` | `/sec` | `/관측성` | `/obs` |
 | `/테스트` | `/test` | `/리팩터` | `/refactor` |
@@ -891,7 +978,13 @@ claude-agents/
 ├─ storyteller.md                # 창작(스토리텔링, fable)
 ├─ debugger.md                   # 품질(버그 근본 원인 규명)
 ├─ multiplayer-rule-reviewer.md  # 게임(멀티플레이 룰 정합성·서버 권위, MSW mlua)
-└─ save-data-reviewer.md         # 게임(세이브·영속 데이터 호환성)
+├─ save-data-reviewer.md         # 게임(세이브·영속 데이터 호환성)
+├─ ml-experiment-reviewer.md     # 도메인(ML 실험 설계·데이터 누출)
+├─ accounting-rule-reviewer.md   # 도메인(복식부기 규칙 감사)
+├─ automation-reliability-reviewer.md  # 도메인(데몬·크론 신뢰성)
+├─ game-localization-reviewer.md # 게임(현지화 준비)
+├─ game-test-strategy.md         # 게임(자동 테스트 전략·seam)
+└─ game-audio-reviewer.md        # 게임(오디오 구현)
 ```
 
 ---

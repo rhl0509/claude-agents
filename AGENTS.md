@@ -1,4 +1,4 @@
-# 서브에이전트 전체 정리 (40종)
+# 서브에이전트 전체 정리 (46종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
@@ -65,6 +65,12 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 38 | `debugger` | `/debug` | 품질 | 버그·에러·간헐 실패의 근본 원인 규명(재현·가설 검증·이분 탐색) | Read, Grep, Glob, Bash |
 | 39 | `multiplayer-rule-reviewer` | `/rule` | 게임 | 멀티플레이 룰 정합성·서버 권위 점검(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
 | 40 | `save-data-reviewer` | `/save` | 게임 | 세이브·영속 데이터 호환성(스키마 버전·마이그레이션·직렬화 리네이밍·손상 복구·클라우드 충돌) | Read, Grep, Glob |
+| 41 | `accounting-rule-reviewer` | `/acct` | 도메인 | 복식부기 규칙 감사(차대 균형·역분개·마감 차단·금액 타입·잔액 정합·감사 추적) | Read, Grep, Glob |
+| 42 | `ml-experiment-reviewer` | `/ml` | 도메인 | ML 실험 설계 감사(미래 정보 누출·검증 분할·as-of 재학습·백테스트 현실성·과적합) | Read, Grep, Glob |
+| 43 | `automation-reliability-reviewer` | `/auto` | 도메인 | 데몬·크론 신뢰성(로그 유실·침묵 실패·중복 실행·멱등성·하트비트·복구) | Read, Grep, Glob |
+| 44 | `game-localization-reviewer` | `/gloc` | 게임 | 현지화 준비(하드코딩 문자열·폰트 글리프·길이 팽창·어순·복수형·폴백) | Read, Grep, Glob |
+| 45 | `game-test-strategy` | `/gtest` | 게임 | 게임 자동 테스트 전략(엔진 의존 seam·EditMode/PlayMode·결정론적 리플레이) | Read, Grep, Glob |
+| 46 | `game-audio-reviewer` | `/gaudio` | 게임 | 오디오 구현(믹서 버스·동시 발음·반복 피로·임포트 설정·BGM 전환) | Read, Grep, Glob |
 
 ---
 
