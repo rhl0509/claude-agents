@@ -88,7 +88,7 @@
 |---|---|---|---|---|---|---|
 | 26 | `unity-code-reviewer` | `/ureview` | 1.4 | opus | Unity C# 코드 리뷰(수명주기·GC·프레임/물리 · Fast Enter Play Mode) | Read, Grep, Glob, Bash |
 | 27 | `game-design-architect` | `/gdd` | 1.4 | opus | 게임 디자인·시스템 설계(코어 루프·난이도·수직 슬라이스, 엔진 무관) | Read, Grep, Glob |
-| 28 | `game-ui-reviewer` | `/gui` | 1.2 | opus | 게임 UI/UX(HUD·스케일링·내비·가독성, UGUI/UI Toolkit 분기) | Read, Grep, Glob |
+| 28 | `game-ui-reviewer` | `/gui` | 1.3 | opus | 게임 UI/UX(HUD·스케일링·내비·가독성, UGUI/UI Toolkit 분기) | Read, Grep, Glob |
 | 29 | `game-feel-reviewer` | `/feel` | 1.3 | opus | 손맛/juice(입력 관대성·히트스톱·카메라 + 페이즈/턴 기반 피드백) | Read, Grep, Glob |
 | 30 | `unity-perf-auditor` | `/uperf` | 1.1 | opus | 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler) | Read, Grep, Glob |
 | 31 | `playtest-designer` | `/playtest` | 1.2 | opus | 플레이테스트 설계(가설·참가자·지표 + 다인 동시 세션) | Read, Grep, Glob |
@@ -96,7 +96,7 @@
 | 40 | `save-data-reviewer` | `/save` `/세이브` | 1.0 | opus | 세이브·영속 데이터 호환성(스키마 버전·마이그레이션·손상 복구) | Read, Grep, Glob |
 | 44 | `game-localization-reviewer` | `/gloc` `/현지화` | 1.1 | opus | **현지화 준비**(하드코딩 문자열·폰트 글리프·길이 팽창·어순·폴백) | Read, Grep, Glob |
 | 45 | `game-test-strategy` | `/gtest` `/게임테스트` | 1.1 | opus | **게임 자동 테스트 전략**(엔진 의존 seam·EditMode/PlayMode·결정론적 리플레이) | Read, Grep, Glob |
-| 46 | `game-audio-reviewer` | `/gaudio` `/오디오` | 1.0 | opus | **오디오 구현**(믹서 버스·동시 발음·반복 피로·임포트·BGM 전환) | Read, Grep, Glob |
+| 46 | `game-audio-reviewer` | `/gaudio` `/오디오` | 1.1 | opus | **오디오 구현**(믹서 버스·동시 발음·반복 피로·임포트·BGM 전환) | Read, Grep, Glob |
 | 39 | `multiplayer-rule-reviewer` | `/rule` `/룰` | 1.1 | opus | **멀티플레이 룰 정합성·서버 권위 점검**(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
 | 40 | `save-data-reviewer` | `/save` `/세이브` | 1.0 | opus | **세이브·영속 데이터 호환성**(스키마 버전·마이그레이션·직렬화 리네이밍·손상 복구·클라우드 충돌) | Read, Grep, Glob |
 
@@ -631,7 +631,7 @@
 
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
-양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 1.56의 전수 스캔 34쌍에서 1.64·1.67·1.68·1.69를 거치며 늘어 **현재 52쌍**이며 클러스터별로 나눈다.
+양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 1.56의 전수 스캔 34쌍에서 1.64·1.67~1.71을 거치며 늘어 **현재 53쌍**이며 클러스터별로 나눈다.
 
 **웹 스택 (20쌍)**
 | 쌍 | 구분 |
@@ -671,7 +671,7 @@
 | security-reviewer ↔ llm-ai-security-reviewer | 웹 앱 일반 보안 ↔ AI/LLM 특화 심화 |
 | threat-modeler ↔ llm-ai-security-reviewer | 설계 단계 위협(LLM 포함) ↔ 구현 후 AI/LLM 심화 |
 
-**게임 (Unity + C# · MSW, 16쌍)**
+**게임 (Unity + C# · MSW, 17쌍)**
 | 쌍 | 구분 |
 |---|---|
 | game-design-architect ↔ unity-code-reviewer | 코어 루프·시스템 "설계" ↔ C# 코드 품질·프레임 "리뷰" |
@@ -683,6 +683,7 @@
 | game-localization-reviewer ↔ game-ui-reviewer | "문자열·폰트·번역 파이프라인" ↔ "레이아웃·스케일링·내비게이션" ⟵ 1.69 |
 | game-test-strategy ↔ playtest-designer | **기계** 테스트(자동) ↔ **사람** 플레이테스트 ⟵ 1.69 |
 | game-audio-reviewer ↔ game-feel-reviewer | 오디오 "믹싱·재생 구조" ↔ 사운드가 동작과 "동기화되는 타이밍" ⟵ 1.69 |
+| game-audio-reviewer ↔ game-ui-reviewer | "그 소리가 어떻게 재생되는가"(믹서·중복·비용) ↔ "어떤 소리가 나야 하는가"(UI 조작음 일관성·무음 대체) ⟵ 1.71 |
 | game-audio-reviewer ↔ unity-perf-auditor | 오디오 "구조·청감 품질" ↔ 오디오 "메모리·CPU 프레임 예산" ⟵ 1.69 |
 
 **도메인 (ML · 회계 · 자동화, 4쌍)** — 1.69 신설
