@@ -102,6 +102,23 @@ if (Test-Path $cmdSrc) {
         }
 }
 
+# Workflow scripts (*.js) -> global workflows dir (invoked by the Workflow tool by name).
+$wfSrc = Join-Path $src 'workflows'
+$wfDst = Join-Path $env:USERPROFILE '.claude\workflows'
+if (Test-Path $wfSrc) {
+    New-Item -ItemType Directory -Force -Path $wfDst | Out-Null
+    Get-ChildItem -Path $wfSrc -Filter *.js |
+        ForEach-Object {
+            try {
+                Copy-Item $_.FullName -Destination $wfDst -Force -ErrorAction Stop
+                Write-Host "synced workflow: $($_.Name)"
+            } catch {
+                Write-Host "ERROR syncing workflow $($_.Name): $($_.Exception.Message)"
+                $script:errorCount++
+            }
+        }
+}
+
 # Desktop launcher(s) -> global launchers dir.
 $lchSrc = Join-Path $src 'launchers'
 $lchDst = Join-Path $env:USERPROFILE '.claude\launchers'
@@ -154,8 +171,8 @@ if (Test-Path $skSrc) {
 }
 
 if ($errorCount -gt 0) {
-    Write-Host "FAILED: $errorCount error(s). Targets: $dst , $cmdDst , $lchDst , $hkDst , $skDst"
+    Write-Host "FAILED: $errorCount error(s). Targets: $dst , $cmdDst , $wfDst , $lchDst , $hkDst , $skDst"
     exit 1
 }
-Write-Host "Done -> $dst , $cmdDst , $lchDst , $hkDst , $skDst"
+Write-Host "Done -> $dst , $cmdDst , $wfDst , $lchDst , $hkDst , $skDst"
 exit 0

@@ -10,6 +10,27 @@
 
 ---
 
+## 1.83 (2026-07-15) — project-manager 신설(메타/조율) + pm-orchestrate 워크플로("두뇌+팔") → 58종
+
+여러 작업·기능·레포에 걸친 일을 실행 계획으로 옮기기 전 **프로젝트 차원 조율**을 맡는 에이전트를 신설. `ai-workspace-architect`·`memory-recaller`에 이은 세 번째 **메타/스택 무관** 에이전트이자 저장소 첫 *조율* 에이전트. 여기에 "PM은 오케스트레이터여야 하지 않나"라는 지적을 반영해 **실행 팔**(워크플로)까지 붙여 두 층으로 구성.
+
+**설계: 왜 서브에이전트는 오케스트레이터가 아닌가 → 두 층 분리.** 이 라이브러리 서브에이전트는 전부 읽기 전용이고 Agent(Task) 도구가 없어 **다른 서브에이전트를 호출할 수 없다**(중첩 서브에이전트는 이 harness의 지원 패턴도 아님). 오케스트레이션은 "위층"(메인 세션/Workflow 도구)에 산다. 그래서 **계획 두뇌 = project-manager 서브에이전트**, **실행 팔 = pm-orchestrate 워크플로**로 나눴다.
+- **`/pm`·`/프로젝트관리`** → project-manager 서브에이전트. 계획·라우팅·진행만(읽기 전용, 자동 실행 없음).
+- **`/pm-run`·`/프로젝트실행`** → `pm-orchestrate` 워크플로. project-manager를 계획 두뇌로 부른 뒤 라우팅된 전문 에이전트들을 실제로 팬아웃 실행하고 통합 보고까지. **전문 에이전트가 전부 읽기 전용이라 이 워크플로는 "분석·설계 산출물"을 오케스트레이션한 통합 리포트를 내며, 실제 코드 편집은 그 리포트를 받은 메인 세션/사람의 후속 단계**(정직한 한계).
+
+- **[신설] project-manager v1.0** (`/pm` `/프로젝트관리`, opus·effort high·color cyan·memory user)
+  - **역할**: 목표 → 태스크 분해(WBS)·의존성(순환 의존=결함)·우선순위(P0~P2)·**라우팅 맵**(각 태스크 → 이 라이브러리의 알맞은 전문 에이전트)·실행 순서/마일스톤·리스크. 진행 점검 시 `project_active.md`·최신 날짜 인덱스·`git log`로 완료/진행/다음/차단 보고.
+  - **핵심 전제**: **오케스트레이터가 아니다** — 서브에이전트는 다른 서브에이전트를 호출할 수 없으므로, 일을 굴리지 않고 계획·라우팅·현황을 **텍스트 산출물**로 낸다. 실행(전문 에이전트 호출·코드 편집)은 메인 세션/사용자가 한다. 읽기 전용, 코드·파일 미수정.
+  - **도구**: `Read, Grep, Glob, Bash` — Bash는 **읽기 전용 git 이력**(`log`/`status`/`diff`)로 진행 파악에만. 트리 변경 명령은 실행 않고 사용자 단계로 제안(debugger와 동형). PreToolUse 가드로도 강제.
+  - **경계**: 한 기능의 기술 구조 설계 `system-architect` · 게임 시스템 `game-design-architect` · 한 작업의 구현 단계 계획 harness `Plan` 빌트인 · 리팩터 단계 `refactor-strategist` · 원인 규명 `debugger` · AI 작업환경 재설계 `ai-workspace-architect` · 메모리 회상만 `memory-recaller`. 이 에이전트는 "무엇을·어떤 순서로·누구에게"의 프로젝트 조율(기술 설계·코드 작성 아님).
+- **[신설] pm-orchestrate 워크플로** (`workflows/pm-orchestrate.js`) — 3단계(Plan: project-manager로 WBS+라우팅 → Execute: 라우팅된 전문 에이전트 병렬 팬아웃 → Synthesize: project-manager로 통합 보고). 폭주 방지 상한 24단위(초과 시 무음 절단 없이 로그). 실패 단위(에이전트명 오류 등)는 null 필터+집계 보고.
+- **[인프라] sync.ps1에 workflows 블록 신설** — `commands/`·`launchers/`·`hooks/`·`skills/`와 대칭으로 `workflows/*.js` → `~/.claude/workflows/` 배포. Done/FAILED 메시지에 `$wfDst` 추가. (저장소가 워크플로를 배포하는 첫 사례 — 카테고리 대칭 확장.)
+- **[문서]** README 카운트 57→58종(메타 2→3, opus 심층추론 53→54), 메타 섹션 표 행·상세 블록(#58)·버전 요약 추가, TOC/헤더 앵커 동기화. CLAUDE.md intro 문단·에이전트 표 행·model tiering 목록 추가. 커맨드 4종 신설(`pm`·`프로젝트관리` = 계획, `pm-run`·`프로젝트실행` = 실행).
+- **[알려진 잔여]** AGENTS.md 상세·대칭 위임 쌍 섹션은 이번에 미반영(다음 정합 감사 대상). project-manager는 라우팅 대상이 전 에이전트라 특정 1:1 대칭 쌍으로 넣기보다 별도 취급이 맞아 쌍 목록 편입은 보류.
+- sync.ps1 실행해 전역 반영.
+
+---
+
 ## 1.82 (2026-07-15) — 대칭 위임 쌍 섹션 README·AGENTS 전량 동기화 + README 자체 오분류 교정
 
 1.81 후속. AGENTS 쌍 섹션을 README와 전량 동기화하려다 **README 정본 자체의 구조 버그**를 발견해 먼저 교정한 뒤 양쪽을 동일화.
