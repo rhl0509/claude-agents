@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (46종)
+# 서브에이전트 전체 정리 (52종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다. 2종(`threat-modeler`·`llm-ai-security-reviewer`)은 **설계 단계 위협 모델링·AI/LLM 보안 심화**를 담당한다(품질 카테고리, `security-reviewer`와 보안 방어 클러스터 형성). 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)은 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트다(🎮 게임 클러스터, 색상 `cyan` 공유). 1종(`memory-recaller` · `/recall`)은 리뷰/설계가 아니라 **사용자 개인의 파일 기반 장기기억(`E:\claude_memory\`)을 값싼 `haiku`로 대신 회상**하는 인프라 에이전트다(🧠 인프라, 저장소 첫 haiku·메모리 훅 자동 호출 + `/recall` 수동 호출·읽기 전용). 마지막으로 2026-07 추가된 3종은 엔지니어링 `refactor-strategist`(`/refactor`, 동작 보존 리팩터 계획·단계 설계), 문서 `docs-writer`(`/docs`, 개발자용 README·아키텍처·온보딩·ADR), 메타 `agent-definition-reviewer`(`/agentdef`, 이 라이브러리의 에이전트 정의 자체의 스펙·경계·규범 점검)로, 각각 품질·문서·메타 클러스터에 편입된다. 그리고 1종(`storyteller` · `/story`)은 프롬프트(뼈대)에 살을 붙여 **없던 이야기를 새로 짓는** 창작 생성 에이전트로, 저장소 첫 `fable`(창작 특화 모델) 에이전트다(✍️ 창작 클러스터, 기존 자산 재활용인 `content-repurposer`와 구분). 마지막 1종(`debugger` · `/debug`)은 **이미 발생한 증상에서 거꾸로 원인을 추적**하는 디버깅 에이전트다(🐞 품질 클러스터, 스택 무관 — 정적 리뷰인 `code-reviewer`·`unity-code-reviewer`, 결과 집계인 `test-runner`와 구분).
+> 16종은 위 개발 스택 전용 리뷰/설계 에이전트, 1종(`ai-workspace-architect` · `/fable`)은 스택과 무관한 **AI 작업환경 재설계** 메타 에이전트, 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)은 **카피·전환·SEO·팩트체크·재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트다. 2종(`threat-modeler`·`llm-ai-security-reviewer`)은 **설계 단계 위협 모델링·AI/LLM 보안 심화**를 담당한다(품질 카테고리, `security-reviewer`와 보안 방어 클러스터 형성). 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)은 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트다(🎮 게임 클러스터, 색상 `cyan` 공유). 1종(`memory-recaller` · `/recall`)은 리뷰/설계가 아니라 **사용자 개인의 파일 기반 장기기억(`E:\claude_memory\`)을 값싼 `haiku`로 대신 회상**하는 인프라 에이전트다(🧠 인프라, 저장소 첫 haiku·메모리 훅 자동 호출 + `/recall` 수동 호출·읽기 전용). 마지막으로 2026-07 추가된 3종은 엔지니어링 `refactor-strategist`(`/refactor`, 동작 보존 리팩터 계획·단계 설계), 문서 `docs-writer`(`/docs`, 개발자용 README·아키텍처·온보딩·ADR), 메타 `agent-definition-reviewer`(`/agentdef`, 이 라이브러리의 에이전트 정의 자체의 스펙·경계·규범 점검)로, 각각 품질·문서·메타 클러스터에 편입된다. 그리고 1종(`storyteller` · `/story`)은 프롬프트(뼈대)에 살을 붙여 **없던 이야기를 새로 짓는** 창작 생성 에이전트로, 저장소 첫 `fable`(창작 특화 모델) 에이전트다(✍️ 창작 클러스터, 기존 자산 재활용인 `content-repurposer`와 구분). 마지막 1종(`debugger` · `/debug`)은 **이미 발생한 증상에서 거꾸로 원인을 추적**하는 디버깅 에이전트다(🐞 품질 클러스터, 스택 무관 — 정적 리뷰인 `code-reviewer`·`unity-code-reviewer`, 결과 집계인 `test-runner`와 구분). 그리고 2026-07 추가된 6종(`c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`)은 **C와 비-Unity C#/.NET**을 전담하는 시스템 언어 클러스터(🧩)로, 각 언어를 리뷰·설계·성능 3역으로 나눠 웹·게임 트리오와 동형이며 리뷰↔성능은 원인/증상 대칭이다(Unity C#은 `unity-code-reviewer`가 계속 담당).
 
 ## 공통 규칙
 - 발견/제안은 **영향도(심각도) 순으로 정렬**
@@ -71,6 +71,12 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 44 | `game-localization-reviewer` | `/gloc` | 게임 | 현지화 준비(하드코딩 문자열·폰트 글리프·길이 팽창·어순·복수형·폴백) | Read, Grep, Glob |
 | 45 | `game-test-strategy` | `/gtest` | 게임 | 게임 자동 테스트 전략(엔진 의존 seam·EditMode/PlayMode·결정론적 리플레이) | Read, Grep, Glob |
 | 46 | `game-audio-reviewer` | `/gaudio` | 게임 | 오디오 구현(믹서 버스·동시 발음·반복 피로·임포트 설정·BGM 전환) | Read, Grep, Glob |
+| 47 | `c-code-reviewer` | `/creview` | 시스템 | C 코드 리뷰(메모리 안전·UB·정수 변환·에러경로 누수·포맷 취약점) | Read, Grep, Glob, Bash |
+| 48 | `c-architect` | `/carch` | 시스템 | C 구조 설계(모듈/헤더·메모리 소유권 계약·에러 규약·빌드/이식성) | Read, Grep, Glob |
+| 49 | `c-perf-auditor` | `/cperf` | 시스템 | C 런타임 성능(캐시 지역성·할당·복잡도·프로파일 해석) | Read, Grep, Glob |
+| 50 | `dotnet-code-reviewer` | `/dnreview` | 시스템 | 비-Unity C#/.NET 리뷰(async 데드락·IDisposable·지연실행·DI 수명·EF Core) | Read, Grep, Glob, Bash |
+| 51 | `dotnet-architect` | `/dnarch` | 시스템 | .NET 구조 설계(계층·DI 수명·미들웨어·호스팅·async 경계) | Read, Grep, Glob, Context7 |
+| 52 | `dotnet-perf-auditor` | `/dnperf` | 시스템 | .NET 런타임 성능(GC 압력·LOH·Span/ArrayPool·박싱·벤치마크 해석) | Read, Grep, Glob |
 
 ---
 
@@ -257,11 +263,39 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 **이미 발생한 증상**에서 거꾸로 근본 원인을 추적한다(스택 무관 — 웹이 주력, Unity C# 런타임 증상도 동일 절차). 증상 확정(기대 vs 실제·재현율·환경) → 최소 재현 → 관찰 수집(스택트레이스는 *우리 코드의 가장 깊은 프레임*부터) → 가설 3~5개(각각 반증 조건) → 검증·축소(코드 경로·시간(`git log`/`blame`)·입력·환경 이분) → 원인 확정 → 수정 방향·재발 방지 테스트. 버그 클래스 렌즈: 간헐·플레이키(경쟁 조건·순서 의존), 상태·데이터, 경계 넘김(계약·캐시 stale·하이드레이션), 동시성·자원, 환경차, Unity 런타임(fake-null·구독 해제). 관찰이 추측을 이긴다 — 못 밝히면 **미확정으로 정직 보고**(범인 창작 금지). 코드 수정 안 함, `git bisect`·`checkout` 등 워킹트리 변경은 절차만 제시, Bash는 재현·조회 전용, 계측은 코드에 심지 않고 계획만. 출력: 증상 요약 → 관찰된 사실 → 가설·검증 표 → 근본 원인(인과 사슬) → 수정 방향 → 재발 방지 → 미해결·다음 관찰.
 → 테스트 실행·집계·1차 분류는 `test-runner`(테스트를 아직 안 돌렸으면 거기부터 — 안 풀리는 실패가 이 에이전트 몫), 증상 없는 정적 리뷰는 `code-reviewer`·`unity-code-reviewer`, 추적 인프라 공백은 `observability-reviewer`, 취약점은 `security-reviewer`. **성능은 축으로 가른다** — "무엇이 느린가"(병목 진단)는 `perf-auditor`·`db-optimizer`·`unity-perf-auditor`, "언제부터·무엇이 바뀌어 느려졌나"(회귀 시점 추적)는 이 에이전트.
 
+### 🧩 시스템 언어 (C · 비-Unity .NET) — 1.72 추가
+
+웹(code-reviewer)·게임(unity-code-reviewer)이 폴백으로만 훑던 C와 비-Unity C#/.NET을 전담. 각 언어를 리뷰·설계·성능 3역으로 나눴고, 리뷰↔성능은 unity 쌍과 같은 원인/증상 대칭.
+
+**47. c-code-reviewer (`/creview`)** — 시스템
+C 고유 결함의 정적 리뷰. 공간 안전(버퍼 오버플로·off-by-one), 시간 안전/소유권(UAF·double-free·dangling·미초기화), 널·반환값·`errno` 미검사, 정수(시그니처드 오버플로·부호/폭 변환·크기 계산 오버플로→힙 오버플로), UB(엄격 앨리어싱·시퀀스 포인트·널 산술), 에러 경로 자원 누수(`goto cleanup` 일관성), 포맷 스트링, 동시성·시그널 안전성, 매크로 함정. C의 메모리 안전 결함 = 보안 결함이라 웹 OWASP `security-reviewer`가 안 보는 층을 맡는다. Bash는 변경 범위 식별 + **명시 요청 시** 읽기전용 정적분석(빌드·실행 금지). 출력: 요약 → Must fix → Should fix → Nit → 위임.
+→ 일반 품질·타 스택 폴백은 `code-reviewer`, 구조는 `c-architect`, 성능은 `c-perf-auditor`, 이미 난 크래시 원인은 `debugger`.
+
+**48. c-architect (`/carch`)** — 시스템
+C 구조 설계(언어가 규율을 강제 안 하니 구조·계약으로 만든다). 모듈/헤더 경계(불투명 포인터·최소 공개 표면·순환 포함 차단), **메모리 소유권 모델**(할당·해제를 API 계약으로·이전 vs 대여), 에러 처리 전략(반환코드/errno/out-param 일관·단일 출구 정리), API/ABI 안정성, 빌드 의존성 방향, 이식성 계층(`#ifdef` 격리), 동시성·할당 전략(아레나/풀 vs 개별 malloc). 출력: (신규) 가정 → 옵션 비교 → 권장안(다이어그램·API 스케치) → 단계 / (점검) 진단 → 문제 → 개선 → 마이그레이션.
+→ 구현 코드 결함은 `c-code-reviewer`, 성능은 `c-perf-auditor`, 웹 아키텍처는 `system-architect`, .NET 구조는 `dotnet-architect`.
+
+**49. c-perf-auditor (`/cperf`)** — 시스템
+C 런타임 성능. (1) 정적 감사 — 캐시 지역성(AoS/SoA·거짓 공유·정렬)·할당 전략(핫 경로 malloc→아레나/풀)·불필요 복사·알고리즘 복잡도·분기·벡터화 저해 요인(`restrict`은 정확성이라 c-code-reviewer로)·I/O 버퍼링, (2) 캡처 해석 — perf/gprof/cachegrind/callgrind/Massif. 정적으로 "느리다" 단정 금지 → 측정 계획으로 분리(조기 최적화 경계). `c-code-reviewer`와 원인/증상 대칭.
+→ 코드 원인·UB는 `c-code-reviewer`, 회귀 시점은 `debugger`, 구조는 `c-architect`, 웹/.NET 성능은 `perf-auditor`·`dotnet-perf-auditor`.
+
+**50. dotnet-code-reviewer (`/dnreview`)** — 시스템
+비-Unity C#/.NET 고유 결함 리뷰(ASP.NET Core·워커·콘솔·WPF·라이브러리). async(`.Result`/`.Wait()` 데드락·`async void`·미대기·취소 미전파·`ConfigureAwait`), 자원 수명(IDisposable/`using`·`HttpClient` 소켓 고갈·이벤트 미해제), 지연 실행(IEnumerable 다중 열거), nullable, **DI 수명**(captive dependency·`DbContext` 공유), EF Core(N+1·클라 평가·추적 낭비·`SaveChanges` 누락), 예외(삼킴·`throw ex` 스택 소실), 값/참조 의미·문화권 파싱. Bash는 변경 범위 식별만. 출력: 요약 → Must fix → Should fix → Nit → 위임.
+→ Unity C#은 `unity-code-reviewer`, 웹 JS/파이썬 폴백은 `code-reviewer`, 구조는 `dotnet-architect`, 성능은 `dotnet-perf-auditor`, 보안은 `security-reviewer`.
+
+**51. dotnet-architect (`/dnarch`)** — 시스템
+.NET 구조 설계. 계층 분리(엔드포인트/앱/도메인/인프라·Minimal API vs 컨트롤러), **DI 서비스 수명 설계**(captive dependency 예방·`DbContext` 수명), 미들웨어 파이프라인 순서, 호스팅(`BackgroundService`·그레이스풀 셧다운·큐 소비), 옵션 패턴(`IOptions`·시크릿), async 경계(끝까지 async·취소 전파), 프로젝트 의존성 방향(순환 차단), 복원력(재시도·서킷브레이커). 버전 의존 패턴은 Context7로 확인. 출력: (신규) 가정 → 옵션 비교 → 권장안 → 단계 / (점검) 진단 → 문제 → 개선 → 마이그레이션.
+→ 구현 코드 결함은 `dotnet-code-reviewer`, 성능은 `dotnet-perf-auditor`, 웹 풀스택은 `system-architect`, C 구조는 `c-architect`, 배포·컨테이너는 `devops-reviewer`.
+
+**52. dotnet-perf-auditor (`/dnperf`)** — 시스템
+.NET 런타임 성능. (1) 정적 감사 — **GC 압력**(할당률·세대 승격·LOH 단편화·Server vs Workstation GC)·할당 절감(`Span`/`stackalloc`/`ArrayPool`·struct vs class·박싱·클로저 캡처)·문자열·async 오버헤드(`ValueTask`)·LINQ 중간 컬렉션·컬렉션 선택·직렬화·JIT/AOT, (2) 캡처 해석 — BenchmarkDotNet/dotnet-counters/dotnet-trace/PerfView. 정적으로 "느리다" 단정 금지 → 측정 계획으로. `dotnet-code-reviewer`와 증상/원인 대칭.
+→ 할당 유발 코드·EF 안티패턴은 `dotnet-code-reviewer`, 회귀 시점은 `debugger`, 구조는 `dotnet-architect`, Unity 성능은 `unity-perf-auditor`, MySQL 튜닝은 `db-optimizer`.
+
 ---
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
-양쪽 description이 서로를 가리키는 대칭 위임(`↔`). 1.56의 전수 스캔 34쌍에 **1.64에서 `debugger` 4쌍을 더한 38쌍**이며 클러스터별로 나눈다.
+양쪽 description이 서로를 가리키는 대칭 위임(`↔`). 1.56의 전수 스캔 34쌍에 1.64에서 `debugger` 4쌍, 1.72에서 시스템 언어 5쌍을 더했다(전체 상세 목록은 README 참조). 클러스터별로 나눈다.
 
 **웹 스택 (20쌍)**
 | 쌍 | 구분 |
@@ -326,6 +360,15 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 | devops-reviewer ↔ unity-build-auditor | 일반 CI/CD·시크릿·파이프라인 ↔ Unity 빌드/릴리스·스토어 제출 |
 | test-strategy ↔ playtest-designer | 소프트웨어 자동 테스트 ↔ 사람 대상 플레이테스트 |
 
+**시스템 언어 (C · 비-Unity .NET, 5쌍)** — 1.72 신설
+| 쌍 | 구분 |
+|---|---|
+| c-code-reviewer ↔ c-perf-auditor | C 성능 깎는 "코드 원인·UB" ↔ 캐시·할당 "증상·측정 해석" |
+| dotnet-code-reviewer ↔ dotnet-perf-auditor | .NET 할당 유발 "코드 원인·EF 안티패턴" ↔ GC "증상·측정 해석" |
+| dotnet-code-reviewer ↔ unity-code-reviewer | **비-Unity** C#(async·DI·EF Core) ↔ **Unity** C#(수명주기·GC·프레임) |
+| c-architect ↔ system-architect | C 모듈·소유권 "설계" ↔ 웹 풀스택 "아키텍처" |
+| dotnet-architect ↔ system-architect | .NET 계층·DI 수명 "설계" ↔ 웹 풀스택 "아키텍처" |
+
 ## 일방향 위임 포인터
 
 특화 → 허브/일반/상위로만 가리키는 단방향(`→`). 허브 에이전트(code-reviewer 등)가 받는 모든 특화를 역으로 나열하면 description이 비대해지므로 역방향을 두지 않는다. 아래는 **대표 예시**이며 전수 목록은 아니다(허브로 들어오는 inbound 포인터는 이 외에도 여럿 — 예: system-architect가 받는 5건, code-reviewer가 받는 다수).
@@ -334,6 +377,7 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 |---|---|
 | test-strategy → code-reviewer | `code-reviewer`는 일반 폴백, 개별 특화로 되돌리지 않음 |
 | perf-auditor → code-reviewer | 동일(일반 품질·버그 폴백) |
+| code-reviewer → c-code-reviewer / dotnet-code-reviewer | C·비-Unity C#의 고유 결함은 전담이 폴백보다 우선(전담은 폴백을 역참조 안 함) ⟵ 1.72 |
 | devops-reviewer → migration-reviewer | 마이그레이션 리뷰는 DB 영역 집중 |
 | system-architect → api-contract-reviewer / data-modeler / security-reviewer | 설계가 구현 후 검증을 특화로 넘김(특화는 설계를 역참조 안 함) |
 | ai-workspace-architect → system-architect / design-system-architect | 메타가 스택 설계를 넘길 뿐, 설계 에이전트는 메타를 역참조 안 함 |

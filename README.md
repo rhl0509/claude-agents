@@ -1,18 +1,18 @@
 # claude-agents
 
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
-코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터).
+코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터). 여기에 더해 **C와 비-Unity C#/.NET**을 전담하는 시스템 언어 에이전트 6종(`c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`)이 추가되었습니다(🧩 시스템 언어 클러스터 — 각 언어를 리뷰·설계·성능 3역으로).
 
-- 에이전트 수: **46종** (개발 스택 리뷰·엔지니어링·문서 19종 + 도메인 3종(ML·회계·자동화) + 메타 2종 + 콘텐츠/마케팅 6종 + 창작 1종 + 보안 심화 2종 + 게임 12종 + 인프라 1종)
+- 에이전트 수: **52종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET 6종 + 도메인 3종(ML·회계·자동화) + 메타 2종 + 콘텐츠/마케팅 6종 + 창작 1종 + 보안 심화 2종 + 게임 12종 + 인프라 1종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.12**, `test-runner` **v1.11**, `code-reviewer` **v1.13**, `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `observability-reviewer`·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 9종 `unity-code-reviewer` **v1.4**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.2**·`game-ui-reviewer`·`unity-build-auditor`·`playtest-designer`·`multiplayer-rule-reviewer` **v1.1**·`unity-perf-auditor`·`save-data-reviewer` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
-- 추론 강도(`effort`): opus 심층추론 42종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.12**, `test-runner` **v1.11**, `code-reviewer` **v1.14**(Flask 흡수), `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.5**, `design-system-architect`·`perf-auditor`·`test-strategy` **v1.4**, `observability-reviewer`·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 9종 `unity-code-reviewer` **v1.4**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.2**·`game-ui-reviewer`·`unity-build-auditor`·`playtest-designer`·`multiplayer-rule-reviewer` **v1.1**·`unity-perf-auditor`·`save-data-reviewer` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.2**, 시스템 언어 C/.NET 6종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 추론 강도(`effort`): opus 심층추론 48종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
 
 ## 목차
-- [에이전트 46종](#에이전트-46종)
+- [에이전트 52종](#에이전트-52종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -24,7 +24,7 @@
 
 ---
 
-## 에이전트 46종
+## 에이전트 52종
 
 **관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했고, `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록은 추가 순서대로 있음).
 
@@ -32,7 +32,7 @@
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 1 | `code-reviewer` | `/review` `/리뷰` | 1.13 | opus | 코드 품질·가독성·버그 리뷰(증상 없는 정적 탐색 · 타 스택 폴백) | Read, Grep, Glob, Bash |
+| 1 | `code-reviewer` | `/review` `/리뷰` | 1.14 | opus | 코드 품질·가독성·버그 리뷰(FastAPI+**Flask** · 증상 없는 정적 탐색 · 타 스택 폴백) | Read, Grep, Glob, Bash |
 | 3 | `test-runner` | `/test` `/테스트` | 1.11 | sonnet | 테스트 실행·실패 분석(1차 원인 분류) | Bash, Read, Grep, Glob |
 | 4 | `test-strategy` | `/coverage` `/커버리지` | 1.5 | opus | 테스트 커버리지 공백·약한 테스트 진단(웹 스택) | Read, Grep, Glob |
 | 34 | `refactor-strategist` | `/refactor` `/리팩터` | 1.0 | opus | 동작 보존 리팩터 계획·단계 설계(추출·중복·의존·seam) | Read, Grep, Glob |
@@ -99,6 +99,19 @@
 | 46 | `game-audio-reviewer` | `/gaudio` `/오디오` | 1.1 | opus | **오디오 구현**(믹서 버스·동시 발음·반복 피로·임포트·BGM 전환) | Read, Grep, Glob |
 | 39 | `multiplayer-rule-reviewer` | `/rule` `/룰` | 1.1 | opus | **멀티플레이 룰 정합성·서버 권위 점검**(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
 | 40 | `save-data-reviewer` | `/save` `/세이브` | 1.0 | opus | **세이브·영속 데이터 호환성**(스키마 버전·마이그레이션·직렬화 리네이밍·손상 복구·클라우드 충돌) | Read, Grep, Glob |
+
+#### 🧩 시스템 언어 (C · 비-Unity .NET)
+
+각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹·게임 트리오와 동형). 리뷰↔성능은 **원인/증상 대칭**.
+
+| # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
+|---|---|---|---|---|---|---|
+| 47 | `c-code-reviewer` | `/creview` | 1.0 | opus | **C 코드 리뷰**(메모리 안전·UB·정수 변환·에러경로 누수·포맷 취약점) | Read, Grep, Glob, Bash |
+| 48 | `c-architect` | `/carch` | 1.0 | opus | **C 구조 설계**(모듈/헤더·메모리 소유권 계약·에러 규약·빌드/이식성) | Read, Grep, Glob |
+| 49 | `c-perf-auditor` | `/cperf` | 1.0 | opus | **C 런타임 성능**(캐시 지역성·할당·복잡도·프로파일 해석) | Read, Grep, Glob |
+| 50 | `dotnet-code-reviewer` | `/dnreview` | 1.0 | opus | **비-Unity C#/.NET 리뷰**(async 데드락·IDisposable·지연실행·DI 수명·EF Core) | Read, Grep, Glob, Bash |
+| 51 | `dotnet-architect` | `/dnarch` | 1.0 | opus | **.NET 구조 설계**(계층·DI 수명·미들웨어·호스팅·async 경계) | Read, Grep, Glob, Context7 |
+| 52 | `dotnet-perf-auditor` | `/dnperf` | 1.0 | opus | **.NET 런타임 성능**(GC 압력·LOH·Span/ArrayPool·박싱·벤치마크 해석) | Read, Grep, Glob |
 
 #### 📣 콘텐츠 / 마케팅
 
@@ -629,9 +642,71 @@
 - **구분(경계)**: 테스트 실행·집계·1차 분류는 `test-runner`(테스트를 아직 안 돌렸으면 거기부터 — 안 풀리는 실패가 이 에이전트 몫), 증상 없는 정적 리뷰는 `code-reviewer`·`unity-code-reviewer`, 추적 인프라 공백은 `observability-reviewer`, 병목 진단은 `perf-auditor`·`db-optimizer`·`unity-perf-auditor`, 취약점은 `security-reviewer`
 </details>
 
+### 🧩 시스템 언어 (C · 비-Unity .NET) — 1.72 추가
+
+> 웹(code-reviewer)·게임(unity-code-reviewer)이 폴백으로만 훑던 **C와 비-Unity C#/.NET**을 전담하는 6종. 두 언어는 code-reviewer가 못 잡는 **고유 결함 표면**(C: 메모리 안전·UB·정수 변환 / .NET: async 계약·자원 수명·DI 수명·EF Core)이 프로젝트와 무관하게 참이라, 각 언어를 **리뷰·설계·성능** 3역으로 나눴다(웹·게임 트리오와 동형). 리뷰↔성능은 unity 쌍과 같은 **원인/증상 대칭**. Unity C#은 `unity-code-reviewer`가 계속 맡고, 이 클러스터는 비-Unity만 본다.
+
+<details>
+<summary><b>47. c-code-reviewer</b> (<code>/creview</code>) — C 코드 리뷰(메모리 안전·UB) (품질)</summary>
+
+- **언제**: C 코드 커밋/머지 전 셀프 리뷰. `git diff`로 변경분 파악(Bash는 범위 식별 + **명시 요청 시** 읽기전용 정적분석 `-fsyntax-only`·cppcheck·clang --analyze, 빌드·실행 금지)
+- **점검**: ① 공간 안전(버퍼 오버플로·off-by-one·널 종결자) ② 시간 안전/소유권(UAF·double-free·dangling·미초기화 읽기) ③ 널·반환값·`errno` 미검사(`p=realloc(p,...)` 함정) ④ 정수(시그니처드 오버플로·부호/폭 변환·크기 계산 오버플로→힙 오버플로) ⑤ UB(엄격 앨리어싱·시퀀스 포인트·널 산술) ⑥ 에러 경로 자원 누수(`goto cleanup` 일관성) ⑦ 포맷 스트링 ⑧ 동시성·시그널 안전성 ⑨ 매크로 함정
+- **전제**: C의 메모리 안전 결함 = 보안 결함(RCE·정보 노출) — 웹 OWASP `security-reviewer`가 안 보는 층을 여기서 맡는다. "지금은 도는 UB"도 결함으로 보고
+- **출력**: 요약 → Must fix(메모리·UB·정수·누수·포맷) → Should fix(소유권 계약·이식성·const) → Nit → 위임
+- **구분**: 일반 품질·타 스택 폴백은 `code-reviewer`, 구조는 `c-architect`, 성능은 `c-perf-auditor`, 이미 난 크래시 원인은 `debugger`
+</details>
+
+<details>
+<summary><b>48. c-architect</b> (<code>/carch</code>) — C 구조 설계 (설계)</summary>
+
+- **언제**: 새 C 모듈·라이브러리·서브시스템을 만들기 전, 기존 구조 점검
+- **전제**: C는 캡슐화·수명 관리를 언어가 강제하지 않는다 — **규율을 구조와 계약으로 만든다**
+- **설계**: 모듈/헤더 경계(불투명 포인터·최소 공개 표면·순환 포함 차단), **메모리 소유권 모델**(누가 할당·해제하는지를 API 계약으로·이전 vs 대여), 에러 처리 전략(반환코드/errno/out-param 일관·단일 출구 정리), API/ABI 안정성(레이아웃·버저닝·심볼 가시성), 빌드 의존성 방향, 이식성 계층(플랫폼 추상화·`#ifdef` 격리), 동시성·할당 전략(아레나/풀 vs 개별 malloc)
+- **출력**: (신규) 요구사항/가정 → 옵션 비교 표 → 권장안(모듈/소유권 다이어그램·API 스케치) → 단계 적용 / (점검) 진단 → 구조적 문제 → 개선 → 마이그레이션
+- **구분**: 구현 코드 결함은 `c-code-reviewer`, 성능은 `c-perf-auditor`, 웹 아키텍처는 `system-architect`, .NET 구조는 `dotnet-architect`
+</details>
+
+<details>
+<summary><b>49. c-perf-auditor</b> (<code>/cperf</code>) — C 런타임 성능 (성능)</summary>
+
+- **언제**: 릴리스 전 성능 패스, "느리다" 보고, 프로파일러 캡처 해석
+- **모드**: (1) 정적 감사 — 접근 패턴·할당·복사·복잡도 (2) 캡처 해석 — perf/gprof/cachegrind/callgrind/Massif
+- **점검**: 캐시 지역성(AoS/SoA·스트라이드·**거짓 공유**·정렬), 할당 전략(핫 경로 개별 malloc→아레나/풀), 불필요 복사·루프 불변식, 알고리즘·자료구조 복잡도, 분기·핫/콜드 분리, 벡터화 저해 요인(`restrict`—정확성은 c-code-reviewer로), I/O 버퍼링
+- **원칙**: 정적으로 "느리다"를 단정하지 않는다 — 성능 깎는 구성은 보고하되 실제 비용은 **측정 계획**으로 분리, 조기 최적화 경계. `c-code-reviewer`와 **원인/증상 대칭**
+- **구분**: 코드 원인·UB는 `c-code-reviewer`, 회귀 시점은 `debugger`, 구조 재설계는 `c-architect`, 웹/.NET 성능은 `perf-auditor`·`dotnet-perf-auditor`
+</details>
+
+<details>
+<summary><b>50. dotnet-code-reviewer</b> (<code>/dnreview</code>) — 비-Unity C#/.NET 코드 리뷰 (품질)</summary>
+
+- **언제**: 비-Unity C# 코드 커밋/머지 전(ASP.NET Core·워커·콘솔·WPF·라이브러리). `git diff`로 범위 파악(Bash는 범위 식별만)
+- **점검**: ① async(`.Result`/`.Wait()` 데드락·`async void`·미대기 Task·취소 미전파·`ConfigureAwait`) ② 자원 수명(IDisposable/`using` 누락·`HttpClient` 소켓 고갈·이벤트 미해제) ③ 지연 실행(IEnumerable 다중 열거·열거 중 변경) ④ nullable(`!` 남용·NRE) ⑤ **DI 수명**(captive dependency·`DbContext` 공유) ⑥ EF Core(N+1·클라 평가·추적 낭비·`SaveChanges` 누락) ⑦ 예외(삼킴·`throw ex` 스택 소실) ⑧ 값/참조 의미·문화권 파싱
+- **출력**: 요약 → Must fix(데드락·누수·captive dependency·다중 열거) → Should fix(nullable·EF·문화권) → Nit → 위임
+- **구분**: Unity C#은 `unity-code-reviewer`, 웹 JS/파이썬 폴백은 `code-reviewer`, 구조는 `dotnet-architect`, 성능은 `dotnet-perf-auditor`, 보안은 `security-reviewer`
+</details>
+
+<details>
+<summary><b>51. dotnet-architect</b> (<code>/dnarch</code>) — .NET 구조 설계 (설계)</summary>
+
+- **언제**: 새 .NET 서비스·모듈을 만들기 전, 기존 구조 점검. 버전 의존 패턴은 Context7로 확인
+- **설계**: 계층 분리(엔드포인트/앱/도메인/인프라·Minimal API vs 컨트롤러), **DI 서비스 수명 설계**(싱글턴/스코프드/트랜지언트·captive dependency 예방·`DbContext` 수명), 미들웨어 파이프라인 순서, 호스팅(`BackgroundService`·그레이스풀 셧다운·큐 소비), 옵션 패턴(`IOptions`·시크릿), async 경계(끝까지 async·취소 전파), 프로젝트 의존성 방향(순환 차단), 복원력(재시도·서킷브레이커)
+- **출력**: (신규) 요구사항/가정 → 옵션 비교 → 권장안(계층·DI 수명·파이프라인 다이어그램) → 단계 적용 / (점검) 진단 → 구조적 문제 → 개선 → 마이그레이션
+- **구분**: 구현 코드 결함은 `dotnet-code-reviewer`, 성능은 `dotnet-perf-auditor`, 웹 풀스택은 `system-architect`, C 구조는 `c-architect`, 배포·컨테이너는 `devops-reviewer`
+</details>
+
+<details>
+<summary><b>52. dotnet-perf-auditor</b> (<code>/dnperf</code>) — .NET 런타임 성능 (성능)</summary>
+
+- **언제**: 릴리스 전 성능 패스, "느리다·GC가 튄다" 보고, 측정 캡처 해석
+- **모드**: (1) 정적 감사 — 할당·GC 압력·비싼 경로 (2) 캡처 해석 — BenchmarkDotNet/dotnet-counters/dotnet-trace/PerfView
+- **점검**: **GC 압력**(할당률·세대 0/1/2 승격·**LOH 단편화**·Server vs Workstation GC), 할당 절감(`Span<T>`/`stackalloc`/`ArrayPool`·struct vs class·박싱·클로저 캡처), 문자열(연결·보간→`StringBuilder`/`ReadOnlySpan<char>`), async 오버헤드(상태머신 할당·`ValueTask`), LINQ 중간 컬렉션, 컬렉션 선택·용량 예약, 직렬화, JIT/AOT·티어드
+- **원칙**: 정적으로 "느리다" 단정 금지 — 할당 유발 구성은 보고하되 실제 비용은 **측정 계획**으로. `dotnet-code-reviewer`와 **증상/원인 대칭**
+- **구분**: 할당 유발 코드·EF 안티패턴은 `dotnet-code-reviewer`, 회귀 시점은 `debugger`, 구조는 `dotnet-architect`, Unity 성능은 `unity-perf-auditor`, MySQL 튜닝은 `db-optimizer`
+</details>
+
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
-양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 1.56의 전수 스캔 34쌍에서 1.64·1.67~1.71을 거치며 늘어 **현재 53쌍**이며 클러스터별로 나눈다.
+양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 1.56의 전수 스캔 34쌍에서 1.64·1.67~1.72를 거치며 늘어 **현재 58쌍**이며 클러스터별로 나눈다.
 
 **웹 스택 (20쌍)**
 | 쌍 | 구분 |
@@ -710,6 +785,15 @@
 | test-strategy ↔ playtest-designer | 소프트웨어 자동 테스트 ↔ 사람 대상 플레이테스트 |
 | game-test-strategy ↔ test-strategy | 게임(엔진 seam·EditMode/PlayMode·결정론) ↔ 웹(pytest·Vitest·Playwright) ⟵ 1.69 |
 
+**시스템 언어 (C · 비-Unity .NET, 5쌍)** — 1.72 신설
+| 쌍 | 구분 |
+|---|---|
+| c-code-reviewer ↔ c-perf-auditor | C 성능 깎는 코드 "원인·UB" ↔ 캐시·할당 "증상·측정 해석" (원인/증상 대칭) |
+| dotnet-code-reviewer ↔ dotnet-perf-auditor | .NET 할당 유발 "코드 원인·EF 안티패턴" ↔ GC "증상·측정 해석" (원인/증상 대칭) |
+| dotnet-code-reviewer ↔ unity-code-reviewer | **비-Unity** C#/.NET(async·DI·EF Core) ↔ **Unity** C#(수명주기·GC·프레임) |
+| c-architect ↔ system-architect | 시스템 언어 C 모듈·소유권 "설계" ↔ 웹 풀스택 "아키텍처" |
+| dotnet-architect ↔ system-architect | .NET 계층·DI 수명 "설계" ↔ 웹 풀스택 "아키텍처" |
+
 ### 일방향 위임 포인터
 
 특화 에이전트가 **허브/일반/상위 에이전트로만** 안내하는 단방향(`→`). 역방향을 두지 않는 이유: 허브 에이전트(code-reviewer 등)가 받는 모든 특화를 역으로 나열하면 description이 비대해진다. 아래는 **의도적 단방향의 대표 예시**이며 전수 목록은 아니다 — 허브로 들어오는 inbound 포인터는 이 외에도 여럿(예: system-architect가 받는 5건, code-reviewer가 받는 다수).
@@ -718,6 +802,7 @@
 |---|---|---|
 | test-strategy → code-reviewer | 특화 → 일반 폴백 | `code-reviewer`는 일반 폴백이라 개별 특화로 되돌리지 않음 |
 | perf-auditor → code-reviewer | 특화 → 일반 폴백 | 동일(일반 품질·버그 폴백) |
+| code-reviewer → c-code-reviewer / dotnet-code-reviewer | 일반 폴백 → 언어 전담 | C·비-Unity C#의 고유 결함은 전담이 폴백보다 우선(전담은 일반 폴백을 역참조 안 함) ⟵ 1.72 |
 | devops-reviewer → migration-reviewer | 운영 → DB 도메인 | 마이그레이션 리뷰는 DB 영역에 집중 |
 | system-architect → api-contract-reviewer / data-modeler / security-reviewer | 최상위 설계 → 특화 검증 | 설계가 구현 후 검증을 특화로 넘김(특화는 설계를 역참조 안 함) |
 | ai-workspace-architect → system-architect / design-system-architect | 메타 → 도메인 설계 | 메타가 스택 설계를 넘길 뿐, 설계 에이전트는 메타를 역참조 안 함 |
@@ -765,11 +850,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 46개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 52개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 46개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 46개 슬래시 명령(+ 한글 별칭 28개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 52개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 52개 슬래시 명령(+ 한글 별칭 28개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -851,6 +936,12 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/gloc` | game-localization-reviewer | 문자열·UI·폰트 경로(선택) |
 | `/gtest` | game-test-strategy | 게임 로직 경로(선택) |
 | `/gaudio` | game-audio-reviewer | 오디오 코드·믹서·클립 경로(선택) |
+| `/creview` | c-code-reviewer | C 소스 경로(선택) |
+| `/carch` | c-architect | 설계 대상/경로(선택) |
+| `/cperf` | c-perf-auditor | 경로 또는 프로파일러 캡처(선택) |
+| `/dnreview` | dotnet-code-reviewer | C# 소스 경로(선택) |
+| `/dnarch` | dotnet-architect | 설계 대상/경로(선택) |
+| `/dnperf` | dotnet-perf-auditor | 경로 또는 측정 캡처(선택) |
 
 ### 한글 별칭 (1.65)
 
@@ -900,7 +991,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-39종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-52종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
@@ -923,13 +1014,13 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
-├─ AGENTS.md                     # 38개 에이전트 통합 정리
+├─ AGENTS.md                     # 52개 에이전트 통합 정리
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
 ├─ .gitignore
 │
-├─ commands/                     # ── 슬래시 명령 정의 (38개) ──
+├─ commands/                     # ── 슬래시 명령 정의 (52개, +한글 별칭 28개) ──
 │  ├─ review.md  ├─ sec.md       ├─ test.md      ├─ coverage.md
 │  ├─ perf.md    ├─ contract.md  ├─ apidoc.md    ├─ db.md
 │  ├─ migrate.md ├─ ui.md        ├─ dsystem.md   ├─ datamodel.md
@@ -939,12 +1030,14 @@ claude-agents/
 │  ├─ threat.md   ├─ aisec.md    ├─ ureview.md   ├─ gdd.md
 │  ├─ gui.md      ├─ feel.md     ├─ uperf.md     ├─ playtest.md
 │  ├─ ubuild.md   ├─ recall.md   ├─ refactor.md  ├─ docs.md
-│  ├─ agentdef.md ├─ story.md    └─ debug.md
+│  ├─ agentdef.md ├─ story.md    ├─ debug.md
+│  ├─ creview.md  ├─ carch.md    ├─ cperf.md
+│  ├─ dnreview.md ├─ dnarch.md   └─ dnperf.md
 │
 ├─ launchers/                    # ── 바탕화면 런처 ──
 │  └─ claude.bat
 │
-├─ code-reviewer.md              # ── 에이전트 정의 (38개) ──
+├─ code-reviewer.md              # ── 에이전트 정의 (52개) ──
 ├─ security-reviewer.md
 ├─ test-runner.md
 ├─ test-strategy.md
@@ -989,7 +1082,13 @@ claude-agents/
 ├─ automation-reliability-reviewer.md  # 도메인(데몬·크론 신뢰성)
 ├─ game-localization-reviewer.md # 게임(현지화 준비)
 ├─ game-test-strategy.md         # 게임(자동 테스트 전략·seam)
-└─ game-audio-reviewer.md        # 게임(오디오 구현)
+├─ game-audio-reviewer.md        # 게임(오디오 구현)
+├─ c-code-reviewer.md            # 시스템 언어(C 리뷰·메모리 안전·UB)
+├─ c-architect.md                # 시스템 언어(C 구조 설계)
+├─ c-perf-auditor.md             # 시스템 언어(C 런타임 성능)
+├─ dotnet-code-reviewer.md       # 시스템 언어(비-Unity C#/.NET 리뷰)
+├─ dotnet-architect.md           # 시스템 언어(.NET 구조 설계)
+└─ dotnet-perf-auditor.md        # 시스템 언어(.NET 런타임 성능)
 ```
 
 ---

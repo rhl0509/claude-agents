@@ -6,7 +6,23 @@
 
 **작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync.ps1`을 실행해 전역(`%USERPROFILE%\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`(상단 버전 요약·버전 표·해당 상세 블록)와 `AGENTS.md`·`CLAUDE.md`의 관련 내용을 갱신한 뒤 ④ `sync.ps1` 실행 후 `git commit` 한다. **원격 `git push`는 명시 요청 시에만** 한다(public repo에서 push는 곧 공개 게시 — sync만으로 로컬 에이전트는 이미 작동).
 
-**effort 튜닝 요약(1.57~1.60)**: opus 30종 `high` 일괄 채택(1.57) → 보안 3종 `xhigh`(1.58) → fable `xhigh`(1.59) → 1.60에서 신규 opus 3종(refactor-strategist·docs-writer·agent-definition-reviewer)도 `high`로 신설. 현재 **`xhigh` 4종**(security-reviewer·threat-modeler·llm-ai-security-reviewer·ai-workspace-architect), 나머지 opus 38종 `high`(1.69 기준 opus 총 42종), sonnet·haiku는 세션 상속. `effort`는 실행 정책 필드라 기존 에이전트 개별 `version` 미bump(신규는 v1.0 신설).
+**effort 튜닝 요약(1.57~1.60)**: opus 30종 `high` 일괄 채택(1.57) → 보안 3종 `xhigh`(1.58) → fable `xhigh`(1.59) → 1.60에서 신규 opus 3종(refactor-strategist·docs-writer·agent-definition-reviewer)도 `high`로 신설. 현재 **`xhigh` 4종**(security-reviewer·threat-modeler·llm-ai-security-reviewer·ai-workspace-architect), 나머지 opus 44종 `high`(1.72 기준 opus 총 48종 — 신규 C/.NET 6종 포함), sonnet·haiku는 세션 상속. `effort`는 실행 정책 필드라 기존 에이전트 개별 `version` 미bump(신규는 v1.0 신설).
+
+---
+
+## 1.72 (2026-07-15) — 신규 6종: 시스템 언어 클러스터(C 3종 + 비-Unity .NET 3종) + code-reviewer Flask 흡수
+
+웹·Unity에 이어 **C와 비-Unity C#/.NET**을 전담하는 6종을 신설했다. 아직 해당 스택 레포는 없지만(투기적 신설), 두 언어는 code-reviewer의 폴백으로는 못 잡는 **고유 결함 표면**(C: 메모리 안전·UB·정수 변환 / .NET: async 계약·자원 수명·DI 수명·EF Core)이 프로젝트와 무관하게 참이라 지금 만들어도 일반론이 아니다. 디버그는 스택 무관 `debugger`가 이미 커버해 신설하지 않았다. 각 언어를 **리뷰·설계·성능** 3역으로 나눠 웹(code-reviewer/system-architect/perf-auditor)·게임(unity-code-reviewer/…/unity-perf-auditor) 트리오와 같은 구조로 맞췄다.
+
+- **c-code-reviewer 1.0 (신설, `/creview`, opus·high, orange, `Read,Grep,Glob,Bash`)** — 공간/시간 메모리 안전(버퍼 오버플로·UAF·double-free·미초기화), 널·반환값·errno, 정수 오버플로·부호/폭 변환, UB(엄격 앨리어싱·시퀀스 포인트·시그니처드 오버플로), 에러 경로 자원 누수, 포맷 스트링, 동시성·시그널 안전성. C의 메모리 안전 결함 = 보안 결함이라 웹 OWASP security-reviewer가 안 보는 층을 이 에이전트가 맡음. Bash는 git diff 범위 식별 + **명시 요청 시** 읽기전용 정적분석(`-fsyntax-only`·cppcheck·clang --analyze), 빌드·실행 금지.
+- **c-architect 1.0 (신설, `/carch`, opus·high, green, `Read,Grep,Glob`)** — 모듈/헤더 경계(불투명 포인터 캡슐화), **메모리 소유권 모델(할당·해제 계약)**, 에러 처리 전략(반환코드/errno/out-param 일관성·단일 출구 정리), API/ABI 안정성, 빌드 의존성 방향, 이식성 계층, 동시성·할당 전략. "언어가 규율을 안 강제하니 구조·계약으로 만든다"가 축.
+- **c-perf-auditor 1.0 (신설, `/cperf`, opus·high, yellow, `Read,Grep,Glob`)** — 캐시 지역성(AoS/SoA·거짓 공유), 할당 전략(아레나/풀), 불필요 복사, 알고리즘 복잡도, 분기·핫/콜드, 벡터화 여지, I/O 버퍼링; perf/cachegrind/callgrind/Massif 캡처 해석. **c-code-reviewer와 원인/증상 대칭**(unity 쌍과 동형).
+- **dotnet-code-reviewer 1.0 (신설, `/dnreview`, opus·high, purple, `Read,Grep,Glob,Bash`)** — async 오용(`.Result`/`.Wait()` 데드락·`async void`·미대기·취소 미전파), IDisposable/`using` 누수, IEnumerable 지연·다중 열거, nullable, DI 수명(captive dependency·`DbContext`), EF Core 안티패턴(N+1·추적·클라 평가), 예외 삼킴·`throw ex`, 문화권 파싱. Unity C#은 unity-code-reviewer로 분리. Bash는 git diff 범위 식별만(`dotnet build/run/test` 금지).
+- **dotnet-architect 1.0 (신설, `/dnarch`, opus·high, green, `Read,Grep,Glob,Context7`)** — 계층(엔드포인트/앱/도메인/인프라·Minimal API 대 컨트롤러), **DI 서비스 수명 설계(captive dependency 예방)**, 미들웨어 순서, 호스팅(`BackgroundService`·그레이스풀 셧다운), 옵션 패턴, async 경계, 프로젝트 의존성 방향, 복원력. ASP.NET Core 버전 의존 패턴은 Context7 확인.
+- **dotnet-perf-auditor 1.0 (신설, `/dnperf`, opus·high, yellow, `Read,Grep,Glob`)** — GC 압력(할당률·세대 승격·LOH·Server/Workstation GC), 할당 절감(`Span`/`stackalloc`/`ArrayPool`·박싱·클로저), 문자열, async 오버헤드(`ValueTask`), LINQ 중간 컬렉션, 컬렉션 선택, 직렬화, JIT/AOT; BenchmarkDotNet/dotnet-counters/dotnet-trace/PerfView 해석. **dotnet-code-reviewer와 증상/원인 대칭**.
+- **code-reviewer 1.13 → 1.14** — (1) 파이썬 웹 백엔드에 **Flask(WSGI)** 명시 흡수: 애플리케이션/요청 컨텍스트 수명, Pydantic 없는 수동·marshmallow 검증, 동기 WSGI 블로킹, 블루프린트·팩토리 구조, 요청 스코프 세션. 별도 flask 에이전트 대신 code-reviewer 확장(FastAPI와 실패 유형 대부분 공유). (2) 폴백 조항에 **C→c-code-reviewer, 비-Unity C#→dotnet-code-reviewer** 카브아웃 추가(전담 리뷰어가 폴백보다 우선).
+- **경계 요약(신규 위임 쌍)** — `c-code-reviewer ↔ c-perf-auditor`(원인 vs 증상), `dotnet-code-reviewer ↔ dotnet-perf-auditor`(원인 vs 증상), `dotnet-code-reviewer ↔ unity-code-reviewer`(비-Unity vs Unity C#), `c-architect/dotnet-architect ↔ system-architect`(시스템 언어 vs 웹 풀스택), `code-reviewer → c/dotnet-code-reviewer`(폴백 양보).
+- **문서** — CLAUDE.md 에이전트 표 6행 + 티어링(opus·high) + 인트로 프로즈, CHANGELOG 이 항목. **README.md·AGENTS.md 상세 카탈로그(46→52종 카운트·per-agent 블록·위임쌍 표·트리)는 사용자 검토 후 반영 예정**(⚠️ 미완 — sync는 에이전트·커맨드만으로 이미 작동).
 
 ---
 
