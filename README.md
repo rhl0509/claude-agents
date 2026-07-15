@@ -806,7 +806,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 | security-reviewer ↔ llm-ai-security-reviewer | 웹 앱 일반 보안 ↔ AI/LLM 특화 심화 |
 | threat-modeler ↔ llm-ai-security-reviewer | 설계 단계 위협(LLM 포함) ↔ 구현 후 AI/LLM 심화 |
 
-**게임 (Unity + C# · MSW, 17쌍)**
+**게임 (Unity + C# · MSW, 16쌍)**
 | 쌍 | 구분 |
 |---|---|
 | game-design-architect ↔ unity-code-reviewer | 코어 루프·시스템 "설계" ↔ C# 코드 품질·프레임 "리뷰" |
@@ -820,6 +820,11 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 | game-audio-reviewer ↔ game-feel-reviewer | 오디오 "믹싱·재생 구조" ↔ 사운드가 동작과 "동기화되는 타이밍" ⟵ 1.69 |
 | game-audio-reviewer ↔ game-ui-reviewer | "그 소리가 어떻게 재생되는가"(믹서·중복·비용) ↔ "어떤 소리가 나야 하는가"(UI 조작음 일관성·무음 대체) ⟵ 1.71 |
 | game-audio-reviewer ↔ unity-perf-auditor | 오디오 "구조·청감 품질" ↔ 오디오 "메모리·CPU 프레임 예산" ⟵ 1.69 |
+| game-design-architect ↔ playtest-designer | "무엇을 검증할지"(재미 가설) ↔ "어떻게 검증할지"(프로토콜) |
+| game-feel-reviewer ↔ game-ui-reviewer | 게임플레이 동작 피드백 ↔ UI 조작 피드백 |
+| game-feel-reviewer ↔ playtest-designer | 손맛 장치·프로토타입 검증 항목 ↔ 검증 프로토콜 |
+| unity-code-reviewer ↔ unity-perf-auditor | GC 유발 코드 "원인" ↔ 프레임 예산 "증상·측정 해석" |
+| unity-build-auditor ↔ unity-perf-auditor | 텍스처 압축 "빌드 용량" ↔ "런타임 메모리·GPU" |
 
 **도메인 (ML · 회계 · 자동화, 4쌍)** — 1.69 신설
 | 쌍 | 구분 |
@@ -828,13 +833,8 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 | accounting-rule-reviewer ↔ data-modeler | 회계 "규칙이 코드로 강제되는가" ↔ 테이블·관계 "설계" |
 | automation-reliability-reviewer ↔ observability-reviewer | 로컬 데몬·크론의 "운용 신뢰성" ↔ 웹 앱 런타임의 "추적 가능성" |
 | automation-reliability-reviewer ↔ devops-reviewer | 상시 실행 자동화의 "생존·복구" ↔ CI/CD·컨테이너 "파이프라인 설정" |
-| game-design-architect ↔ playtest-designer | "무엇을 검증할지"(재미 가설) ↔ "어떻게 검증할지"(프로토콜) |
-| game-feel-reviewer ↔ game-ui-reviewer | 게임플레이 동작 피드백 ↔ UI 조작 피드백 |
-| game-feel-reviewer ↔ playtest-designer | 손맛 장치·프로토타입 검증 항목 ↔ 검증 프로토콜 |
-| unity-code-reviewer ↔ unity-perf-auditor | GC 유발 코드 "원인" ↔ 프레임 예산 "증상·측정 해석" |
-| unity-build-auditor ↔ unity-perf-auditor | 텍스처 압축 "빌드 용량" ↔ "런타임 메모리·GPU" |
 
-**클러스터 교차 (게임 ↔ 웹, 6쌍)** — 1.52에서 양방향화
+**클러스터 교차 (게임 ↔ 웹, 7쌍)** — 1.52에서 양방향화
 | 쌍 | 구분 |
 |---|---|
 | code-reviewer ↔ unity-code-reviewer | 웹(Next.js/FastAPI) 코드 ↔ Unity C# 게임 코드 |

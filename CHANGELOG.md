@@ -10,6 +10,16 @@
 
 ---
 
+## 1.82 (2026-07-15) — 대칭 위임 쌍 섹션 README·AGENTS 전량 동기화 + README 자체 오분류 교정
+
+1.81 후속. AGENTS 쌍 섹션을 README와 전량 동기화하려다 **README 정본 자체의 구조 버그**를 발견해 먼저 교정한 뒤 양쪽을 동일화.
+
+- **[README 교정]** 게임 쌍 5개(game-design↔playtest·game-feel↔game-ui·game-feel↔playtest·unity-code↔unity-perf·unity-build↔unity-perf)가 **"도메인" 헤더 아래 잘못 편입**돼 있었다(전부 게임 클러스터 쌍). 게임 블록으로 이동. 라벨도 실제와 어긋나 있어 정정: **게임 17→16쌍**(실제 행수), **교차 6→7쌍**. 총합 60은 불변(오분류가 상쇄돼 총계만 우연히 맞던 상태였음).
+- **[AGENTS 전량 동기화]** AGENTS 쌍 섹션은 1.69/1.71 게임 추가분(현지화·게임테스트·오디오 5쌍)이 누락돼 게임 11쌍·도메인 섹션 부재였다. 게임 5쌍 추가(→16)·도메인 4쌍 섹션 신설·교차 game-test-strategy↔test-strategy 추가(→7)·intro를 "현재 60쌍"으로 갱신. 이제 **README ≡ AGENTS**(웹 20·콘텐츠 3·보안 3·게임 16·도메인 4·교차 7·시스템 7 = 60쌍, 스크립트로 섹션별 대조 확인).
+- 에이전트 정의 무변경(version 무bump). README·AGENTS는 배포 대상 아니라 sync 불필요.
+
+---
+
 ## 1.81 (2026-07-15) — README·AGENTS 카운트 정합 감사 + 드리프트 수정 (에이전트 무변경)
 
 에이전트 정의는 건드리지 않고, README·AGENTS의 카운트·표만 실측 대조해 정합화. **실측 기준: 에이전트 57(opus 53·sonnet 2·haiku 1·fable 1), 영문 커맨드 57·한글 별칭 29, xhigh 4.**
