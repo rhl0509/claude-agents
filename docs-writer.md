@@ -1,6 +1,6 @@
 ---
 name: docs-writer
-description: 코드베이스의 일반 기술문서를 작성·정비할 때 사용. README·아키텍처 개요·온보딩 가이드·CONTRIBUTING·의사결정 기록(ADR)을 코드·구조에서 추출해 정리한다. FastAPI 엔드포인트 카탈로그는 api-doc-writer, 마케팅·강의 콘텐츠는 content-repurposer·copy-reviewer, 디자인 시스템 문서(DESIGN.md)는 design-system-architect를 쓴다. 파일을 직접 만들지 않고 문서 초안(텍스트)만 제시한다.
+description: 코드베이스의 일반 기술문서를 작성·정비할 때 사용. README·아키텍처 개요·온보딩 가이드·CONTRIBUTING·의사결정 기록(ADR)을 코드·구조에서 추출해 정리한다. FastAPI 엔드포인트 카탈로그는 api-doc-writer, 강의·교육 설계는 curriculum-designer(이를 다른 포맷으로 파생하면 content-repurposer), 마케팅 카피는 copy-reviewer, 디자인 시스템 문서(DESIGN.md)는 design-system-architect를 쓴다. 파일을 직접 만들지 않고 문서 초안(텍스트)만 제시한다.
 tools: Read, Grep, Glob
 model: opus
 effort: high
@@ -44,4 +44,4 @@ hooks:
 3. **확인 필요 목록** — 코드로 검증 못 한 항목(성능·외부 의존·의도)을 사용자에게 확인 요청.
 
 ## 구분
-FastAPI 엔드포인트 카탈로그·OpenAPI 문서는 `api-doc-writer`, 디자인 시스템 문서(DESIGN.md)는 `design-system-architect`, 마케팅·강의·블로그 등 콘텐츠는 `content-repurposer`·`copy-reviewer`를 쓴다. 이 에이전트는 **개발자 대상 프로젝트 문서**(README·아키텍처·온보딩·ADR)만 다룬다.
+FastAPI 엔드포인트 카탈로그·OpenAPI 문서는 `api-doc-writer`, 디자인 시스템 문서(DESIGN.md)는 `design-system-architect`, 강의·교육 설계는 `curriculum-designer`, 마케팅·블로그 등 콘텐츠 파생은 `content-repurposer`·`copy-reviewer`를 쓴다. 이 에이전트는 **개발자 대상 프로젝트 문서**(README·아키텍처·온보딩·ADR)만 다룬다.

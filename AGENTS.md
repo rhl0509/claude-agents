@@ -1,4 +1,4 @@
-# 서브에이전트 전체 정리 (52종)
+# 서브에이전트 전체 정리 (53종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
@@ -77,6 +77,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 50 | `dotnet-code-reviewer` | `/dnreview` | 시스템 | 비-Unity C#/.NET 리뷰(async 데드락·IDisposable·지연실행·DI 수명·EF Core) | Read, Grep, Glob, Bash |
 | 51 | `dotnet-architect` | `/dnarch` | 시스템 | .NET 구조 설계(계층·DI 수명·미들웨어·호스팅·async 경계) | Read, Grep, Glob, Context7 |
 | 52 | `dotnet-perf-auditor` | `/dnperf` | 시스템 | .NET 런타임 성능(GC 압력·LOH·Span/ArrayPool·박싱·벤치마크 해석) | Read, Grep, Glob |
+| 53 | `curriculum-designer` | `/curriculum` | 교육 | 강의·워크숍·강좌 교수 설계(학습자 분석·측정 가능한 학습 목표·모듈 계열화·backward design·슬라이드/핸드아웃 골격) | Read, Grep, Glob |
 
 ---
 
@@ -186,6 +187,12 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 **23. brand-voice-guardian (`/voice`)**
 콘텐츠가 브랜드 보이스(문체·톤·어휘·거리감·시그니처)에 맞는지 점검. 기준 소스: voice.md → 확정 예시글 → 제공 예시 추론 → 부재 시 `/fable`로 voice.md부터 만들라고 안내(보이스 지어내지 않음). 문장 습관·호칭·금지 표현·시그니처·톤 일관성·번역투 점검. 출력: 요약(기준·부합도) → 벗어난 구간(원문→교정) → 보강 제안.
 → 일반 카피 품질은 `copy-reviewer`, 보이스 정의·시스템 설계는 `ai-workspace-architect`.
+
+### 🎓 교육 / 교수설계
+
+**53. curriculum-designer (`/curriculum`)**
+강의·워크숍·강좌·교육 자료의 **교수 설계(instructional design)**. backward design으로 학습자·맥락 분석 → 측정 가능한 학습 목표(Bloom's 동사) → 목표에 정렬된 형성·총괄 평가 → 목표·평가에 맞춘 활동·콘텐츠 순서로 설계한다. 모듈 분해·선수관계 계열화, 난이도 곡선·페이싱, 학습 경험 흐름(도입·동기→설명→시연→실습→피드백→정리), 인지부하 청킹, 슬라이드·핸드아웃·강사 노트 골격, 시간 배분을 다뤄 완성형 커리큘럼 맵+모듈 초안을 낸다(읽기 전용 — 파일 미수정). 콘텐츠 계열의 "교육 1종"으로 콘텐츠/마케팅 6종·창작 1종과 별개. 출력: 커리큘럼 맵(목표·모듈·평가 정렬표) → 모듈별 초안 → 슬라이드/핸드아웃/강사 노트 골격 → 채운 가정 & 확장 포인트.
+→ 강의 홍보 카피는 `copy-reviewer`, 완성된 강의를 다른 포맷으로 파생은 `content-repurposer`, 개발자 문서·튜토리얼은 `docs-writer`, 사실 검증은 `fact-checker`, AI 작업환경 설계는 `ai-workspace-architect`.
 
 ### 🔒 품질 / QA — 보안 심화
 

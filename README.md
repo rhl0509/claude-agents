@@ -1,18 +1,18 @@
 # claude-agents
 
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
-코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터). 여기에 더해 **C와 비-Unity C#/.NET**을 전담하는 시스템 언어 에이전트 6종(`c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`)이 추가되었습니다(🧩 시스템 언어 클러스터 — 각 언어를 리뷰·설계·성능 3역으로).
+코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 여기에 강의·워크숍·강좌·교육 자료의 교수 설계(학습자 분석·측정 가능한 학습 목표·모듈 계열화·목표-평가-활동 정렬)를 맡는 **교육/교수설계 에이전트 1종**(`curriculum-designer`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터). 여기에 더해 **C와 비-Unity C#/.NET**을 전담하는 시스템 언어 에이전트 6종(`c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`)이 추가되었습니다(🧩 시스템 언어 클러스터 — 각 언어를 리뷰·설계·성능 3역으로).
 
-- 에이전트 수: **52종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET 6종 + 도메인 3종(ML·회계·자동화) + 메타 2종 + 콘텐츠/마케팅 6종 + 창작 1종 + 보안 심화 2종 + 게임 12종 + 인프라 1종)
+- 에이전트 수: **53종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET 6종 + 도메인 3종(ML·회계·자동화) + 메타 2종 + 콘텐츠/마케팅 6종 + 교육 1종 + 창작 1종 + 보안 심화 2종 + 게임 12종 + 인프라 1종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.13**, `test-runner` **v1.11**, `code-reviewer` **v1.14**(Flask 흡수), `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.6**, `perf-auditor` **v1.5**, `design-system-architect`·`test-strategy` **v1.4**, `observability-reviewer`·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 9종 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.2**·`game-ui-reviewer`·`unity-build-auditor`·`playtest-designer`·`multiplayer-rule-reviewer` **v1.1**·`unity-perf-auditor`·`save-data-reviewer` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.4**, 시스템 언어 C/.NET 6종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
-- 추론 강도(`effort`): opus 심층추론 48종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.13**, `test-runner` **v1.11**, `code-reviewer` **v1.14**(Flask 흡수), `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.6**, `perf-auditor` **v1.5**, `design-system-architect`·`test-strategy` **v1.4**, `observability-reviewer`·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 9종 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.2**·`game-ui-reviewer`·`unity-build-auditor`·`playtest-designer`·`multiplayer-rule-reviewer` **v1.1**·`unity-perf-auditor`·`save-data-reviewer` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.4**, 시스템 언어 C/.NET 6종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 추론 강도(`effort`): opus 심층추론 49종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
 
 ## 목차
-- [에이전트 52종](#에이전트-52종)
+- [에이전트 53종](#에이전트-53종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -24,7 +24,7 @@
 
 ---
 
-## 에이전트 52종
+## 에이전트 53종
 
 **관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했고, `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록은 추가 순서대로 있음).
 
@@ -124,6 +124,7 @@
 | 22 | `content-repurposer` | `/repurpose` | 1.1 | opus | 1소스 → 멀티 포맷 재활용 | Read, Grep, Glob |
 | 23 | `brand-voice-guardian` | `/voice` | 1.0 | opus | 브랜드 보이스(문체·톤) 일관성 점검 | Read, Grep, Glob |
 | 37 | `storyteller` | `/story` `/이야기` | 1.0 | **fable** | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성 | Read, Grep, Glob |
+| 53 | `curriculum-designer` | `/curriculum` `/강의설계` | 1.1 | opus | 강의·워크숍·강좌 교수 설계(학습 목표·모듈 계열화·backward design·슬라이드 골격) | Read, Grep, Glob |
 
 #### 🧭 메타 / 인프라 (내 작업환경 자체)
 
@@ -704,6 +705,20 @@
 - **구분**: 할당 유발 코드·EF 안티패턴은 `dotnet-code-reviewer`, 회귀 시점은 `debugger`, 구조는 `dotnet-architect`, Unity 성능은 `unity-perf-auditor`, MySQL 튜닝은 `db-optimizer`
 </details>
 
+### 🎓 교육 / 교수설계 (콘텐츠 · 2026-07-15 추가)
+
+> 콘텐츠 계열의 **교육/교수설계 생성기**. 기존 콘텐츠/마케팅 6종·창작 1종과 별개인 "교육 1종"으로, 강의·워크숍·강좌·교육 자료를 사람이 배우도록 설계한다(읽기 전용 — 파일 미수정, 완성형 커리큘럼 맵+모듈 초안을 텍스트로 낸다).
+
+<details>
+<summary><b>53. curriculum-designer</b> (<code>/curriculum</code> <code>/강의설계</code>) — 강의·워크숍 교수 설계</summary>
+
+- **언제**: 강의·워크숍·강좌·교육 자료(온·오프라인)를 만들기 전 교수 설계가 필요할 때. 수동 호출은 `/curriculum <주제·대상·시간>`
+- **절차(backward design)**: ① 학습자·맥락 분석(선수지식·동기·제약·시간 예산) → ② 측정 가능한 학습 목표(Bloom's 동사) → ③ 목표에 정렬된 형성·총괄 평가 → ④ 목표·평가에 맞춘 활동·콘텐츠(목표-평가-활동 정렬, constructive alignment)
+- **설계**: 모듈 분해·선수관계 계열화, 난이도 곡선·페이싱, 학습 경험 흐름(도입·동기→설명→시연→실습→피드백→정리), 인지부하 청킹, 슬라이드·핸드아웃·강사 노트 골격, 시간 배분
+- **출력**: 커리큘럼 맵(목표·모듈·평가 정렬표) → 모듈별 초안(학습 목표·활동·시간 배분·평가) → 슬라이드/핸드아웃/강사 노트 골격 → 채운 가정 & 확장 포인트
+- **구분**: 강의 홍보 카피는 `copy-reviewer`, 완성된 강의를 다른 포맷으로 파생하는 것은 `content-repurposer`, 개발자 문서·튜토리얼은 `docs-writer`, 사실 검증은 `fact-checker`, AI 작업환경 설계는 `ai-workspace-architect`
+</details>
+
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
 양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 1.56의 전수 스캔 34쌍에서 1.64·1.67~1.72를 거치며 늘어 **현재 58쌍**이며 클러스터별로 나눈다.
@@ -942,10 +957,11 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/dnreview` | dotnet-code-reviewer | C# 소스 경로(선택) |
 | `/dnarch` | dotnet-architect | 설계 대상/경로(선택) |
 | `/dnperf` | dotnet-perf-auditor | 경로 또는 측정 캡처(선택) |
+| `/curriculum` | curriculum-designer | 주제·대상·시간(선택) |
 
 ### 한글 별칭 (1.65)
 
-Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1.65에서 `/디버그`로 검증). 자주 쓰는 28종에 한글 별칭 커맨드를 함께 배포한다 — 에이전트는 그대로고 커맨드 파일만 하나 더 있는 구조라, 별칭을 지워도 영어 명령은 그대로 동작한다.
+Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1.65에서 `/디버그`로 검증). 자주 쓰는 29종에 한글 별칭 커맨드를 함께 배포한다 — 에이전트는 그대로고 커맨드 파일만 하나 더 있는 구조라, 별칭을 지워도 영어 명령은 그대로 동작한다.
 
 | 한글 | 영어 | 한글 | 영어 |
 |---|---|---|---|
@@ -963,6 +979,7 @@ Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1
 | `/디비` | `/db` | `/이야기` | `/story` |
 | `/마이그레이션` | `/migrate` | `/화면` | `/ui` |
 | `/아키텍처` | `/arch` | `/데이터모델` | `/datamodel` |
+| `/강의설계` | `/curriculum` | | |
 
 > 한국어 **자연어 호출**은 별칭과 무관하게 원래부터 동작한다(38종 description이 전부 한국어라 라우터가 한국어 문장으로 매치). 별칭은 슬래시 표기 편의일 뿐이다.
 
@@ -991,7 +1008,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-52종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-53종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 

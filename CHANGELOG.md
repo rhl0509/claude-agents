@@ -10,6 +10,19 @@
 
 ---
 
+## 1.76 (2026-07-15) — 신규: curriculum-designer(교육/교수설계 생성기), 52종 → 53종
+
+사용자 산출물(강의자료·강의)에 담당 에이전트가 0이던 공백을 메우는 **교육/교수설계 생성기** 1종 신설. 후보 7종 중 갭이 가장 큰 것으로 선정. `agent-definition-reviewer`로 초안을 점검한 결과 **정의 자체는 규범 완비(수정 불필요)**, 유일한 리스크는 이웃의 **일방 위임(중복 표면)** — content-repurposer가 소스 목록에 "강의"를 갖고 있어 신규 강의 설계 요청이 새어들 수 있었다. 확정 결함(경계 봉합)만 반영했다.
+
+- **curriculum-designer v1.0 신설** (opus, effort: high, green, Read/Grep/Glob) — 교수 설계: 학습자·맥락 분석, 측정 가능한 학습 목표(Bloom's 동사), 모듈 분해·선수관계 계열화(scaffolding), 난이도 곡선·페이싱, 학습 경험 흐름(도입·동기→설명→시연→실습→피드백→정리), 인지부하 청킹, 형성·총괄 평가와 목표-평가-활동 정렬(backward design/constructive alignment), 슬라이드·핸드아웃·강사 노트 골격. 완성형 커리큘럼 맵+모듈 초안 산출. 슬래시 `/curriculum` `/강의설계` 신설. 생성기 계열이라 storyteller·docs-writer처럼 "발견·심각도" 규범을 "교수 설계 정직성"(완성형·가정 명시·사실 확인필요·효과 단정 금지)으로 보정.
+- **[경계 봉합] content-repurposer** — description에 "강의·강좌를 처음부터 설계(교수 설계·커리큘럼)하는 것은 curriculum-designer" 위임 절 추가(핵심 중복 표면 봉합; "강의" 트리거 이중 매치 해소). 정의 본문 무변경이라 version 미bump.
+- **[경계 봉합] docs-writer** — description·본문 §구분 2곳의 stale 라우트 갱신: 강의 **설계**는 curriculum-designer, 파생만 content-repurposer. version 미bump.
+- **[경계 봉합] ai-workspace-architect** — "개별 강의·강좌 자체의 교수 설계는 curriculum-designer" 대칭 위임 추가(층위: 메타 시스템화 vs object-level 설계). version 미bump.
+- **curriculum-designer 1.0 → 1.1 (출력 계약 보강)** — 첫 스모크(`/curriculum` 릴스 워크숍)에서 6단계 설계를 다 만들고도 최종 메시지에 **요약(recap)만** 실어, 서브에이전트로선 정작 본문이 사용자에게 안 닿는 결함 발현. §출력 형식에 "**최종 출력은 요약이 아니라 완성 본문 그 자체다** — '작성했다'는 메타설명으로 갈음 금지, 서브에이전트의 최종 텍스트가 곧 산출물" 한 문단 추가. (출력 형식 변경이라 minor bump)
+- **문서** — CLAUDE.md 내러티브·에이전트 표·opus 티어링 리스트, README(카운트 52→53·opus 48→49·인트로·버전 요약·콘텐츠 표 행·상세 블록 #53·슬래시/별칭 표), AGENTS.md(제목 53종·전체 표·📣 뒤 🎓 교육 클러스터) 갱신. 카운트 검산: 콘텐츠 6 + 교육 1 + 창작 1 … 합 53, opus 49 + sonnet 2 + haiku 1 + fable 1 = 53.
+
+---
+
 ## 1.75 (2026-07-15) — 재검수(/agentdef) 후속: debugger description↔본문 병목 목록 동기화
 
 편집된 이웃 5종을 `agent-definition-reviewer`로 재점검한 결과 **"회귀 없음, 오히려 1.72 비대칭 해소"** 판정. 단 확정 결함 1건 — 1.73에서 debugger **description**의 병목 소유자 목록엔 c-perf·dotnet-perf를 추가했으나 **같은 파일 본문(§구분)**과 README 사본은 갱신을 빠뜨려, 한 파일 안에서 목록이 어긋났다(라우팅은 description을 쓰므로 오라우팅은 없었으나 본문 가이드가 신규 2종을 모름).
