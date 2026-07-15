@@ -93,12 +93,11 @@
 | 30 | `unity-perf-auditor` | `/uperf` | 1.1 | opus | 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler) | Read, Grep, Glob |
 | 31 | `playtest-designer` | `/playtest` | 1.2 | opus | 플레이테스트 설계(가설·참가자·지표 + 다인 동시 세션) | Read, Grep, Glob |
 | 32 | `unity-build-auditor` | `/ubuild` | 1.1 | opus | 빌드/릴리스·스토어 제출(+ **2026 정책: API 36·16KB·연령등급**) | Read, Grep, Glob |
-| 40 | `save-data-reviewer` | `/save` `/세이브` | 1.0 | opus | 세이브·영속 데이터 호환성(스키마 버전·마이그레이션·손상 복구) | Read, Grep, Glob |
+| 39 | `multiplayer-rule-reviewer` | `/rule` `/룰` | 1.1 | opus | **멀티플레이 룰 정합성·서버 권위 점검**(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
+| 40 | `save-data-reviewer` | `/save` `/세이브` | 1.0 | opus | **세이브·영속 데이터 호환성**(스키마 버전·마이그레이션·직렬화 리네이밍·손상 복구·클라우드 충돌) | Read, Grep, Glob |
 | 44 | `game-localization-reviewer` | `/gloc` `/현지화` | 1.1 | opus | **현지화 준비**(하드코딩 문자열·폰트 글리프·길이 팽창·어순·폴백) | Read, Grep, Glob |
 | 45 | `game-test-strategy` | `/gtest` `/게임테스트` | 1.1 | opus | **게임 자동 테스트 전략**(엔진 의존 seam·EditMode/PlayMode·결정론적 리플레이) | Read, Grep, Glob |
 | 46 | `game-audio-reviewer` | `/gaudio` `/오디오` | 1.1 | opus | **오디오 구현**(믹서 버스·동시 발음·반복 피로·임포트·BGM 전환) | Read, Grep, Glob |
-| 39 | `multiplayer-rule-reviewer` | `/rule` `/룰` | 1.1 | opus | **멀티플레이 룰 정합성·서버 권위 점검**(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
-| 40 | `save-data-reviewer` | `/save` `/세이브` | 1.0 | opus | **세이브·영속 데이터 호환성**(스키마 버전·마이그레이션·직렬화 리네이밍·손상 복구·클라우드 충돌) | Read, Grep, Glob |
 
 #### 🧩 시스템 언어 (C · 비-Unity .NET · Java · Swift)
 
@@ -327,7 +326,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 <summary><b>17. ai-workspace-architect</b> (<code>/fable</code>) — AI 작업환경 진단·재설계</summary>
 
 - **언제**: 프롬프트·지침·`CLAUDE.md`·`SKILL.md`·커스텀 인스트럭션·반복 업무 규칙을 상위 수준으로 재설계할 때
-- **성격**: 다른 16종과 달리 특정 개발 스택이 아니라 **AI 작업환경 자체**를 다루는 메타 에이전트. 마케팅·콘텐츠 제작(릴스·카드뉴스·블로그·상세페이지·강의자료) 결과물 품질을 시스템화
+- **성격**: 다른 에이전트들과 달리 특정 개발 스택이 아니라 **AI 작업환경 자체**를 다루는 메타 에이전트. 마케팅·콘텐츠 제작(릴스·카드뉴스·블로그·상세페이지·강의자료) 결과물 품질을 시스템화
 - **범위**: 여러 모델(Claude/GPT/Gemini/Cursor)에서 일관되게 작동하는 범용 AI 운영체제 설계 — 바로 붙여넣을 커스텀 인스트럭션·CLAUDE.md·SKILL.md 초안 + 모델별 사용 전략
 - **품질 엔진(모델 무관)**: 실행 모델과 무관하게 뼈대→초안→자가채점 루브릭(완성형·밀도·구체성·구조·근거·신뢰도)→재작성 절차를 강제. 도장찍기 금지(각 점수 근거 인용 + 진짜 약점 1개 이상 발굴·수정)
 - **출력**: 총평 → 진단표 → 병목 5 → A.커스텀 인스트럭션 → B.CLAUDE.md → C.SKILL.md → D.모델별 전략 → 운영 규칙 → 자기비판 후 최종본
@@ -1033,7 +1032,7 @@ Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1
 | `/아키텍처` | `/arch` | `/데이터모델` | `/datamodel` |
 | `/강의설계` | `/curriculum` | | |
 
-> 한국어 **자연어 호출**은 별칭과 무관하게 원래부터 동작한다(38종 description이 전부 한국어라 라우터가 한국어 문장으로 매치). 별칭은 슬래시 표기 편의일 뿐이다.
+> 한국어 **자연어 호출**은 별칭과 무관하게 원래부터 동작한다(57종 description이 전부 한국어라 라우터가 한국어 문장으로 매치). 별칭은 슬래시 표기 편의일 뿐이다.
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
 > `/recall`은 메모리 회상 훅으로 자동 호출되기도 하지만, 수동으로 직접 부를 수도 있습니다.

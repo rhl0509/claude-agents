@@ -362,7 +362,7 @@ Swift 앱 구조 설계. 아키텍처 패턴 선택(MVVM/TCA/VIPER/Clean, 규모
 | security-reviewer ↔ llm-ai-security-reviewer | 웹 앱 일반 보안 ↔ AI/LLM 특화 심화 |
 | threat-modeler ↔ llm-ai-security-reviewer | 설계 단계 위협(LLM 포함) ↔ 구현 후 AI/LLM 심화 |
 
-**게임 (Unity + C#, 6쌍)**
+**게임 (Unity + C# · MSW, 11쌍 발췌 — 전체 17쌍은 README 참조)**
 | 쌍 | 구분 |
 |---|---|
 | game-design-architect ↔ unity-code-reviewer | 코어 루프·시스템 "설계" ↔ C# 코드 품질·프레임 "리뷰" |
@@ -377,7 +377,7 @@ Swift 앱 구조 설계. 아키텍처 패턴 선택(MVVM/TCA/VIPER/Clean, 규모
 | unity-code-reviewer ↔ unity-perf-auditor | GC 유발 코드 "원인" ↔ 프레임 예산 "증상·측정 해석" |
 | unity-build-auditor ↔ unity-perf-auditor | 텍스처 압축 "빌드 용량" ↔ "런타임 메모리·GPU" |
 
-**클러스터 교차 (게임 ↔ 웹, 5쌍)** — 1.52에서 양방향화
+**클러스터 교차 (게임 ↔ 웹, 6쌍)** — 1.52에서 양방향화
 | 쌍 | 구분 |
 |---|---|
 | code-reviewer ↔ unity-code-reviewer | 웹(Next.js/FastAPI) 코드 ↔ Unity C# 게임 코드 |
