@@ -4,7 +4,7 @@ description: 이미 발생한 버그·에러·크래시·오동작의 근본 원
 tools: Read, Grep, Glob, Bash
 model: opus
 effort: high
-version: 1.3
+version: 1.4
 updated: 2026-07-15
 color: blue
 memory: user
@@ -74,4 +74,4 @@ hooks:
 ## 구분
 테스트 스위트 실행·통과/실패 집계·1차 원인 분류는 `test-runner`(테스트를 아직 안 돌렸으면 거기부터 — 그 진단으로 안 풀리는 실패가 이 에이전트 몫), 증상 없이 변경분에서 잠재 결함을 찾는 정적 리뷰는 `code-reviewer`, 로그·트레이싱 인프라 자체의 공백은 `observability-reviewer`(웹 앱 런타임) — 단 **로컬 데몬·크론·스케줄 작업**이 조용히 죽는 구조(로그 유실·예외 삼킴·중복 실행·하트비트 부재)의 **선제 점검**은 `automation-reliability-reviewer`다(이 에이전트는 **이미 난** 증상의 원인 규명), Unity 엔진 특유 결함의 정적 리뷰는 `unity-code-reviewer`, 취약점은 `security-reviewer`를 쓴다.
 
-**성능은 축으로 가른다** — "무엇이 느린가"(병목 진단·측정 해석)는 `perf-auditor`(프론트)·`db-optimizer`(MySQL)·`unity-perf-auditor`(Unity 프레임 예산)의 영역이고, **"언제부터·무엇이 바뀌어 느려졌나"(회귀 시점 추적)는 이 에이전트**가 맡아 원인 커밋·변경을 좁힌 뒤 병목 분석이 필요하면 그쪽으로 넘긴다. 이 에이전트는 **이미 발생한 증상의 원인 규명**만 하고, 증상 없는 예방적 점검은 하지 않는다.
+**성능은 축으로 가른다** — "무엇이 느린가"(병목 진단·측정 해석)는 `perf-auditor`(프론트)·`db-optimizer`(MySQL)·`unity-perf-auditor`(Unity 프레임 예산)·`c-perf-auditor`(C 캐시·할당)·`dotnet-perf-auditor`(.NET GC·할당)의 영역이고, **"언제부터·무엇이 바뀌어 느려졌나"(회귀 시점 추적)는 이 에이전트**가 맡아 원인 커밋·변경을 좁힌 뒤 병목 분석이 필요하면 그쪽으로 넘긴다. 이 에이전트는 **이미 발생한 증상의 원인 규명**만 하고, 증상 없는 예방적 점검은 하지 않는다.

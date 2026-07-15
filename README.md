@@ -6,7 +6,7 @@
 - 에이전트 수: **52종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET 6종 + 도메인 3종(ML·회계·자동화) + 메타 2종 + 콘텐츠/마케팅 6종 + 창작 1종 + 보안 심화 2종 + 게임 12종 + 인프라 1종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.13**, `test-runner` **v1.11**, `code-reviewer` **v1.14**(Flask 흡수), `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.6**, `perf-auditor` **v1.5**, `design-system-architect`·`test-strategy` **v1.4**, `observability-reviewer`·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 9종 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.2**·`game-ui-reviewer`·`unity-build-auditor`·`playtest-designer`·`multiplayer-rule-reviewer` **v1.1**·`unity-perf-auditor`·`save-data-reviewer` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.3**, 시스템 언어 C/.NET 6종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.13**, `test-runner` **v1.11**, `code-reviewer` **v1.14**(Flask 흡수), `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.6**, `perf-auditor` **v1.5**, `design-system-architect`·`test-strategy` **v1.4**, `observability-reviewer`·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 9종 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.2**·`game-ui-reviewer`·`unity-build-auditor`·`playtest-designer`·`multiplayer-rule-reviewer` **v1.1**·`unity-perf-auditor`·`save-data-reviewer` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.4**, 시스템 언어 C/.NET 6종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 - 추론 강도(`effort`): opus 심층추론 48종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
@@ -36,7 +36,7 @@
 | 3 | `test-runner` | `/test` `/테스트` | 1.11 | sonnet | 테스트 실행·실패 분석(1차 원인 분류) | Bash, Read, Grep, Glob |
 | 4 | `test-strategy` | `/coverage` `/커버리지` | 1.5 | opus | 테스트 커버리지 공백·약한 테스트 진단(웹 스택) | Read, Grep, Glob |
 | 34 | `refactor-strategist` | `/refactor` `/리팩터` | 1.0 | opus | 동작 보존 리팩터 계획·단계 설계(추출·중복·의존·seam) | Read, Grep, Glob |
-| 38 | `debugger` | `/debug` `/디버그` | 1.3 | opus | 이미 난 버그·에러·간헐 실패의 근본 원인 규명(재현·가설 검증·이분 탐색) | Read, Grep, Glob, Bash |
+| 38 | `debugger` | `/debug` `/디버그` | 1.4 | opus | 이미 난 버그·에러·간헐 실패의 근본 원인 규명(재현·가설 검증·이분 탐색) | Read, Grep, Glob, Bash |
 | 42 | `ml-experiment-reviewer` | `/ml` `/머신러닝` | 1.0 | opus | **ML 실험 설계 감사**(미래 정보 누출·검증 분할·백테스트 현실성·과적합) | Read, Grep, Glob |
 
 #### 🔒 보안 (설계 단계 → 코드 → AI/LLM 3단 방어)
@@ -636,10 +636,10 @@
 - **절차**: 증상 확정(기대 vs 실제·재현율·환경) → 최소 재현 → 관찰 수집(스택트레이스는 *우리 코드의 가장 깊은 프레임*부터) → 가설 3~5개(각각 반증 조건 명시) → 검증·축소(코드 경로·시간(`git log`/`blame` 회귀 시점)·입력·환경 이분) → 원인 확정 → 수정 방향·재발 방지
 - **버그 클래스 렌즈**: 간헐·플레이키(경쟁 조건·순서 의존·시간/타임존), 상태·데이터(경계·부분 실패·트랜잭션), 경계 넘김(계약·직렬화·캐시 stale·하이드레이션), 동시성·자원(블로킹 I/O·풀 고갈·누수), 환경차("로컬은 되는데"), Unity 런타임(fake-null·구독 해제·프레임률 의존)
 - **원칙**: 관찰이 추측을 이긴다(각 주장에 `파일:줄`·로그 근거), 첫 가설에 애착 금지, 한 번에 하나만 바꾼다, **못 밝히면 미확정으로 정직 보고**(그럴듯한 범인 창작 금지)
-- **성능 축 카빙**: "무엇이 느린가"(병목 진단·측정 해석)는 `perf-auditor`·`db-optimizer`·`unity-perf-auditor`, **"언제부터·무엇이 바뀌어 느려졌나"(회귀 시점 추적)는 이 에이전트** — 성능 회귀가 무주공산이 되지 않게 축으로 나눔
+- **성능 축 카빙**: "무엇이 느린가"(병목 진단·측정 해석)는 `perf-auditor`·`db-optimizer`·`unity-perf-auditor`·`c-perf-auditor`·`dotnet-perf-auditor`, **"언제부터·무엇이 바뀌어 느려졌나"(회귀 시점 추적)는 이 에이전트** — 성능 회귀가 무주공산이 되지 않게 축으로 나눔
 - **안전장치**: 코드·데이터 수정 안 함. 워킹트리를 바꾸는 `git bisect`·`checkout`·`stash`는 **직접 실행하지 않고 절차만 제시**. Bash는 재현·조회 전용(테스트 재실행·로그·git 이력). 계측이 필요하면 코드에 심지 않고 **임시 계측 계획**만 제시
 - **출력**: 증상 요약 → 관찰된 사실(해석과 분리) → 가설·검증 표(판정: 확정/반증/미검증) → 근본 원인(인과 사슬·`파일:줄`) → 수정 방향(+형제 결함) → 재발 방지 테스트 → 미해결·다음 관찰
-- **구분(경계)**: 테스트 실행·집계·1차 분류는 `test-runner`(테스트를 아직 안 돌렸으면 거기부터 — 안 풀리는 실패가 이 에이전트 몫), 증상 없는 정적 리뷰는 `code-reviewer`·`unity-code-reviewer`, 추적 인프라 공백은 `observability-reviewer`, 병목 진단은 `perf-auditor`·`db-optimizer`·`unity-perf-auditor`, 취약점은 `security-reviewer`
+- **구분(경계)**: 테스트 실행·집계·1차 분류는 `test-runner`(테스트를 아직 안 돌렸으면 거기부터 — 안 풀리는 실패가 이 에이전트 몫), 증상 없는 정적 리뷰는 `code-reviewer`·`unity-code-reviewer`, 추적 인프라 공백은 `observability-reviewer`, 병목 진단은 `perf-auditor`·`db-optimizer`·`unity-perf-auditor`·`c-perf-auditor`·`dotnet-perf-auditor`, 취약점은 `security-reviewer`
 </details>
 
 ### 🧩 시스템 언어 (C · 비-Unity .NET) — 1.72 추가

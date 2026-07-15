@@ -10,6 +10,16 @@
 
 ---
 
+## 1.75 (2026-07-15) — 재검수(/agentdef) 후속: debugger description↔본문 병목 목록 동기화
+
+편집된 이웃 5종을 `agent-definition-reviewer`로 재점검한 결과 **"회귀 없음, 오히려 1.72 비대칭 해소"** 판정. 단 확정 결함 1건 — 1.73에서 debugger **description**의 병목 소유자 목록엔 c-perf·dotnet-perf를 추가했으나 **같은 파일 본문(§구분)**과 README 사본은 갱신을 빠뜨려, 한 파일 안에서 목록이 어긋났다(라우팅은 description을 쓰므로 오라우팅은 없었으나 본문 가이드가 신규 2종을 모름).
+
+- **debugger 1.3 → 1.4** — 본문 §"성능은 축으로 가른다"의 병목 소유자 목록에 `c-perf-auditor`(C 캐시·할당)·`dotnet-perf-auditor`(.NET GC·할당) 추가(description과 일치). README debugger 절 2곳(성능 축 카빙·구분)의 동일 목록도 보강, 버전 표·요약 갱신.
+- **회귀 없음 확인** — unity↔dotnet-code·system-architect↔c/dotnet-architect·security↔c-code·perf-auditor↔c/dotnet-perf 대칭 전부 성립, frontmatter·본문 규범(인젝션 방어·읽기전용·출력 형식) 5종 훼손 없음.
+- **의도적 미반영(비결함)** — README 위임쌍 표에 `perf-auditor↔c-perf/dotnet-perf` 행 부재는 표가 "전수 아님"을 명시하므로 정합성 위반 아님(카운트 드리프트 회피 위해 추가 보류).
+
+---
+
 ## 1.74 (2026-07-15) — 1.73 보류 항목 결정: perf-auditor 프론트 전용 명시 + 백엔드 성능 공백 문서화
 
 1.73에서 **결정 필요**로 남긴 항목(파이썬 백엔드 런타임 성능 무주공산)을 처리했다. /fable 권고대로 **신규 에이전트를 만들지 않고**, 대신 정직성 규범에 따라 공백을 명시했다(억지 커버 금지).
