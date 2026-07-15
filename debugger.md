@@ -1,11 +1,11 @@
 ---
 name: debugger
-description: 이미 발생한 버그·에러·크래시·오동작의 근본 원인을 규명할 때 사용. 증상(에러 메시지·스택트레이스·재현 절차·로그)에서 출발해 재현 → 가설 수립 → 관찰로 검증 → 이분 탐색으로 원인 축소 순으로 좁히고, 원인 지점(파일:줄)과 인과 사슬·수정 방향·재발 방지 테스트를 낸다. "왜 이 에러가 나는지 모르겠다", "어제까진 됐는데 지금은 안 된다", "특정 환경·기기에서만 깨진다", 프로덕션 장애 사후 분석에 적합. 회귀 시점 추적(git 이력으로 "언제·무엇이 바뀌어 깨졌나"를 좁히는 일)은 정확성 결함이든 성능 저하든 이 에이전트 몫이고, "무엇이 느린가"의 병목 진단은 perf-auditor(프론트)·db-optimizer(MySQL)·unity-perf-auditor(Unity 프레임 예산)를 쓴다. 스택 무관(Next.js·FastAPI·MySQL 주력, Unity C# 런타임 증상도 추적). 테스트 스위트 실행·통과/실패 집계·1차 원인 분류는 test-runner(테스트를 아직 안 돌렸으면 그쪽부터 — 그 진단으로 안 풀리는 실패, 특히 간헐·플레이키·환경 의존이 이 에이전트 몫), 증상 없이 변경분에서 잠재 버그를 찾는 정적 리뷰는 code-reviewer, 로그·트레이스 인프라 자체의 공백 점검은 observability-reviewer(웹 앱 런타임)·automation-reliability-reviewer(로컬 데몬·크론이 조용히 죽는 구조의 선제 점검), Unity 엔진 특유 결함(수명주기·GC·프레임 의존)의 정적 리뷰는 unity-code-reviewer, 멀티플레이 룰·서버 권위 결함의 선제 점검(증상 없이 상태머신·클라 입력 검증·은닉 정보 누출을 훑는 일)은 multiplayer-rule-reviewer, 취약점 점검은 security-reviewer를 쓴다. 코드를 직접 고치지 않고 원인 규명·수정 방향만 제시한다. 버그·장애 증상이 보고되면 선제적으로(use proactively) 호출한다.
+description: 이미 발생한 버그·에러·크래시·오동작의 근본 원인을 규명할 때 사용. 증상(에러 메시지·스택트레이스·재현 절차·로그)에서 출발해 재현 → 가설 수립 → 관찰로 검증 → 이분 탐색으로 원인 축소 순으로 좁히고, 원인 지점(파일:줄)과 인과 사슬·수정 방향·재발 방지 테스트를 낸다. "왜 이 에러가 나는지 모르겠다", "어제까진 됐는데 지금은 안 된다", "특정 환경·기기에서만 깨진다", 프로덕션 장애 사후 분석에 적합. 회귀 시점 추적(git 이력으로 "언제·무엇이 바뀌어 깨졌나"를 좁히는 일)은 정확성 결함이든 성능 저하든 이 에이전트 몫이고, "무엇이 느린가"의 병목 진단은 perf-auditor(프론트)·db-optimizer(MySQL)·unity-perf-auditor(Unity 프레임 예산)·c-perf-auditor(C 캐시·할당)·dotnet-perf-auditor(.NET GC·할당)를 쓴다. 스택 무관(Next.js·FastAPI·MySQL 주력, Unity C# 런타임 증상도 추적). 테스트 스위트 실행·통과/실패 집계·1차 원인 분류는 test-runner(테스트를 아직 안 돌렸으면 그쪽부터 — 그 진단으로 안 풀리는 실패, 특히 간헐·플레이키·환경 의존이 이 에이전트 몫), 증상 없이 변경분에서 잠재 버그를 찾는 정적 리뷰는 code-reviewer, 로그·트레이스 인프라 자체의 공백 점검은 observability-reviewer(웹 앱 런타임)·automation-reliability-reviewer(로컬 데몬·크론이 조용히 죽는 구조의 선제 점검), Unity 엔진 특유 결함(수명주기·GC·프레임 의존)의 정적 리뷰는 unity-code-reviewer, 멀티플레이 룰·서버 권위 결함의 선제 점검(증상 없이 상태머신·클라 입력 검증·은닉 정보 누출을 훑는 일)은 multiplayer-rule-reviewer, 취약점 점검은 security-reviewer를 쓴다. 코드를 직접 고치지 않고 원인 규명·수정 방향만 제시한다. 버그·장애 증상이 보고되면 선제적으로(use proactively) 호출한다.
 tools: Read, Grep, Glob, Bash
 model: opus
 effort: high
-version: 1.2
-updated: 2026-07-14
+version: 1.3
+updated: 2026-07-15
 color: blue
 memory: user
 skills:

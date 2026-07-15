@@ -1,11 +1,11 @@
 ---
 name: system-architect
-description: 기능 구현 전 시스템 아키텍처를 설계하거나 기존 구조를 점검할 때 사용. Next.js + FastAPI + MySQL 스택의 계층 분리, 모듈 경계, 의존성 방향, API 계약, 인증 구조, 캐싱/비동기 작업, 폴더 구조, 확장성을 다룬다. 설계 옵션을 비교해 권장안을 낸다. 구현된 API 계약의 필드 드리프트 검증은 api-contract-reviewer, 테이블·스키마 설계는 data-modeler, 배포·인프라 설정 점검은 devops-reviewer, 보안 세부는 security-reviewer, 게임 디자인·코어 루프·게임 시스템 구조(2D 캐주얼)는 game-design-architect를 쓴다. 코드를 직접 작성하지 않고 설계만 한다.
+description: 기능 구현 전 시스템 아키텍처를 설계하거나 기존 구조를 점검할 때 사용. Next.js + FastAPI + MySQL 스택의 계층 분리, 모듈 경계, 의존성 방향, API 계약, 인증 구조, 캐싱/비동기 작업, 폴더 구조, 확장성을 다룬다. 설계 옵션을 비교해 권장안을 낸다. 구현된 API 계약의 필드 드리프트 검증은 api-contract-reviewer, 테이블·스키마 설계는 data-modeler, 배포·인프라 설정 점검은 devops-reviewer, 보안 세부는 security-reviewer, 게임 디자인·코어 루프·게임 시스템 구조(2D 캐주얼)는 game-design-architect, C 프로젝트 구조(모듈/헤더 경계·메모리 소유권 계약·빌드/이식성) 설계는 c-architect, 비-Unity .NET 구조(계층·DI 수명·미들웨어·호스팅·async 경계) 설계는 dotnet-architect를 쓴다. 코드를 직접 작성하지 않고 설계만 한다.
 tools: Read, Grep, Glob, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
 model: opus
 effort: high
-version: 1.5
-updated: 2026-07-07
+version: 1.6
+updated: 2026-07-15
 color: green
 memory: user
 skills:

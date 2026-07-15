@@ -1,11 +1,11 @@
 ---
 name: unity-code-reviewer
-description: Unity + C#로 만든 게임 코드(주로 싱글플레이어 2D 캐주얼)의 품질·버그·프레임 안정성을 리뷰할 때 사용. MonoBehaviour 수명주기 오용, Update/FixedUpdate 루프 비용, GC 유발 할당(매 프레임 new·박싱·문자열·LINQ·GetComponent/Find), 코루틴·async 취소 누수, 물리·프레임률 의존(Time.deltaTime 누락), fake-null(파괴된 오브젝트 참조), ScriptableObject·이벤트 구독 해제 패턴을 본다. 일반 웹(Next.js/FastAPI) 코드 리뷰는 code-reviewer, 게임 설계·코어 루프·시스템 분해는 game-design-architect, 렌더링·배칭·텍스처/오디오 임포트·물리 스텝 등 설정·에셋 차원의 성능과 Profiler 캡처 수치 해석은 unity-perf-auditor를 쓴다(이 에이전트는 GC를 유발하는 코드 원인을, unity-perf-auditor는 프레임 예산 증상·측정 해석을 맡는다). 이미 발생한 런타임 오동작·크래시의 원인 규명(재현·가설 검증·회귀 시점 추적)은 debugger를 쓴다(이 에이전트는 증상 없이 코드 패턴에서 결함을 찾는 정적 리뷰). 멀티플레이 게임의 룰 정합성·서버 권위(상태머신 전이·승패 판정 누락·클라 입력 검증·은닉 정보 누출)는 엔진과 무관한 층이라 multiplayer-rule-reviewer를 쓴다(MSW mlua 주력 — 이 에이전트는 Unity C# 엔진 코드만). Unity C# 코드를 커밋·머지하기 직전이면 요청이 없어도 선제적으로(use proactively) 호출한다. 코드를 직접 수정하지 않고 리뷰만 한다.
+description: Unity + C#로 만든 게임 코드(주로 싱글플레이어 2D 캐주얼)의 품질·버그·프레임 안정성을 리뷰할 때 사용. MonoBehaviour 수명주기 오용, Update/FixedUpdate 루프 비용, GC 유발 할당(매 프레임 new·박싱·문자열·LINQ·GetComponent/Find), 코루틴·async 취소 누수, 물리·프레임률 의존(Time.deltaTime 누락), fake-null(파괴된 오브젝트 참조), ScriptableObject·이벤트 구독 해제 패턴을 본다. 일반 웹(Next.js/FastAPI) 코드 리뷰는 code-reviewer, 비-Unity C#/.NET 코드(ASP.NET Core·콘솔·워커·WPF·순수 라이브러리의 async 데드락·IDisposable·DI 수명·EF Core 등 엔진과 무관한 .NET 결함)는 dotnet-code-reviewer(이 에이전트는 Unity C# 엔진 코드만 본다), 게임 설계·코어 루프·시스템 분해는 game-design-architect, 렌더링·배칭·텍스처/오디오 임포트·물리 스텝 등 설정·에셋 차원의 성능과 Profiler 캡처 수치 해석은 unity-perf-auditor를 쓴다(이 에이전트는 GC를 유발하는 코드 원인을, unity-perf-auditor는 프레임 예산 증상·측정 해석을 맡는다). 이미 발생한 런타임 오동작·크래시의 원인 규명(재현·가설 검증·회귀 시점 추적)은 debugger를 쓴다(이 에이전트는 증상 없이 코드 패턴에서 결함을 찾는 정적 리뷰). 멀티플레이 게임의 룰 정합성·서버 권위(상태머신 전이·승패 판정 누락·클라 입력 검증·은닉 정보 누출)는 엔진과 무관한 층이라 multiplayer-rule-reviewer를 쓴다(MSW mlua 주력 — 이 에이전트는 Unity C# 엔진 코드만). Unity C# 코드를 커밋·머지하기 직전이면 요청이 없어도 선제적으로(use proactively) 호출한다. 코드를 직접 수정하지 않고 리뷰만 한다.
 tools: Read, Grep, Glob, Bash
 model: opus
 effort: high
-version: 1.4
-updated: 2026-07-14
+version: 1.5
+updated: 2026-07-15
 color: cyan
 memory: user
 skills:
@@ -79,6 +79,7 @@ Fast Enter Play Mode(도메인·씬 리로드 생략)가 **최근 Unity에서 �
 ## 공통 (일반 C# 품질)
 - 명명, 중복 코드, 매직 넘버, 죽은 코드, 경계 조건, null·범위 처리 누락으로 인한 런타임 예외.
 - `public` 필드 남발로 캡슐화가 깨진 곳(인스펙터 노출은 `[SerializeField] private`로).
+- 엔진과 무관한 순수 .NET 결함(async 계약·DI 수명·EF Core·IDisposable)이 섞여 있으면 dotnet-code-reviewer로 넘긴다(이 에이전트는 Unity 엔진 코드 결함만 본다).
 
 ## 리뷰 깊이 원칙
 - **결함 묶음(버그 클래스) 전체를 본다.** 한 곳에서 매 프레임 `GetComponent`·`Time.deltaTime` 누락·구독 해제 누락을 발견하면, 같은 패턴의 형제 스크립트(복붙된 이동 컨트롤러·매니저)를 함께 찾아 "이 부류를 고치라"고 제안한다.

@@ -10,6 +10,20 @@
 
 ---
 
+## 1.73 (2026-07-15) — 1.72 자체 검수(/agentdef + /fable) 반영: 경계 대칭 복원
+
+`agent-definition-reviewer`로 신규 6종 + 이웃을, `ai-workspace-architect`(/fable)로 상위 설계를 점검했다. **신규 6종의 frontmatter·tools·본문 규범은 무결**로 판정됐고(P1 없음), 문제는 1.70·1.71과 같은 패턴 — **묶음 밖 이웃의 역방향 카브아웃 누락**(신규는 이웃을 가리키는데 이웃은 신규를 안 가리켜 일방향)이었다. 확정 결함만 반영했다.
+
+- **[P2] unity-code-reviewer 1.4 → 1.5** — `dotnet-code-reviewer`가 "Unity C#은 unity-code-reviewer"로 위임하는데 역방향이 없었다(같은 C# 언어라 이중 매치 위험 최고). description·본문에 "비-Unity 순수 .NET 결함(async·DI·EF·IDisposable)은 dotnet-code-reviewer" 카브아웃 추가.
+- **[P2] system-architect 1.5 → 1.6** — `c-architect`·`dotnet-architect`가 "웹 풀스택은 system-architect"로 위임하는데 역방향이 없었다(이미 game-design-architect를 카브아웃하는 선례가 있는데 시스템 언어 아키텍트만 누락). description에 c-architect·dotnet-architect 카브아웃 추가.
+- **[P2] debugger 1.2 → 1.3** — 병목 소유자 목록이 `perf-auditor·db-optimizer·unity-perf-auditor`만 열거하고 신규 `c-perf-auditor`·`dotnet-perf-auditor`를 빠뜨렸다(신규 perf 2종이 회귀 시점을 debugger로 보내는데 목록 불완전). 목록에 2종 추가.
+- **[P3] security-reviewer 1.12 → 1.13** — `c-code-reviewer`가 "C 메모리 안전=보안 층은 이 에이전트가 맡는다"고 선언하는데 security-reviewer가 역참조 안 함. "C 메모리 안전·정수 오버플로가 곧 보안이 되는 결함은 c-code-reviewer" 위임 추가(웹 OWASP 위협 모델 밖).
+- **[P3] 문서** — README 일방향 표의 `code-reviewer → c/dotnet-code-reviewer` 사유가 "전담은 폴백 역참조 안 함"으로 사실과 반대였다(전담도 code-reviewer를 되참조) → 1.70 도메인 카브아웃과 동일 패턴으로 사유 정정. README 버전 표·요약 4종 갱신(위임쌍 58 유지 — P2 수정으로 5쌍이 진짜 대칭 성립).
+- **[설계 노트] CLAUDE.md** — /fable 권고 반영: (1) 접두는 언어가 아니라 **런타임**을 인코딩(`dotnet-` — C#이 Unity와 공유되므로 축은 엔진 vs 런타임)이라 명문화, (2) **승격 게이트**(향후 Go/Rust 등 언어 트리오는 "같은 필요가 실제 작업에서 반복될 때만" — 투기적 선provisioning은 프로젝트가 쓸 때까지 미완으로 취급).
+- **[보류·결정 필요] perf-auditor 백엔드 성능 공백** — /fable의 1순위 발견: `perf-auditor`는 **Next.js 프론트 전용**(perf-auditor.md:22)이라 FastAPI·Flask 등 **파이썬 백엔드 런타임 성능은 원래부터 주인이 없다**(이번 변경이 만든 게 아니라 드러낸 기존 공백). 정직성 규범상 방치할 문제 — perf-auditor 범위를 백엔드로 넓힐지, 전담 backend-perf를 둘지, 현 상태를 명시할지 **의미 변경이라 별도 결정 후 반영**.
+
+---
+
 ## 1.72 (2026-07-15) — 신규 6종: 시스템 언어 클러스터(C 3종 + 비-Unity .NET 3종) + code-reviewer Flask 흡수
 
 웹·Unity에 이어 **C와 비-Unity C#/.NET**을 전담하는 6종을 신설했다. 아직 해당 스택 레포는 없지만(투기적 신설), 두 언어는 code-reviewer의 폴백으로는 못 잡는 **고유 결함 표면**(C: 메모리 안전·UB·정수 변환 / .NET: async 계약·자원 수명·DI 수명·EF Core)이 프로젝트와 무관하게 참이라 지금 만들어도 일반론이 아니다. 디버그는 스택 무관 `debugger`가 이미 커버해 신설하지 않았다. 각 언어를 **리뷰·설계·성능** 3역으로 나눠 웹(code-reviewer/system-architect/perf-auditor)·게임(unity-code-reviewer/…/unity-perf-auditor) 트리오와 같은 구조로 맞췄다.
