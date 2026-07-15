@@ -10,6 +10,21 @@
 
 ---
 
+## 1.77 (2026-07-15) — 신규 4종: 시스템 언어 클러스터 Java·Swift 확장(리뷰어+설계 2역씩), 53종 → 57종
+
+시스템 언어 클러스터(C 3종·비-Unity .NET 3종)를 **Java(JVM)·Swift**로 확장. 사용자 요청이며, **투기적 신설**(현재 D드라이브에 해당 레포 없음 — C/.NET 선례와 동일, 그렇게 기록). 다만 **트리오가 아니라 리뷰어+아키텍트 2역씩**만 provisioning하고 **perf는 프로모션 게이트에 따라 의도적으로 미생성**. `/agentdef` 점검 결과 신규 4종 자체는 무결, 봉합은 전부 이웃 허브 쪽.
+
+- **java-code-reviewer v1.0 신설**(opus·high·red·Read/Grep/Glob/Bash): NPE·Optional 오용·예외 정책·try-with-resources 자원 누수·JVM 동시성(volatile 오해·SimpleDateFormat 비스레드안전)·equals/hashCode 계약·오토박싱 ==·String/로케일·Stream 부작용. 슬래시 `/jreview`. Android/Kotlin은 대상 밖(공백 명시).
+- **java-architect v1.0 신설**(opus·high·green·+Context7): 계층 분리·빈 수명(생성자 주입·싱글턴 상태·순환)·모듈 의존 방향·에러 전략(@ControllerAdvice 경계 변환)·트랜잭션 경계·영속성(엔티티 vs DTO·OSIV)·복원력. 슬래시 `/jarch`. Spring Boot 3·jakarta 전환 등 버전 민감 → Context7.
+- **swift-code-reviewer v1.0 신설**(opus·high·blue·Read/Grep/Glob/Bash): 강제 언랩 `!`/`try!`/`as!` 크래시·ARC retain cycle([weak self] 누락·강한 델리게이트)·값/참조 의미·에러 삼킴(try?)·동시성(actor·@MainActor·Sendable·DispatchQueue.main.sync 데드락·continuation 이중 재개)·열거 망라성·Codable. 슬래시 `/swreview`.
+- **swift-architect v1.0 신설**(opus·high·green·+Context7): 아키텍처 패턴(MVVM/TCA 등)·모듈 경계(SPM)·DI·동시성 아키텍처·SwiftUI 상태 관리(단일 진실 원천·프로퍼티 래퍼 소유권)·내비게이션·값 타입 도메인. 슬래시 `/swarch`. SwiftUI/@Observable/NavigationStack 버전 민감 → Context7.
+- **정직한 perf 공백** — perf 미생성이라, 리뷰어 본문의 "측정과 단정 분리" 절을 c/dotnet처럼 "perf로 위임"이라 하지 않고 **"전담 Java/Swift perf 에이전트 없음(알려진 공백) — 측정은 프로파일러(JFR·async-profiler·Instruments), 회귀는 debugger"**로 명시(perf-auditor 백엔드 공백 문서화 선례와 동일 취지).
+- **[경계 봉합] code-reviewer 1.14 → 1.15** — 폴백 카브아웃(description + 본문 "스택 밖 코드")이 C·비-Unity C#만 위임하던 것을 Java/Swift까지 확장("네 언어"). 이중 매치·전담 우회 차단.
+- **[경계 봉합] system-architect 1.6 → 1.7** — carve-out에 java-architect·swift-architect 추가(c/dotnet-architect만 있던 것 대칭 확보).
+- **문서** — CLAUDE.md 클러스터 내러티브·에이전트 표 4행·opus 티어링 리스트, README(53→57·opus 49→53·표·상세블록·슬래시), AGENTS.md 갱신. 카운트 검산: opus 53 + sonnet 2 + haiku 1 + fable 1 = 57. 슬래시는 시스템 언어 클러스터 관례대로 영문 전용(/jreview /jarch /swreview /swarch).
+
+---
+
 ## 1.76 (2026-07-15) — 신규: curriculum-designer(교육/교수설계 생성기), 52종 → 53종
 
 사용자 산출물(강의자료·강의)에 담당 에이전트가 0이던 공백을 메우는 **교육/교수설계 생성기** 1종 신설. 후보 7종 중 갭이 가장 큰 것으로 선정. `agent-definition-reviewer`로 초안을 점검한 결과 **정의 자체는 규범 완비(수정 불필요)**, 유일한 리스크는 이웃의 **일방 위임(중복 표면)** — content-repurposer가 소스 목록에 "강의"를 갖고 있어 신규 강의 설계 요청이 새어들 수 있었다. 확정 결함(경계 봉합)만 반영했다.

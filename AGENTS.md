@@ -1,4 +1,4 @@
-# 서브에이전트 전체 정리 (53종)
+# 서브에이전트 전체 정리 (57종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
@@ -78,6 +78,10 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 51 | `dotnet-architect` | `/dnarch` | 시스템 | .NET 구조 설계(계층·DI 수명·미들웨어·호스팅·async 경계) | Read, Grep, Glob, Context7 |
 | 52 | `dotnet-perf-auditor` | `/dnperf` | 시스템 | .NET 런타임 성능(GC 압력·LOH·Span/ArrayPool·박싱·벤치마크 해석) | Read, Grep, Glob |
 | 53 | `curriculum-designer` | `/curriculum` | 교육 | 강의·워크숍·강좌 교수 설계(학습자 분석·측정 가능한 학습 목표·모듈 계열화·backward design·슬라이드/핸드아웃 골격) | Read, Grep, Glob |
+| 54 | `java-code-reviewer` | `/jreview` | 시스템 | Java(JVM) 코드 리뷰(NPE·Optional 오용·예외 정책·try-with-resources 자원 누수·동시성·equals/hashCode·오토박싱 ==·Stream 부작용) | Read, Grep, Glob, Bash |
+| 55 | `java-architect` | `/jarch` | 시스템 | Java/Spring 구조 설계(계층 분리·빈 수명/생성자 주입·모듈 의존 방향·에러 전략 @ControllerAdvice·트랜잭션 경계·영속성 OSIV) | Read, Grep, Glob, Context7 |
+| 56 | `swift-code-reviewer` | `/swreview` | 시스템 | Swift 코드 리뷰(강제 언랩 크래시·ARC retain cycle·값/참조 의미·에러 삼킴·동시성 actor/@MainActor/Sendable·열거 망라·Codable) | Read, Grep, Glob, Bash |
+| 57 | `swift-architect` | `/swarch` | 시스템 | Swift 앱 구조 설계(MVVM/TCA·SPM 모듈 경계·DI·동시성 아키텍처·SwiftUI 상태 관리·내비게이션·값 타입 도메인) | Read, Grep, Glob, Context7 |
 
 ---
 
@@ -270,9 +274,9 @@ Unity 빌드·릴리스 설정·스토어 제출 준비 감사(모바일). Playe
 **이미 발생한 증상**에서 거꾸로 근본 원인을 추적한다(스택 무관 — 웹이 주력, Unity C# 런타임 증상도 동일 절차). 증상 확정(기대 vs 실제·재현율·환경) → 최소 재현 → 관찰 수집(스택트레이스는 *우리 코드의 가장 깊은 프레임*부터) → 가설 3~5개(각각 반증 조건) → 검증·축소(코드 경로·시간(`git log`/`blame`)·입력·환경 이분) → 원인 확정 → 수정 방향·재발 방지 테스트. 버그 클래스 렌즈: 간헐·플레이키(경쟁 조건·순서 의존), 상태·데이터, 경계 넘김(계약·캐시 stale·하이드레이션), 동시성·자원, 환경차, Unity 런타임(fake-null·구독 해제). 관찰이 추측을 이긴다 — 못 밝히면 **미확정으로 정직 보고**(범인 창작 금지). 코드 수정 안 함, `git bisect`·`checkout` 등 워킹트리 변경은 절차만 제시, Bash는 재현·조회 전용, 계측은 코드에 심지 않고 계획만. 출력: 증상 요약 → 관찰된 사실 → 가설·검증 표 → 근본 원인(인과 사슬) → 수정 방향 → 재발 방지 → 미해결·다음 관찰.
 → 테스트 실행·집계·1차 분류는 `test-runner`(테스트를 아직 안 돌렸으면 거기부터 — 안 풀리는 실패가 이 에이전트 몫), 증상 없는 정적 리뷰는 `code-reviewer`·`unity-code-reviewer`, 추적 인프라 공백은 `observability-reviewer`, 취약점은 `security-reviewer`. **성능은 축으로 가른다** — "무엇이 느린가"(병목 진단)는 `perf-auditor`·`db-optimizer`·`unity-perf-auditor`, "언제부터·무엇이 바뀌어 느려졌나"(회귀 시점 추적)는 이 에이전트.
 
-### 🧩 시스템 언어 (C · 비-Unity .NET) — 1.72 추가
+### 🧩 시스템 언어 (C · 비-Unity .NET · Java · Swift) — 1.72 추가, 2026-07-15 Java·Swift 확장
 
-웹(code-reviewer)·게임(unity-code-reviewer)이 폴백으로만 훑던 C와 비-Unity C#/.NET을 전담. 각 언어를 리뷰·설계·성능 3역으로 나눴고, 리뷰↔성능은 unity 쌍과 같은 원인/증상 대칭.
+웹(code-reviewer)·게임(unity-code-reviewer)이 폴백으로만 훑던 C와 비-Unity C#/.NET을 전담. C·.NET은 각 언어를 리뷰·설계·성능 3역으로 나눴고, 리뷰↔성능은 unity 쌍과 같은 원인/증상 대칭. 2026-07-15 이 클러스터를 **Java(JVM)·Swift**로 확장했는데, 3역 트리오가 아니라 **리뷰어+아키텍트 2역씩**만 두고 **전담 perf 에이전트는 프로모션 게이트에 따라 의도적으로 미생성**(두 리뷰어가 "전담 perf 없음"을 알려진 공백으로 명시). 리뷰어는 Bash(git diff 범위 식별 + 명시 요청 시 읽기전용 정적분석), 아키텍트는 Context7(Spring·SwiftUI 등 버전 의존 패턴)을 갖는다.
 
 **47. c-code-reviewer (`/creview`)** — 시스템
 C 고유 결함의 정적 리뷰. 공간 안전(버퍼 오버플로·off-by-one), 시간 안전/소유권(UAF·double-free·dangling·미초기화), 널·반환값·`errno` 미검사, 정수(시그니처드 오버플로·부호/폭 변환·크기 계산 오버플로→힙 오버플로), UB(엄격 앨리어싱·시퀀스 포인트·널 산술), 에러 경로 자원 누수(`goto cleanup` 일관성), 포맷 스트링, 동시성·시그널 안전성, 매크로 함정. C의 메모리 안전 결함 = 보안 결함이라 웹 OWASP `security-reviewer`가 안 보는 층을 맡는다. Bash는 변경 범위 식별 + **명시 요청 시** 읽기전용 정적분석(빌드·실행 금지). 출력: 요약 → Must fix → Should fix → Nit → 위임.
@@ -298,11 +302,27 @@ C 런타임 성능. (1) 정적 감사 — 캐시 지역성(AoS/SoA·거짓 공�
 .NET 런타임 성능. (1) 정적 감사 — **GC 압력**(할당률·세대 승격·LOH 단편화·Server vs Workstation GC)·할당 절감(`Span`/`stackalloc`/`ArrayPool`·struct vs class·박싱·클로저 캡처)·문자열·async 오버헤드(`ValueTask`)·LINQ 중간 컬렉션·컬렉션 선택·직렬화·JIT/AOT, (2) 캡처 해석 — BenchmarkDotNet/dotnet-counters/dotnet-trace/PerfView. 정적으로 "느리다" 단정 금지 → 측정 계획으로. `dotnet-code-reviewer`와 증상/원인 대칭.
 → 할당 유발 코드·EF 안티패턴은 `dotnet-code-reviewer`, 회귀 시점은 `debugger`, 구조는 `dotnet-architect`, Unity 성능은 `unity-perf-auditor`, MySQL 튜닝은 `db-optimizer`.
 
+**54. java-code-reviewer (`/jreview`)** — 시스템
+서버/JVM Java 고유 결함 리뷰. NPE·널 처리(필드/파라미터 `Optional` 오용·미검사 `get()`), 예외 정책(빈·`catch(Exception)` 삼킴·원인 체이닝 소실·try-with-resources 미사용), 자원 수명(AutoCloseable/스트림/커넥션 누수), JVM 동시성(volatile을 원자성으로 오해·비스레드안전 `SimpleDateFormat`·`ConcurrentModificationException`·데드락), `equals`/`hashCode`/`compareTo` 계약(HashMap 키·가변 키), 제네릭(로 타입·미검사 캐스트·소거), 오토박싱(`Integer` 캐시 `==`·언박싱 NPE·`double`로 금액), String/로케일, Stream 부작용. Bash는 변경 범위 식별 + 명시 요청 시 읽기전용 정적분석. **Android/Kotlin 프레임워크는 대상 밖(인접 공백 명시)**, **전담 perf 에이전트 없음(알려진 공백)**. 출력: 요약 → Must fix → Should fix → Nit → 위임.
+→ 일반 품질·타 스택 폴백은 `code-reviewer`, 구조는 `java-architect`, 이미 난 크래시 원인은 `debugger`, 보안은 `security-reviewer`.
+
+**55. java-architect (`/jarch`)** — 시스템
+Java/Spring 구조 설계. 계층 분리(controller/service/repository/domain·헥사고날·의존성 안쪽 방향), **빈 수명**(생성자 주입·빈 스코프·싱글턴 빈의 가변 상태 스레드 안전·순환 의존), 모듈/패키지 의존 방향, 에러 전략(checked/unchecked 정책·경계 변환 `@ControllerAdvice`), 동시성(executor 소유권·불변성·`@Async` 경계), 영속성 경계(엔티티 vs DTO·`@Transactional` 전파·OSIV). 버전 의존 패턴(Spring·`jakarta.*`)은 Context7로 확인. 출력: (신규) 가정 → 옵션 비교 → 권장안 → 단계 / (점검) 진단 → 문제 → 개선 → 마이그레이션.
+→ 구현 코드 결함은 `java-code-reviewer`, 웹 풀스택은 `system-architect`, .NET 구조는 `dotnet-architect`, C 구조는 `c-architect`, 배포·컨테이너는 `devops-reviewer`.
+
+**56. swift-code-reviewer (`/swreview`)** — 시스템
+Swift 고유 결함 리뷰. 옵셔널 안전(강제 언랩 `!`/`try!`/`as!` 크래시·IUO), **ARC retain cycle**(클로저 `[weak self]` 누락·강한 delegate 참조·`unowned` 오용), 값/참조 의미(struct vs class·COW), 에러 삼킴(`try?`·force-try), 동시성(async/await·actor 격리·`@MainActor` UI 스레드·Sendable 데이터 레이스·`DispatchQueue.main.sync` 데드락·continuation 이중 재개), 프로토콜/제네릭 existential 비용·클로저 캡처, 열거 망라성, force-cast, Codable. Bash는 변경 범위 식별 + 명시 요청 시 읽기전용 정적분석. **전담 perf 에이전트 없음(알려진 공백)**. 출력: 요약 → Must fix → Should fix → Nit → 위임.
+→ 일반 품질·타 스택 폴백은 `code-reviewer`, 구조는 `swift-architect`, 이미 난 크래시 원인은 `debugger`, 보안은 `security-reviewer`.
+
+**57. swift-architect (`/swarch`)** — 시스템
+Swift 앱 구조 설계. 아키텍처 패턴 선택(MVVM/TCA/VIPER/Clean, 규모별), 모듈 경계(SPM/프레임워크 타깃·비순환 의존), DI(이니셜라이저/Environment 주입·싱글턴 남용 회피·프로토콜 seam), 동시성 아키텍처(actor 격리·`@MainActor` 경계·구조적 동시성·Sendable), **SwiftUI 상태 관리**(단일 진실 원천·`@State`/`@StateObject`/`@ObservedObject`/`@Binding`/`@Environment` 소유권 배치·`@Observable`), 내비게이션, 값 타입 우선 도메인 모델링, 영속성·네트워킹 경계. 버전 의존 패턴(`@Observable`·NavigationStack)은 Context7로 확인. 출력: (신규) 가정 → 옵션 비교 → 권장안 → 단계 / (점검) 진단 → 문제 → 개선 → 마이그레이션.
+→ 구현 코드 결함은 `swift-code-reviewer`, 웹 풀스택은 `system-architect`, .NET 구조는 `dotnet-architect`, C 구조는 `c-architect`.
+
 ---
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
-양쪽 description이 서로를 가리키는 대칭 위임(`↔`). 1.56의 전수 스캔 34쌍에 1.64에서 `debugger` 4쌍, 1.72에서 시스템 언어 5쌍을 더했다(전체 상세 목록은 README 참조). 클러스터별로 나눈다.
+양쪽 description이 서로를 가리키는 대칭 위임(`↔`). 1.56의 전수 스캔 34쌍에 1.64에서 `debugger` 4쌍, 1.72에서 시스템 언어 5쌍, 2026-07-15 Java·Swift 아키텍트 2쌍을 더했다(전체 상세 목록은 README 참조). 클러스터별로 나눈다.
 
 **웹 스택 (20쌍)**
 | 쌍 | 구분 |
@@ -367,7 +387,7 @@ C 런타임 성능. (1) 정적 감사 — 캐시 지역성(AoS/SoA·거짓 공�
 | devops-reviewer ↔ unity-build-auditor | 일반 CI/CD·시크릿·파이프라인 ↔ Unity 빌드/릴리스·스토어 제출 |
 | test-strategy ↔ playtest-designer | 소프트웨어 자동 테스트 ↔ 사람 대상 플레이테스트 |
 
-**시스템 언어 (C · 비-Unity .NET, 5쌍)** — 1.72 신설
+**시스템 언어 (C · 비-Unity .NET · Java · Swift, 7쌍)** — 1.72 신설, 2026-07-15 Java·Swift 확장
 | 쌍 | 구분 |
 |---|---|
 | c-code-reviewer ↔ c-perf-auditor | C 성능 깎는 "코드 원인·UB" ↔ 캐시·할당 "증상·측정 해석" |
@@ -375,6 +395,8 @@ C 런타임 성능. (1) 정적 감사 — 캐시 지역성(AoS/SoA·거짓 공�
 | dotnet-code-reviewer ↔ unity-code-reviewer | **비-Unity** C#(async·DI·EF Core) ↔ **Unity** C#(수명주기·GC·프레임) |
 | c-architect ↔ system-architect | C 모듈·소유권 "설계" ↔ 웹 풀스택 "아키텍처" |
 | dotnet-architect ↔ system-architect | .NET 계층·DI 수명 "설계" ↔ 웹 풀스택 "아키텍처" |
+| java-architect ↔ system-architect | Java/Spring 계층·빈 수명 "설계" ↔ 웹 풀스택 "아키텍처" |
+| swift-architect ↔ system-architect | Swift 앱 아키텍처·SwiftUI 상태 "설계" ↔ 웹 풀스택 "아키텍처" |
 
 ## 일방향 위임 포인터
 
@@ -384,7 +406,7 @@ C 런타임 성능. (1) 정적 감사 — 캐시 지역성(AoS/SoA·거짓 공�
 |---|---|
 | test-strategy → code-reviewer | `code-reviewer`는 일반 폴백, 개별 특화로 되돌리지 않음 |
 | perf-auditor → code-reviewer | 동일(일반 품질·버그 폴백) |
-| code-reviewer → c-code-reviewer / dotnet-code-reviewer | C·비-Unity C#의 고유 결함은 전담이 폴백보다 우선(전담은 폴백을 역참조 안 함) ⟵ 1.72 |
+| code-reviewer → c-code-reviewer / dotnet-code-reviewer / java-code-reviewer / swift-code-reviewer | C·비-Unity C#·Java·Swift의 고유 결함은 전담이 폴백보다 우선(전담은 폴백을 역참조 안 함) ⟵ 1.72, Java·Swift 2026-07-15 |
 | devops-reviewer → migration-reviewer | 마이그레이션 리뷰는 DB 영역 집중 |
 | system-architect → api-contract-reviewer / data-modeler / security-reviewer | 설계가 구현 후 검증을 특화로 넘김(특화는 설계를 역참조 안 함) |
 | ai-workspace-architect → system-architect / design-system-architect | 메타가 스택 설계를 넘길 뿐, 설계 에이전트는 메타를 역참조 안 함 |

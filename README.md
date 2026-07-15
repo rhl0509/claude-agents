@@ -1,18 +1,18 @@
 # claude-agents
 
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
-코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 여기에 강의·워크숍·강좌·교육 자료의 교수 설계(학습자 분석·측정 가능한 학습 목표·모듈 계열화·목표-평가-활동 정렬)를 맡는 **교육/교수설계 에이전트 1종**(`curriculum-designer`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터). 여기에 더해 **C와 비-Unity C#/.NET**을 전담하는 시스템 언어 에이전트 6종(`c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`)이 추가되었습니다(🧩 시스템 언어 클러스터 — 각 언어를 리뷰·설계·성능 3역으로).
+코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 여기에 강의·워크숍·강좌·교육 자료의 교수 설계(학습자 분석·측정 가능한 학습 목표·모듈 계열화·목표-평가-활동 정렬)를 맡는 **교육/교수설계 에이전트 1종**(`curriculum-designer`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터). 여기에 더해 **C와 비-Unity C#/.NET**을 전담하는 시스템 언어 에이전트 6종(`c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`)이 추가되었습니다(🧩 시스템 언어 클러스터 — 각 언어를 리뷰·설계·성능 3역으로). 이어 이 클러스터를 **Java(JVM)·Swift**로 넓혀 4종(`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect`)을 추가했는데, C/.NET처럼 3역 트리오가 아니라 **리뷰어+아키텍트 2역씩**만 두고 **전담 perf 에이전트는 의도적으로 만들지 않았다**(프로모션 게이트 — 각 언어의 성능 점검 수요가 실제로 반복될 때까지 유보하고, 리뷰어가 그 공백을 "알려진 공백"으로 명시).
 
-- 에이전트 수: **53종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET 6종 + 도메인 3종(ML·회계·자동화) + 메타 2종 + 콘텐츠/마케팅 6종 + 교육 1종 + 창작 1종 + 보안 심화 2종 + 게임 12종 + 인프라 1종)
+- 에이전트 수: **57종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET/Java/Swift 10종 + 도메인 3종(ML·회계·자동화) + 메타 2종 + 콘텐츠/마케팅 6종 + 교육 1종 + 창작 1종 + 보안 심화 2종 + 게임 12종 + 인프라 1종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.13**, `test-runner` **v1.11**, `code-reviewer` **v1.14**(Flask 흡수), `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.6**, `perf-auditor` **v1.5**, `design-system-architect`·`test-strategy` **v1.4**, `observability-reviewer`·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 9종 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.2**·`game-ui-reviewer`·`unity-build-auditor`·`playtest-designer`·`multiplayer-rule-reviewer` **v1.1**·`unity-perf-auditor`·`save-data-reviewer` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.4**, 시스템 언어 C/.NET 6종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
-- 추론 강도(`effort`): opus 심층추론 49종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.13**, `test-runner` **v1.11**, `code-reviewer` **v1.15**(Flask 흡수), `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.6**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.7**, `perf-auditor` **v1.5**, `design-system-architect`·`test-strategy` **v1.4**, `observability-reviewer`·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 2종 `ai-workspace-architect` **v1.3**·`agent-definition-reviewer` **v1.1**, 콘텐츠 6종 `copy-reviewer`·`content-repurposer` **v1.1**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 게임 9종 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.2**·`game-ui-reviewer`·`unity-build-auditor`·`playtest-designer`·`multiplayer-rule-reviewer` **v1.1**·`unity-perf-auditor`·`save-data-reviewer` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.1**, 창작 `storyteller` **v1.0**, 디버깅 `debugger` **v1.4**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 추론 강도(`effort`): opus 심층추론 53종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
 
 ## 목차
-- [에이전트 53종](#에이전트-53종)
+- [에이전트 57종](#에이전트-57종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -24,7 +24,7 @@
 
 ---
 
-## 에이전트 53종
+## 에이전트 57종
 
 **관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했고, `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록은 추가 순서대로 있음).
 
@@ -32,7 +32,7 @@
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 1 | `code-reviewer` | `/review` `/리뷰` | 1.14 | opus | 코드 품질·가독성·버그 리뷰(FastAPI+**Flask** · 증상 없는 정적 탐색 · 타 스택 폴백) | Read, Grep, Glob, Bash |
+| 1 | `code-reviewer` | `/review` `/리뷰` | 1.15 | opus | 코드 품질·가독성·버그 리뷰(FastAPI+**Flask** · 증상 없는 정적 탐색 · 타 스택 폴백) | Read, Grep, Glob, Bash |
 | 3 | `test-runner` | `/test` `/테스트` | 1.11 | sonnet | 테스트 실행·실패 분석(1차 원인 분류) | Bash, Read, Grep, Glob |
 | 4 | `test-strategy` | `/coverage` `/커버리지` | 1.5 | opus | 테스트 커버리지 공백·약한 테스트 진단(웹 스택) | Read, Grep, Glob |
 | 34 | `refactor-strategist` | `/refactor` `/리팩터` | 1.0 | opus | 동작 보존 리팩터 계획·단계 설계(추출·중복·의존·seam) | Read, Grep, Glob |
@@ -62,7 +62,7 @@
 |---|---|---|---|---|---|---|
 | 6 | `api-contract-reviewer` | `/contract` `/계약` | 1.1 | opus | 프론트-백 API 계약 정합성 점검 | Read, Grep, Glob |
 | 7 | `api-doc-writer` | `/apidoc` | 1.6 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
-| 13 | `system-architect` | `/arch` `/아키텍처` | 1.6 | opus | 시스템 아키텍처 설계(계층·경계·확장성) | Read, Grep, Glob, Context7 |
+| 13 | `system-architect` | `/arch` `/아키텍처` | 1.7 | opus | 시스템 아키텍처 설계(계층·경계·확장성) | Read, Grep, Glob, Context7 |
 | 35 | `docs-writer` | `/docs` `/문서` | 1.1 | opus | 개발자용 기술문서(README·아키텍처·온보딩·ADR) | Read, Grep, Glob |
 
 #### 🎨 프론트엔드 (화면 · 디자인 · 성능)
@@ -100,9 +100,9 @@
 | 39 | `multiplayer-rule-reviewer` | `/rule` `/룰` | 1.1 | opus | **멀티플레이 룰 정합성·서버 권위 점검**(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
 | 40 | `save-data-reviewer` | `/save` `/세이브` | 1.0 | opus | **세이브·영속 데이터 호환성**(스키마 버전·마이그레이션·직렬화 리네이밍·손상 복구·클라우드 충돌) | Read, Grep, Glob |
 
-#### 🧩 시스템 언어 (C · 비-Unity .NET)
+#### 🧩 시스템 언어 (C · 비-Unity .NET · Java · Swift)
 
-각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹·게임 트리오와 동형). 리뷰↔성능은 **원인/증상 대칭**.
+C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹·게임 트리오와 동형). 리뷰↔성능은 **원인/증상 대칭**. Java·Swift는 프로모션 게이트에 따라 **리뷰어+아키텍트 2역씩**만 두고 **전담 perf는 의도적 미생성**(공백은 각 리뷰어가 명시).
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
@@ -112,6 +112,10 @@
 | 50 | `dotnet-code-reviewer` | `/dnreview` | 1.0 | opus | **비-Unity C#/.NET 리뷰**(async 데드락·IDisposable·지연실행·DI 수명·EF Core) | Read, Grep, Glob, Bash |
 | 51 | `dotnet-architect` | `/dnarch` | 1.0 | opus | **.NET 구조 설계**(계층·DI 수명·미들웨어·호스팅·async 경계) | Read, Grep, Glob, Context7 |
 | 52 | `dotnet-perf-auditor` | `/dnperf` | 1.0 | opus | **.NET 런타임 성능**(GC 압력·LOH·Span/ArrayPool·박싱·벤치마크 해석) | Read, Grep, Glob |
+| 54 | `java-code-reviewer` | `/jreview` | 1.0 | opus | **Java(JVM) 코드 리뷰**(NPE·Optional 오용·예외 정책·자원 누수·동시성·equals/hashCode·오토박싱 ==·Stream 부작용 · 전담 perf 없음) | Read, Grep, Glob, Bash |
+| 55 | `java-architect` | `/jarch` | 1.0 | opus | **Java/Spring 구조 설계**(계층 분리·빈 수명/생성자 주입·모듈 의존 방향·에러 전략·트랜잭션 경계·영속성 OSIV) | Read, Grep, Glob, Context7 |
+| 56 | `swift-code-reviewer` | `/swreview` | 1.0 | opus | **Swift 코드 리뷰**(강제 언랩 크래시·ARC retain cycle·값/참조·에러 삼킴·동시성 actor/@MainActor/Sendable·열거 망라·Codable · 전담 perf 없음) | Read, Grep, Glob, Bash |
+| 57 | `swift-architect` | `/swarch` | 1.0 | opus | **Swift 앱 구조 설계**(MVVM/TCA·SPM 모듈 경계·DI·동시성 아키텍처·SwiftUI 상태 관리·내비게이션·값 타입 도메인) | Read, Grep, Glob, Context7 |
 
 #### 📣 콘텐츠 / 마케팅
 
@@ -719,9 +723,51 @@
 - **구분**: 강의 홍보 카피는 `copy-reviewer`, 완성된 강의를 다른 포맷으로 파생하는 것은 `content-repurposer`, 개발자 문서·튜토리얼은 `docs-writer`, 사실 검증은 `fact-checker`, AI 작업환경 설계는 `ai-workspace-architect`
 </details>
 
+### 🧩 시스템 언어 — Java · Swift (2026-07-15 추가)
+
+> 시스템 언어 클러스터를 **Java(JVM)·Swift**로 확장한 4종. C/.NET 트리오와 달리 **리뷰어+아키텍트 2역씩**만 두고 **전담 perf 에이전트는 의도적으로 만들지 않았다**(프로모션 게이트 — 각 언어의 성능 점검 수요가 실제 작업에서 반복될 때까지 유보). 두 리뷰어는 이 공백을 **"전담 perf 에이전트 없음(알려진 공백)"**으로 정직하게 명시한다. 리뷰어는 `Bash`(git diff 범위 식별 + 명시 요청 시 읽기전용 정적분석, 빌드·실행 금지), 아키텍트는 `Context7`(Spring/`jakarta.*`·`@Observable`/NavigationStack 등 버전 의존 패턴 확인)을 갖는다.
+
+<details>
+<summary><b>54. java-code-reviewer</b> (<code>/jreview</code>) — Java(JVM) 코드 리뷰 (품질)</summary>
+
+- **언제**: 서버/JVM Java 코드 커밋/머지 전 셀프 리뷰. `git diff`로 변경분 파악(Bash는 범위 식별 + **명시 요청 시** 읽기전용 정적분석, 빌드·실행 금지)
+- **점검(Java 고유)**: ① NPE·널 처리(필드/파라미터 `Optional` 오용·미검사 `get()`) ② 예외 정책(빈 `catch`·`catch(Exception)` 삼킴·원인 체이닝 소실·try-with-resources 미사용) ③ 자원 수명(AutoCloseable/스트림/커넥션 누수) ④ JVM 동시성(volatile을 원자성으로 오해·비스레드안전 `SimpleDateFormat`·`ConcurrentModificationException`·데드락) ⑤ `equals`/`hashCode`/`compareTo` 계약(HashMap 키·가변 키) ⑥ 제네릭(로 타입·미검사 캐스트·소거) ⑦ 오토박싱(`Integer` 캐시 `==`·언박싱 NPE·`double`로 금액) ⑧ String/로케일 ⑨ Stream 부작용
+- **범위**: 서버·JVM Java 전담 — **Android/Kotlin 프레임워크는 대상 밖(인접 공백으로 명시)**. **전담 perf 에이전트 없음(알려진 공백)** — 성능 의심은 측정 권고로만 분리
+- **출력**: 요약 → Must fix → Should fix → Nit → 위임
+- **구분**: 일반 품질·타 스택 폴백은 `code-reviewer`, 구조는 `java-architect`, 이미 난 크래시 원인은 `debugger`, 보안은 `security-reviewer`
+</details>
+
+<details>
+<summary><b>55. java-architect</b> (<code>/jarch</code>) — Java/Spring 구조 설계 (설계)</summary>
+
+- **언제**: 새 Java/Spring 서비스·모듈을 만들기 전, 기존 구조 점검. 버전 의존 패턴(Spring·`jakarta.*`)은 Context7로 확인
+- **설계**: 계층 분리(controller/service/repository/domain·헥사고날·의존성 안쪽 방향), **빈 수명**(생성자 주입·빈 스코프·싱글턴 빈의 가변 상태 스레드 안전·순환 의존), 모듈/패키지 의존 방향, 에러 전략(checked/unchecked 정책·경계 변환 `@ControllerAdvice`), 동시성(executor 소유권·불변성·`@Async` 경계), 영속성 경계(엔티티 vs DTO·`@Transactional` 전파·OSIV)
+- **출력**: (신규) 요구사항/가정 → 옵션 비교 → 권장안(계층·빈 수명 다이어그램) → 단계 적용 / (점검) 진단 → 구조적 문제 → 개선 → 마이그레이션
+- **구분**: 구현 코드 결함은 `java-code-reviewer`, 웹 풀스택은 `system-architect`, .NET 구조는 `dotnet-architect`, C 구조는 `c-architect`, 배포·컨테이너는 `devops-reviewer`
+</details>
+
+<details>
+<summary><b>56. swift-code-reviewer</b> (<code>/swreview</code>) — Swift 코드 리뷰 (품질)</summary>
+
+- **언제**: Swift 코드 커밋/머지 전 셀프 리뷰. `git diff`로 변경분 파악(Bash는 범위 식별 + **명시 요청 시** 읽기전용 정적분석, 빌드·실행 금지)
+- **점검(Swift 고유)**: ① 옵셔널 안전(강제 언랩 `!`/`try!`/`as!` 크래시·IUO) ② **ARC retain cycle**(클로저 `[weak self]` 누락·강한 delegate 참조·`unowned` 오용) ③ 값/참조 의미(struct vs class·COW) ④ 에러 삼킴(`try?`·force-try) ⑤ 동시성(async/await·actor 격리·`@MainActor` UI 스레드·Sendable 데이터 레이스·`DispatchQueue.main.sync` 데드락·continuation 이중 재개) ⑥ 프로토콜/제네릭 existential 비용·클로저 캡처 ⑦ 열거 망라성 ⑧ force-cast ⑨ Codable
+- **범위**: **전담 perf 에이전트 없음(알려진 공백)** — 성능 의심은 측정 권고로만 분리
+- **출력**: 요약 → Must fix → Should fix → Nit → 위임
+- **구분**: 일반 품질·타 스택 폴백은 `code-reviewer`, 구조는 `swift-architect`, 이미 난 크래시 원인은 `debugger`, 보안은 `security-reviewer`
+</details>
+
+<details>
+<summary><b>57. swift-architect</b> (<code>/swarch</code>) — Swift 앱 구조 설계 (설계)</summary>
+
+- **언제**: 새 Swift 앱·모듈을 만들기 전, 기존 구조 점검. 버전 의존 패턴(`@Observable`·NavigationStack)은 Context7로 확인
+- **설계**: 아키텍처 패턴 선택(MVVM/TCA/VIPER/Clean, 규모별), 모듈 경계(SPM/프레임워크 타깃·비순환 의존), DI(이니셜라이저/Environment 주입·싱글턴 남용 회피·프로토콜 seam), 동시성 아키텍처(actor 격리·`@MainActor` 경계·구조적 동시성·Sendable), **SwiftUI 상태 관리**(단일 진실 원천·`@State`/`@StateObject`/`@ObservedObject`/`@Binding`/`@Environment` 소유권 배치·`@Observable`), 내비게이션, 값 타입 우선 도메인 모델링, 영속성·네트워킹 경계
+- **출력**: (신규) 요구사항/가정 → 옵션 비교 → 권장안(아키텍처·상태 소유권 다이어그램) → 단계 적용 / (점검) 진단 → 구조적 문제 → 개선 → 마이그레이션
+- **구분**: 구현 코드 결함은 `swift-code-reviewer`, 웹 풀스택은 `system-architect`, .NET 구조는 `dotnet-architect`, C 구조는 `c-architect`
+</details>
+
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
-양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 1.56의 전수 스캔 34쌍에서 1.64·1.67~1.72를 거치며 늘어 **현재 58쌍**이며 클러스터별로 나눈다.
+양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 1.56의 전수 스캔 34쌍에서 1.64·1.67~1.72를 거치며 늘어 **현재 60쌍**이며 클러스터별로 나눈다.
 
 **웹 스택 (20쌍)**
 | 쌍 | 구분 |
@@ -800,7 +846,7 @@
 | test-strategy ↔ playtest-designer | 소프트웨어 자동 테스트 ↔ 사람 대상 플레이테스트 |
 | game-test-strategy ↔ test-strategy | 게임(엔진 seam·EditMode/PlayMode·결정론) ↔ 웹(pytest·Vitest·Playwright) ⟵ 1.69 |
 
-**시스템 언어 (C · 비-Unity .NET, 5쌍)** — 1.72 신설
+**시스템 언어 (C · 비-Unity .NET · Java · Swift, 7쌍)** — 1.72 신설, 2026-07-15 Java·Swift 확장
 | 쌍 | 구분 |
 |---|---|
 | c-code-reviewer ↔ c-perf-auditor | C 성능 깎는 코드 "원인·UB" ↔ 캐시·할당 "증상·측정 해석" (원인/증상 대칭) |
@@ -808,6 +854,8 @@
 | dotnet-code-reviewer ↔ unity-code-reviewer | **비-Unity** C#/.NET(async·DI·EF Core) ↔ **Unity** C#(수명주기·GC·프레임) |
 | c-architect ↔ system-architect | 시스템 언어 C 모듈·소유권 "설계" ↔ 웹 풀스택 "아키텍처" |
 | dotnet-architect ↔ system-architect | .NET 계층·DI 수명 "설계" ↔ 웹 풀스택 "아키텍처" |
+| java-architect ↔ system-architect | Java/Spring 계층·빈 수명 "설계" ↔ 웹 풀스택 "아키텍처" |
+| swift-architect ↔ system-architect | Swift 앱 아키텍처·SwiftUI 상태 "설계" ↔ 웹 풀스택 "아키텍처" |
 
 ### 일방향 위임 포인터
 
@@ -817,7 +865,7 @@
 |---|---|---|
 | test-strategy → code-reviewer | 특화 → 일반 폴백 | `code-reviewer`는 일반 폴백이라 개별 특화로 되돌리지 않음 |
 | perf-auditor → code-reviewer | 특화 → 일반 폴백 | 동일(일반 품질·버그 폴백) |
-| code-reviewer → c-code-reviewer / dotnet-code-reviewer | 일반 폴백 → 언어 전담 | 폴백이 C·비-Unity C#를 전담으로 넘김(1.70 도메인 카브아웃과 동일 — 흡수 방지). 전담도 일반 품질을 code-reviewer로 되넘기지만, 허브가 특화를 전부 나열하지 않는 관행상 일방향 표에 둔다 ⟵ 1.72 |
+| code-reviewer → c-code-reviewer / dotnet-code-reviewer / java-code-reviewer / swift-code-reviewer | 일반 폴백 → 언어 전담 | 폴백이 C·비-Unity C#·Java·Swift를 전담으로 넘김(1.70 도메인 카브아웃과 동일 — 흡수 방지). 전담도 일반 품질을 code-reviewer로 되넘기지만, 허브가 특화를 전부 나열하지 않는 관행상 일방향 표에 둔다 ⟵ 1.72, Java·Swift 2026-07-15 |
 | devops-reviewer → migration-reviewer | 운영 → DB 도메인 | 마이그레이션 리뷰는 DB 영역에 집중 |
 | system-architect → api-contract-reviewer / data-modeler / security-reviewer | 최상위 설계 → 특화 검증 | 설계가 구현 후 검증을 특화로 넘김(특화는 설계를 역참조 안 함) |
 | ai-workspace-architect → system-architect / design-system-architect | 메타 → 도메인 설계 | 메타가 스택 설계를 넘길 뿐, 설계 에이전트는 메타를 역참조 안 함 |
@@ -865,7 +913,7 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 52개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 57개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
@@ -957,6 +1005,10 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/dnreview` | dotnet-code-reviewer | C# 소스 경로(선택) |
 | `/dnarch` | dotnet-architect | 설계 대상/경로(선택) |
 | `/dnperf` | dotnet-perf-auditor | 경로 또는 측정 캡처(선택) |
+| `/jreview` | java-code-reviewer | Java 소스 경로(선택) |
+| `/jarch` | java-architect | 설계 대상/경로(선택) |
+| `/swreview` | swift-code-reviewer | Swift 소스 경로(선택) |
+| `/swarch` | swift-architect | 설계 대상/경로(선택) |
 | `/curriculum` | curriculum-designer | 주제·대상·시간(선택) |
 
 ### 한글 별칭 (1.65)
@@ -1008,7 +1060,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-53종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-57종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
@@ -1031,13 +1083,13 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
-├─ AGENTS.md                     # 52개 에이전트 통합 정리
+├─ AGENTS.md                     # 57개 에이전트 통합 정리
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
 ├─ .gitignore
 │
-├─ commands/                     # ── 슬래시 명령 정의 (52개, +한글 별칭 28개) ──
+├─ commands/                     # ── 슬래시 명령 정의 (57개, +한글 별칭 29개) ──
 │  ├─ review.md  ├─ sec.md       ├─ test.md      ├─ coverage.md
 │  ├─ perf.md    ├─ contract.md  ├─ apidoc.md    ├─ db.md
 │  ├─ migrate.md ├─ ui.md        ├─ dsystem.md   ├─ datamodel.md
@@ -1049,12 +1101,14 @@ claude-agents/
 │  ├─ ubuild.md   ├─ recall.md   ├─ refactor.md  ├─ docs.md
 │  ├─ agentdef.md ├─ story.md    ├─ debug.md
 │  ├─ creview.md  ├─ carch.md    ├─ cperf.md
-│  ├─ dnreview.md ├─ dnarch.md   └─ dnperf.md
+│  ├─ dnreview.md ├─ dnarch.md   ├─ dnperf.md
+│  ├─ curriculum.md ├─ jreview.md ├─ jarch.md
+│  ├─ swreview.md └─ swarch.md
 │
 ├─ launchers/                    # ── 바탕화면 런처 ──
 │  └─ claude.bat
 │
-├─ code-reviewer.md              # ── 에이전트 정의 (52개) ──
+├─ code-reviewer.md              # ── 에이전트 정의 (57개) ──
 ├─ security-reviewer.md
 ├─ test-runner.md
 ├─ test-strategy.md
@@ -1105,7 +1159,12 @@ claude-agents/
 ├─ c-perf-auditor.md             # 시스템 언어(C 런타임 성능)
 ├─ dotnet-code-reviewer.md       # 시스템 언어(비-Unity C#/.NET 리뷰)
 ├─ dotnet-architect.md           # 시스템 언어(.NET 구조 설계)
-└─ dotnet-perf-auditor.md        # 시스템 언어(.NET 런타임 성능)
+├─ dotnet-perf-auditor.md        # 시스템 언어(.NET 런타임 성능)
+├─ curriculum-designer.md        # 콘텐츠(교육/교수설계, backward design)
+├─ java-code-reviewer.md         # 시스템 언어(Java/JVM 리뷰)
+├─ java-architect.md             # 시스템 언어(Java/JVM 구조 설계)
+├─ swift-code-reviewer.md        # 시스템 언어(Swift 리뷰)
+└─ swift-architect.md            # 시스템 언어(Swift 구조 설계)
 ```
 
 ---
