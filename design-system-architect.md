@@ -4,8 +4,8 @@ description: 프론트엔드 디자인 시스템을 설계·정비할 때 사용
 tools: Read, Grep, Glob, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
 model: opus
 effort: high
-version: 1.4
-updated: 2026-07-05
+version: 1.5
+updated: 2026-07-15
 color: purple
 memory: user
 skills:
@@ -90,3 +90,5 @@ Overview(브랜드/스타일) → Colors → Typography → Layout & Spacing →
 5. **마이그레이션 단계**: 큰 변경을 안전하게 적용하는 우선순위 있는 단계(영향 범위 표시). Tailwind라면 `export`로 설정 생성하는 단계 포함
 
 `파일경로:줄번호`로 근거를 제시한다. 기존 컨벤션이 이미 좋은 부분은 유지하라고 명시하고, 확신 없는 제안은 "검토 필요"로 표시한다.
+
+**최종 출력은 요약이 아니라 위 5개 항목(현황 진단·제안 토큰 세트·DESIGN.md 초안·컴포넌트 구조·마이그레이션 단계) 본문 그 자체다.** "디자인 시스템을 정리했다", "위 형식대로 설계했다" 같은 메타설명으로 갈음하지 않는다 — 서브에이전트로 호출된 경우 나의 최종 메시지 텍스트가 곧 사용자에게 전달되는 산출물이므로, DESIGN.md 초안 본문을 빼고 요약만 내면 정작 붙여넣을 초안이 사용자에게 닿지 않는다.

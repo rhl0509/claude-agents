@@ -10,6 +10,18 @@
 
 ---
 
+## 1.80 (2026-07-15) — /agentdef 재점검(회귀 없음) + 아티팩트 생성기 2종 계약 확대
+
+생성기 5종 "요약 갈음 금지" 계약을 `/agentdef`로 재점검 → **회귀 없음**(P1/P2 0). 문구 일관·정확, storyteller/ai-workspace-architect의 "과정 비노출"과 무충돌, 경계 대칭 유지 확인. 리뷰어 제외 판정·brand-voice-guardian(발견형) 제외 판정도 정확. 나온 P3 2건 처리:
+
+- **[나이트] curriculum-designer 표기 통일** — 계약 연결부가 마침표(나머지 4종은 em-dash)라 em-dash로 통일. 동작 무변경이라 version 미bump.
+- **[P3→반영] 아티팩트 생성기 2종에 계약 확대** — 리뷰어가 "문서/카탈로그 생성기라 같은 소지, 미검증이니 재현 시에만"으로 관찰한 `api-doc-writer`·`design-system-architect`를, 부류 완결 차원에서 선제 보강(무해한 방어 한 문단):
+  - **api-doc-writer 1.6 → 1.7** — §출력 형식에 "최종 출력은 정리된 엔드포인트 카탈로그 그 자체" 명시(표·목록 본문이 산출물).
+  - **design-system-architect 1.4 → 1.5** — §출력 형식에 "최종 출력은 5개 항목(진단·토큰 세트·DESIGN.md 초안·컴포넌트 구조·마이그레이션 단계) 본문 그 자체" 명시.
+- 이로써 아티팩트를 내는 생성기 전수(curriculum·content-repurposer·storyteller·docs-writer·ai-workspace-architect·api-doc-writer·design-system-architect = 7종)가 계약 보유. 리뷰어·순수 점검형(brand-voice-guardian 등)은 출력 형식 강제라 대상 아님.
+
+---
+
 ## 1.79 (2026-07-15) — ai-workspace-architect도 "요약 갈음 금지" 보강 (1.78 후속, 생성기 전수 완료)
 
 1.78에서 "미적용, 다음 대상 후보"로 남긴 ai-workspace-architect(완성형 초안 생성기, `/fable`)를 보강. 이로써 생성기 전수(curriculum-designer·content-repurposer·storyteller·docs-writer·ai-workspace-architect)가 "요약 갈음 금지" 출력 계약을 가진다.
