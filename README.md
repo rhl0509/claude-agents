@@ -3,16 +3,16 @@
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
 코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 여기에 강의·워크숍·강좌·교육 자료의 교수 설계(학습자 분석·측정 가능한 학습 목표·모듈 계열화·목표-평가-활동 정렬)를 맡는 **교육/교수설계 에이전트 1종**(`curriculum-designer`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터). 여기에 더해 **C와 비-Unity C#/.NET**을 전담하는 시스템 언어 에이전트 6종(`c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`)이 추가되었습니다(🧩 시스템 언어 클러스터 — 각 언어를 리뷰·설계·성능 3역으로). 이어 이 클러스터를 **Java(JVM)·Swift**로 넓혀 4종(`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect`)을 추가했는데, C/.NET처럼 3역 트리오가 아니라 **리뷰어+아키텍트 2역씩**만 두고 **전담 perf 에이전트는 의도적으로 만들지 않았다**(프로모션 게이트 — 각 언어의 성능 점검 수요가 실제로 반복될 때까지 유보하고, 리뷰어가 그 공백을 "알려진 공백"으로 명시).
 
-- 에이전트 수: **58종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET/Java/Swift 10종 + 도메인 3종(ML·회계·자동화) + 메타 3종 + 콘텐츠/마케팅 6종 + 교육 1종 + 창작 1종 + 보안 심화 2종 + 게임 12종 + 인프라 1종)
+- 에이전트 수: **60종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET/Java/Swift 10종 + 도메인 3종(ML·회계·자동화) + 메타 3종 + 콘텐츠/마케팅 6종 + 교육 1종 + 창작 1종 + 커리어 1종 + 보안 심화 2종 + 게임 12종 + 인프라 2종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.13**, `test-runner` **v1.11**, `code-reviewer` **v1.15**(Flask 흡수), `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.7**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.7**, `perf-auditor` **v1.5**, `design-system-architect` **v1.5**·`test-strategy` **v1.4**, `observability-reviewer`·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 3종 `ai-workspace-architect` **v1.4**·`agent-definition-reviewer` **v1.1**·`project-manager` **v1.0**, 콘텐츠 6종 `copy-reviewer` **v1.1**·`content-repurposer` **v1.2**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 조율 `project-manager` **v1.0**, 게임 9종 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.2**·`game-ui-reviewer`·`unity-build-auditor`·`playtest-designer`·`multiplayer-rule-reviewer` **v1.1**·`unity-perf-auditor`·`save-data-reviewer` **v1.0**, 인프라 `memory-recaller` **v1.3**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.2**, 창작 `storyteller` **v1.1**, 디버깅 `debugger` **v1.4**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
-- 추론 강도(`effort`): opus 심층추론 54종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.13**, `test-runner` **v1.11**, `code-reviewer` **v1.15**(Flask 흡수), `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.7**, `ui-ux-reviewer` **v1.5**, `system-architect` **v1.7**, `perf-auditor` **v1.5**, `design-system-architect` **v1.5**·`test-strategy` **v1.4**, `observability-reviewer`·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 3종 `ai-workspace-architect` **v1.4**·`agent-definition-reviewer` **v1.1**·`project-manager` **v1.0**, 콘텐츠 6종 `copy-reviewer` **v1.1**·`content-repurposer` **v1.2**·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`brand-voice-guardian` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 조율 `project-manager` **v1.0**, 게임 9종 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.2**·`game-ui-reviewer`·`unity-build-auditor`·`playtest-designer`·`multiplayer-rule-reviewer` **v1.1**·`unity-perf-auditor`·`save-data-reviewer` **v1.0**, 인프라 2종 `memory-recaller` **v1.3**·`self-reflector` **v1.0**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.2**, 창작 `storyteller` **v1.1**, 커리어 `cover-letter-tailor` **v1.0**, 디버깅 `debugger` **v1.4**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 추론 강도(`effort`): opus 심층추론 55종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 4종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller·self-reflector)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
 
 ## 목차
-- [에이전트 58종](#에이전트-58종)
+- [에이전트 60종](#에이전트-60종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -24,9 +24,9 @@
 
 ---
 
-## 에이전트 58종
+## 에이전트 60종
 
-**관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했고, `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록은 추가 순서대로 있음). **예외 #0** = `project-manager` — 추가 순서로는 58번째지만, 모든 에이전트 위에 앉는 진입/조율 층이라 의도적으로 0번으로 맨 앞에 둔다(따라서 번호는 0~57, `#0`만 "추가 순서 = 번호" 불변식의 예외).
+**관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했고, `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록은 추가 순서대로 있음). **예외 #0** = `project-manager` — 추가 순서로는 58번째지만, 모든 에이전트 위에 앉는 진입/조율 층이라 의도적으로 0번으로 맨 앞에 둔다(따라서 번호는 0~60, `#0`만 "추가 순서 = 번호" 불변식의 예외).
 
 #### 🔍 코드 품질 · 디버깅 · 테스트
 
@@ -128,6 +128,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 | 23 | `brand-voice-guardian` | `/voice` | 1.0 | opus | 브랜드 보이스(문체·톤) 일관성 점검 | Read, Grep, Glob |
 | 37 | `storyteller` | `/story` `/이야기` | 1.1 | **fable** | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성 | Read, Grep, Glob |
 | 53 | `curriculum-designer` | `/curriculum` `/강의설계` | 1.1 | opus | 강의·워크숍·강좌 교수 설계(학습 목표·모듈 계열화·backward design·슬라이드 골격) | Read, Grep, Glob |
+| 59 | `cover-letter-tailor` | `/cover` `/자소서` | 1.0 | opus | 채용 공고(JD)에 맞춰 자기소개서 맞춤 재작성(역량 매핑·STAR·글자수·사실만·공백 표시) | Read, Grep, Glob |
 
 #### 🧭 메타 / 인프라 (내 작업환경 자체)
 
@@ -137,6 +138,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 | 17 | `ai-workspace-architect` | `/fable` | 1.4 | opus | AI 작업환경 진단·재설계(프롬프트·CLAUDE.md·SKILL.md·모델별 전략) | Read, Grep, Glob, WebSearch, WebFetch |
 | 33 | `memory-recaller` | `/recall` `/회상` | 1.3 | **haiku** | 파일 기반 장기기억 회상(`E:\claude_memory`) — 값싼 Haiku 회상 | Read, Grep, Glob |
 | 36 | `agent-definition-reviewer` | `/agentdef` | 1.1 | opus | 이 라이브러리의 에이전트 정의(.md) 스펙·경계·규범 점검 | Read, Grep, Glob |
+| 60 | `self-reflector` | `/reflect-log` `/누적회고` | 1.0 | **haiku** | 누적 관찰 로그(`_observations`) 교차 세션 증류 → 학습 후보 제안(신뢰도·증거 기반, 자기개선 루프) | Read, Grep, Glob |
 
 ### 🧭 진입 / 조율 (#0 — 모든 에이전트 위에 앉는 조율 층)
 
@@ -599,6 +601,17 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 - **원칙**: 읽기 전용 — 메모리를 쓰거나 고치지 않음(저장·수정은 메인 세션이 담당)
 </details>
 
+<details>
+<summary><b>60. self-reflector</b> (<code>/reflect-log</code> <code>/누적회고</code>) — 누적 관찰 로그 교차 세션 증류 (자기개선)</summary>
+
+- **언제**: "요즘 반복되는 내 요구/교정 패턴 뽑아줘", 주기적 자기개선 회고. 여러 세션에 걸친 관찰 로그가 소스. 수동 호출 `/reflect-log`·`/누적회고`
+- **성격**: ECC continuous-learning의 **규율만** E: 단일소스로 이식한 자기개선 루프의 증류 층. `observe-capture` 훅(UserPromptSubmit)이 매 프롬프트를 `E:\claude_memory\_observations\`에 append-only로 적재하면, 이 haiku 에이전트가 그 누적 로그를 교차 세션으로 훑는다
+- **증류 절차**: 반복(여러 세션·여러 날) 신호만 추출(1회성 버림) → 관찰 횟수·세션 수로 신뢰도(0.3~0.9) 산정 → 기존 메모리와 같은 취지면 갱신·신뢰도 상향, 모순이면 하향 플래그 → 이미 메모리·CLAUDE.md·git에 있는 것은 노이즈로 버림
+- **출력**: 학습 후보(대상 파일·frontmatter·`confidence`·`evidence`)를 신뢰도순으로 제안. 관찰 없으면 "누적 관찰 없음"으로 정직 보고
+- **원칙**: 읽기 전용 — 메모리에 직접 쓰지 않음(기록은 메인 세션이 사용자 승인 후)
+- **구분**: 특정 질의 회상만은 `memory-recaller`, 지금 보이는 이번 세션 하나 증류는 `/회고` 메인 리추얼(서브에이전트 없음)
+</details>
+
 ### 🛠 엔지니어링 / 문서 / 메타 (1.60 추가)
 
 <details>
@@ -642,6 +655,20 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 - **원칙**: 표절 금지(오마주/패러디 한정), 사용자가 준 핵심 설정·결말 방향 보존(바꾸려면 대안 제안), 채운 가정 명시. 유해 실행 지침·미성년 성적 묘사·실존 인물 명예훼손은 거부
 - **출력**: 로그라인 → 뼈대 요약 → 이야기 본문(제목) → 채운 가정 & 확장 포인트(더 길게/다른 결말/속편)
 - **구분**: 기존 자산을 매체별로 파생하는 것은 `content-repurposer`, 카피 품질은 `copy-reviewer`, 확정 보이스 준수는 `brand-voice-guardian`, 프롬프트·지침 시스템 설계는 `ai-workspace-architect`
+</details>
+
+### 🧑‍💼 커리어 / 채용 (1.85 추가)
+
+> 채용 공고(JD)를 해부해 지원자의 **실제 경험**을 그 요구에 맞게 재구성하는 생성 에이전트. 콘텐츠 생성기 계열이지만 마케팅이 아니라 **커리어 문서**를 다루는 별도 1종이다. 핵심 가드레일은 **없는 사실을 창작하지 않는 것**(허위기재 방지) — 프레이밍은 자유롭게, 팩트는 지원자가 준 것에서만.
+
+<details>
+<summary><b>59. cover-letter-tailor</b> (<code>/cover</code> <code>/자소서</code>) — 채용 공고에 맞춰 자기소개서 맞춤 재작성</summary>
+
+- **언제**: 기업 공고와 기존 자소서(또는 경력·경험)가 있고, 그 공고에 맞게 자소서를 수정·재작성할 때. 수동 호출은 `/cover` 또는 `/자소서`
+- **맞춤 3단계**: ① 공고 해부(주요업무·자격·우대·인재상에서 요구 역량·키워드 3~7개 추출) → ② 매핑(지원자 경험 ↔ 요구, 근거 강도 강/중/**공백** 판정) → ③ 리라이트(두괄식·STAR·직무 연결·문항별 글자수 준수·상투구 제거)
+- **정직성(최우선)**: 지원자가 준 사실만 사용 — 없는 경력·수상·자격·정량 수치 창작 금지. 근거 공백은 숨기지 않고 "이런 경험이 있으면 알려달라"로 되묻는다. 위조·과장 요청은 거부하고 위험(합격/채용 취소·법적 책임)을 밝힌 뒤 "가진 사실을 더 강하게" 대안으로 전환
+- **출력**: 공고 요구역량 요약 → 매핑 표(공백 포함) → 문항별 완성본(글자수 표기) → 보강 제안(공백 메우기 질문) → 채운 가정
+- **구분**: 마케팅 카피 품질은 `copy-reviewer`, 확정 브랜드 보이스 정합은 `brand-voice-guardian`, 1소스 멀티포맷 파생은 `content-repurposer`, 창작 서사는 `storyteller`, 외부 사실·수치 검증은 `fact-checker`
 </details>
 
 ### 🐞 디버깅 (품질 · 1.64 추가)
@@ -886,6 +913,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 | copy-reviewer → ai-workspace-architect | 콘텐츠 → 메타 | 보이스·프롬프트 시스템 설계로 넘기는 상향 포인터 |
 | content-repurposer → copy-reviewer / seo-optimizer / fact-checker | 생성 → 점검 3종 | 재활용 초안을 각 점검 에이전트로(점검 측은 생성기를 역참조 안 함) |
 | storyteller → content-repurposer / copy-reviewer / brand-voice-guardian | 창작 생성 → 재활용·점검 | 새로 지은 이야기를 매체 파생·카피·보이스로(점검·재활용 측은 창작 생성기를 역참조 안 함) |
+| cover-letter-tailor → copy-reviewer / brand-voice-guardian / fact-checker | 커리어 생성 → 점검 | 맞춤 자소서를 카피·보이스·사실검증으로(점검 측은 커리어 생성기를 역참조 안 함) |
 | fact-checker → copy-reviewer / seo-optimizer / landing-reviewer | 검증 → 콘텐츠 점검 | 사실 검증 후 문장·전환·검색은 각 특화로 |
 | brand-voice-guardian → copy-reviewer / ai-workspace-architect | 보이스 → 카피·메타 | 일반 카피는 copy, 보이스 정의·시스템은 메타로 |
 | threat-modeler → system-architect | 보안 설계 → 구조 설계 | 위협 모델이 구조 설계로 넘김 |
@@ -1000,6 +1028,8 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/playtest` | playtest-designer | 검증 질문·빌드 범위(선택) |
 | `/ubuild` | unity-build-auditor | ProjectSettings·플랫폼(선택) |
 | `/recall` | memory-recaller | 회상할 주제/질문(선택) |
+| `/reflect-log` | self-reflector | 범위/주제 힌트(선택) — 누적 로그 교차 세션 증류 |
+| `/reflect` | (메인 세션 리추얼) | 이번 세션 회고 범위 힌트(선택) — 서브에이전트 없음 |
 | `/refactor` | refactor-strategist | 경로/대상(선택) |
 | `/docs` | docs-writer | 문서 종류/대상(선택) |
 | `/agentdef` | agent-definition-reviewer | 에이전트 파일/이름(선택) |
@@ -1024,10 +1054,11 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/swreview` | swift-code-reviewer | Swift 소스 경로(선택) |
 | `/swarch` | swift-architect | 설계 대상/경로(선택) |
 | `/curriculum` | curriculum-designer | 주제·대상·시간(선택) |
+| `/cover` | cover-letter-tailor | 채용 공고 + 기존 자소서/경력(선택) |
 
 ### 한글 별칭 (1.65)
 
-Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1.65에서 `/디버그`로 검증). 자주 쓰는 29종에 한글 별칭 커맨드를 함께 배포한다 — 에이전트는 그대로고 커맨드 파일만 하나 더 있는 구조라, 별칭을 지워도 영어 명령은 그대로 동작한다.
+Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1.65에서 `/디버그`로 검증). 자주 쓰는 32종에 한글 별칭 커맨드를 함께 배포한다 — 에이전트는 그대로고 커맨드 파일만 하나 더 있는 구조라, 별칭을 지워도 영어 명령은 그대로 동작한다.
 
 | 한글 | 영어 | 한글 | 영어 |
 |---|---|---|---|
@@ -1045,9 +1076,10 @@ Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1
 | `/디비` | `/db` | `/이야기` | `/story` |
 | `/마이그레이션` | `/migrate` | `/화면` | `/ui` |
 | `/아키텍처` | `/arch` | `/데이터모델` | `/datamodel` |
-| `/강의설계` | `/curriculum` | | |
+| `/강의설계` | `/curriculum` | `/자소서` | `/cover` |
+| `/회고` | `/reflect` | `/누적회고` | `/reflect-log` |
 
-> 한국어 **자연어 호출**은 별칭과 무관하게 원래부터 동작한다(58종 description이 전부 한국어라 라우터가 한국어 문장으로 매치). 별칭은 슬래시 표기 편의일 뿐이다.
+> 한국어 **자연어 호출**은 별칭과 무관하게 원래부터 동작한다(60종 description이 전부 한국어라 라우터가 한국어 문장으로 매치). 별칭은 슬래시 표기 편의일 뿐이다.
 
 > 슬래시 명령은 추가 후 다음 세션부터 목록에 나타납니다.
 > `/recall`은 메모리 회상 훅으로 자동 호출되기도 하지만, 수동으로 직접 부를 수도 있습니다.
@@ -1074,7 +1106,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-58종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-60종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
@@ -1155,6 +1187,7 @@ claude-agents/
 ├─ playtest-designer.md
 ├─ unity-build-auditor.md
 ├─ memory-recaller.md            # 인프라(개인 메모리 회상, haiku)
+├─ self-reflector.md             # 인프라(자기개선 회고·누적 관찰 증류, haiku)
 ├─ refactor-strategist.md        # 품질(동작 보존 리팩터 계획)
 ├─ docs-writer.md                # 문서(개발자용 기술문서)
 ├─ agent-definition-reviewer.md  # 메타(에이전트 정의 점검)
@@ -1175,6 +1208,7 @@ claude-agents/
 ├─ dotnet-architect.md           # 시스템 언어(.NET 구조 설계)
 ├─ dotnet-perf-auditor.md        # 시스템 언어(.NET 런타임 성능)
 ├─ curriculum-designer.md        # 콘텐츠(교육/교수설계, backward design)
+├─ cover-letter-tailor.md        # 커리어(자소서 맞춤 재작성, 사실만)
 ├─ java-code-reviewer.md         # 시스템 언어(Java/JVM 리뷰)
 ├─ java-architect.md             # 시스템 언어(Java/JVM 구조 설계)
 ├─ swift-code-reviewer.md        # 시스템 언어(Swift 리뷰)
