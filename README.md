@@ -26,78 +26,78 @@
 
 ## 에이전트 62종
 
-**관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했고, `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록은 추가 순서대로 있음). **예외 #0** = `project-manager` — 추가 순서로는 58번째지만, 모든 에이전트 위에 앉는 진입/조율 층이라 의도적으로 0번으로 맨 앞에 둔다(따라서 번호는 0~62, `#0`만 "추가 순서 = 번호" 불변식의 예외).
+**관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했다(예외: 📣 콘텐츠/마케팅 표는 **마케팅 → 창작 → 교육 → 커리어** 하위 묶음 순서를 번호보다 우선한다). `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록 자체는 번호순이 아니라 클러스터별로 묶여 있다). 번호는 **1~62 연속이며 결번이 없다** — `#1`은 모든 에이전트 위에 앉는 진입/조율 층인 `project-manager`, `#2`부터는 대체로 추가된 순서다. 번호는 상세 블록을 찾는 **인덱스일 뿐 추가 시점을 뜻하지 않으며**, 새 에이전트는 다음 번호(`#63`…)를 이어 받는다.
 
 #### 🔍 코드 품질 · 디버깅 · 테스트
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 1 | `code-reviewer` | `/review` `/리뷰` | 1.15 | opus | 코드 품질·가독성·버그 리뷰(FastAPI+**Flask** · 증상 없는 정적 탐색 · 타 스택 폴백) | Read, Grep, Glob, Bash |
-| 3 | `test-runner` | `/test` `/테스트` | 1.11 | sonnet | 테스트 실행·실패 분석(1차 원인 분류) | Bash, Read, Grep, Glob |
-| 4 | `test-strategy` | `/coverage` `/커버리지` | 1.5 | opus | 테스트 커버리지 공백·약한 테스트 진단(웹 스택) | Read, Grep, Glob |
-| 34 | `refactor-strategist` | `/refactor` `/리팩터` | 1.0 | opus | 동작 보존 리팩터 계획·단계 설계(추출·중복·의존·seam) | Read, Grep, Glob |
-| 38 | `debugger` | `/debug` `/디버그` | 1.4 | opus | 이미 난 버그·에러·간헐 실패의 근본 원인 규명(재현·가설 검증·이분 탐색) | Read, Grep, Glob, Bash |
-| 42 | `ml-experiment-reviewer` | `/ml` `/머신러닝` | 1.0 | opus | **ML 실험 설계 감사**(미래 정보 누출·검증 분할·백테스트 현실성·과적합) | Read, Grep, Glob |
+| 2 | `code-reviewer` | `/review` `/리뷰` | 1.15 | opus | 코드 품질·가독성·버그 리뷰(FastAPI+**Flask** · 증상 없는 정적 탐색 · 타 스택 폴백) | Read, Grep, Glob, Bash |
+| 4 | `test-runner` | `/test` `/테스트` | 1.11 | sonnet | 테스트 실행·실패 분석(1차 원인 분류) | Bash, Read, Grep, Glob |
+| 5 | `test-strategy` | `/coverage` `/커버리지` | 1.5 | opus | 테스트 커버리지 공백·약한 테스트 진단(웹 스택) | Read, Grep, Glob |
+| 35 | `refactor-strategist` | `/refactor` `/리팩터` | 1.0 | opus | 동작 보존 리팩터 계획·단계 설계(추출·중복·의존·seam) | Read, Grep, Glob |
+| 39 | `debugger` | `/debug` `/디버그` | 1.4 | opus | 이미 난 버그·에러·간헐 실패의 근본 원인 규명(재현·가설 검증·이분 탐색) | Read, Grep, Glob, Bash |
+| 43 | `ml-experiment-reviewer` | `/ml` `/머신러닝` | 1.0 | opus | **ML 실험 설계 감사**(미래 정보 누출·검증 분할·백테스트 현실성·과적합) | Read, Grep, Glob |
 
 #### 🔒 보안 (설계 단계 → 코드 → AI/LLM 3단 방어)
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 2 | `security-reviewer` | `/sec` `/보안` | 1.13 | opus | 코드 보안 취약점(OWASP) 점검 — 구현 **후**(+ C 메모리안전=보안 층은 c-code-reviewer로) | Read, Grep, Glob, WebSearch, WebFetch |
-| 24 | `threat-modeler` | `/threat` | 1.1 | opus | 설계 단계 위협 모델링(STRIDE) — 구현 **전** | Read, Grep, Glob, WebSearch, WebFetch |
-| 25 | `llm-ai-security-reviewer` | `/aisec` | 1.1 | opus | AI/LLM 보안 심화(OWASP LLM Top 10) | Read, Grep, Glob, WebSearch, WebFetch |
+| 3 | `security-reviewer` | `/sec` `/보안` | 1.13 | opus | 코드 보안 취약점(OWASP) 점검 — 구현 **후**(+ C 메모리안전=보안 층은 c-code-reviewer로) | Read, Grep, Glob, WebSearch, WebFetch |
+| 25 | `threat-modeler` | `/threat` | 1.1 | opus | 설계 단계 위협 모델링(STRIDE) — 구현 **전** | Read, Grep, Glob, WebSearch, WebFetch |
+| 26 | `llm-ai-security-reviewer` | `/aisec` | 1.1 | opus | AI/LLM 보안 심화(OWASP LLM Top 10) | Read, Grep, Glob, WebSearch, WebFetch |
 
 #### 🗄 데이터 / DB
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 8 | `db-optimizer` | `/db` `/디비` | 1.10 | opus | MySQL 쿼리·인덱스 **성능 튜닝** | Read, Grep, Glob, Bash |
-| 9 | `migration-reviewer` | `/migrate` `/마이그레이션` | 1.3 | opus | 스키마 마이그레이션 **안전성**(락·백필·롤백) — 서버 DB 전용 | Read, Grep, Glob |
-| 12 | `data-modeler` | `/datamodel` `/데이터모델` | 1.7 | opus | 데이터 모델/스키마 **설계**(ERD·키·제약) | Read, Grep, Glob |
-| 41 | `accounting-rule-reviewer` | `/acct` `/회계` | 1.0 | opus | **복식부기 규칙 감사**(차대 균형·역분개·마감 차단·금액 타입·잔액 정합) | Read, Grep, Glob |
+| 9 | `db-optimizer` | `/db` `/디비` | 1.10 | opus | MySQL 쿼리·인덱스 **성능 튜닝** | Read, Grep, Glob, Bash |
+| 10 | `migration-reviewer` | `/migrate` `/마이그레이션` | 1.3 | opus | 스키마 마이그레이션 **안전성**(락·백필·롤백) — 서버 DB 전용 | Read, Grep, Glob |
+| 13 | `data-modeler` | `/datamodel` `/데이터모델` | 1.7 | opus | 데이터 모델/스키마 **설계**(ERD·키·제약) | Read, Grep, Glob |
+| 42 | `accounting-rule-reviewer` | `/acct` `/회계` | 1.0 | opus | **복식부기 규칙 감사**(차대 균형·역분개·마감 차단·금액 타입·잔액 정합) | Read, Grep, Glob |
 
 #### 🏗 아키텍처 · API · 문서
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 6 | `api-contract-reviewer` | `/contract` `/계약` | 1.1 | opus | 프론트-백 API 계약 정합성 점검 | Read, Grep, Glob |
-| 7 | `api-doc-writer` | `/apidoc` | 1.7 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
-| 13 | `system-architect` | `/arch` `/아키텍처` | 1.7 | opus | 시스템 아키텍처 설계(계층·경계·확장성) | Read, Grep, Glob, Context7 |
-| 35 | `docs-writer` | `/docs` `/문서` | 1.2 | opus | 개발자용 기술문서(README·아키텍처·온보딩·ADR) | Read, Grep, Glob |
+| 7 | `api-contract-reviewer` | `/contract` `/계약` | 1.1 | opus | 프론트-백 API 계약 정합성 점검 | Read, Grep, Glob |
+| 8 | `api-doc-writer` | `/apidoc` | 1.7 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
+| 14 | `system-architect` | `/arch` `/아키텍처` | 1.7 | opus | 시스템 아키텍처 설계(계층·경계·확장성) | Read, Grep, Glob, Context7 |
+| 36 | `docs-writer` | `/docs` `/문서` | 1.2 | opus | 개발자용 기술문서(README·아키텍처·온보딩·ADR) | Read, Grep, Glob |
 
 #### 🎨 프론트엔드 (화면 · 디자인 · 성능)
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 5 | `perf-auditor` | `/perf` `/성능` | 1.5 | opus | Next.js **프론트 전용** 성능(번들·CWV·캐싱 · 파이썬 백엔드 런타임 성능은 범위 밖=알려진 공백) | Read, Grep, Glob |
-| 10 | `ui-ux-reviewer` | `/ui` `/화면` | 1.5 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
-| 11 | `design-system-architect` | `/dsystem` | 1.5 | opus | 디자인 토큰·컴포넌트 설계(DESIGN.md) | Read, Grep, Glob, Context7 |
+| 6 | `perf-auditor` | `/perf` `/성능` | 1.5 | opus | Next.js **프론트 전용** 성능(번들·CWV·캐싱 · 파이썬 백엔드 런타임 성능은 범위 밖=알려진 공백) | Read, Grep, Glob |
+| 11 | `ui-ux-reviewer` | `/ui` `/화면` | 1.5 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
+| 12 | `design-system-architect` | `/dsystem` | 1.5 | opus | 디자인 토큰·컴포넌트 설계(DESIGN.md) | Read, Grep, Glob, Context7 |
 
 #### 🚀 운영 (배포 · 의존성 · 관측성)
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 14 | `devops-reviewer` | `/devops` `/배포` | 1.9 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
-| 15 | `dependency-auditor` | `/deps` `/의존성` | 1.1 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
-| 16 | `observability-reviewer` | `/obs` `/관측성` | 1.4 | opus | 로깅·트레이싱·관측성 점검(웹 앱 런타임) | Read, Grep, Glob |
-| 43 | `automation-reliability-reviewer` | `/auto` `/자동화` | 1.1 | opus | **데몬·크론 자동화 신뢰성**(로그 유실·중복 실행·하트비트·멱등성) | Read, Grep, Glob |
+| 15 | `devops-reviewer` | `/devops` `/배포` | 1.9 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
+| 16 | `dependency-auditor` | `/deps` `/의존성` | 1.1 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
+| 17 | `observability-reviewer` | `/obs` `/관측성` | 1.4 | opus | 로깅·트레이싱·관측성 점검(웹 앱 런타임) | Read, Grep, Glob |
+| 44 | `automation-reliability-reviewer` | `/auto` `/자동화` | 1.1 | opus | **데몬·크론 자동화 신뢰성**(로그 유실·중복 실행·하트비트·멱등성) | Read, Grep, Glob |
 
 #### 🎮 게임 (Unity + C# 싱글플레이 2D 캐주얼 · MSW 멀티플레이)
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 26 | `unity-code-reviewer` | `/ureview` | 1.5 | opus | Unity C# 코드 리뷰(수명주기·GC·프레임/물리 · Fast Enter Play Mode · 비-Unity .NET은 dotnet-code-reviewer로) | Read, Grep, Glob, Bash |
-| 27 | `game-design-architect` | `/gdd` | 1.4 | opus | 게임 디자인·시스템 설계(코어 루프·난이도·수직 슬라이스, 엔진 무관) | Read, Grep, Glob |
-| 28 | `game-ui-reviewer` | `/gui` | 1.3 | opus | 게임 UI/UX(HUD·스케일링·내비·가독성, UGUI/UI Toolkit 분기) | Read, Grep, Glob |
-| 29 | `game-feel-reviewer` | `/feel` | 1.3 | opus | 손맛/juice(입력 관대성·히트스톱·카메라 + 페이즈/턴 기반 피드백) | Read, Grep, Glob |
-| 30 | `unity-perf-auditor` | `/uperf` | 1.1 | opus | 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler) | Read, Grep, Glob |
-| 31 | `playtest-designer` | `/playtest` | 1.2 | opus | 플레이테스트 설계(가설·참가자·지표 + 다인 동시 세션) | Read, Grep, Glob |
-| 32 | `unity-build-auditor` | `/ubuild` | 1.1 | opus | 빌드/릴리스·스토어 제출(+ **2026 정책: API 36·16KB·연령등급**) | Read, Grep, Glob |
-| 39 | `multiplayer-rule-reviewer` | `/rule` `/룰` | 1.1 | opus | **멀티플레이 룰 정합성·서버 권위 점검**(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
-| 40 | `save-data-reviewer` | `/save` `/세이브` | 1.0 | opus | **세이브·영속 데이터 호환성**(스키마 버전·마이그레이션·직렬화 리네이밍·손상 복구·클라우드 충돌) | Read, Grep, Glob |
-| 44 | `game-localization-reviewer` | `/gloc` `/현지화` | 1.1 | opus | **현지화 준비**(하드코딩 문자열·폰트 글리프·길이 팽창·어순·폴백) | Read, Grep, Glob |
-| 45 | `game-test-strategy` | `/gtest` `/게임테스트` | 1.1 | opus | **게임 자동 테스트 전략**(엔진 의존 seam·EditMode/PlayMode·결정론적 리플레이) | Read, Grep, Glob |
-| 46 | `game-audio-reviewer` | `/gaudio` `/오디오` | 1.1 | opus | **오디오 구현**(믹서 버스·동시 발음·반복 피로·임포트·BGM 전환) | Read, Grep, Glob |
+| 27 | `unity-code-reviewer` | `/ureview` | 1.5 | opus | Unity C# 코드 리뷰(수명주기·GC·프레임/물리 · Fast Enter Play Mode · 비-Unity .NET은 dotnet-code-reviewer로) | Read, Grep, Glob, Bash |
+| 28 | `game-design-architect` | `/gdd` | 1.4 | opus | 게임 디자인·시스템 설계(코어 루프·난이도·수직 슬라이스, 엔진 무관) | Read, Grep, Glob |
+| 29 | `game-ui-reviewer` | `/gui` | 1.3 | opus | 게임 UI/UX(HUD·스케일링·내비·가독성, UGUI/UI Toolkit 분기) | Read, Grep, Glob |
+| 30 | `game-feel-reviewer` | `/feel` | 1.3 | opus | 손맛/juice(입력 관대성·히트스톱·카메라 + 페이즈/턴 기반 피드백) | Read, Grep, Glob |
+| 31 | `unity-perf-auditor` | `/uperf` | 1.1 | opus | 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler) | Read, Grep, Glob |
+| 32 | `playtest-designer` | `/playtest` | 1.2 | opus | 플레이테스트 설계(가설·참가자·지표 + 다인 동시 세션) | Read, Grep, Glob |
+| 33 | `unity-build-auditor` | `/ubuild` | 1.1 | opus | 빌드/릴리스·스토어 제출(+ **2026 정책: API 36·16KB·연령등급**) | Read, Grep, Glob |
+| 40 | `multiplayer-rule-reviewer` | `/rule` `/룰` | 1.1 | opus | **멀티플레이 룰 정합성·서버 권위 점검**(MSW mlua — 상태머신·판정 누락·클라 입력 검증·은닉 정보) | Read, Grep, Glob |
+| 41 | `save-data-reviewer` | `/save` `/세이브` | 1.0 | opus | **세이브·영속 데이터 호환성**(스키마 버전·마이그레이션·직렬화 리네이밍·손상 복구·클라우드 충돌) | Read, Grep, Glob |
+| 45 | `game-localization-reviewer` | `/gloc` `/현지화` | 1.1 | opus | **현지화 준비**(하드코딩 문자열·폰트 글리프·길이 팽창·어순·폴백) | Read, Grep, Glob |
+| 46 | `game-test-strategy` | `/gtest` `/게임테스트` | 1.1 | opus | **게임 자동 테스트 전략**(엔진 의존 seam·EditMode/PlayMode·결정론적 리플레이) | Read, Grep, Glob |
+| 47 | `game-audio-reviewer` | `/gaudio` `/오디오` | 1.1 | opus | **오디오 구현**(믹서 버스·동시 발음·반복 피로·임포트·BGM 전환) | Read, Grep, Glob |
 
 #### 🧩 시스템 언어 (C · 비-Unity .NET · Java · Swift)
 
@@ -105,47 +105,47 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 47 | `c-code-reviewer` | `/creview` | 1.0 | opus | **C 코드 리뷰**(메모리 안전·UB·정수 변환·에러경로 누수·포맷 취약점) | Read, Grep, Glob, Bash |
-| 48 | `c-architect` | `/carch` | 1.0 | opus | **C 구조 설계**(모듈/헤더·메모리 소유권 계약·에러 규약·빌드/이식성) | Read, Grep, Glob |
-| 49 | `c-perf-auditor` | `/cperf` | 1.0 | opus | **C 런타임 성능**(캐시 지역성·할당·복잡도·프로파일 해석) | Read, Grep, Glob |
-| 50 | `dotnet-code-reviewer` | `/dnreview` | 1.0 | opus | **비-Unity C#/.NET 리뷰**(async 데드락·IDisposable·지연실행·DI 수명·EF Core) | Read, Grep, Glob, Bash |
-| 51 | `dotnet-architect` | `/dnarch` | 1.0 | opus | **.NET 구조 설계**(계층·DI 수명·미들웨어·호스팅·async 경계) | Read, Grep, Glob, Context7 |
-| 52 | `dotnet-perf-auditor` | `/dnperf` | 1.0 | opus | **.NET 런타임 성능**(GC 압력·LOH·Span/ArrayPool·박싱·벤치마크 해석) | Read, Grep, Glob |
-| 54 | `java-code-reviewer` | `/jreview` | 1.0 | opus | **Java(JVM) 코드 리뷰**(NPE·Optional 오용·예외 정책·자원 누수·동시성·equals/hashCode·오토박싱 ==·Stream 부작용 · 전담 perf 없음) | Read, Grep, Glob, Bash |
-| 55 | `java-architect` | `/jarch` | 1.0 | opus | **Java/Spring 구조 설계**(계층 분리·빈 수명/생성자 주입·모듈 의존 방향·에러 전략·트랜잭션 경계·영속성 OSIV) | Read, Grep, Glob, Context7 |
-| 56 | `swift-code-reviewer` | `/swreview` | 1.0 | opus | **Swift 코드 리뷰**(강제 언랩 크래시·ARC retain cycle·값/참조·에러 삼킴·동시성 actor/@MainActor/Sendable·열거 망라·Codable · 전담 perf 없음) | Read, Grep, Glob, Bash |
-| 57 | `swift-architect` | `/swarch` | 1.0 | opus | **Swift 앱 구조 설계**(MVVM/TCA·SPM 모듈 경계·DI·동시성 아키텍처·SwiftUI 상태 관리·내비게이션·값 타입 도메인) | Read, Grep, Glob, Context7 |
+| 48 | `c-code-reviewer` | `/creview` | 1.0 | opus | **C 코드 리뷰**(메모리 안전·UB·정수 변환·에러경로 누수·포맷 취약점) | Read, Grep, Glob, Bash |
+| 49 | `c-architect` | `/carch` | 1.0 | opus | **C 구조 설계**(모듈/헤더·메모리 소유권 계약·에러 규약·빌드/이식성) | Read, Grep, Glob |
+| 50 | `c-perf-auditor` | `/cperf` | 1.0 | opus | **C 런타임 성능**(캐시 지역성·할당·복잡도·프로파일 해석) | Read, Grep, Glob |
+| 51 | `dotnet-code-reviewer` | `/dnreview` | 1.0 | opus | **비-Unity C#/.NET 리뷰**(async 데드락·IDisposable·지연실행·DI 수명·EF Core) | Read, Grep, Glob, Bash |
+| 52 | `dotnet-architect` | `/dnarch` | 1.0 | opus | **.NET 구조 설계**(계층·DI 수명·미들웨어·호스팅·async 경계) | Read, Grep, Glob, Context7 |
+| 53 | `dotnet-perf-auditor` | `/dnperf` | 1.0 | opus | **.NET 런타임 성능**(GC 압력·LOH·Span/ArrayPool·박싱·벤치마크 해석) | Read, Grep, Glob |
+| 55 | `java-code-reviewer` | `/jreview` | 1.0 | opus | **Java(JVM) 코드 리뷰**(NPE·Optional 오용·예외 정책·자원 누수·동시성·equals/hashCode·오토박싱 ==·Stream 부작용 · 전담 perf 없음) | Read, Grep, Glob, Bash |
+| 56 | `java-architect` | `/jarch` | 1.0 | opus | **Java/Spring 구조 설계**(계층 분리·빈 수명/생성자 주입·모듈 의존 방향·에러 전략·트랜잭션 경계·영속성 OSIV) | Read, Grep, Glob, Context7 |
+| 57 | `swift-code-reviewer` | `/swreview` | 1.0 | opus | **Swift 코드 리뷰**(강제 언랩 크래시·ARC retain cycle·값/참조·에러 삼킴·동시성 actor/@MainActor/Sendable·열거 망라·Codable · 전담 perf 없음) | Read, Grep, Glob, Bash |
+| 58 | `swift-architect` | `/swarch` | 1.0 | opus | **Swift 앱 구조 설계**(MVVM/TCA·SPM 모듈 경계·DI·동시성 아키텍처·SwiftUI 상태 관리·내비게이션·값 타입 도메인) | Read, Grep, Glob, Context7 |
 
 #### 📣 콘텐츠 / 마케팅
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 18 | `copy-reviewer` | `/copy` `/카피` | 1.2 | opus | 마케팅 카피 품질 리뷰(후킹·CTA·과장/윤리) | Read, Grep, Glob |
-| 19 | `landing-reviewer` | `/landing` | 1.1 | opus | 상세페이지·랜딩 전환 구조 리뷰 | Read, Grep, Glob |
-| 20 | `seo-optimizer` | `/seo` | 1.0 | opus | 블로그·페이지 SEO 점검 | Read, Grep, Glob, WebSearch, WebFetch |
-| 21 | `fact-checker` | `/factcheck` | 1.0 | opus | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
-| 22 | `content-repurposer` | `/repurpose` | 1.3 | opus | 1소스 → 멀티 포맷 재활용(단발 뉴스레터까지) | Read, Grep, Glob |
-| 23 | `brand-voice-guardian` | `/voice` | 1.0 | opus | 브랜드 보이스(문체·톤) 일관성 점검 | Read, Grep, Glob |
+| 19 | `copy-reviewer` | `/copy` `/카피` | 1.2 | opus | 마케팅 카피 품질 리뷰(후킹·CTA·과장/윤리) | Read, Grep, Glob |
+| 20 | `landing-reviewer` | `/landing` | 1.1 | opus | 상세페이지·랜딩 전환 구조 리뷰 | Read, Grep, Glob |
+| 21 | `seo-optimizer` | `/seo` | 1.0 | opus | 블로그·페이지 SEO 점검 | Read, Grep, Glob, WebSearch, WebFetch |
+| 22 | `fact-checker` | `/factcheck` | 1.0 | opus | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
+| 23 | `content-repurposer` | `/repurpose` | 1.3 | opus | 1소스 → 멀티 포맷 재활용(단발 뉴스레터까지) | Read, Grep, Glob |
+| 24 | `brand-voice-guardian` | `/voice` | 1.0 | opus | 브랜드 보이스(문체·톤) 일관성 점검 | Read, Grep, Glob |
 | 61 | `email-sequence-writer` | `/email` `/이메일` | 1.0 | opus | 이메일/라이프사이클 시퀀스 생성(웰컴·런칭·너처·재참여·콜드아웃리치, 타이밍·제목·CTA) | Read, Grep, Glob |
 | 62 | `offer-strategist` | `/offer` `/오퍼` | 1.0 | opus | 카피 앞단 오퍼 설계(가치제안·가격 티어·보증·보너스·포지셔닝) | Read, Grep, Glob |
-| 37 | `storyteller` | `/story` `/이야기` | 1.1 | **fable** | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성 | Read, Grep, Glob |
-| 53 | `curriculum-designer` | `/curriculum` `/강의설계` | 1.1 | opus | 강의·워크숍·강좌 교수 설계(학습 목표·모듈 계열화·backward design·슬라이드 골격) | Read, Grep, Glob |
+| 38 | `storyteller` | `/story` `/이야기` | 1.1 | **fable** | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성 | Read, Grep, Glob |
+| 54 | `curriculum-designer` | `/curriculum` `/강의설계` | 1.1 | opus | 강의·워크숍·강좌 교수 설계(학습 목표·모듈 계열화·backward design·슬라이드 골격) | Read, Grep, Glob |
 | 59 | `cover-letter-tailor` | `/cover` `/자소서` | 1.0 | opus | 채용 공고(JD)에 맞춰 자기소개서 맞춤 재작성(역량 매핑·STAR·글자수·사실만·공백 표시) | Read, Grep, Glob |
 
 #### 🧭 메타 / 인프라 (내 작업환경 자체)
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 0 | `project-manager` | `/pm` `/프로젝트관리` | 1.0 | opus | **프로젝트 조율**(태스크 분해·의존성·우선순위·전문 에이전트 라우팅 맵·순서/마일스톤·진행 현황) — 오케스트레이터 아님(계획을 텍스트로 냄) | Read, Grep, Glob, Bash |
-| 17 | `ai-workspace-architect` | `/fable` | 1.4 | opus | AI 작업환경 진단·재설계(프롬프트·CLAUDE.md·SKILL.md·모델별 전략) | Read, Grep, Glob, WebSearch, WebFetch |
-| 33 | `memory-recaller` | `/recall` `/회상` | 1.3 | **haiku** | 파일 기반 장기기억 회상(`E:\claude_memory`) — 값싼 Haiku 회상 | Read, Grep, Glob |
-| 36 | `agent-definition-reviewer` | `/agentdef` | 1.1 | opus | 이 라이브러리의 에이전트 정의(.md) 스펙·경계·규범 점검 | Read, Grep, Glob |
+| 1 | `project-manager` | `/pm` `/프로젝트관리` | 1.0 | opus | **프로젝트 조율**(태스크 분해·의존성·우선순위·전문 에이전트 라우팅 맵·순서/마일스톤·진행 현황) — 오케스트레이터 아님(계획을 텍스트로 냄) | Read, Grep, Glob, Bash |
+| 18 | `ai-workspace-architect` | `/fable` | 1.4 | opus | AI 작업환경 진단·재설계(프롬프트·CLAUDE.md·SKILL.md·모델별 전략) | Read, Grep, Glob, WebSearch, WebFetch |
+| 34 | `memory-recaller` | `/recall` `/회상` | 1.3 | **haiku** | 파일 기반 장기기억 회상(`E:\claude_memory`) — 값싼 Haiku 회상 | Read, Grep, Glob |
+| 37 | `agent-definition-reviewer` | `/agentdef` | 1.1 | opus | 이 라이브러리의 에이전트 정의(.md) 스펙·경계·규범 점검 | Read, Grep, Glob |
 | 60 | `self-reflector` | `/reflect-log` `/누적회고` | 1.0 | **haiku** | 누적 관찰 로그(`_observations`) 교차 세션 증류 → 학습 후보 제안(신뢰도·증거 기반, 자기개선 루프) | Read, Grep, Glob |
 
-### 🧭 진입 / 조율 (#0 — 모든 에이전트 위에 앉는 조율 층)
+### 🧭 진입 / 조율 (#1 — 모든 에이전트 위에 앉는 조율 층)
 
 <details>
-<summary><b>0. project-manager</b> (<code>/pm</code>) — 프로젝트 조율 (메타/조율)</summary>
+<summary><b>1. project-manager</b> (<code>/pm</code>) — 프로젝트 조율 (메타/조율)</summary>
 
 - **언제**: 여러 작업·기능·레포에 걸친 일을 실행 계획으로 옮기기 전, 스프린트·마일스톤을 짜기 전, 진행 현황을 점검할 때. "어디서부터·어떤 순서로·누구에게 시킬지 모르겠다"
 - **전제**: **서브에이전트는 오케스트레이터가 아님** — 서브에이전트는 다른 서브에이전트를 호출 못 하므로(오케스트레이션은 메인 세션/Workflow 등 "위층"에 있음), 이 에이전트는 일을 굴리지 않고 계획·라우팅 맵·진행 현황을 **텍스트로 산출**한다. 코드·파일 미수정
@@ -159,7 +159,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 ### 🔍 품질 / QA
 
 <details>
-<summary><b>1. code-reviewer</b> (<code>/review</code>) — 코드 품질·버그 리뷰</summary>
+<summary><b>2. code-reviewer</b> (<code>/review</code>) — 코드 품질·버그 리뷰</summary>
 
 - **언제**: 커밋/PR 전 셀프 리뷰, 리팩터링 검토
 - **범위 결정**: `git diff` / `git diff --staged`로 변경분을 파악해 그 범위에 집중 (Bash는 범위 식별 전용, 실행·수정 금지)
@@ -171,7 +171,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>2. security-reviewer</b> (<code>/sec</code>) — 보안 취약점 점검</summary>
+<summary><b>3. security-reviewer</b> (<code>/sec</code>) — 보안 취약점 점검</summary>
 
 - **언제**: PR/새 기능 머지 전, 보안 점검 필요 시
 - **기준**: OWASP Top 10 (2025) — A03 공급망·A10 예외 처리 오류(fail-open) 포함
@@ -182,7 +182,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>3. test-runner</b> (<code>/test</code>) — 테스트 실행·분석</summary>
+<summary><b>4. test-runner</b> (<code>/test</code>) — 테스트 실행·분석</summary>
 
 - **언제**: 코드 수정 후 테스트 실행·실패 진단
 - **러너**: pytest(FastAPI), Vitest/Jest 유닛(Next.js), Playwright/Cypress E2E
@@ -195,7 +195,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>4. test-strategy</b> (<code>/coverage</code>) — 테스트 커버리지·약한 테스트 진단</summary>
+<summary><b>5. test-strategy</b> (<code>/coverage</code>) — 테스트 커버리지·약한 테스트 진단</summary>
 
 - **언제**: 테스트가 회귀를 실제로 잡는지 점검, 보강할 케이스 설계
 - **점검**: 커버리지 공백(분기·경계·에러·인증 경로), 약한 단언(change-detector·목 그린·단언 약함), 테스트 구조(중복·플레이키), 스택별 핵심 경로
@@ -205,7 +205,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>5. perf-auditor</b> (<code>/perf</code>) — Next.js 프론트 성능 점검</summary>
+<summary><b>6. perf-auditor</b> (<code>/perf</code>) — Next.js 프론트 성능 점검</summary>
 
 - **언제**: "화면이 느리다", "번들이 크다", 배포 전 성능 점검
 - **점검**: 번들/코드 스플리팅, 서버/클라 경계, 데이터 페칭·캐싱(워터폴), 이미지/폰트(next/image·next/font), 렌더 비용(리렌더·가상화), Core Web Vitals(LCP/CLS/INP)
@@ -216,7 +216,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>6. api-contract-reviewer</b> (<code>/contract</code>) — 프론트-백 API 계약 정합성 점검</summary>
+<summary><b>7. api-contract-reviewer</b> (<code>/contract</code>) — 프론트-백 API 계약 정합성 점검</summary>
 
 - **언제**: 프론트-백 연동 직후, API 계약 변경 머지 전
 - **가정**: 프론트와 백엔드는 서로 다른 시점·다른 사람이 고친다 → 한쪽만 바뀌면 런타임에서 깨진다
@@ -228,7 +228,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 ### 📚 문서 / DB
 
 <details>
-<summary><b>7. api-doc-writer</b> (<code>/apidoc</code>) — API 문서화</summary>
+<summary><b>8. api-doc-writer</b> (<code>/apidoc</code>) — API 문서화</summary>
 
 - **언제**: 프론트 연동 전 API 명세 파악, 미문서화 엔드포인트 발견
 - **수집**: 라우터/WebSocket 데코레이터, 다단계(중첩) prefix 합성, 라우터/앱 레벨 의존성까지 본 인증 판정, `tags`/`response_model`/`deprecated` 반영
@@ -238,7 +238,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>8. db-optimizer</b> (<code>/db</code>) — MySQL 성능 튜닝</summary>
+<summary><b>9. db-optimizer</b> (<code>/db</code>) — MySQL 성능 튜닝</summary>
 
 - **언제**: 느린 쿼리 진단, N+1, 인덱스 설계, 마이그레이션의 성능·인덱스 영향 검토
 - **점검**: N+1, 인덱스(복합 컬럼 순서·중복), SELECT */함수 래핑/OFFSET 페이지네이션, 타입 적정성, 트랜잭션·락, 커넥션 풀, 벡터 검색(MySQL 9 `VECTOR` k-NN·사전필터, 거리 함수·인덱스 지원은 엔진별 확인)
@@ -248,7 +248,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>9. migration-reviewer</b> (<code>/migrate</code>) — 마이그레이션 안전성 점검</summary>
+<summary><b>10. migration-reviewer</b> (<code>/migrate</code>) — 마이그레이션 안전성 점검</summary>
 
 - **언제**: 스키마 마이그레이션(Alembic 등) 머지·배포 전 안전성 리뷰
 - **가정**: 운영 데이터가 많은 큰 테이블 + 마이그레이션 도중에도 트래픽이 흐른다
@@ -261,7 +261,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 ### 🎨 디자인
 
 <details>
-<summary><b>10. ui-ux-reviewer</b> (<code>/ui</code>) — UI/UX·접근성 점검</summary>
+<summary><b>11. ui-ux-reviewer</b> (<code>/ui</code>) — UI/UX·접근성 점검</summary>
 
 - **언제**: 화면 머지 전 디자인 품질 점검
 - **점검**: 레이아웃/간격, 타이포 위계, 색 대비(WCAG AA), 반응형·터치 타깃, 접근성(시맨틱·aria·키보드·alt·label·reduced-motion), 상태 표현(로딩/빈/에러), 컴포넌트 일관성
@@ -271,7 +271,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>11. design-system-architect</b> (<code>/dsystem</code>) — 디자인 시스템 설계</summary>
+<summary><b>12. design-system-architect</b> (<code>/dsystem</code>) — 디자인 시스템 설계</summary>
 
 - **언제**: 흩어진 스타일을 일관된 시스템으로 정비, 디자인 시스템을 `DESIGN.md` 단일 소스로 정리
 - **설계**: 디자인 토큰(색/타이포/스페이싱/래디우스/섀도), 테마(다크모드), 컴포넌트 계층·variant, 네이밍, Tailwind 토큰화, 중복 통합, 문서화(Storybook)
@@ -283,7 +283,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 ### 🏗 설계
 
 <details>
-<summary><b>12. data-modeler</b> (<code>/datamodel</code>) — 데이터 모델 설계</summary>
+<summary><b>13. data-modeler</b> (<code>/datamodel</code>) — 데이터 모델 설계</summary>
 
 - **언제**: 새 도메인 테이블/관계 설계, 기존 모델 재설계 (ERP 등 복잡 도메인)
 - **설계**: 엔터티/관계(N:M 연결 테이블), 정규화, 키 전략(대리키/자연키/FK 동작), 타입 선택, 제약·무결성, 이력/감사/soft delete/채번, 확장성
@@ -293,7 +293,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>13. system-architect</b> (<code>/arch</code>) — 시스템 아키텍처 설계</summary>
+<summary><b>14. system-architect</b> (<code>/arch</code>) — 시스템 아키텍처 설계</summary>
 
 - **언제**: 기능 구현 전 구조 설계, 기존 아키텍처 점검
 - **설계**: 계층 분리, 모듈 경계·의존성, API 계약, 인증 구조, 비동기/작업(큐·워커), 캐싱, 폴더 구조, 확장성
@@ -305,7 +305,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 ### 🚀 운영 (DevOps)
 
 <details>
-<summary><b>14. devops-reviewer</b> (<code>/devops</code>) — Docker·CI/CD·배포 설정 점검</summary>
+<summary><b>15. devops-reviewer</b> (<code>/devops</code>) — Docker·CI/CD·배포 설정 점검</summary>
 
 - **언제**: 머지·배포 전 인프라/파이프라인 설정 점검
 - **점검**: Dockerfile(이미지 핀·멀티스테이지·비루트·HEALTHCHECK), 시크릿/환경변수(하드코딩·이미지 잔존·.env 커밋), docker-compose(포트 노출·헬스체크), CI/CD(액션 핀·권한·시크릿 노출·게이트), 배포 안전성(롤백·무중단), 빌드 재현성(락파일)
@@ -319,7 +319,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>15. dependency-auditor</b> (<code>/deps</code>) — 의존성 취약점·버전·라이선스 점검</summary>
+<summary><b>16. dependency-auditor</b> (<code>/deps</code>) — 의존성 취약점·버전·라이선스 점검</summary>
 
 - **언제**: 머지·배포 전 또는 정기 의존성 점검
 - **점검**: 알려진 취약점(CVE, 직접/전이 경로), 버전 신선도·방치/deprecated, lockfile 무결성·드리프트(npm/pnpm/yarn·poetry·**uv.lock·PEP 751 pylock.toml**(v1.1)), 미사용·누락 의존성, dependencies/devDependencies 오분류, 라이선스 위험(GPL/AGPL·불명), 공급망 신호(타이포스쿼팅·postinstall·비공식 레지스트리·**lockfile 포이즈닝·provenance/Trusted Publishing·릴리스 숙성**(v1.1))
@@ -329,7 +329,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>16. observability-reviewer</b> (<code>/obs</code>) — 로깅·트레이싱·관측성 점검</summary>
+<summary><b>17. observability-reviewer</b> (<code>/obs</code>) — 로깅·트레이싱·관측성 점검</summary>
 
 - **언제**: "장애가 나도 추적이 안 된다", 운영 투입·머지 전 관측성 점검
 - **가정**: 새벽 3시 장애 알림 — 로그·트레이스만으로 "어떤 요청이, 누가/무엇에서, 어디서, 왜 실패했는가"를 답할 수 있는가
@@ -342,7 +342,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 ### 🧭 메타 / 워크플로우
 
 <details>
-<summary><b>17. ai-workspace-architect</b> (<code>/fable</code>) — AI 작업환경 진단·재설계</summary>
+<summary><b>18. ai-workspace-architect</b> (<code>/fable</code>) — AI 작업환경 진단·재설계</summary>
 
 - **언제**: 프롬프트·지침·`CLAUDE.md`·`SKILL.md`·커스텀 인스트럭션·반복 업무 규칙을 상위 수준으로 재설계할 때
 - **성격**: 다른 에이전트들과 달리 특정 개발 스택이 아니라 **AI 작업환경 자체**를 다루는 메타 에이전트. 마케팅·콘텐츠 제작(릴스·카드뉴스·블로그·상세페이지·강의자료) 결과물 품질을 시스템화
@@ -355,7 +355,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 ### 📣 콘텐츠 / 마케팅
 
 <details>
-<summary><b>18. copy-reviewer</b> (<code>/copy</code>) — 마케팅 카피 품질 리뷰</summary>
+<summary><b>19. copy-reviewer</b> (<code>/copy</code>) — 마케팅 카피 품질 리뷰</summary>
 
 - **언제**: 릴스·카드뉴스·블로그·상세페이지·제안서·광고 문구를 발행하기 전 카피 점검
 - **점검**: 후킹(첫 3초/첫 줄), 1메시지 집중, 독자 언어(vs 공급자 언어), 구체성(추상어·공허한 최상급), CTA 명확성·마찰, 신뢰도·윤리(근거 없는 보장·허위·다크패턴), 톤·문체 일관성, 포맷 적합(분량·구조). 변동 수치엔 `⚠️검증필요`
@@ -364,7 +364,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>19. landing-reviewer</b> (<code>/landing</code>) — 상세페이지·랜딩 전환 리뷰</summary>
+<summary><b>20. landing-reviewer</b> (<code>/landing</code>) — 상세페이지·랜딩 전환 리뷰</summary>
 
 - **언제**: 판매·전환 페이지(상세페이지·랜딩)를 게시하기 전 전환 관점 점검
 - **점검**: 히어로 가치 제안, 문제-공감-해결 흐름, 차별점의 benefit 번역, 사회적 증거, 반론 처리(FAQ·보증), CTA 전략(수·배치·마찰), 오퍼·가격 표현, 긴급성·희소성 윤리(다크패턴), 스캔 가능성·모바일 흐름
@@ -373,7 +373,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>20. seo-optimizer</b> (<code>/seo</code>) — 블로그·페이지 SEO 점검</summary>
+<summary><b>21. seo-optimizer</b> (<code>/seo</code>) — 블로그·페이지 SEO 점검</summary>
 
 - **언제**: 블로그·랜딩을 발행하기 전 검색 최적화 점검
 - **점검**: 검색 의도 매칭, 타이틀·메타, 헤딩 구조(H1 유일·계층), 키워드 배치·과최적화, 내부/외부 링크, 이미지 alt, 슬러그, 구조화 데이터(schema.org), E-E-A-T·스니펫, 카니발라이제이션. 키워드·SERP는 WebSearch로 확인(미확인은 "추정")
@@ -382,7 +382,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>21. fact-checker</b> (<code>/factcheck</code>) — 콘텐츠 사실·수치·출처 검증</summary>
+<summary><b>22. fact-checker</b> (<code>/factcheck</code>) — 콘텐츠 사실·수치·출처 검증</summary>
 
 - **언제**: 통계·수치·인용이 든 마케팅·블로그·강의자료·제안서를 발행하기 전
 - **검증**: 검증 가능한 진술만 추출(의견·일반론 제외) → ✅확인 / ⚠️부분사실 / ❌틀림 / ❓출처없음 / 🔒검증불가로 판정 + 출처(발행처·URL·날짜). 통계·가격·날짜·연구 인용·비교 최상급("업계 1위")·법률/의료/금융 주장을 특히 주의. 미확인은 사실로 단정하지 않음
@@ -391,7 +391,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>22. content-repurposer</b> (<code>/repurpose</code>) — 1소스 → 멀티 포맷 재활용</summary>
+<summary><b>23. content-repurposer</b> (<code>/repurpose</code>) — 1소스 → 멀티 포맷 재활용</summary>
 
 - **언제**: 블로그·영상 스크립트·강의·뉴스레터 등 기존 자산을 릴스·카드뉴스·스레드·뉴스레터·상세페이지 섹션으로 재활용할 때
 - **원칙**: 소스에서 핵심 추출 → 매체별 관행(릴스 훅3초·카드뉴스 1장1메시지·스레드 연쇄·뉴스레터 구조)에 맞춤. 포맷마다 다른 각도로(중복 파생 금지), 원본 수치·주장 왜곡·새 사실 창작 금지(변동 정보 `⚠️검증필요`)
@@ -400,7 +400,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>23. brand-voice-guardian</b> (<code>/voice</code>) — 브랜드 보이스 일관성 점검</summary>
+<summary><b>24. brand-voice-guardian</b> (<code>/voice</code>) — 브랜드 보이스 일관성 점검</summary>
 
 - **언제**: 채널 톤을 일관되게 지키고 싶을 때, 여러 사람이 같은 채널 글을 쓸 때, 발행 전 보이스 점검
 - **기준 소스**(이 순서): `voice.md` → `voice/examples/` 확정글 → 제공된 예시 추론(근거 명시) → 아무 기준도 없으면 보이스를 지어내지 않고 `/fable`로 `voice.md`부터 만들라고 안내
@@ -432,7 +432,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 > `security-reviewer`(`/sec`, 위 품질 카테고리)와 함께 보안 방어를 이룬다: 설계 단계(threat-modeler) → 코드 취약점(security-reviewer) → AI/LLM 특화(llm-ai-security-reviewer).
 
 <details>
-<summary><b>24. threat-modeler</b> (<code>/threat</code>) — 설계 단계 위협 모델링(STRIDE)</summary>
+<summary><b>25. threat-modeler</b> (<code>/threat</code>) — 설계 단계 위협 모델링(STRIDE)</summary>
 
 - **언제**: 새 기능·인증/결제/파일업로드/외부연동을 **구현하기 전** 또는 큰 변경 전
 - **절차**: 자산 식별 → 진입점·공격 표면 → 신뢰 경계·데이터 흐름(텍스트 DFD) → STRIDE(스푸핑·변조·부인·정보노출·DoS·권한상승) per element → 악용 시나리오 → 위험 순위 → 완화책·보안 요구사항
@@ -441,7 +441,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>25. llm-ai-security-reviewer</b> (<code>/aisec</code>) — AI/LLM 보안 심화(OWASP LLM Top 10)</summary>
+<summary><b>26. llm-ai-security-reviewer</b> (<code>/aisec</code>) — AI/LLM 보안 심화(OWASP LLM Top 10)</summary>
 
 - **언제**: 앱이 LLM/AI 기능(챗봇·RAG·에이전트·툴 호출·파인튜닝)을 포함하고, 머지 전 AI 보안을 깊게 볼 때
 - **점검**(OWASP LLM Top 10 2025): 프롬프트 인젝션(직접·**간접**: RAG·문서·외부페이지), 부적절한 출력 처리(SQL/명령/HTML/툴 전파), 과도한 행위성(도구 권한·human-in-the-loop), 민감정보·시스템 프롬프트 유출, 벡터/RAG 포이즈닝·멀티테넌시, 모델·데이터 공급망, 무제한 소비(Denial of Wallet), 가드레일·평가/레드팀
@@ -454,7 +454,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 > 웹 스택과 별개인 **게임 개발 도메인**의 시작점(싱글플레이어 2D 캐주얼). 색상은 8색 소진으로 `cyan`(문서 카테고리)을 공유하되 문서에서 게임 클러스터로 묶는다. 로드맵: game-feel-reviewer·unity-perf-auditor·playtest-designer·unity-build-auditor(같은 필요 3회 반복 시 승격).
 
 <details>
-<summary><b>26. unity-code-reviewer</b> (<code>/ureview</code>) — Unity C# 게임 코드 리뷰</summary>
+<summary><b>27. unity-code-reviewer</b> (<code>/ureview</code>) — Unity C# 게임 코드 리뷰</summary>
 
 - **언제**: Unity + C# 코드를 커밋·머지하기 직전 셀프 리뷰 (2D 캐주얼 — 퍼즐/플랫포머)
 - **범위 결정**: `git diff`로 변경분의 `Assets/` 하위 `.cs`에 집중 (Bash는 범위 식별 전용, 실행·수정 금지)
@@ -465,7 +465,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>27. game-design-architect</b> (<code>/gdd</code>) — 2D 캐주얼 게임 디자인·시스템 설계</summary>
+<summary><b>28. game-design-architect</b> (<code>/gdd</code>) — 2D 캐주얼 게임 디자인·시스템 설계</summary>
 
 - **언제**: 새 게임·메카닉·레벨 시스템을 구현하기 전 설계, 기존 설계 점검
 - **설계**: 코어 게임플레이 루프(핵심 동사·재미 가설), 난이도 곡선·페이싱·진행(메카닉 도입→연습→응용→조합), 시스템 분해(GameManager 상태머신·이벤트 흐름·씬 구성·세이브), ScriptableObject 데이터 경계, 게임필 피드백 계획
@@ -475,7 +475,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>28. game-ui-reviewer</b> (<code>/gui</code>) — 게임 UI/UX 점검</summary>
+<summary><b>29. game-ui-reviewer</b> (<code>/gui</code>) — 게임 UI/UX 점검</summary>
 
 - **언제**: UI 씬·프리팹·UI 스크립트를 커밋하기 직전 (2D 캐주얼, 모바일 우선)
 - **점검**: HUD·메뉴 레이아웃/정보 위계, CanvasScaler 해상도·종횡비 스케일링(Scale With Screen Size·reference resolution·match), 세이프 에어리어(노치), 캔버스 렌더 모드, 게임패드·터치 내비게이션·포커스(EventSystem·explicit navigation), 움직이는 화면 위 텍스트 가독성·색약/명도 대비, UI 상태(로딩/빈/에러/전환), 온보딩 UI, (수익화 시) F2P 다크패턴
@@ -485,7 +485,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>29. game-feel-reviewer</b> (<code>/feel</code>) — 게임플레이 손맛/juice 점검</summary>
+<summary><b>30. game-feel-reviewer</b> (<code>/feel</code>) — 게임플레이 손맛/juice 점검</summary>
 
 - **언제**: 조작이 뻣뻣·타격감 없다고 느낄 때, 플레이어 컨트롤러·카메라·이펙트 코드 커밋 직전
 - **점검**: 입력 응답 관대성(코요테 타임·점프 버퍼·입력 버퍼링·가변 점프), 히트스톱/타임프리즈, 화면 흔들림·카메라 추적/룩어헤드, 스쿼시&스트레치·파티클·플래시, 사운드/햅틱 타이밍, 가감속 커브, 페이싱·리듬
@@ -495,7 +495,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>30. unity-perf-auditor</b> (<code>/uperf</code>) — Unity 런타임 성능·렌더링 점검</summary>
+<summary><b>31. unity-perf-auditor</b> (<code>/uperf</code>) — Unity 런타임 성능·렌더링 점검</summary>
 
 - **언제**: "프레임이 떨어진다"·"기기가 뜨겁다", Profiler 캡처를 들고 왔을 때, 릴리스 전 성능 패스
 - **점검**: 드로우콜·배칭(SpriteAtlas·머티리얼/소팅), 오버드로우·필레이트(모바일 2D GPU 병목), 텍스처 압축(ASTC/ETC2)·`.meta` 임포트·텍스처/오디오 메모리, Fixed Timestep·2D 충돌 비용, 퀄리티/프로젝트 설정, Profiler/Frame Debugger 캡처 수치 해석
@@ -505,7 +505,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>31. playtest-designer</b> (<code>/playtest</code>) — 플레이테스트 프로토콜 설계</summary>
+<summary><b>32. playtest-designer</b> (<code>/playtest</code>) — 플레이테스트 프로토콜 설계</summary>
 
 - **언제**: 검증 질문 목록이 생겼거나 빌드를 외부인에게 처음 보여주기 직전 (수직 슬라이스/프로토타입)
 - **설계**: 검증 질문→행동 지표→판정 기준, 참가자·회차(타깃·신선한 눈 배분), 세션 프로토콜(콜드 스타트·진행자 스크립트·개입 규칙), 관찰 지표(FTUE·막힘·이탈·재시도·리텐션 프록시), 설문(유도 질문 배제), 텔레메트리 이벤트, 결과 해석·우선순위화
@@ -515,7 +515,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>32. unity-build-auditor</b> (<code>/ubuild</code>) — 빌드/릴리스·스토어 제출 점검</summary>
+<summary><b>33. unity-build-auditor</b> (<code>/ubuild</code>) — 빌드/릴리스·스토어 제출 점검</summary>
 
 - **언제**: 스토어 제출·릴리스 빌드 직전, ProjectSettings·빌드 구성 변경 시
 - **점검**: Player Settings(번들 ID·버전·IL2CPP/ARM64·managed stripping), 빌드 크기(Resources 남용·압축 용량·AAB), 빌드 씬 목록, 매니페스트 권한, 스토어 요건(64bit·개인정보·데이터 안전), 서명/keystore 커밋 여부, development build 플래그 잔존, Addressables 구성
@@ -525,7 +525,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>39. multiplayer-rule-reviewer</b> (<code>/rule</code> <code>/룰</code>) — 멀티플레이 룰 정합성·서버 권위 점검</summary>
+<summary><b>40. multiplayer-rule-reviewer</b> (<code>/rule</code> <code>/룰</code>) — 멀티플레이 룰 정합성·서버 권위 점검</summary>
 
 - **언제**: 멀티플레이 룰·상태머신·서버 핸들러 코드를 머지하기 직전. "밤에 죽였는데 게임이 안 끝난다", "죽은 사람을 지목할 수 있다", "마피아가 누군지 보인다". 주력 대상은 **MapleStory Worlds(MSW) mlua**(마피아류 소셜 추리) — 원칙은 엔진 무관
 - **전제 2가지**: ① **클라이언트는 적대적이다** — 서버가 검증하지 않으면 존재하지 않는 규칙(UI가 막는 건 방어가 아님). ② **판정은 상태 변화에 걸어야 한다** — 승패 조건을 특정 페이즈 전환에만 걸면 다른 사망 경로에서 조용히 누락
@@ -535,7 +535,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>40. save-data-reviewer</b> (<code>/save</code> <code>/세이브</code>) — 세이브·영속 데이터 호환성 점검</summary>
+<summary><b>41. save-data-reviewer</b> (<code>/save</code> <code>/세이브</code>) — 세이브·영속 데이터 호환성 점검</summary>
 
 - **언제**: 세이브 구조·저장 키·데이터 클래스를 바꾸는 변경을 배포하기 직전. "업데이트했더니 진행도가 날아갔다". 엔진 무관(Unity PlayerPrefs·JSON·바이너리, MSW 스토리지, 클라우드 세이브)
 - **하나의 질문**: 이 업데이트를 내보내면 **이미 플레이 중인 유저의 진행도가 살아남는가**. 심각도 기준도 "유저 데이터가 손실되는가"
@@ -545,7 +545,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>44. game-localization-reviewer</b> (<code>/gloc</code> <code>/현지화</code>) — 게임 현지화 준비 점검</summary>
+<summary><b>45. game-localization-reviewer</b> (<code>/gloc</code> <code>/현지화</code>) — 게임 현지화 준비 점검</summary>
 
 - **언제**: 영어·일본어 출시 준비, 번역을 넣기 **전** 구조 점검, UI에 텍스트가 잘려 보일 때
 - **전제**: 현지화 비용의 대부분은 번역료가 아니라 **구조를 뒤늦게 고치는 비용**이다 — 그래서 번역 전에 본다
@@ -555,7 +555,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>45. game-test-strategy</b> (<code>/gtest</code> <code>/게임테스트</code>) — 게임 자동 테스트 전략·seam 설계</summary>
+<summary><b>46. game-test-strategy</b> (<code>/gtest</code> <code>/게임테스트</code>) — 게임 자동 테스트 전략·seam 설계</summary>
 
 - **언제**: "게임 로직에 테스트를 붙이고 싶다", "리팩터가 무서워서 못 고친다"
 - **전제**: 게임 로직이 테스트 불가능한 건 복잡해서가 아니라 **엔진에 붙어 있어서**다 — 그래서 절반은 "어떤 테스트를 쓸까"가 아니라 "**무엇을 떼어내면 테스트할 수 있는가**"
@@ -565,7 +565,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>46. game-audio-reviewer</b> (<code>/gaudio</code> <code>/오디오</code>) — 게임 오디오 구현 점검</summary>
+<summary><b>47. game-audio-reviewer</b> (<code>/gaudio</code> <code>/오디오</code>) — 게임 오디오 구현 점검</summary>
 
 - **언제**: "소리가 시끄럽거나 찢어진다", "BGM 루프가 튄다", 오디오를 붙이기 전 구조 설계
 - **점검**: 믹서 버스 분리(BGM/SFX/UI)와 **음량 설정 저장·로그 스케일 변환**·믹서 우회 재생, **동시 발음 제한·보이스 스틸링**(같은 SFX 다량 겹침 = 찢어짐), 반복 SFX의 **피치·볼륨 랜덤화**(동일 파형 반복은 수십 번 만에 거슬린다), BGM 루프·크로스페이드·덕킹, **임포트 설정**(짧은 SFX는 메모리 적재, 긴 BGM은 스트리밍 — 반대면 메모리 폭탄/지연), 일시정지·백그라운드 처리, **음소거로도 게임이 성립하는가**
@@ -578,7 +578,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 > 웹·게임·콘텐츠와 별개로, **실제 운용 중인 개인 프로젝트의 도메인 규칙**을 보는 3종. 공통점은 "코드는 잘 돌지만 **결과가 조용히 틀리는**" 부류를 잡는다는 것 — 누출된 백테스트, 어긋난 장부, 죽은 줄 모르는 데몬.
 
 <details>
-<summary><b>42. ml-experiment-reviewer</b> (<code>/ml</code> <code>/머신러닝</code>) — ML 실험 설계·데이터 누출 감사</summary>
+<summary><b>43. ml-experiment-reviewer</b> (<code>/ml</code> <code>/머신러닝</code>) — ML 실험 설계·데이터 누출 감사</summary>
 
 - **언제**: "백테스트는 잘 나오는데 실전은 안 된다", "검증 점수가 비현실적으로 높다", 모델 재학습·배포 전
 - **전제**: **좋은 점수는 증거가 아니라 용의자다.** 누출은 에러도 경고도 없이 오직 실전에서만 드러나므로 정적으로 잡아야 한다
@@ -588,7 +588,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>41. accounting-rule-reviewer</b> (<code>/acct</code> <code>/회계</code>) — 복식부기 규칙 감사</summary>
+<summary><b>42. accounting-rule-reviewer</b> (<code>/acct</code> <code>/회계</code>) — 복식부기 규칙 감사</summary>
 
 - **언제**: "잔액이 안 맞는다", "마감 후 숫자가 바뀐다", GL·전표·마감 로직 머지 전
 - **불변식 3개**: ① 모든 전표는 **차변 합 = 대변 합** ② 기록은 지우지 않는다(정정은 **역분개**) ③ 마감된 과거는 바뀌지 않는다. 이걸 **코드가 강제하는가**(관행이 아니라 assert·DB 제약·트랜잭션)를 본다
@@ -598,7 +598,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>43. automation-reliability-reviewer</b> (<code>/auto</code> <code>/자동화</code>) — 데몬·스케줄 자동화 신뢰성</summary>
+<summary><b>44. automation-reliability-reviewer</b> (<code>/auto</code> <code>/자동화</code>) — 데몬·스케줄 자동화 신뢰성</summary>
 
 - **언제**: "돌고는 있는데 로그가 없다", "언제부터 안 도는지 몰랐다", "두 번 실행돼 중복 데이터가 쌓였다", 자동화를 상시 운용에 올리기 전
 - **하나의 질문**: 아무도 안 보고 있을 때 이게 조용히 죽으면 **언제 알 수 있는가**
@@ -612,7 +612,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 > 웹·게임·콘텐츠 리뷰와 별개로, **사용자 개인의 파일 기반 장기기억**(`E:\claude_memory\`)을 값싼 모델로 대신 읽는 인프라 에이전트. 저장소의 첫 `haiku` 에이전트다. 메모리 회상 훅(세션 시작·"예전에 뭐라고 정했더라")으로 자동 호출되며, `/recall`로 수동 호출도 된다.
 
 <details>
-<summary><b>33. memory-recaller</b> (<code>/recall</code>) — 파일 기반 장기기억 회상</summary>
+<summary><b>34. memory-recaller</b> (<code>/recall</code>) — 파일 기반 장기기억 회상</summary>
 
 - **언제**: "예전에 뭐라고 정했더라", "그 프로젝트 메모리 찾아줘", 세션 시작 시 관련 컨텍스트 회상. 수동 회상은 `/recall <주제>`
 - **성격**: 리뷰/설계가 아니라 사용자 개인 메모리 저장소를 대신 읽는 인프라. 무거운 모델(Opus/Fable)이 인덱스를 통째로 읽는 토큰 낭비를 없애려 값싼 `haiku`로 회상만 수행
@@ -635,7 +635,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 ### 🛠 엔지니어링 / 문서 / 메타 (1.60 추가)
 
 <details>
-<summary><b>34. refactor-strategist</b> (<code>/refactor</code>) — 동작 보존 리팩터 계획·단계 설계 (품질)</summary>
+<summary><b>35. refactor-strategist</b> (<code>/refactor</code>) — 동작 보존 리팩터 계획·단계 설계 (품질)</summary>
 
 - **언제**: "이거 정리하고 싶다", 큰 변경 전 구조 정돈 (기능 변경 없이 구조만)
 - **진단**: 책임 분리(과대 함수·God object), 중복·네이밍·매직 넘버, 의존 구조(순환·잘못된 방향), 데드코드·미사용, 변경 seam(특성화 테스트 경계)
@@ -645,7 +645,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>35. docs-writer</b> (<code>/docs</code>) — 개발자용 기술문서 작성·정비 (문서)</summary>
+<summary><b>36. docs-writer</b> (<code>/docs</code>) — 개발자용 기술문서 작성·정비 (문서)</summary>
 
 - **언제**: README·아키텍처 개요·온보딩·CONTRIBUTING·ADR을 코드·구조에서 추출해 정리
 - **원칙**: 코드가 진실원천(확인한 것만, 미확인은 `확인 필요`), 독자별 깊이·용어 조정, 문서 종류별 관행(README/아키텍처/온보딩/CONTRIBUTING/ADR), 드리프트 방지(바뀌어도 유효한 구조·의도 우선)
@@ -654,7 +654,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>36. agent-definition-reviewer</b> (<code>/agentdef</code>) — 서브에이전트 정의(.md) 점검 (메타)</summary>
+<summary><b>37. agent-definition-reviewer</b> (<code>/agentdef</code>) — 서브에이전트 정의(.md) 점검 (메타)</summary>
 
 - **언제**: 새 에이전트를 추가하거나 기존 정의를 개정하기 전 (이 라이브러리 자체를 점검)
 - **점검**: frontmatter 스펙 정합(name/description/tools/model/effort 티어), description 라우팅 친화성(트리거·위임 절), tools 최소권한(과대·과소), 경계 중복·공백, 본문 규범 누락(인젝션 방어·읽기전용·증거 기반 보고), 배포 정합(hooks·memory·skills 조합·sync allowlist)
@@ -667,7 +667,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 > 개발 스택·마케팅 리뷰와 별개로, **프롬프트(뼈대)에 살을 붙여 이야기를 새로 짓는** 생성 에이전트. 저장소의 첫 `fable`(창작 특화 모델) 에이전트다. 기존 자산을 매체별로 각색하는 `content-repurposer`(재활용)와 달리 **없던 서사를 창작**한다.
 
 <details>
-<summary><b>37. storyteller</b> (<code>/story</code>) — 프롬프트에 살 붙여 완성형 이야기 작성 (창작)</summary>
+<summary><b>38. storyteller</b> (<code>/story</code>) — 프롬프트에 살 붙여 완성형 이야기 작성 (창작)</summary>
 
 - **언제**: 한 줄 아이디어·설정·인물·장르만 있고 완성형 이야기(단편·서사·시나리오·브랜드 스토리·에피소드)가 필요할 때. 수동 호출은 `/story <아이디어>`
 - **모델**: 창작 특화 `fable`(+`effort: high`). 미가용 시 최강 모델로 폴백하되, 품질은 내장 작법 절차가 보장
@@ -696,7 +696,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 > 기존 품질 에이전트가 모두 **증상이 없는 상태에서** 코드를 훑는 정적 리뷰(code-reviewer·unity-code-reviewer)이거나 **결과를 집계**하는 실행기(test-runner)인 반면, 이 에이전트는 **이미 나타난 증상에서 거꾸로** 원인을 추적한다(재현 → 가설 → 검증 → 이분 탐색). 스택 무관 — 웹(Next.js/FastAPI/MySQL)이 주력이지만 Unity C# 런타임 증상도 같은 절차로 다룬다.
 
 <details>
-<summary><b>38. debugger</b> (<code>/debug</code>) — 버그·에러·간헐 실패 근본 원인 규명</summary>
+<summary><b>39. debugger</b> (<code>/debug</code>) — 버그·에러·간헐 실패 근본 원인 규명</summary>
 
 - **언제**: "왜 이 에러가 나는지 모르겠다", "가끔만 실패한다", "어제까진 됐는데", 프로덕션 장애 사후 분석. 수동 호출은 `/debug <증상>`
 - **절차**: 증상 확정(기대 vs 실제·재현율·환경) → 최소 재현 → 관찰 수집(스택트레이스는 *우리 코드의 가장 깊은 프레임*부터) → 가설 3~5개(각각 반증 조건 명시) → 검증·축소(코드 경로·시간(`git log`/`blame` 회귀 시점)·입력·환경 이분) → 원인 확정 → 수정 방향·재발 방지
@@ -713,7 +713,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 > 웹(code-reviewer)·게임(unity-code-reviewer)이 폴백으로만 훑던 **C와 비-Unity C#/.NET**을 전담하는 6종. 두 언어는 code-reviewer가 못 잡는 **고유 결함 표면**(C: 메모리 안전·UB·정수 변환 / .NET: async 계약·자원 수명·DI 수명·EF Core)이 프로젝트와 무관하게 참이라, 각 언어를 **리뷰·설계·성능** 3역으로 나눴다(웹·게임 트리오와 동형). 리뷰↔성능은 unity 쌍과 같은 **원인/증상 대칭**. Unity C#은 `unity-code-reviewer`가 계속 맡고, 이 클러스터는 비-Unity만 본다.
 
 <details>
-<summary><b>47. c-code-reviewer</b> (<code>/creview</code>) — C 코드 리뷰(메모리 안전·UB) (품질)</summary>
+<summary><b>48. c-code-reviewer</b> (<code>/creview</code>) — C 코드 리뷰(메모리 안전·UB) (품질)</summary>
 
 - **언제**: C 코드 커밋/머지 전 셀프 리뷰. `git diff`로 변경분 파악(Bash는 범위 식별 + **명시 요청 시** 읽기전용 정적분석 `-fsyntax-only`·cppcheck·clang --analyze, 빌드·실행 금지)
 - **점검**: ① 공간 안전(버퍼 오버플로·off-by-one·널 종결자) ② 시간 안전/소유권(UAF·double-free·dangling·미초기화 읽기) ③ 널·반환값·`errno` 미검사(`p=realloc(p,...)` 함정) ④ 정수(시그니처드 오버플로·부호/폭 변환·크기 계산 오버플로→힙 오버플로) ⑤ UB(엄격 앨리어싱·시퀀스 포인트·널 산술) ⑥ 에러 경로 자원 누수(`goto cleanup` 일관성) ⑦ 포맷 스트링 ⑧ 동시성·시그널 안전성 ⑨ 매크로 함정
@@ -723,7 +723,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>48. c-architect</b> (<code>/carch</code>) — C 구조 설계 (설계)</summary>
+<summary><b>49. c-architect</b> (<code>/carch</code>) — C 구조 설계 (설계)</summary>
 
 - **언제**: 새 C 모듈·라이브러리·서브시스템을 만들기 전, 기존 구조 점검
 - **전제**: C는 캡슐화·수명 관리를 언어가 강제하지 않는다 — **규율을 구조와 계약으로 만든다**
@@ -733,7 +733,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>49. c-perf-auditor</b> (<code>/cperf</code>) — C 런타임 성능 (성능)</summary>
+<summary><b>50. c-perf-auditor</b> (<code>/cperf</code>) — C 런타임 성능 (성능)</summary>
 
 - **언제**: 릴리스 전 성능 패스, "느리다" 보고, 프로파일러 캡처 해석
 - **모드**: (1) 정적 감사 — 접근 패턴·할당·복사·복잡도 (2) 캡처 해석 — perf/gprof/cachegrind/callgrind/Massif
@@ -743,7 +743,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>50. dotnet-code-reviewer</b> (<code>/dnreview</code>) — 비-Unity C#/.NET 코드 리뷰 (품질)</summary>
+<summary><b>51. dotnet-code-reviewer</b> (<code>/dnreview</code>) — 비-Unity C#/.NET 코드 리뷰 (품질)</summary>
 
 - **언제**: 비-Unity C# 코드 커밋/머지 전(ASP.NET Core·워커·콘솔·WPF·라이브러리). `git diff`로 범위 파악(Bash는 범위 식별만)
 - **점검**: ① async(`.Result`/`.Wait()` 데드락·`async void`·미대기 Task·취소 미전파·`ConfigureAwait`) ② 자원 수명(IDisposable/`using` 누락·`HttpClient` 소켓 고갈·이벤트 미해제) ③ 지연 실행(IEnumerable 다중 열거·열거 중 변경) ④ nullable(`!` 남용·NRE) ⑤ **DI 수명**(captive dependency·`DbContext` 공유) ⑥ EF Core(N+1·클라 평가·추적 낭비·`SaveChanges` 누락) ⑦ 예외(삼킴·`throw ex` 스택 소실) ⑧ 값/참조 의미·문화권 파싱
@@ -752,7 +752,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>51. dotnet-architect</b> (<code>/dnarch</code>) — .NET 구조 설계 (설계)</summary>
+<summary><b>52. dotnet-architect</b> (<code>/dnarch</code>) — .NET 구조 설계 (설계)</summary>
 
 - **언제**: 새 .NET 서비스·모듈을 만들기 전, 기존 구조 점검. 버전 의존 패턴은 Context7로 확인
 - **설계**: 계층 분리(엔드포인트/앱/도메인/인프라·Minimal API vs 컨트롤러), **DI 서비스 수명 설계**(싱글턴/스코프드/트랜지언트·captive dependency 예방·`DbContext` 수명), 미들웨어 파이프라인 순서, 호스팅(`BackgroundService`·그레이스풀 셧다운·큐 소비), 옵션 패턴(`IOptions`·시크릿), async 경계(끝까지 async·취소 전파), 프로젝트 의존성 방향(순환 차단), 복원력(재시도·서킷브레이커)
@@ -761,7 +761,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>52. dotnet-perf-auditor</b> (<code>/dnperf</code>) — .NET 런타임 성능 (성능)</summary>
+<summary><b>53. dotnet-perf-auditor</b> (<code>/dnperf</code>) — .NET 런타임 성능 (성능)</summary>
 
 - **언제**: 릴리스 전 성능 패스, "느리다·GC가 튄다" 보고, 측정 캡처 해석
 - **모드**: (1) 정적 감사 — 할당·GC 압력·비싼 경로 (2) 캡처 해석 — BenchmarkDotNet/dotnet-counters/dotnet-trace/PerfView
@@ -775,7 +775,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 > 콘텐츠 계열의 **교육/교수설계 생성기**. 기존 콘텐츠/마케팅 6종·창작 1종과 별개인 "교육 1종"으로, 강의·워크숍·강좌·교육 자료를 사람이 배우도록 설계한다(읽기 전용 — 파일 미수정, 완성형 커리큘럼 맵+모듈 초안을 텍스트로 낸다).
 
 <details>
-<summary><b>53. curriculum-designer</b> (<code>/curriculum</code> <code>/강의설계</code>) — 강의·워크숍 교수 설계</summary>
+<summary><b>54. curriculum-designer</b> (<code>/curriculum</code> <code>/강의설계</code>) — 강의·워크숍 교수 설계</summary>
 
 - **언제**: 강의·워크숍·강좌·교육 자료(온·오프라인)를 만들기 전 교수 설계가 필요할 때. 수동 호출은 `/curriculum <주제·대상·시간>`
 - **절차(backward design)**: ① 학습자·맥락 분석(선수지식·동기·제약·시간 예산) → ② 측정 가능한 학습 목표(Bloom's 동사) → ③ 목표에 정렬된 형성·총괄 평가 → ④ 목표·평가에 맞춘 활동·콘텐츠(목표-평가-활동 정렬, constructive alignment)
@@ -789,7 +789,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 > 시스템 언어 클러스터를 **Java(JVM)·Swift**로 확장한 4종. C/.NET 트리오와 달리 **리뷰어+아키텍트 2역씩**만 두고 **전담 perf 에이전트는 의도적으로 만들지 않았다**(프로모션 게이트 — 각 언어의 성능 점검 수요가 실제 작업에서 반복될 때까지 유보). 두 리뷰어는 이 공백을 **"전담 perf 에이전트 없음(알려진 공백)"**으로 정직하게 명시한다. 리뷰어는 `Bash`(git diff 범위 식별 + 명시 요청 시 읽기전용 정적분석, 빌드·실행 금지), 아키텍트는 `Context7`(Spring/`jakarta.*`·`@Observable`/NavigationStack 등 버전 의존 패턴 확인)을 갖는다.
 
 <details>
-<summary><b>54. java-code-reviewer</b> (<code>/jreview</code>) — Java(JVM) 코드 리뷰 (품질)</summary>
+<summary><b>55. java-code-reviewer</b> (<code>/jreview</code>) — Java(JVM) 코드 리뷰 (품질)</summary>
 
 - **언제**: 서버/JVM Java 코드 커밋/머지 전 셀프 리뷰. `git diff`로 변경분 파악(Bash는 범위 식별 + **명시 요청 시** 읽기전용 정적분석, 빌드·실행 금지)
 - **점검(Java 고유)**: ① NPE·널 처리(필드/파라미터 `Optional` 오용·미검사 `get()`) ② 예외 정책(빈 `catch`·`catch(Exception)` 삼킴·원인 체이닝 소실·try-with-resources 미사용) ③ 자원 수명(AutoCloseable/스트림/커넥션 누수) ④ JVM 동시성(volatile을 원자성으로 오해·비스레드안전 `SimpleDateFormat`·`ConcurrentModificationException`·데드락) ⑤ `equals`/`hashCode`/`compareTo` 계약(HashMap 키·가변 키) ⑥ 제네릭(로 타입·미검사 캐스트·소거) ⑦ 오토박싱(`Integer` 캐시 `==`·언박싱 NPE·`double`로 금액) ⑧ String/로케일 ⑨ Stream 부작용
@@ -799,7 +799,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>55. java-architect</b> (<code>/jarch</code>) — Java/Spring 구조 설계 (설계)</summary>
+<summary><b>56. java-architect</b> (<code>/jarch</code>) — Java/Spring 구조 설계 (설계)</summary>
 
 - **언제**: 새 Java/Spring 서비스·모듈을 만들기 전, 기존 구조 점검. 버전 의존 패턴(Spring·`jakarta.*`)은 Context7로 확인
 - **설계**: 계층 분리(controller/service/repository/domain·헥사고날·의존성 안쪽 방향), **빈 수명**(생성자 주입·빈 스코프·싱글턴 빈의 가변 상태 스레드 안전·순환 의존), 모듈/패키지 의존 방향, 에러 전략(checked/unchecked 정책·경계 변환 `@ControllerAdvice`), 동시성(executor 소유권·불변성·`@Async` 경계), 영속성 경계(엔티티 vs DTO·`@Transactional` 전파·OSIV)
@@ -808,7 +808,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>56. swift-code-reviewer</b> (<code>/swreview</code>) — Swift 코드 리뷰 (품질)</summary>
+<summary><b>57. swift-code-reviewer</b> (<code>/swreview</code>) — Swift 코드 리뷰 (품질)</summary>
 
 - **언제**: Swift 코드 커밋/머지 전 셀프 리뷰. `git diff`로 변경분 파악(Bash는 범위 식별 + **명시 요청 시** 읽기전용 정적분석, 빌드·실행 금지)
 - **점검(Swift 고유)**: ① 옵셔널 안전(강제 언랩 `!`/`try!`/`as!` 크래시·IUO) ② **ARC retain cycle**(클로저 `[weak self]` 누락·강한 delegate 참조·`unowned` 오용) ③ 값/참조 의미(struct vs class·COW) ④ 에러 삼킴(`try?`·force-try) ⑤ 동시성(async/await·actor 격리·`@MainActor` UI 스레드·Sendable 데이터 레이스·`DispatchQueue.main.sync` 데드락·continuation 이중 재개) ⑥ 프로토콜/제네릭 existential 비용·클로저 캡처 ⑦ 열거 망라성 ⑧ force-cast ⑨ Codable
@@ -818,7 +818,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>57. swift-architect</b> (<code>/swarch</code>) — Swift 앱 구조 설계 (설계)</summary>
+<summary><b>58. swift-architect</b> (<code>/swarch</code>) — Swift 앱 구조 설계 (설계)</summary>
 
 - **언제**: 새 Swift 앱·모듈을 만들기 전, 기존 구조 점검. 버전 의존 패턴(`@Observable`·NavigationStack)은 Context7로 확인
 - **설계**: 아키텍처 패턴 선택(MVVM/TCA/VIPER/Clean, 규모별), 모듈 경계(SPM/프레임워크 타깃·비순환 의존), DI(이니셜라이저/Environment 주입·싱글턴 남용 회피·프로토콜 seam), 동시성 아키텍처(actor 격리·`@MainActor` 경계·구조적 동시성·Sendable), **SwiftUI 상태 관리**(단일 진실 원천·`@State`/`@StateObject`/`@ObservedObject`/`@Binding`/`@Environment` 소유권 배치·`@Observable`), 내비게이션, 값 타입 우선 도메인 모델링, 영속성·네트워킹 경계
@@ -942,6 +942,10 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 | unity-build-auditor → unity-code-reviewer | 빌드 → 코드 | keystore·설정 판정 후 코드 품질은 코드 리뷰로 |
 | playtest-designer → test-runner | 플레이테스트 → 자동 테스트 | 사람 테스트와 별개인 자동 테스트 러너로 |
 | debugger → perf-auditor / db-optimizer / unity-perf-auditor / security-reviewer | 회귀 시점 추적 → 병목 진단·보안 특화 | "무엇이 느린가"(병목)는 성능 3종, "취약점"이면 보안으로. **"언제부터 느려졌나"(회귀 시점)는 debugger가 유지** — 성능·보안 측은 디버깅을 역참조 안 함 |
+| project-manager → 전 특화 에이전트(라우팅 맵) | 조율 → 실무 특화 | 조율 층이 각 태스크를 알맞은 특화로 보낼 뿐, 특화는 조율을 역참조 안 함(진입/조율은 위층) ⟵ 1.83 |
+| email-sequence-writer → copy-reviewer / brand-voice-guardian / offer-strategist / fact-checker | 생성 → 점검·앞단 설계 | 생성기가 점검·오퍼 설계로 넘김(점검 측은 생성기를 역참조 안 함) ⟵ 1.87 |
+| offer-strategist → landing-reviewer / copy-reviewer / email-sequence-writer / fact-checker | 앞단 설계 → 하류 표현·검증 | 카피 앞단이 페이지·문장·이메일로 넘김(하류는 앞단을 역참조 안 함) ⟵ 1.87 |
+| self-reflector → memory-recaller | 누적 증류 → 질의 회상 | 교차 세션 증류가 특정 질의 회상으로 넘김(회상은 증류를 역참조 안 함) ⟵ 1.86 |
 
 > **정정(1.56)**: 이전 문서는 `system-architect`를 "다른 에이전트로 내보내는 위임이 없는 최상위 설계 에이전트"라 기술하고 `devops-reviewer → system-architect`를 일방향으로 분류했다. 그러나 현재 `system-architect` description은 5개 특화(api-contract-reviewer·data-modeler·devops-reviewer·security-reviewer·game-design-architect)로 위임을 **내보낸다**(1.52의 game-design-architect 추가가 결정타). 따라서 devops ↔ system-architect는 **대칭**(위 웹 표)으로 이동했고, system-architect도 위임을 내보내는 에이전트다.
 
@@ -1129,7 +1133,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-60종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-62종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
