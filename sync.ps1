@@ -170,9 +170,30 @@ if (Test-Path $skSrc) {
         }
 }
 
+# Coding-standard rules -> global rules dir. Claude Code natively auto-loads
+# ~/.claude/rules/*.md; a `paths:` frontmatter scopes a rule to matching files
+# (conditional load), no frontmatter = unconditional. README.md is docs, not a
+# rule, so it is skipped.
+$rlSrc = Join-Path $src 'rules'
+$rlDst = Join-Path $env:USERPROFILE '.claude\rules'
+if (Test-Path $rlSrc) {
+    New-Item -ItemType Directory -Force -Path $rlDst | Out-Null
+    Get-ChildItem -Path $rlSrc -Filter *.md |
+        Where-Object { $_.Name -ne 'README.md' } |
+        ForEach-Object {
+            try {
+                Copy-Item $_.FullName -Destination $rlDst -Force -ErrorAction Stop
+                Write-Host "synced rule: $($_.Name)"
+            } catch {
+                Write-Host "ERROR syncing rule $($_.Name): $($_.Exception.Message)"
+                $script:errorCount++
+            }
+        }
+}
+
 if ($errorCount -gt 0) {
-    Write-Host "FAILED: $errorCount error(s). Targets: $dst , $cmdDst , $wfDst , $lchDst , $hkDst , $skDst"
+    Write-Host "FAILED: $errorCount error(s). Targets: $dst , $cmdDst , $wfDst , $lchDst , $hkDst , $skDst , $rlDst"
     exit 1
 }
-Write-Host "Done -> $dst , $cmdDst , $wfDst , $lchDst , $hkDst , $skDst"
+Write-Host "Done -> $dst , $cmdDst , $wfDst , $lchDst , $hkDst , $skDst , $rlDst"
 exit 0
