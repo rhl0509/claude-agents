@@ -4,12 +4,13 @@ description: Next.js 프론트엔드의 UI/UX 품질을 점검할 때 사용. �
 tools: Read, Grep, Glob
 model: opus
 effort: high
-version: 1.5
-updated: 2026-07-05
+version: 1.6
+updated: 2026-07-16
 color: purple
 memory: user
 skills:
   - agent-conventions
+  - design-reference
 hooks:
   PreToolUse:
     - matcher: "Write|Edit|Bash"
@@ -67,6 +68,7 @@ hooks:
    - 아이콘 패밀리·코너 래디우스·인터랙션 상태(hover/active/focus)의 일관성, 내비 활성 상태 표시
 13. **심미성 / 차별성 (Anthropic 프런트엔드 미학 가이드 기준 — 보조 점검)**
    > 1~7(사용성·접근성)을 우선한다. 아래는 "완성도·인상" 관점의 보조이며, 근거를 들어 대개 Should fix·제안 수준으로 보고한다(취향 강요 금지).
+   > **프리로드된 `design-reference` 스킬을 근거로 삼는다** — "제네릭하다"로 끝내지 말고, 그 스킬의 (2) AI-slop 클리셰 차단 리스트로 구체적 지점을 인용하고, (1) 업계→디자인 매핑으로 "이 업계엔 이 무드가 맞다"는 구체 대안을 제시한다.
    - **타이포**: 제네릭 폰트(Inter/Roboto/Open Sans/Lato/Arial/system-ui)에만 의존하는가. 굵기·크기 대비가 약해 위계가 밋밋하지 않은가(과감한 weight/size 차이로 위계 강화)
    - **색**: 안전하게 고르게 퍼진 팔레트인가. 지배색 + 선명한 강조색의 의도가 있는가. 색 토큰을 CSS 변수로 일관 관리하는가. 흰 배경 + 보라 그라데이션 같은 클리셰
    - **배경**: 단색만 써서 평면적인가. 그라데이션·패턴·깊이로 맥락에 맞는 분위기를 주는가

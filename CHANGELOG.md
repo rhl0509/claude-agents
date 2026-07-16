@@ -10,6 +10,30 @@
 
 ---
 
+## 1.87 (2026-07-16) — 마케팅 갭 2종(email-sequence-writer·offer-strategist) 신설 + design-reference 스킬로 디자인 에이전트 강화 → 62종
+
+외부 Notion 가이드("클로드 사기 스킬 TOP 5")가 소개한 커뮤니티 스킬(UI/UX Pro Max·Corey Haines Marketing Skills 40여 종)을 이 라이브러리 관점에서 검토해, **형 라이브러리에 없던 공백만** 흡수. 기억(Claude Mem)은 E: 단일소스 체계와 겹쳐 제외, 워크플로(Superpowers)는 project-manager/pm-orchestrate와 겹쳐 제외, 영상(Remotion)은 별도 도구 설치 건이라 이번 범위 밖.
+
+**설계: 리뷰어 라이브러리에 '생산' 공백을 메운다.** 기존 콘텐츠/마케팅 6종은 대부분 리뷰어(copy-reviewer·landing-reviewer·seo-optimizer 등)인데, 마케팅 실무의 **이메일 시퀀스 생성**과 **오퍼 설계**는 오너가 없었다. Corey Haines 팩과 대조해 이 둘을 신규 생성기로 신설(나머지 CRO/SEO/카피/소셜은 기존 오너로 커버, 측정/리텐션/세일즈는 형 프로필상 관련 낮아 유보 — 프로모션 게이트).
+
+- **[신설] email-sequence-writer v1.0** (`/email` `/이메일`, opus·effort high·color orange·memory user, tools Read/Grep/Glob)
+  - **역할**: 웰컴·온보딩·런칭·너처·이탈·재참여·콜드아웃리치 등 여러 통이 흐름을 이루는 이메일 시퀀스를 발송 타이밍·제목 후보·본문·CTA까지 완성형으로 생성. 생성기 정직성(없는 실적·수치 창작 금지, 미확인은 `[placeholder]`/`⚠️검증필요`, 거짓 긴급성 금지).
+  - **경계**: 단발 뉴스레터 1통·1소스 멀티포맷 파생 → content-repurposer, 카피 품질 리뷰 → copy-reviewer, 브랜드 보이스 → brand-voice-guardian, 오퍼 설계 → offer-strategist, 사실검증 → fact-checker.
+- **[신설] offer-strategist v1.0** (`/offer` `/오퍼`, opus·effort high·color yellow·memory user, tools Read/Grep/Glob)
+  - **역할**: 카피/페이지 **앞단**에서 오퍼 자체(핵심 가치제안·가치 방정식·가격 티어·보증/리스크 리버설·보너스 스택·정직한 긴급성·차별 포지셔닝·네이밍)를 설계. game-design-architect가 코드 앞단이듯 카피 앞단의 설계 층. 생성기 정직성(시장·경쟁·실적 수치 창작 금지, 지킬 수 있는 보증만).
+  - **경계**: 페이지 전환 구조 리뷰 → landing-reviewer, 문장 카피 → copy-reviewer, 판매 이메일 → email-sequence-writer, 사실·시장 데이터 → fact-checker.
+- **[신설 스킬] design-reference** (`skills/design-reference/SKILL.md`, ui-ux-reviewer·design-system-architect에 preload)
+  - `nextlevelbuilder/ui-ux-pro-max-skill`(MIT © 2024 Next Level Builder)의 **방법론만 증류**(84 스타일·192 팔레트·161 규칙 데이터 자체는 미복제, SKILL.md에 attribution 명기). 담은 것: 업계→디자인 매핑 프레임워크(6축 worked example 8종) · AI-slop 클리셰 차단 리스트 · 팔레트 5색 구성 규칙 · 폰트 페어링 스타터(가독성·tabular-nums·한글 글리프) · 배송 전 체크리스트. 전수 검색이 필요하면 원본 스킬 병행(리뷰어↔생성기 보완).
+- **[강화] ui-ux-reviewer v1.5→1.6**: §13 심미성/차별성을 design-reference 근거로 격상 — "제네릭하다"로 끝내지 않고 클리셰 리스트로 지점을 인용, 업계 매핑으로 구체 대안 제시. skills에 design-reference 추가.
+- **[강화] design-system-architect v1.5→1.6**: 기존 코드가 없을 때의 "무에서 시작 — 업계 기반 스타터"(5색 팔레트+폰트 페어링+키 효과+안티패턴 → DESIGN.md 토큰) 경로 신설. skills에 design-reference 추가.
+- **[카브아웃]** content-repurposer v1.2→1.3(이메일 시퀀스 위임), copy-reviewer v1.1→1.2(오퍼·이메일 위임), landing-reviewer v1.0→1.1(오퍼 설계 위임) — 라우팅 충돌 방지.
+- **[커맨드]** `/email`·`/이메일`·`/offer`·`/오퍼` 4종 신설. 한글 별칭 32→34종.
+- **[문서]** README 카운트 60→62종(콘텐츠/마케팅 6→8), 버전 요약·표 행·슬래시/별칭·구조 동기화. CLAUDE.md intro 문단·에이전트 표·model tiering opus 목록 갱신.
+- **[알려진 잔여]** AGENTS.md 미반영(1.83~1.86 잔여와 함께 다음 정합 감사 대상). design-reference의 worked example은 통상 관행 요약이라 원본 데이터셋만큼 망라적이지 않음(전수는 원본 스킬 병행 안내).
+- sync.ps1 실행해 전역 반영.
+
+---
+
 ## 1.86 (2026-07-16) — self-reflector 신설(메타/인프라·haiku) + 자기개선 회고 루프 → 60종
 
 ECC(Everything Claude Code)의 continuous-learning **규율만** E: 단일소스 체계에 맞춰 이식한 **자기개선(회고) 루프**를 신설. 코드(ECC의 `~/.claude` 기록·플러그인 방식)는 이식하지 않고 규율(원자성·신뢰도 가중·증거 기반·결정적 캡처)만 가져와, 저장은 전부 `E:\claude_memory` 단일소스로 유지. `memory-recaller`에 이은 **두 번째 haiku·인프라** 에이전트(60종).

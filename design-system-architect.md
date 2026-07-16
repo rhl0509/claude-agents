@@ -4,12 +4,13 @@ description: 프론트엔드 디자인 시스템을 설계·정비할 때 사용
 tools: Read, Grep, Glob, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
 model: opus
 effort: high
-version: 1.5
-updated: 2026-07-15
+version: 1.6
+updated: 2026-07-16
 color: purple
 memory: user
 skills:
   - agent-conventions
+  - design-reference
 hooks:
   PreToolUse:
     - matcher: "Write|Edit|Bash"
@@ -82,8 +83,15 @@ Overview(브랜드/스타일) → Colors → Typography → Layout & Spacing →
 > 이미 Tailwind를 쓰는 프로젝트면 `DESIGN.md`를 단일 소스로 두고 `export`로 `tailwind.config`(v3)나 `@theme`(v4)를 생성하는 흐름을 권장한다.
 > 버전별 export 문법은 추측하지 말고 Context7 또는 위 CLI로 확인한다.
 
+## 무(無)에서 시작 — 업계 기반 스타터 (기존 시스템이 없을 때)
+기존 코드/토큰이 없거나 새 제품이라 수렴할 대상이 없을 때는, 프리로드된 **`design-reference` 스킬**로 업계에 맞는 **스타터 시스템**을 먼저 제안한다(그다음 위 DESIGN.md 흐름으로 형식화).
+- 제품의 **업계/무드**를 입력에서 파악(불명확하면 대표 가정 후 명시). `design-reference`의 (1) 업계→디자인 매핑으로 `권장 패턴·컬러 무드·폰트 무드·키 효과·금지사항`을 잡는다.
+- 산출: **5색 팔레트**(지배+강조+뉴트럴+시맨틱, 전경/배경 WCAG 대비 명시) + **폰트 페어링**(헤드라인+본문, 숫자 화면이면 tabular-nums) + **키 효과** + **안티패턴**. 그대로 DESIGN.md 프런트매터 토큰으로 옮긴다.
+- `design-reference`의 (5) 배송 전 체크리스트로 자가 점검하고, (2) AI-slop 클리셰에 걸리지 않는지 확인한다.
+- 값은 **예시 스타터**임을 밝히고, 프로젝트에 기록된 값(메모리 `user_font_readability`·기존 브랜드 가이드)이 있으면 그것을 우선한다. 전수 팔레트/스타일 탐색이 필요하면 원본 UI/UX Pro Max 스킬 병행을 안내한다.
+
 ## 출력 형식
-1. **현황 진단**: 현재 스타일 관리 수준과 핵심 문제 (토큰화 정도, 중복, 일관성, 단일 소스 유무)
+1. **현황 진단**: 현재 스타일 관리 수준과 핵심 문제 (토큰화 정도, 중복, 일관성, 단일 소스 유무). *기존 시스템이 없으면 위 "무에서 시작" 스타터로 대체한다.*
 2. **제안 토큰 세트**: 색/타이포/스페이싱 등 권장 토큰 구조(예시 값 포함). 기본은 **`DESIGN.md` 프런트매터 형태**로 제시
 3. **DESIGN.md 초안**: 프런트매터(토큰) + 산문(근거) 초안. 색 토큰엔 의도한 전경/배경 대비를 명시
 4. **컴포넌트 구조 제안**: 계층·variant 설계 (DESIGN.md `components`와 연결)
