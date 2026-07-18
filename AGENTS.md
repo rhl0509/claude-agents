@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (62종)
+# 서브에이전트 전체 정리 (63종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> **클러스터 구성(62종)** — 번호는 `README.md`의 에이전트 표와 동일하다(`#1`~`#62` 연속).
+> **클러스터 구성(63종)** — 번호는 `README.md`의 에이전트 표와 동일하다(`#1`~`#63` 연속).
 >
 > | 클러스터 | 종수 | 성격 |
 > |---|---|---|
@@ -17,8 +17,9 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 > | 🧩 시스템 언어 | 10 | C·비-Unity .NET은 리뷰·설계·성능 3역, Java·Swift는 리뷰·설계 2역(perf는 프로모션 게이트로 유보) |
 > | 📣 콘텐츠 / 마케팅 | 11 | 마케팅 8(리뷰어 6 + 생성기 `email-sequence-writer`·설계 `offer-strategist`) + 창작 1 + 교육 1 + 커리어 1 |
 > | 🧭 메타 / 인프라 | 5 | 조율 `project-manager`(#1) + 메타 2 + 인프라 2(`memory-recaller`·`self-reflector`, 저장소의 두 `haiku`) |
+> | 🧪 검증 | 1 | 질문·주장 정확성 검증 `truth-checker`(5분류·날조 금지·근거 기반 신뢰도·0.8 미만 재작성 루프) |
 >
-> **모델 티어링**: 대부분 `opus`(+`effort: high`, 보안 3종과 `ai-workspace-architect`는 `xhigh`), `sonnet` 2종(`api-doc-writer`·`test-runner`), `haiku` 2종(`memory-recaller`·`self-reflector` — 기계적 작업), `fable` 1종(`storyteller` — 창작 특화).
+> **모델 티어링**: 대부분 `opus`(+`effort: high`, 보안 3종과 `ai-workspace-architect`·`truth-checker`는 `xhigh`), `sonnet` 2종(`api-doc-writer`·`test-runner`), `haiku` 2종(`memory-recaller`·`self-reflector` — 기계적 작업), `fable` 1종(`storyteller` — 창작 특화).
 >
 > **경계 원칙 몇 가지**: 리뷰↔성능은 **원인/증상 대칭**(코드 원인은 리뷰어, 프레임·GC 증상과 측정 해석은 perf) · 정적 리뷰(증상 없음)와 `debugger`(증상 있음)는 다른 층 · 생성기(`content-repurposer`·`storyteller`·`cover-letter-tailor`·`email-sequence-writer`)는 점검 에이전트를 **단방향으로만** 가리킨다 · 새 언어 클러스터는 **프로모션 게이트**(실제 수요가 반복될 때까지 미생성).
 
@@ -104,6 +105,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 60 | `self-reflector` | `/reflect-log` | 인프라 | 누적 관찰 로그(`_observations`) 교차 세션 증류 → 학습 후보 제안(신뢰도·증거 기반, haiku) | Read, Grep, Glob |
 | 61 | `email-sequence-writer` | `/email` | 콘텐츠 | 이메일/라이프사이클 시퀀스 생성(웰컴·런칭·너처·재참여·콜드아웃리치, 타이밍·제목·CTA) | Read, Grep, Glob |
 | 62 | `offer-strategist` | `/offer` | 콘텐츠 | 카피 앞단 오퍼 설계(가치제안·가격 티어·보증·보너스·포지셔닝) | Read, Grep, Glob |
+| 63 | `truth-checker` | `/truth` | 검증 | 질문·주장 정확성 검증(5분류·날조 금지·근거 기반 신뢰도 0~1·0.8 미만 재작성·[명확한 답변]/[신뢰도]/[확인할 점]) | Read, Grep, Glob, WebSearch, WebFetch |
 
 ---
 
@@ -354,6 +356,12 @@ ML·시계열 예측 코드의 **실험 설계** 감사(코드 스타일이 아�
 `E:\claude_memory\_observations\`에 누적된 세션 관찰 로그를 **교차 세션**으로 증류해 다음 세션의 나를 개선할 학습 후보를 제안(저장소 두 번째 `haiku`). ECC continuous-learning의 **규율만**(원자성·신뢰도 가중·증거 기반) E: 단일소스 체계로 이식한 자기개선 루프의 증류 층 — 코드는 이식하지 않았다(ECC는 `~/.claude` 밖에 기록해 E: 단일소스 규칙 위반). **두 층인 이유**: 서브에이전트는 현재 세션 대화를 못 보므로 ① `observe-capture` 훅(UserPromptSubmit)이 매 프롬프트를 append-only로 적재하고 ② 이 에이전트가 그 누적 로그를 훑는다. 증류: 반복(여러 세션·여러 날) 신호만 추출(1회성 버림) → 관찰 횟수·세션 수로 신뢰도(0.3~0.9) 산정 → 기존 메모리와 같은 취지면 갱신·상향, 모순이면 하향 플래그 → 이미 메모리·CLAUDE.md·git에 있는 것은 노이즈로 버림. 출력: 학습 후보(대상 파일·frontmatter·`confidence`·`evidence`)를 신뢰도순 제안, 없으면 "누적 관찰 없음"으로 정직 보고.
 → 읽기 전용 — 메모리에 직접 쓰지 않는다(기록은 메인 세션이 사용자 승인 후). 특정 질의 회상만은 `memory-recaller`, 지금 보이는 이번 세션 하나 증류는 `/회고` 메인 리추얼(서브에이전트 없음).
 
+### 🧪 검증 (정확성 · 사실 확인)
+
+**63. truth-checker (`/truth`, `/진실검증`)** — 검증
+특정 질문·주장 자체를 정확성 최우선으로 검증하는 스택 무관 답변 모드(콘텐츠 초안 검증인 `fact-checker`와 달리 임의 질문·주장이 대상). **절차**: ① 요청을 검증 가능한 작은 주장으로 분해 ② 정보 5분류(확인된 사실 / 근거 있는 추론 / 미확인 가정 / 의견 / 확인 불가) ③ 날조 금지 — 없는 사실·수치·인용·출처·링크를 지어내지 않고 확인 못 하면 "확인 불가/추가 확인 필요" ④ 답변 전 검수(모순·사실추정 혼입·맥락 누락·과거지식 의존·근거 없는 동의). **신뢰도**: 말투가 아니라 근거 품질 기준 0.0~1.0, **0.8 미만이면** 가장 약한 주장을 재검토·재작성. 최신성 필요하면 WebSearch/WebFetch로 확인·시점 명시. 출력: 검증 근거·분류 → **[명확한 답변]** → **[신뢰도]**(점수+이유) → **[확인할 점]**. 자기수정 루프가 존재 이유라 `effort: xhigh`(보안 3종·ai-workspace-architect에 이은 다섯 번째).
+→ 콘텐츠 초안 속 통계·인용·출처 검증은 `fact-checker`, 이미 난 버그 원인 규명은 `debugger`, 파일 기반 장기기억 회상은 `memory-recaller`. `WebSearch`/`WebFetch`는 검증 목적으로만.
+
 ### 🧩 시스템 언어 (C · 비-Unity .NET · Java · Swift) — 1.72 추가, 2026-07-15 Java·Swift 확장
 
 웹(code-reviewer)·게임(unity-code-reviewer)이 폴백으로만 훑던 C와 비-Unity C#/.NET을 전담. C·.NET은 각 언어를 리뷰·설계·성능 3역으로 나눴고, 리뷰↔성능은 unity 쌍과 같은 원인/증상 대칭. 2026-07-15 이 클러스터를 **Java(JVM)·Swift**로 확장했는데, 3역 트리오가 아니라 **리뷰어+아키텍트 2역씩**만 두고 **전담 perf 에이전트는 프로모션 게이트에 따라 의도적으로 미생성**(두 리뷰어가 "전담 perf 없음"을 알려진 공백으로 명시). 리뷰어는 Bash(git diff 범위 식별 + 명시 요청 시 읽기전용 정적분석), 아키텍트는 Context7(Spring·SwiftUI 등 버전 의존 패턴)을 갖는다.
@@ -402,7 +410,7 @@ Swift 앱 구조 설계. 아키텍처 패턴 선택(MVVM/TCA/VIPER/Clean, 규모
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
-양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 1.56의 전수 스캔 34쌍에서 1.64·1.67~1.72를 거치며 늘어 **현재 60쌍**이며 클러스터별로 나눈다.
+양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 1.56의 전수 스캔 34쌍에서 1.64·1.67~1.72를 거치며 늘어 **현재 61쌍**이며 클러스터별로 나눈다.
 
 **웹 스택 (20쌍)**
 | 쌍 | 구분 |
@@ -428,12 +436,13 @@ Swift 앱 구조 설계. 아키텍처 패턴 선택(MVVM/TCA/VIPER/Clean, 규모
 | debugger ↔ code-reviewer | 이미 난 증상에서 "역추적" ↔ 증상 없이 변경분에서 "잠재 결함" 정적 리뷰 ⟵ 1.64 |
 | debugger ↔ observability-reviewer | 지금 있는 로그로 "원인 규명" ↔ 추적 "가능성" 자체의 공백 점검 ⟵ 1.64 |
 
-**콘텐츠 / 마케팅 (3쌍)**
+**콘텐츠 / 마케팅 (4쌍)**
 | 쌍 | 구분 |
 |---|---|
 | copy-reviewer ↔ landing-reviewer | 문장 카피 품질 ↔ 상세페이지·랜딩 전환 구조 |
 | copy-reviewer ↔ seo-optimizer | 설득·문장 품질 ↔ 검색 최적화 |
 | landing-reviewer ↔ seo-optimizer | 전환 구조 ↔ 검색 유입 |
+| truth-checker ↔ fact-checker | 질문·주장 자체 "정확성 검증"(신뢰도 산정) ↔ 콘텐츠 초안 속 진술 "출처 검증" ⟵ 1.89 |
 
 **보안 (3쌍)**
 | 쌍 | 구분 |

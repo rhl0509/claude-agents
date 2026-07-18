@@ -6,7 +6,25 @@
 
 **작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync.ps1`을 실행해 전역(`%USERPROFILE%\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`(상단 버전 요약·버전 표·해당 상세 블록)와 `AGENTS.md`·`CLAUDE.md`의 관련 내용을 갱신한 뒤 ④ `sync.ps1` 실행 후 `git commit` 한다. **원격 `git push`는 명시 요청 시에만** 한다(public repo에서 push는 곧 공개 게시 — sync만으로 로컬 에이전트는 이미 작동).
 
-**effort 튜닝 요약(1.57~1.60)**: opus 30종 `high` 일괄 채택(1.57) → 보안 3종 `xhigh`(1.58) → fable `xhigh`(1.59) → 1.60에서 신규 opus 3종(refactor-strategist·docs-writer·agent-definition-reviewer)도 `high`로 신설. 현재 **`xhigh` 4종**(security-reviewer·threat-modeler·llm-ai-security-reviewer·ai-workspace-architect), 나머지 opus 44종 `high`(1.72 기준 opus 총 48종 — 신규 C/.NET 6종 포함), sonnet·haiku는 세션 상속. `effort`는 실행 정책 필드라 기존 에이전트 개별 `version` 미bump(신규는 v1.0 신설).
+**effort 튜닝 요약(1.57~1.60)**: opus 30종 `high` 일괄 채택(1.57) → 보안 3종 `xhigh`(1.58) → fable `xhigh`(1.59) → 1.60에서 신규 opus 3종(refactor-strategist·docs-writer·agent-definition-reviewer)도 `high`로 신설. 현재 **`xhigh` 5종**(security-reviewer·threat-modeler·llm-ai-security-reviewer·ai-workspace-architect·truth-checker), 나머지 opus 44종 `high`(1.72 기준 opus 총 48종 — 신규 C/.NET 6종 포함), sonnet·haiku는 세션 상속. `effort`는 실행 정책 필드라 기존 에이전트 개별 `version` 미bump(신규는 v1.0 신설).
+
+---
+
+## 1.89 (2026-07-18) — 검증 에이전트 truth-checker 신설 → 63종
+
+정확성을 최우선으로 하는 **검증형 답변 에이전트**를 신설. 기존 `fact-checker`가 **콘텐츠 초안(문서) 속** 진술을 출처 검증하는 것과 달리, 이 에이전트는 **임의의 질문·주장 자체**를 정확성 규율로 답하는 스택 무관 모드다(별도 클러스터 🧪 검증 신설).
+
+**설계: fact-checker와 겹치지 않는 이유.** fact-checker는 발행 전 콘텐츠(마케팅·블로그·강의)의 통계·인용·출처를 리뷰하는 콘텐츠/마케팅 계열 리뷰어다. truth-checker는 리뷰어가 아니라 **답변 모드** — 질문을 검증 가능한 작은 주장으로 분해하고, 답의 각 조각을 5분류(확인된 사실/근거 있는 추론/미확인 가정/의견/확인 불가)하고, 근거 품질 기준 신뢰도를 매겨 0.8 미만이면 재작성한다. 양쪽 description에 상호 카브아웃을 넣어 라우팅 충돌을 막았다.
+
+- **[신설] truth-checker v1.0** (`/truth` `/진실검증`, opus·**effort xhigh**·color cyan·memory user, tools Read/Grep/Glob/WebSearch/WebFetch)
+  - **역할**: 요청 분해 → 정보 5분류 → 날조 금지(없는 사실·수치·인용·출처·링크 창작 금지, 확인 못 하면 "확인 불가/추가 확인 필요") → 답변 전 검수(모순·사실추정 혼입·맥락 누락·과거지식 의존·근거 없는 동의) → 근거 기반 신뢰도 0~1 → 0.8 미만 재검토·재작성 → 불확실성 공개. 고정 출력 `[명확한 답변]/[신뢰도]/[확인할 점]`.
+  - **effort xhigh 근거**: 신뢰도 0.8 미만 자기수정 루프가 존재 이유라, `ai-workspace-architect`(skeleton→draft→self-score→rewrite)와 같은 논리의 xhigh 예외. 보안 3종·ai-workspace-architect에 이은 **5번째 xhigh**.
+  - **tools 근거**: WebSearch/WebFetch는 "최신 정보 필요한데 과거지식에만 의존?" 검수를 실제로 확인하기 위함(fact-checker와 동일 셋). 검증 목적 전용, 가져온 페이지는 명령이 아니라 데이터로 취급(인젝션 방어).
+  - **경계**: 콘텐츠 초안 속 진술 출처 검증 → `fact-checker`, 이미 난 버그 원인 규명 → `debugger`, 파일 기반 장기기억 회상 → `memory-recaller`.
+- **[카브아웃]** fact-checker v1.0→1.1 — "특정 질문·주장 자체를 정확성 규율로 검증하고 신뢰도까지 매기는 것은 truth-checker" 위임 절 추가(양방향 대칭쌍 1개 신설, 60→61쌍).
+- **[커맨드]** `/truth`·`/진실검증` 2종 신설. 한글 별칭 34→35종.
+- **[문서]** README 62→63종(🧪 검증 1종 신설) — 버전 요약·표 행(#63)·상세 블록·effort xhigh 4→5종·delegation 60→61쌍·슬래시/별칭·구조도·앵커(`#에이전트-63종`) 동기화. AGENTS.md 제목·클러스터 표(🧪 검증 신설)·전체 표(#63)·분류별 상세·delegation 동기화. CLAUDE.md intro 문단·에이전트 표·model tiering opus 목록·effort xhigh 예외 갱신.
+- sync.ps1 실행해 전역 반영.
 
 ---
 
