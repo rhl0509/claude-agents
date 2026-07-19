@@ -6,7 +6,7 @@
 - 에이전트 수: **63종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET/Java/Swift 10종 + 도메인 3종(ML·회계·자동화) + 메타 3종 + 검증 1종 + 콘텐츠/마케팅 8종 + 교육 1종 + 창작 1종 + 커리어 1종 + 보안 심화 2종 + 게임 12종 + 인프라 2종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.13**, `test-runner` **v1.11**, `code-reviewer` **v1.15**(Flask 흡수), `devops-reviewer` **v1.8**, `data-modeler` **v1.6**, `api-doc-writer` **v1.7**, `ui-ux-reviewer` **v1.6**, `system-architect` **v1.7**, `perf-auditor` **v1.5**, `design-system-architect` **v1.6**·`test-strategy` **v1.4**, `observability-reviewer`·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 3종 `ai-workspace-architect` **v1.4**·`agent-definition-reviewer` **v1.1**·`project-manager` **v1.0**, 콘텐츠/마케팅 8종 `copy-reviewer` **v1.2**·`content-repurposer` **v1.3**·`landing-reviewer` **v1.1**·`seo-optimizer`·`brand-voice-guardian` **v1.0**·`fact-checker` **v1.1**·`email-sequence-writer`·`offer-strategist` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 조율 `project-manager` **v1.0**, 게임 9종 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.2**·`game-ui-reviewer`·`unity-build-auditor`·`playtest-designer`·`multiplayer-rule-reviewer` **v1.1**·`unity-perf-auditor`·`save-data-reviewer` **v1.0**, 인프라 2종 `memory-recaller` **v1.3**·`self-reflector` **v1.0**, 검증 `truth-checker` **v1.0**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.2**, 창작 `storyteller` **v1.1**, 커리어 `cover-letter-tailor` **v1.0**, 디버깅 `debugger` **v1.4**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.13**, `test-runner` **v1.11**, `code-reviewer` **v1.15**(Flask 흡수), `devops-reviewer` **v1.9**, `data-modeler` **v1.7**, `api-doc-writer` **v1.7**, `ui-ux-reviewer` **v1.6**, `system-architect` **v1.7**, `perf-auditor` **v1.5**, `design-system-architect` **v1.6**·`test-strategy` **v1.5**, `observability-reviewer` **v1.4**·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 3종 `ai-workspace-architect` **v1.4**·`agent-definition-reviewer` **v1.1**·`project-manager` **v1.0**, 콘텐츠/마케팅 8종 `copy-reviewer` **v1.2**·`content-repurposer` **v1.3**·`landing-reviewer` **v1.1**·`seo-optimizer`·`brand-voice-guardian` **v1.0**·`fact-checker` **v1.1**·`email-sequence-writer`·`offer-strategist` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.1**, 조율 `project-manager` **v1.0**, 게임 9종 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.4**·`game-feel-reviewer` **v1.3**·`game-ui-reviewer` **v1.3**·`playtest-designer` **v1.2**·`unity-build-auditor`·`multiplayer-rule-reviewer`·`unity-perf-auditor` **v1.1**·`save-data-reviewer` **v1.0**, 인프라 2종 `memory-recaller` **v1.3**·`self-reflector` **v1.0**, 검증 `truth-checker` **v1.0**, 엔지니어링 `refactor-strategist` **v1.0**, 문서 `docs-writer` **v1.2**, 창작 `storyteller` **v1.1**, 커리어 `cover-letter-tailor` **v1.0**, 디버깅 `debugger` **v1.4**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 - 추론 강도(`effort`): opus 심층추론 58종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 5종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`·`truth-checker`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller·self-reflector)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
@@ -70,8 +70,8 @@
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
 | 6 | `perf-auditor` | `/perf` `/성능` | 1.5 | opus | Next.js **프론트 전용** 성능(번들·CWV·캐싱 · 파이썬 백엔드 런타임 성능은 범위 밖=알려진 공백) | Read, Grep, Glob |
-| 11 | `ui-ux-reviewer` | `/ui` `/화면` | 1.5 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
-| 12 | `design-system-architect` | `/dsystem` | 1.5 | opus | 디자인 토큰·컴포넌트 설계(DESIGN.md) | Read, Grep, Glob, Context7 |
+| 11 | `ui-ux-reviewer` | `/ui` `/화면` | 1.6 | opus | UI/UX·접근성·반응형·다크패턴 점검 | Read, Grep, Glob |
+| 12 | `design-system-architect` | `/dsystem` | 1.6 | opus | 디자인 토큰·컴포넌트 설계(DESIGN.md) | Read, Grep, Glob, Context7 |
 
 #### 🚀 운영 (배포 · 의존성 · 관측성)
 
@@ -123,7 +123,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 | 19 | `copy-reviewer` | `/copy` `/카피` | 1.2 | opus | 마케팅 카피 품질 리뷰(후킹·CTA·과장/윤리) | Read, Grep, Glob |
 | 20 | `landing-reviewer` | `/landing` | 1.1 | opus | 상세페이지·랜딩 전환 구조 리뷰 | Read, Grep, Glob |
 | 21 | `seo-optimizer` | `/seo` | 1.0 | opus | 블로그·페이지 SEO 점검 | Read, Grep, Glob, WebSearch, WebFetch |
-| 22 | `fact-checker` | `/factcheck` | 1.0 | opus | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
+| 22 | `fact-checker` | `/factcheck` | 1.1 | opus | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
 | 23 | `content-repurposer` | `/repurpose` | 1.3 | opus | 1소스 → 멀티 포맷 재활용(단발 뉴스레터까지) | Read, Grep, Glob |
 | 24 | `brand-voice-guardian` | `/voice` | 1.0 | opus | 브랜드 보이스(문체·톤) 일관성 점검 | Read, Grep, Glob |
 | 61 | `email-sequence-writer` | `/email` `/이메일` | 1.0 | opus | 이메일/라이프사이클 시퀀스 생성(웰컴·런칭·너처·재참여·콜드아웃리치, 타이밍·제목·CTA) | Read, Grep, Glob |
@@ -700,7 +700,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 <details>
 <summary><b>59. cover-letter-tailor</b> (<code>/cover</code> <code>/자소서</code>) — 채용 공고에 맞춰 자기소개서 맞춤 재작성</summary>
 
-- **언제**: 기업 공고와 기존 자소서(또는 경력·경험)가 있고, 그 공고에 맞게 자소서를 수정·재작성할 때. 수동 호출은 `/cover` 또는 `/자소서`
+- **언제**: 기업 공고와 기존 자소서(또는 경력·경험)가 있고, 그 공고에 맞게 자소서를 수정·재작성할 때. 슬래시 `/cover`·`/자소서`는 서식 다운로드·파일 저장까지 하는 **메인 세션 워크플로**(commands/cover.md)이고, 이 `cover-letter-tailor` 서브에이전트는 순수 텍스트 초안만 빠르게 필요할 때 쓰는 **선택적 보조**다(읽기 전용이라 파일 저장은 못 함)
 - **맞춤 3단계**: ① 공고 해부(주요업무·자격·우대·인재상에서 요구 역량·키워드 3~7개 추출) → ② 매핑(지원자 경험 ↔ 요구, 근거 강도 강/중/**공백** 판정) → ③ 리라이트(두괄식·STAR·직무 연결·문항별 글자수 준수·상투구 제거)
 - **정직성(최우선)**: 지원자가 준 사실만 사용 — 없는 경력·수상·자격·정량 수치 창작 금지. 근거 공백은 숨기지 않고 "이런 경험이 있으면 알려달라"로 되묻는다. 위조·과장 요청은 거부하고 위험(합격/채용 취소·법적 책임)을 밝힌 뒤 "가진 사실을 더 강하게" 대안으로 전환
 - **출력**: 공고 요구역량 요약 → 매핑 표(공백 포함) → 문항별 완성본(글자수 표기) → 보강 제안(공백 메우기 질문) → 채운 가정
@@ -996,11 +996,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 57개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 63개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 52개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 52개 슬래시 명령(+ 한글 별칭 28개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사합니다. 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 63개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 65개 슬래시 명령(+ 한글 별칭 37개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사하고, `workflows/`·`hooks/`·`skills/`·`rules/`도 각각 `%USERPROFILE%\.claude\`의 대응 폴더로 배포합니다(배포 대상 7종). 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -1097,12 +1097,12 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/swreview` | swift-code-reviewer | Swift 소스 경로(선택) |
 | `/swarch` | swift-architect | 설계 대상/경로(선택) |
 | `/curriculum` | curriculum-designer | 주제·대상·시간(선택) |
-| `/cover` | cover-letter-tailor | 채용 공고 + 기존 자소서/경력(선택) |
+| `/cover` | (메인 세션 워크플로 · 보조 cover-letter-tailor) | 채용 공고 + 기존 자소서/경력(선택) |
 | `/truth` | truth-checker | 질문·주장 또는 파일/경로(선택) |
 
 ### 한글 별칭 (1.65)
 
-Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1.65에서 `/디버그`로 검증). 자주 쓰는 35종에 한글 별칭 커맨드를 함께 배포한다 — 에이전트는 그대로고 커맨드 파일만 하나 더 있는 구조라, 별칭을 지워도 영어 명령은 그대로 동작한다.
+Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1.65에서 `/디버그`로 검증). 자주 쓰는 37종에 한글 별칭 커맨드를 함께 배포한다 — 에이전트는 그대로고 커맨드 파일만 하나 더 있는 구조라, 별칭을 지워도 영어 명령은 그대로 동작한다.
 
 | 한글 | 영어 | 한글 | 영어 |
 |---|---|---|---|
@@ -1123,7 +1123,8 @@ Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1
 | `/강의설계` | `/curriculum` | `/자소서` | `/cover` |
 | `/회고` | `/reflect` | `/누적회고` | `/reflect-log` |
 | `/이메일` | `/email` | `/오퍼` | `/offer` |
-| `/진실검증` | `/truth` |  |  |
+| `/진실검증` | `/truth` | `/프로젝트관리` | `/pm` |
+| `/프로젝트실행` | `/pm-run` |  |  |
 
 > 한국어 **자연어 호출**은 별칭과 무관하게 원래부터 동작한다(63종 description이 전부 한국어라 라우터가 한국어 문장으로 매치). 별칭은 슬래시 표기 편의일 뿐이다.
 
@@ -1164,7 +1165,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 2. frontmatter `version`/`updated` 갱신 (마이너/메이저 판단)
 3. `CHANGELOG.md`에 변경 기록
 4. **`README.md`의 버전 표 갱신** (버전업 시)
-5. `sync.ps1`으로 전역(`~/.claude/agents/`·`~/.claude/commands/`·`~/.claude/launchers/`)에 반영
+5. `sync.ps1`으로 전역(`~/.claude/`의 `agents/`·`commands/`·`workflows/`·`launchers/`·`hooks/`·`skills/`·`rules/` 7종)에 반영
 6. `git commit` (원격 `git push`는 **명시 요청 시에만** — public repo에서 push는 곧 공개 게시)
 
 ---
@@ -1175,13 +1176,13 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
-├─ AGENTS.md                     # 57개 에이전트 통합 정리
+├─ AGENTS.md                     # 63개 에이전트 통합 정리
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
 ├─ .gitignore
 │
-├─ commands/                     # ── 슬래시 명령 정의 (57개, +한글 별칭 29개) ──
+├─ commands/                     # ── 슬래시 명령 정의 (65개, +한글 별칭 37개) ──
 │  ├─ review.md  ├─ sec.md       ├─ test.md      ├─ coverage.md
 │  ├─ perf.md    ├─ contract.md  ├─ apidoc.md    ├─ db.md
 │  ├─ migrate.md ├─ ui.md        ├─ dsystem.md   ├─ datamodel.md
@@ -1200,6 +1201,20 @@ claude-agents/
 │
 ├─ launchers/                    # ── 바탕화면 런처 ──
 │  └─ claude.bat
+│
+├─ workflows/                    # ── 워크플로 (pm-orchestrate) ──
+│  └─ pm-orchestrate.js
+│
+├─ hooks/                        # ── 읽기 전용 가드 훅 ──
+│  └─ agent-guard.ps1
+│
+├─ skills/                       # ── 프리로드 스킬 ──
+│  ├─ agent-conventions/         └─ design-reference/
+│
+├─ rules/                        # ── 경로 스코프 규칙(common·python·typescript) ──
+│  ├─ README.md  ├─ common.md    ├─ python.md    └─ typescript.md
+│
+├─ _drafts/                      # ── 미편입 초안(sync 배포 안 함) ──
 │
 ├─ code-reviewer.md              # ── 에이전트 정의 (63개) ──
 ├─ security-reviewer.md

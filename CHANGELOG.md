@@ -6,7 +6,25 @@
 
 **작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync.ps1`을 실행해 전역(`%USERPROFILE%\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`(상단 버전 요약·버전 표·해당 상세 블록)와 `AGENTS.md`·`CLAUDE.md`의 관련 내용을 갱신한 뒤 ④ `sync.ps1` 실행 후 `git commit` 한다. **원격 `git push`는 명시 요청 시에만** 한다(public repo에서 push는 곧 공개 게시 — sync만으로 로컬 에이전트는 이미 작동).
 
-**effort 튜닝 요약(1.57~1.60)**: opus 30종 `high` 일괄 채택(1.57) → 보안 3종 `xhigh`(1.58) → fable `xhigh`(1.59) → 1.60에서 신규 opus 3종(refactor-strategist·docs-writer·agent-definition-reviewer)도 `high`로 신설. 현재 **`xhigh` 5종**(security-reviewer·threat-modeler·llm-ai-security-reviewer·ai-workspace-architect·truth-checker), 나머지 opus 44종 `high`(1.72 기준 opus 총 48종 — 신규 C/.NET 6종 포함), sonnet·haiku는 세션 상속. `effort`는 실행 정책 필드라 기존 에이전트 개별 `version` 미bump(신규는 v1.0 신설).
+**effort 튜닝 요약(1.57~1.60)**: opus 30종 `high` 일괄 채택(1.57) → 보안 3종 `xhigh`(1.58) → fable `xhigh`(1.59) → 1.60에서 신규 opus 3종(refactor-strategist·docs-writer·agent-definition-reviewer)도 `high`로 신설. 현재 **`xhigh` 5종**(security-reviewer·threat-modeler·llm-ai-security-reviewer·ai-workspace-architect·truth-checker), 나머지 opus 53종 `high`(현재 opus 총 58종), sonnet·haiku는 세션 상속. `effort`는 실행 정책 필드라 기존 에이전트 개별 `version` 미bump(신규는 v1.0 신설).
+
+---
+
+## 1.90 (2026-07-19) — 문서 정합 패스(정의 무변경)
+
+에이전트 정의 파일(frontmatter `name:` 보유 63개)은 **일절 무변경**. 1.87~1.89를 거치며 문서 4종(README·AGENTS·CLAUDE·CHANGELOG)에 남은 카운트·버전·배포 목록 드리프트만 실제 상태에 맞게 교정했다. 참값: 에이전트 63 / 영문 커맨드 65(에이전트 별칭 63 + `/pm-run` + `/reflect`) / 한글 별칭 37 / sync.ps1 배포 대상 7(agents·commands·workflows·launchers·hooks·skills·rules) / opus 58·sonnet 2·haiku 2·fable 1.
+
+- **[README] 상단 버전 요약 8건** — 클러스터 표를 참값으로 낡은 버전 갱신: devops-reviewer 1.8→1.9, data-modeler 1.6→1.7, test-strategy 1.4→1.5, observability-reviewer 1.3→1.4, game-feel-reviewer 1.2→1.3, game-ui-reviewer 1.1→1.3, playtest-designer 1.1→1.2, unity-perf-auditor 1.0→1.1.
+- **[README] 클러스터 표 3건** — 표 쪽이 낡았던 항목 갱신: ui-ux-reviewer 1.5→1.6, design-system-architect 1.5→1.6, fact-checker 1.0→1.1.
+- **[README] 설치/등록·구조도 카운트** — "57/52개 에이전트·52개 슬래시(+한글 28)" → 63개 에이전트·65개 슬래시(+한글 37), AGENTS.md 주석 57→63, commands 트리 "57개+한글 29" → "65개+한글 37". sync.ps1 설명에 배포 대상 7종 명시.
+- **[README] 한글 별칭** — 표기 35종→37종, 누락된 `/프로젝트관리`(→`/pm`)·`/프로젝트실행`(→`/pm-run`) 2행 추가.
+- **[README] 저장소 구조도** — 트리에 빠져 있던 `workflows/`·`hooks/`·`skills/`·`rules/`·`_drafts/` 디렉터리 추가.
+- **[README] 업데이트 워크플로** — sync 반영 대상을 3종(agents·commands·launchers)에서 7종으로.
+- **[README] `/cover` 설명 정정** — 슬래시 표·상세 블록이 이를 일반 에이전트 별칭으로 표기했으나 실제 `commands/cover.md`는 서식 다운로드·파일 저장까지 하는 **메인 세션 워크플로**(cover-letter-tailor는 순수 텍스트 초안용 선택 보조)임을 반영.
+- **[AGENTS.md] 등록/사용 위치 표** — `agents`·`commands`·`launchers`만 있던 표에 `workflows`·`hooks`·`skills`·`rules` 행 추가, 소스(원본) 행에도 반영. 63종 카운트는 이미 정합.
+- **[CLAUDE.md] Locations & sync** — Source of truth·Runtime location·What sync.ps1 does 세 목록에 누락됐던 `workflows/`·`rules/` 추가(배포 대상 7종 전부 나열).
+- **[CHANGELOG] effort 요약** — "1.72 기준 opus 총 48종" 오독 소지 문구를 "현재 opus 총 58종"으로, 부수적으로 `high` 종수 44→53 정정.
+- **[미변경]** 에이전트 정의·frontmatter 무변경(문서 전용). `sync.ps1`은 문서 배포 대상이 아니므로 불필요.
 
 ---
 
