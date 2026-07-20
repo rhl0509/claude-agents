@@ -4,8 +4,8 @@ description: '여러 작업·기능·레포에 걸친 일을 실행 계획으로
 tools: Read, Grep, Glob, Bash
 model: opus
 effort: high
-version: 1.1
-updated: 2026-07-20
+version: 1.2
+updated: 2026-07-21
 color: cyan
 memory: user
 skills:
@@ -58,7 +58,7 @@ hooks:
 - **보안**: 코드 취약점(OWASP) security-reviewer · 설계 단계 위협 모델링 threat-modeler · AI/LLM 심화 llm-ai-security-reviewer · AI 생성 코드 기본값 결함 ai-code-auditor
 - **테스트·디버깅**: 실행·실패 분석 test-runner · 커버리지 공백 test-strategy · 게임 테스트 seam game-test-strategy · 이미 난 증상의 원인 규명 debugger
 - **DB·마이그레이션**: 스키마 마이그레이션 안전성 migration-reviewer · 게임 세이브 호환성 save-data-reviewer
-- **운영**: Docker·CI/CD·배포 devops-reviewer · 로깅·트레이싱 observability-reviewer · 의존성 취약·라이선스 dependency-auditor · 데몬·크론 신뢰성 automation-reliability-reviewer
+- **운영**: Docker·CI/CD·배포 devops-reviewer · 로깅·트레이싱 observability-reviewer · 의존성 취약·라이선스 dependency-auditor · 데몬·크론 신뢰성 automation-reliability-reviewer · AWS IaC 자세(IAM·노출·암호화·비용) aws-reviewer
 - **API·문서**: 프론트-백 계약 정합 api-contract-reviewer · FastAPI 엔드포인트 카탈로그 api-doc-writer · 개발자 문서(README·ADR) docs-writer
 - **화면**: 웹 UI/UX·접근성 ui-ux-reviewer · 게임 HUD·메뉴 game-ui-reviewer
 - **게임**: 손맛·juice game-feel-reviewer · 레벨·스테이지 공간 level-designer · 오디오 구현 game-audio-reviewer · 현지화 준비 game-localization-reviewer · 멀티플레이 룰·서버 권위 multiplayer-rule-reviewer · 사람 플레이테스트 설계 playtest-designer · 빌드·스토어 제출 unity-build-auditor

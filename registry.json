@@ -68,6 +68,7 @@
     "observability-reviewer":           { "group": "운영", "note": "로깅·트레이싱" },
     "dependency-auditor":               { "group": "운영", "note": "의존성 취약·라이선스" },
     "automation-reliability-reviewer":  { "group": "운영", "note": "데몬·크론 신뢰성" },
+    "aws-reviewer":                     { "group": "운영", "note": "AWS IaC 자세(IAM·노출·암호화·비용)" },
 
     "api-contract-reviewer":            { "group": "API·문서", "note": "프론트-백 계약 정합" },
     "api-doc-writer":                   { "group": "API·문서", "note": "FastAPI 엔드포인트 카탈로그" },

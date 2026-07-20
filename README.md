@@ -3,16 +3,16 @@
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
 코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 여기에 강의·워크숍·강좌·교육 자료의 교수 설계(학습자 분석·측정 가능한 학습 목표·모듈 계열화·목표-평가-활동 정렬)를 맡는 **교육/교수설계 에이전트 1종**(`curriculum-designer`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터). 여기에 더해 **C와 비-Unity C#/.NET**을 전담하는 시스템 언어 에이전트 6종(`c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`)이 추가되었습니다(🧩 시스템 언어 클러스터 — 각 언어를 리뷰·설계·성능 3역으로). 이어 이 클러스터를 **Java(JVM)·Swift**로 넓혀 4종(`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect`)을 추가했는데, C/.NET처럼 3역 트리오가 아니라 **리뷰어+아키텍트 2역씩**만 두고 **전담 perf 에이전트는 의도적으로 만들지 않았다**(프로모션 게이트 — 각 언어의 성능 점검 수요가 실제로 반복될 때까지 유보하고, 리뷰어가 그 공백을 "알려진 공백"으로 명시). 가장 최근에는 주제·문제만 있고 구체 아이디어가 없을 때 **발산(다각도 렌즈)→수렴(기준 채점)**으로 고를 수 있는 후보 목록을 만드는 **브레인스토밍 에이전트 1종**(`brainstormer`)이 더해졌습니다 — 모든 실행(오퍼·이야기·게임 설계·강의 설계) 앞단의 아이디어 단계를 전담합니다.
 
-- 에이전트 수: **73종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET/Java/Swift 10종 + 도메인 3종(ML·회계·자동화) + 메타 3종 + 검증 1종 + 콘텐츠/마케팅 8종 + 교육 1종 + 창작 1종 + 발상 1종 + 커리어 1종 + 보안 심화 2종 + 게임 13종 + 인프라 3종 + AI검색·영상·이미지·제안서 4종)
+- 에이전트 수: **74종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET/Java/Swift 10종 + 도메인 3종(ML·회계·자동화) + 메타 3종 + 검증 1종 + 콘텐츠/마케팅 8종 + 교육 1종 + 창작 1종 + 발상 1종 + 커리어 1종 + 보안 심화 2종 + 게임 13종 + 인프라 3종 + AI검색·영상·이미지·제안서 4종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
 - 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.14**, `test-runner` **v1.11**, `code-reviewer` **v1.16**(Flask 흡수), `devops-reviewer` **v1.9**, `data-modeler` **v1.7**, `api-doc-writer` **v1.7**, `ui-ux-reviewer` **v1.6**, `system-architect` **v1.8**, `perf-auditor` **v1.5**, `design-system-architect` **v1.6**·`test-strategy` **v1.5**, `observability-reviewer` **v1.4**·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 3종 `ai-workspace-architect` **v1.4**·`agent-definition-reviewer` **v1.1**·`project-manager` **v1.0**, 콘텐츠/마케팅 8종 `copy-reviewer` **v1.2**·`content-repurposer` **v1.4**·`landing-reviewer` **v1.2**·`seo-optimizer` **v1.1**·`brand-voice-guardian` **v1.0**·`fact-checker` **v1.1**·`email-sequence-writer` **v1.0**·`offer-strategist` **v1.2**, 발상 `brainstormer` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.2**, 조율 `project-manager` **v1.0**, 게임 9종 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.6**·`game-feel-reviewer` **v1.3**·`game-ui-reviewer` **v1.3**·`playtest-designer` **v1.2**·`unity-build-auditor`·`multiplayer-rule-reviewer`·`unity-perf-auditor` **v1.1**·`save-data-reviewer` **v1.0**, 인프라 2종 `memory-recaller` **v1.4**·`self-reflector` **v1.1**, 검증 `truth-checker` **v1.0**, 엔지니어링 `refactor-strategist` **v1.1**, 문서 `docs-writer` **v1.2**, 창작 `storyteller` **v1.1**, 커리어 `cover-letter-tailor` **v1.0**, 디버깅 `debugger` **v1.5**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** , 1.92 신설 9종 `ai-code-auditor`·`codebase-archaeologist`·`identity-access-architect`·`video-optimizer`·`ai-search-optimizer`·`image-prompt-engineer`·`proposal-strategist`·`level-designer`·`knowledge-gardener` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
-- 추론 강도(`effort`): opus 심층추론 68종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 7종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`·`truth-checker`·`ai-code-auditor`·`identity-access-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller·self-reflector)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
+- 추론 강도(`effort`): opus 심층추론 69종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 7종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`·`truth-checker`·`ai-code-auditor`·`identity-access-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller·self-reflector)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
 
 ## 목차
-- [에이전트 64종](#에이전트-73종)
+- [에이전트 64종](#에이전트-74종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -24,9 +24,9 @@
 
 ---
 
-## 에이전트 73종
+## 에이전트 74종
 
-**관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했다(예외: 📣 콘텐츠/마케팅 표는 **마케팅 → 창작 → 교육 → 커리어** 하위 묶음 순서를 번호보다 우선한다). `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록 자체는 번호순이 아니라 클러스터별로 묶여 있다). 번호는 **1~73 연속이며 결번이 없다** — `#1`은 모든 에이전트 위에 앉는 진입/조율 층인 `project-manager`, `#2`부터는 대체로 추가된 순서다. 번호는 상세 블록을 찾는 **인덱스일 뿐 추가 시점을 뜻하지 않으며**, 새 에이전트는 다음 번호(`#74`…)를 이어 받는다.
+**관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했다(예외: 📣 콘텐츠/마케팅 표는 **마케팅 → 창작 → 교육 → 커리어** 하위 묶음 순서를 번호보다 우선한다). `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록 자체는 번호순이 아니라 클러스터별로 묶여 있다). 번호는 **1~74 연속이며 결번이 없다** — `#1`은 모든 에이전트 위에 앉는 진입/조율 층인 `project-manager`, `#2`부터는 대체로 추가된 순서다. 번호는 상세 블록을 찾는 **인덱스일 뿐 추가 시점을 뜻하지 않으며**, 새 에이전트는 다음 번호(`#75`…)를 이어 받는다.
 
 #### 🔍 코드 품질 · 디버깅 · 테스트
 
@@ -83,6 +83,7 @@
 | 15 | `devops-reviewer` | `/devops` `/배포` | 1.9 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
 | 16 | `dependency-auditor` | `/deps` `/의존성` | 1.1 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
 | 17 | `observability-reviewer` | `/obs` `/관측성` | 1.4 | opus | 로깅·트레이싱·관측성 점검(웹 앱 런타임) | Read, Grep, Glob |
+| 74 | `aws-reviewer` | `/aws` `/인프라` | 1.0 | opus | **AWS IaC 자세**(IAM 최소권한·공개 노출·암호화·격리·state·비용·파괴적 변경) | Read, Grep, Glob |
 | 44 | `automation-reliability-reviewer` | `/auto` `/자동화` | 1.1 | opus | **데몬·크론 자동화 신뢰성**(로그 유실·중복 실행·하트비트·멱등성) | Read, Grep, Glob |
 
 #### 🎮 게임 (Unity + C# 싱글플레이 2D 캐주얼 · MSW 멀티플레이)
@@ -1062,11 +1063,11 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 | `<프로젝트>/.claude/agents/` | 해당 프로젝트만 |
 
 ### 3) 전역 등록 (Windows)
-저장소의 73개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
+저장소의 74개 에이전트 `.md`를 전역 폴더로 복사합니다. 동봉된 스크립트를 쓰면 편합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 73개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 76개 슬래시 명령(+ 한글 별칭 48개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사하고, `workflows/`·`hooks/`·`skills/`·`rules/`도 각각 `%USERPROFILE%\.claude\`의 대응 폴더로 배포합니다(배포 대상 7종). 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 74개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 78개 슬래시 명령(+ 한글 별칭 49개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사하고, `workflows/`·`hooks/`·`skills/`·`rules/`도 각각 `%USERPROFILE%\.claude\`의 대응 폴더로 배포합니다(배포 대상 7종). 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -1176,10 +1177,12 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/level` | level-designer | 레벨·스테이지 설명(선택) |
 | `/garden` | knowledge-gardener | 경로·범위(선택) |
 | `/lint` | (스크립트) lint-agents.ps1 — 정의 규범 검사 | 파일 경로(선택) |
+| `/aws` | aws-reviewer | IaC 경로(선택) |
+| `/aws-deploy` | (스킬) 메인 세션 AWS 배포 워크플로 | 대상 환경 |
 
 ### 한글 별칭 (1.65)
 
-Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1.65에서 `/디버그`로 검증). 자주 쓰는 47종에 한글 별칭 커맨드를 함께 배포한다 — 에이전트는 그대로고 커맨드 파일만 하나 더 있는 구조라, 별칭을 지워도 영어 명령은 그대로 동작한다.
+Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1.65에서 `/디버그`로 검증). 자주 쓰는 49종에 한글 별칭 커맨드를 함께 배포한다 — 에이전트는 그대로고 커맨드 파일만 하나 더 있는 구조라, 별칭을 지워도 영어 명령은 그대로 동작한다.
 
 | 한글 | 영어 | 한글 | 영어 |
 |---|---|---|---|
@@ -1207,6 +1210,7 @@ Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1
 | `/에이아이검색` | `/aeo` | `/이미지프롬프트` | `/imgprompt` |
 | `/제안서` | `/proposal` | `/레벨` | `/level` |
 | `/지식정원` | `/garden` | `/린트` | `/lint` |
+| `/인프라` | `/aws` | | |
 
 > 한국어 **자연어 호출**은 별칭과 무관하게 원래부터 동작한다(64종 description이 전부 한국어라 라우터가 한국어 문장으로 매치). 별칭은 슬래시 표기 편의일 뿐이다.
 
@@ -1235,7 +1239,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 - 각 에이전트의 현재 버전은 파일 frontmatter의 `version`/`updated`에 기록됩니다.
 - 전체 변경 이력은 [CHANGELOG.md](CHANGELOG.md)에 정리됩니다.
-- 이 README의 [에이전트 표](#에이전트-73종) 버전 칸도 버전업 시 함께 갱신됩니다.
+- 이 README의 [에이전트 표](#에이전트-74종) 버전 칸도 버전업 시 함께 갱신됩니다.
 
 ---
 
@@ -1260,7 +1264,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
-├─ AGENTS.md                     # 73개 에이전트 통합 정리
+├─ AGENTS.md                     # 74개 에이전트 통합 정리
 ├─ lint-agents.ps1               # 정의 규범 검사(프론트매터·경계 위임절·끊어진 링크·라우팅 고아)
 ├─ registry.json                 # 에이전트 명단 단일 소스(group·note만 — 나머지는 프론트매터가 정본)
 ├─ build-registry.ps1            # registry.json → project-manager.md 라우팅 블록 생성

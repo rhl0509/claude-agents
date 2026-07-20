@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (73종)
+# 서브에이전트 전체 정리 (74종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> **클러스터 구성(73종)** — 번호는 `README.md`의 에이전트 표와 동일하다(`#1`~`#73` 연속).
+> **클러스터 구성(74종)** — 번호는 `README.md`의 에이전트 표와 동일하다(`#1`~`#74` 연속).
 >
 > | 클러스터 | 종수 | 성격 |
 > |---|---|---|
@@ -123,6 +123,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 71 | `proposal-strategist` | `/proposal` | 콘텐츠 | 제안서 전략(승리 테마·3막 서사·경영진 요약) — 1인 규모 체크포인트 환산 | Read, Grep, Glob |
 | 72 | `level-designer` | `/level` | 게임 | 레벨·스테이지 공간 설계(흐름·불공정 사망 차단·페이싱·블록아웃 규율) | Read, Grep, Glob |
 | 73 | `knowledge-gardener` | `/garden` | 인프라 | 지식베이스 구조 위생(고립 노트·인덱스 커버리지·상록 승격) — 읽기 전용 | Read, Grep, Glob |
+| 74 | `aws-reviewer` | `/aws` | 운영 | AWS IaC 자세(IAM 최소권한·공개 노출·저장 암호화·격리·state·비용·파괴적 변경) | Read, Grep, Glob |
 
 ---
 
