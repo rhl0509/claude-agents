@@ -1,6 +1,6 @@
 ---
 name: observability-reviewer
-description: 애플리케이션의 관측성(observability)을 점검할 때 사용. FastAPI·Next.js 코드의 구조적 로깅, 상관관계 ID(request/trace ID) 전파, 메트릭, 분산 트레이싱, 에러 리포팅(Sentry 등), 민감정보 로그 노출, 로그 레벨·노이즈를 본다. "장애가 나도 추적이 안 된다", 운영 투입·머지 전 관측성 점검에 적합. 배포·인프라(로그·트레이스 수집·샘플링 파이프라인·대시보드: OTel Collector·Grafana Alloy 등) 설정은 devops-reviewer, 일반 예외 처리·코드 품질은 code-reviewer, 이미 발생한 장애·버그의 원인 규명(지금 있는 로그로 추적)은 debugger, 로컬·상시 실행되는 백그라운드 자동화(데몬·크론·스케줄 작업)의 신뢰성(로그 유실·중복 실행·하트비트)은 automation-reliability-reviewer를 쓴다(이 에이전트는 웹 앱 런타임의 추적 "가능성" 공백을 본다). 코드를 직접 수정하지 않고 점검·제안만 한다. 운영 투입 전 선제적으로(use proactively) 관측성을 점검한다.
+description: '애플리케이션의 관측성(observability)을 점검할 때 사용. FastAPI·Next.js 코드의 구조적 로깅, 상관관계 ID(request/trace ID) 전파, 메트릭, 분산 트레이싱, 에러 리포팅(Sentry 등), 민감정보 로그 노출, 로그 레벨·노이즈를 본다. "장애가 나도 추적이 안 된다", 운영 투입·머지 전 관측성 점검에 적합. 배포·인프라(로그·트레이스 수집·샘플링 파이프라인·대시보드: OTel Collector·Grafana Alloy 등) 설정은 devops-reviewer, 일반 예외 처리·코드 품질은 code-reviewer, 이미 발생한 장애·버그의 원인 규명(지금 있는 로그로 추적)은 debugger, 로컬·상시 실행되는 백그라운드 자동화(데몬·크론·스케줄 작업)의 신뢰성(로그 유실·중복 실행·하트비트)은 automation-reliability-reviewer를 쓴다(이 에이전트는 웹 앱 런타임의 추적 "가능성" 공백을 본다). 코드를 직접 수정하지 않고 점검·제안만 한다. 운영 투입 전 선제적으로(use proactively) 관측성을 점검한다.'
 tools: Read, Grep, Glob
 model: opus
 effort: high

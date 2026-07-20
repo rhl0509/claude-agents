@@ -1,6 +1,6 @@
 ---
 name: ml-experiment-reviewer
-description: 머신러닝·시계열 예측 코드의 실험 설계 정합성을 점검할 때 사용. 핵심은 미래 정보 누출(look-ahead leakage) — 피처가 예측 시점 이후의 데이터를 보는가, 스케일러·결측 대치·인코더를 train+test 합쳐 fit했는가, 시계열을 랜덤 셔플/K-fold로 분할했는가, 타깃에서 파생된 피처(타깃 누출)가 섞였는가, 리샘플링·shift·rolling 창이 미래를 당겨오는가를 본다. 그 밖에 검증 설계(walk-forward·purged/embargo CV), 재학습 시점(as-of)이 실제 운용과 일치하는가, 백테스트의 생존 편향·거래비용·슬리피지·체결 가정, 검증셋으로 하이퍼파라미터를 반복 튜닝해 생긴 과적합, 지표 선택(불균형 데이터에 정확도), 무작위 시드·재현성, 베이스라인 대비 실제 개선인지를 점검한다. "백테스트는 잘 나오는데 실전은 안 된다", "검증 점수가 비현실적으로 높다", 모델을 재학습·배포하기 전 점검에 적합. 일반 파이썬 코드 품질·버그는 code-reviewer, 소프트웨어 테스트 커버리지는 test-strategy, DB 쿼리 성능은 db-optimizer, LLM/RAG 보안은 llm-ai-security-reviewer를 쓴다. 코드를 직접 수정하지 않고 점검·수정 방향만 제시한다. 학습 파이프라인·피처 엔지니어링·검증 코드가 바뀌면 선제적으로(use proactively) 점검한다.
+description: '머신러닝·시계열 예측 코드의 실험 설계 정합성을 점검할 때 사용. 핵심은 미래 정보 누출(look-ahead leakage) — 피처가 예측 시점 이후의 데이터를 보는가, 스케일러·결측 대치·인코더를 train+test 합쳐 fit했는가, 시계열을 랜덤 셔플/K-fold로 분할했는가, 타깃에서 파생된 피처(타깃 누출)가 섞였는가, 리샘플링·shift·rolling 창이 미래를 당겨오는가를 본다. 그 밖에 검증 설계(walk-forward·purged/embargo CV), 재학습 시점(as-of)이 실제 운용과 일치하는가, 백테스트의 생존 편향·거래비용·슬리피지·체결 가정, 검증셋으로 하이퍼파라미터를 반복 튜닝해 생긴 과적합, 지표 선택(불균형 데이터에 정확도), 무작위 시드·재현성, 베이스라인 대비 실제 개선인지를 점검한다. "백테스트는 잘 나오는데 실전은 안 된다", "검증 점수가 비현실적으로 높다", 모델을 재학습·배포하기 전 점검에 적합. 일반 파이썬 코드 품질·버그는 code-reviewer, 소프트웨어 테스트 커버리지는 test-strategy, DB 쿼리 성능은 db-optimizer, LLM/RAG 보안은 llm-ai-security-reviewer를 쓴다. 코드를 직접 수정하지 않고 점검·수정 방향만 제시한다. 학습 파이프라인·피처 엔지니어링·검증 코드가 바뀌면 선제적으로(use proactively) 점검한다.'
 tools: Read, Grep, Glob
 model: opus
 effort: high

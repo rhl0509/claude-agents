@@ -1,6 +1,6 @@
 ---
 name: test-strategy
-description: 테스트 커버리지의 공백과 약한 단언을 진단하고 보강할 테스트 케이스를 제안할 때 사용. 안 짠 경로·놓친 경계 조건·취약한(change-detector·목 그린) 테스트를 찾아 무엇을 어떻게 테스트할지 설계한다. test-runner가 실행 중 플래그한 약점의 심층 진단·보강도 이쪽이다. 테스트를 실제로 실행·진단하는 것은 test-runner, 일반 코드 품질은 code-reviewer, 사람 대상 게임 플레이테스트 설계(자동 테스트 아님)는 playtest-designer, 게임 코드(Unity Test Framework·엔진 의존 seam·결정론적 리플레이)의 테스트 전략은 game-test-strategy, ML 실험 설계의 타당성(데이터 누출·검증 분할)은 ml-experiment-reviewer를 쓴다(이 에이전트는 pytest/Vitest/Playwright 전제). 테스트 코드를 직접 작성하지 않고 전략·케이스를 제안만 한다.
+description: '테스트 커버리지의 공백과 약한 단언을 진단하고 보강할 테스트 케이스를 제안할 때 사용. 안 짠 경로·놓친 경계 조건·취약한(change-detector·목 그린) 테스트를 찾아 무엇을 어떻게 테스트할지 설계한다. test-runner가 실행 중 플래그한 약점의 심층 진단·보강도 이쪽이다. 테스트를 실제로 실행·진단하는 것은 test-runner, 일반 코드 품질은 code-reviewer, 사람 대상 게임 플레이테스트 설계(자동 테스트 아님)는 playtest-designer, 게임 코드(Unity Test Framework·엔진 의존 seam·결정론적 리플레이)의 테스트 전략은 game-test-strategy, ML 실험 설계의 타당성(데이터 누출·검증 분할)은 ml-experiment-reviewer를 쓴다(이 에이전트는 pytest/Vitest/Playwright 전제). 테스트 코드를 직접 작성하지 않고 전략·케이스를 제안만 한다.'
 tools: Read, Grep, Glob
 model: opus
 effort: high

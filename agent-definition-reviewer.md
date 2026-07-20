@@ -1,6 +1,6 @@
 ---
 name: agent-definition-reviewer
-description: Claude Code 서브에이전트 정의(.md)의 품질을 점검할 때 사용. frontmatter(name/description/tools/model/effort)의 스펙 정합, description의 라우터 친화성(트리거 명료·위임 절 존재), tools 최소권한(과대·과소), 에이전트 간 경계 중복·공백, 본문 규범(인젝션 방어·읽기전용·증거 기반 보고) 누락을 본다. 새 에이전트를 추가하거나 기존 정의를 개정하기 전 점검에 적합. 사용자의 범용 AI 작업환경·마케팅 프롬프트 시스템 설계는 ai-workspace-architect를 쓴다. 정의 파일을 직접 고치지 않고 점검·개정 초안만 제시한다. 에이전트 정의를 추가·개정하기 전 선제적으로(use proactively) 점검한다.
+description: 'Claude Code 서브에이전트 정의(.md)의 품질을 점검할 때 사용. frontmatter(name/description/tools/model/effort)의 스펙 정합, description의 라우터 친화성(트리거 명료·위임 절 존재), tools 최소권한(과대·과소), 에이전트 간 경계 중복·공백, 본문 규범(인젝션 방어·읽기전용·증거 기반 보고) 누락을 본다. 새 에이전트를 추가하거나 기존 정의를 개정하기 전 점검에 적합. 사용자의 범용 AI 작업환경·마케팅 프롬프트 시스템 설계는 ai-workspace-architect를 쓴다. 정의 파일을 직접 고치지 않고 점검·개정 초안만 제시한다. 에이전트 정의를 추가·개정하기 전 선제적으로(use proactively) 점검한다.'
 tools: Read, Grep, Glob
 model: opus
 effort: high

@@ -103,12 +103,15 @@ if ($Path) {
 
 if ($files.Count -eq 0) { Write-Host 'No agent definitions found.'; exit 1 }
 
-# 에이전트 이름 집합 · 커맨드 집합(교차 검사용)
+# 알려진 에이전트 이름 집합 — **검사 대상이 아니라 저장소 전체**에서 만든다.
+# -Path 로 한 파일만 검사할 때 이 집합을 그 파일로 좁히면, 멀쩡한 위임 대상(devops-reviewer 등)이
+# 전부 "존재하지 않는 에이전트"로 오탐된다. 끊어진 링크·라우팅 고아 판정의 기준은 항상 저장소 전체다.
 $agentNames = @{}
-foreach ($f in $files) {
-    $n = [System.IO.Path]::GetFileNameWithoutExtension($f)
-    $agentNames[$n] = $true
+Get-ChildItem -Path $root -Filter *.md -File | ForEach-Object {
+    if ((Read-Text $_.FullName) -match '(?m)^name:\s*\S') { $agentNames[$_.BaseName] = $true }
 }
+# 검사 대상이 저장소 밖(_drafts 등)이면 그 이름도 알려진 집합에 넣는다 — 자기 자신을 유령으로 보지 않게.
+foreach ($f in $files) { $agentNames[[System.IO.Path]::GetFileNameWithoutExtension($f)] = $true }
 $commandDir = Join-Path $root 'commands'
 $commandNames = @{}
 if (Test-Path $commandDir) {
@@ -222,6 +225,18 @@ foreach ($file in $files) {
         Add-Finding $rel 'WARN' "version이 '메이저.마이너' 형식이 아니다: '$($fm.Map['version'])'"
     }
 
+    # 6-b) description 은 인용부호로 감싼다(1.96).
+    # 이 저장소의 description 은 "경계: ", "(대상: " 처럼 콜론+공백을 자주 쓴다. 인용하지 않으면
+    # 엄격한 YAML 파서가 두 번째 `: ` 에서 "mapping values are not allowed here" 로 죽는다
+    # (73종 중 21종이 그 상태였다). Claude Code 는 관대해서 지금은 동작하지만, 다른 도구로
+    # 옮기거나 파서가 엄격해지면 통째로 깨진다. 큰따옴표가 아니라 **작은따옴표**를 쓴다 —
+    # description 에 `E:\claude_memory` 같은 역슬래시가 있어서 큰따옴표에선 불법 이스케이프가 된다.
+    $rawDesc = ''
+    foreach ($l in ($fm.Raw -split "`n")) { if ($l -match '^description:\s(.*)$') { $rawDesc = $Matches[1]; break } }
+    if ($rawDesc -and -not ($rawDesc.StartsWith("'") -or $rawDesc.StartsWith('"'))) {
+        Add-Finding $rel 'WARN' "description이 인용부호로 감싸여 있지 않다 — 값에 ': '가 들어가면 엄격한 YAML 파서가 실패한다(작은따옴표 권장, 내부 '는 ''로)"
+    }
+
     # 7) description 은 라우팅 신호다
     $desc = ''
     if ($fm.Map.ContainsKey('description')) { $desc = $fm.Map['description'] }
@@ -324,12 +339,16 @@ if (-not $Path) {
     }
 }
 
-# 라우팅 고아
+# 라우팅 고아 — 저장소 전체를 훑을 때만 판정한다.
+# -Path 로 일부만 검사하면 라우팅 그래프가 그 파일들로만 채워져, 스캔되지 않은 나머지가
+# 전부 거짓 고아로 잡힌다(한 파일 검사에 WARN 70건이 쏟아졌다). 부분 검사에선 건너뛴다.
+if (-not $Path) {
 foreach ($n in ($agentNames.Keys | Sort-Object)) {
     if ($n -in $RoutingEntryPoints) { continue }
     if ($referencedBy[$n].Count -eq 0) {
         Add-Finding "$n.md" 'WARN' '다른 어떤 에이전트도 이 에이전트를 위임 대상으로 지목하지 않는다 — 역방향 경계절 누락(라우팅 고아)'
     }
+}
 }
 
 # ----------------------------------------------------------------- 출력 ----

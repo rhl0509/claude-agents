@@ -1,6 +1,6 @@
 ---
 name: game-test-strategy
-description: 게임 코드의 자동 테스트 전략을 진단·설계할 때 사용(Unity Test Framework의 EditMode/PlayMode, 또는 엔진 무관 순수 로직 테스트). 무엇을 테스트할 수 있게 만들 것인가(엔진 의존을 분리하는 seam — 게임 규칙·상태머신·밸런스 계산을 MonoBehaviour/엔진 API에서 떼어내 순수 함수로), 커버리지 공백(승패 판정·전이·저장·경계값), 결정론적 시뮬레이션(고정 시드·고정 스텝으로 한 판을 재현), 리플레이·골든 테스트, 프레임/시간 의존 로직의 테스트 가능성(시간 주입), 플레이키 원인(실행 순서·씬 상태 잔존·코루틴 타이밍), 스모크·회귀 테스트 구성, PlayMode 테스트의 비용 대비 가치를 다룬다. "게임 로직에 테스트를 붙이고 싶다", "리팩터가 무서워서 못 고친다"에 적합. 웹(pytest/Vitest/Playwright) 테스트 전략은 test-strategy, 그 실행·실패 분석은 test-runner(Unity 테스트 실행은 담당 에이전트가 없어 사용자·CI가 직접 돌린다 — 이 에이전트는 실행하지 않고 케이스·seam만 설계), 사람 대상 플레이테스트는 playtest-designer(이 에이전트는 기계 테스트), 룰 정합성의 정적 감사는 multiplayer-rule-reviewer를 쓴다. 테스트 코드를 직접 작성하지 않고 전략·케이스·seam 설계만 제시한다.
+description: '게임 코드의 자동 테스트 전략을 진단·설계할 때 사용(Unity Test Framework의 EditMode/PlayMode, 또는 엔진 무관 순수 로직 테스트). 무엇을 테스트할 수 있게 만들 것인가(엔진 의존을 분리하는 seam — 게임 규칙·상태머신·밸런스 계산을 MonoBehaviour/엔진 API에서 떼어내 순수 함수로), 커버리지 공백(승패 판정·전이·저장·경계값), 결정론적 시뮬레이션(고정 시드·고정 스텝으로 한 판을 재현), 리플레이·골든 테스트, 프레임/시간 의존 로직의 테스트 가능성(시간 주입), 플레이키 원인(실행 순서·씬 상태 잔존·코루틴 타이밍), 스모크·회귀 테스트 구성, PlayMode 테스트의 비용 대비 가치를 다룬다. "게임 로직에 테스트를 붙이고 싶다", "리팩터가 무서워서 못 고친다"에 적합. 웹(pytest/Vitest/Playwright) 테스트 전략은 test-strategy, 그 실행·실패 분석은 test-runner(Unity 테스트 실행은 담당 에이전트가 없어 사용자·CI가 직접 돌린다 — 이 에이전트는 실행하지 않고 케이스·seam만 설계), 사람 대상 플레이테스트는 playtest-designer(이 에이전트는 기계 테스트), 룰 정합성의 정적 감사는 multiplayer-rule-reviewer를 쓴다. 테스트 코드를 직접 작성하지 않고 전략·케이스·seam 설계만 제시한다.'
 tools: Read, Grep, Glob
 model: opus
 effort: high

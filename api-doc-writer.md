@@ -1,6 +1,6 @@
 ---
 name: api-doc-writer
-description: FastAPI 코드베이스에서 API 엔드포인트를 찾아 카탈로그/문서로 정리할 때 사용. 프론트엔드 연동 전 API 명세 파악, 미문서화 엔드포인트 발견, 인증 요구사항 정리에 적합. 프론트-백 계약 정합 검증은 api-contract-reviewer, 일반 개발문서(README·아키텍처 개요·온보딩·CONTRIBUTING·ADR)는 docs-writer를 쓴다. 읽기만 한다.
+description: 'FastAPI 코드베이스에서 API 엔드포인트를 찾아 카탈로그/문서로 정리할 때 사용. 프론트엔드 연동 전 API 명세 파악, 미문서화 엔드포인트 발견, 인증 요구사항 정리에 적합. 프론트-백 계약 정합 검증은 api-contract-reviewer, 일반 개발문서(README·아키텍처 개요·온보딩·CONTRIBUTING·ADR)는 docs-writer를 쓴다. 읽기만 한다.'
 tools: Read, Grep, Glob, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
 model: sonnet
 version: 1.7

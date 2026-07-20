@@ -1,6 +1,6 @@
 ---
 name: curriculum-designer
-description: 강의·워크숍·온라인 강좌·강의자료를 만들기 전에 교수 설계(instructional design)를 하거나 기존 커리큘럼을 점검할 때 사용. 학습자·맥락 분석, 측정 가능한 학습 목표(Bloom's 동사), 모듈 분해와 선수관계 계열화(scaffolding), 난이도 곡선·페이싱, 학습 경험 흐름(도입·동기→설명→시연→실습→피드백→정리), 인지부하 관리(청킹), 형성·총괄 평가와 목표-평가-활동 정렬(backward design/constructive alignment), 슬라이드·핸드아웃·강사 노트 골격, 시간 배분을 다룬다. 바로 쓸 수 있는 커리큘럼 맵과 모듈별 완성형 초안을 낸다. 강의 홍보·상세페이지 카피 품질은 copy-reviewer, 하나의 강의를 릴스·블로그 등 다른 포맷으로 파생하는 것은 content-repurposer, 개발자용 기술문서(README·튜토리얼·ADR)는 docs-writer, 강의 안의 사실·수치 검증은 fact-checker, 프롬프트·지침 시스템 설계는 ai-workspace-architect를 쓴다. 파일을 직접 만들지 않고 설계·초안(텍스트)만 제시한다. 강의·강좌·교육 자료를 새로 설계해야 할 때 선제적으로(use proactively) 호출한다.
+description: '강의·워크숍·온라인 강좌·강의자료를 만들기 전에 교수 설계(instructional design)를 하거나 기존 커리큘럼을 점검할 때 사용. 학습자·맥락 분석, 측정 가능한 학습 목표(Bloom''s 동사), 모듈 분해와 선수관계 계열화(scaffolding), 난이도 곡선·페이싱, 학습 경험 흐름(도입·동기→설명→시연→실습→피드백→정리), 인지부하 관리(청킹), 형성·총괄 평가와 목표-평가-활동 정렬(backward design/constructive alignment), 슬라이드·핸드아웃·강사 노트 골격, 시간 배분을 다룬다. 바로 쓸 수 있는 커리큘럼 맵과 모듈별 완성형 초안을 낸다. 강의 홍보·상세페이지 카피 품질은 copy-reviewer, 하나의 강의를 릴스·블로그 등 다른 포맷으로 파생하는 것은 content-repurposer, 개발자용 기술문서(README·튜토리얼·ADR)는 docs-writer, 강의 안의 사실·수치 검증은 fact-checker, 프롬프트·지침 시스템 설계는 ai-workspace-architect를 쓴다. 파일을 직접 만들지 않고 설계·초안(텍스트)만 제시한다. 강의·강좌·교육 자료를 새로 설계해야 할 때 선제적으로(use proactively) 호출한다.'
 tools: Read, Grep, Glob
 model: opus
 effort: high

@@ -1,6 +1,6 @@
 ---
 name: docs-writer
-description: 코드베이스의 일반 기술문서를 작성·정비할 때 사용. README·아키텍처 개요·온보딩 가이드·CONTRIBUTING·의사결정 기록(ADR)을 코드·구조에서 추출해 정리한다. FastAPI 엔드포인트 카탈로그는 api-doc-writer, 강의·교육 설계는 curriculum-designer(이를 다른 포맷으로 파생하면 content-repurposer), 마케팅 카피는 copy-reviewer, 디자인 시스템 문서(DESIGN.md)는 design-system-architect를 쓴다. 파일을 직접 만들지 않고 문서 초안(텍스트)만 제시한다.
+description: '코드베이스의 일반 기술문서를 작성·정비할 때 사용. README·아키텍처 개요·온보딩 가이드·CONTRIBUTING·의사결정 기록(ADR)을 코드·구조에서 추출해 정리한다. FastAPI 엔드포인트 카탈로그는 api-doc-writer, 강의·교육 설계는 curriculum-designer(이를 다른 포맷으로 파생하면 content-repurposer), 마케팅 카피는 copy-reviewer, 디자인 시스템 문서(DESIGN.md)는 design-system-architect를 쓴다. 파일을 직접 만들지 않고 문서 초안(텍스트)만 제시한다.'
 tools: Read, Grep, Glob
 model: opus
 effort: high

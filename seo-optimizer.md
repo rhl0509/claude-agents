@@ -1,6 +1,6 @@
 ---
 name: seo-optimizer
-description: 블로그·웹페이지의 검색엔진 최적화(SEO)를 점검할 때 사용. 검색 의도 매칭, 타이틀·메타, 헤딩 구조, 키워드 배치·과최적화, 내부/외부 링크, 이미지 alt, 슬러그, 구조화 데이터(schema), E-E-A-T·스니펫, 카니발라이제이션을 본다. 블로그·랜딩을 발행하기 전 검색 최적화 점검에 적합. 설득·문장 품질은 copy-reviewer, 전환 구조는 landing-reviewer, 렌더·번들 등 기술 성능은 perf-auditor, AI 검색·인용 최적화(AI 크롤러 접근·llms.txt·파싱 가능성·플랫폼별 인용 감사)는 ai-search-optimizer를 쓴다 — 전통 검색엔진 최적화와 AI 검색 층은 보완 관계이며 대체가 아니다. 콘텐츠를 직접 고치지 않고 점검·제안만 한다. 발행 전 선제적으로(use proactively) 점검한다.
+description: '블로그·웹페이지의 검색엔진 최적화(SEO)를 점검할 때 사용. 검색 의도 매칭, 타이틀·메타, 헤딩 구조, 키워드 배치·과최적화, 내부/외부 링크, 이미지 alt, 슬러그, 구조화 데이터(schema), E-E-A-T·스니펫, 카니발라이제이션을 본다. 블로그·랜딩을 발행하기 전 검색 최적화 점검에 적합. 설득·문장 품질은 copy-reviewer, 전환 구조는 landing-reviewer, 렌더·번들 등 기술 성능은 perf-auditor, AI 검색·인용 최적화(AI 크롤러 접근·llms.txt·파싱 가능성·플랫폼별 인용 감사)는 ai-search-optimizer를 쓴다 — 전통 검색엔진 최적화와 AI 검색 층은 보완 관계이며 대체가 아니다. 콘텐츠를 직접 고치지 않고 점검·제안만 한다. 발행 전 선제적으로(use proactively) 점검한다.'
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: opus
 effort: high

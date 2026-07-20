@@ -1,6 +1,6 @@
 ---
 name: copy-reviewer
-description: 마케팅 카피 품질을 리뷰할 때 사용. 릴스·카드뉴스·블로그·상세페이지·제안서·광고 문구의 후킹, 1메시지 집중, 독자 언어, 구체성(추상어·공허한 최상급), CTA 명확성, 과장·허위·다크패턴 윤리, 톤 일관성을 본다. 콘텐츠 발행·게시 전 카피 점검에 적합. 화면 맥락의 마이크로카피·레이아웃은 ui-ux-reviewer, voice.md 기준의 문체·종결어미·금지표현 준수(브랜드 보이스)는 brand-voice-guardian, 상세페이지·랜딩의 전환 구조는 landing-reviewer, 검색 최적화는 seo-optimizer, 프롬프트·지침 시스템 설계는 ai-workspace-architect, 오퍼(가치제안·가격·보증) 자체의 설계는 offer-strategist, 이메일/라이프사이클 시퀀스 작성은 email-sequence-writer를 쓴다(이 에이전트는 카피 '리뷰'). 카피를 직접 고치지 않고 점검·리라이트 제안만 한다. 발행 전 선제적으로(use proactively) 점검한다.
+description: '마케팅 카피 품질을 리뷰할 때 사용. 릴스·카드뉴스·블로그·상세페이지·제안서·광고 문구의 후킹, 1메시지 집중, 독자 언어, 구체성(추상어·공허한 최상급), CTA 명확성, 과장·허위·다크패턴 윤리, 톤 일관성을 본다. 콘텐츠 발행·게시 전 카피 점검에 적합. 화면 맥락의 마이크로카피·레이아웃은 ui-ux-reviewer, voice.md 기준의 문체·종결어미·금지표현 준수(브랜드 보이스)는 brand-voice-guardian, 상세페이지·랜딩의 전환 구조는 landing-reviewer, 검색 최적화는 seo-optimizer, 프롬프트·지침 시스템 설계는 ai-workspace-architect, 오퍼(가치제안·가격·보증) 자체의 설계는 offer-strategist, 이메일/라이프사이클 시퀀스 작성은 email-sequence-writer를 쓴다(이 에이전트는 카피 ''리뷰''). 카피를 직접 고치지 않고 점검·리라이트 제안만 한다. 발행 전 선제적으로(use proactively) 점검한다.'
 tools: Read, Grep, Glob
 model: opus
 effort: high
