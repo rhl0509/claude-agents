@@ -47,7 +47,7 @@ $ConventionSkill= 'agent-conventions'
 # 본문 규범 — 저장소의 모든 에이전트가 지키기로 한 것
 $BodyNorms = @(
     @{ Name = '신뢰 경계(프롬프트 인젝션 방어)'; Patterns = @('신뢰 경계', '인젝션 방어') }
-    @{ Name = '출력 형식';                       Patterns = @('출력 형식', '보고 형식') }
+    @{ Name = '출력 형식';                       Patterns = @('출력 형식', '보고 형식', '출력 규칙', '산출 형식') }
 )
 
 $script:Errors   = 0
@@ -267,8 +267,13 @@ foreach ($file in $files) {
             Add-Finding $rel 'WARN' "본문에 '$($norm.Name)' 절이 없다"
         }
     }
-    if ($fm.Body -notmatch '수정하지 않|작성하지 않|만들지 않|고치지 않|쓰지 않는다|읽기 전용') {
-        Add-Finding $rel 'WARN' '본문에 읽기 전용/비수정 선언이 없다'
+    # 읽기 전용 선언은 본문이든 description 이든 한 곳에만 있으면 계약이 선다.
+    # 설계 계열(아키텍트)은 description 에 "코드를 직접 작성하지 않고 설계만 한다"로 두는 게 관행이라
+    # 본문만 보면 7종이 거짓 경고로 잡혔다 — 판정 위치를 둘 다로 넓힌다.
+    $roDeclared = ($fm.Body -match '수정하지 않|변경하지 않|작성하지 않|만들지 않|고치지 않|쓰지 않는다|실행하지 않|읽기 전용') -or
+                  ($desc -match '수정하지 않|변경하지 않|작성하지 않|만들지 않|고치지 않|쓰지 않는다|실행하지 않|읽기 전용')
+    if (-not $roDeclared) {
+        Add-Finding $rel 'WARN' '읽기 전용/비수정 선언이 본문·description 어디에도 없다'
     }
 
     # 10) 슬래시 커맨드 존재 여부
@@ -284,7 +289,32 @@ foreach ($file in $files) {
     }
 }
 
-# ------------------------------------------------- 교차 검사: 라우팅 고아 ---
+# --------------------------- 교차 검사: 레지스트리 · 문서 표 · 라우팅 고아 ---
+
+# 레지스트리 드리프트 — 생성기가 판정한다(명단이 한 벌이라는 전제를 지키는 검사)
+$builder = Join-Path $root 'build-registry.ps1'
+if ((Test-Path $builder) -and (-not $Path)) {
+    & $builder -Check | Out-Null
+    if ($LASTEXITCODE -ne 0) {
+        Add-Finding 'registry.json' 'ERROR' 'registry.json 또는 project-manager.md 라우팅 블록이 실제 파일 집합과 어긋난다 — .\build-registry.ps1 실행 필요'
+    }
+}
+
+# 문서 표 누락 — README·AGENTS 는 사람이 쓴 설명이 많아 생성하지 않고 "행이 있는가"만 본다
+if (-not $Path) {
+    foreach ($doc in @('README.md', 'AGENTS.md')) {
+        $docPath = Join-Path $root $doc
+        if (-not (Test-Path $docPath)) { continue }
+        $docText = Read-Text $docPath
+        foreach ($n in ($agentNames.Keys | Sort-Object)) {
+            if ($docText -notmatch ('\|\s*`' + [regex]::Escape($n) + '`')) {
+                Add-Finding $doc 'WARN' "표에 '$n' 행이 없다"
+            }
+        }
+    }
+}
+
+# 라우팅 고아
 foreach ($n in ($agentNames.Keys | Sort-Object)) {
     if ($n -in $RoutingEntryPoints) { continue }
     if ($referencedBy[$n].Count -eq 0) {

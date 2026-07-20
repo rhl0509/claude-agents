@@ -1,0 +1,116 @@
+{
+  "_comment": [
+    "에이전트 레지스트리 — 파일에서 유도할 수 없는 것만 담는다.",
+    "tools·model·effort·version·updated·description은 각 .md 프론트매터가 정본이므로 여기 두지 않는다.",
+    "여기 있는 것은 두 가지뿐이다: 어느 묶음에 속하는가(group), 라우팅에서 뭐라고 부를 것인가(note).",
+    "build-registry.ps1이 이 파일 + 실제 .md 파일을 읽어 project-manager.md의 라우팅 블록을 생성한다.",
+    "lint-agents.ps1이 이 파일과 실제 파일 목록이 어긋나면 ERROR로 잡는다(누락·유령 둘 다).",
+    "entryPoints는 라우팅 대상이 아닌 에이전트 — PM 자신처럼 조율 층에 있는 것."
+  ],
+  "entryPoints": ["project-manager"],
+  "groupOrder": [
+    "코드 품질·버그",
+    "설계(구조)",
+    "성능",
+    "보안",
+    "테스트·디버깅",
+    "DB·마이그레이션",
+    "운영",
+    "API·문서",
+    "화면",
+    "게임",
+    "도메인",
+    "콘텐츠·마케팅",
+    "교육·창작·커리어",
+    "발상·검증",
+    "메타·인프라"
+  ],
+  "agents": {
+    "code-reviewer":                    { "group": "코드 품질·버그", "note": "웹/일반 폴백" },
+    "c-code-reviewer":                  { "group": "코드 품질·버그", "note": "C" },
+    "dotnet-code-reviewer":             { "group": "코드 품질·버그", "note": "비-Unity .NET" },
+    "java-code-reviewer":               { "group": "코드 품질·버그", "note": "Java" },
+    "swift-code-reviewer":              { "group": "코드 품질·버그", "note": "Swift" },
+    "unity-code-reviewer":              { "group": "코드 품질·버그", "note": "Unity C#" },
+    "codebase-archaeologist":           { "group": "코드 품질·버그", "note": "여러 세션 누적 드리프트" },
+    "refactor-strategist":              { "group": "코드 품질·버그", "note": "동작 보존 리팩터 계획" },
+
+    "system-architect":                 { "group": "설계(구조)", "note": "웹 풀스택" },
+    "c-architect":                      { "group": "설계(구조)", "note": "C" },
+    "dotnet-architect":                 { "group": "설계(구조)", "note": ".NET" },
+    "java-architect":                   { "group": "설계(구조)", "note": "Java/Spring" },
+    "swift-architect":                  { "group": "설계(구조)", "note": "Swift" },
+    "game-design-architect":            { "group": "설계(구조)", "note": "게임 시스템·코어 루프" },
+    "identity-access-architect":        { "group": "설계(구조)", "note": "인증·세션·테넌트 격리" },
+    "data-modeler":                     { "group": "설계(구조)", "note": "데이터 모델" },
+    "design-system-architect":          { "group": "설계(구조)", "note": "디자인 시스템" },
+
+    "perf-auditor":                     { "group": "성능", "note": "Next.js 프론트 전용" },
+    "db-optimizer":                     { "group": "성능", "note": "MySQL 쿼리·인덱스" },
+    "c-perf-auditor":                   { "group": "성능", "note": "C" },
+    "dotnet-perf-auditor":              { "group": "성능", "note": ".NET" },
+    "unity-perf-auditor":               { "group": "성능", "note": "Unity 런타임" },
+
+    "security-reviewer":                { "group": "보안", "note": "코드 취약점(OWASP)" },
+    "threat-modeler":                   { "group": "보안", "note": "설계 단계 위협 모델링" },
+    "llm-ai-security-reviewer":         { "group": "보안", "note": "AI/LLM 심화" },
+    "ai-code-auditor":                  { "group": "보안", "note": "AI 생성 코드 기본값 결함" },
+
+    "test-runner":                      { "group": "테스트·디버깅", "note": "실행·실패 분석" },
+    "test-strategy":                    { "group": "테스트·디버깅", "note": "커버리지 공백" },
+    "game-test-strategy":               { "group": "테스트·디버깅", "note": "게임 테스트 seam" },
+    "debugger":                         { "group": "테스트·디버깅", "note": "이미 난 증상의 원인 규명" },
+
+    "migration-reviewer":               { "group": "DB·마이그레이션", "note": "스키마 마이그레이션 안전성" },
+    "save-data-reviewer":               { "group": "DB·마이그레이션", "note": "게임 세이브 호환성" },
+
+    "devops-reviewer":                  { "group": "운영", "note": "Docker·CI/CD·배포" },
+    "observability-reviewer":           { "group": "운영", "note": "로깅·트레이싱" },
+    "dependency-auditor":               { "group": "운영", "note": "의존성 취약·라이선스" },
+    "automation-reliability-reviewer":  { "group": "운영", "note": "데몬·크론 신뢰성" },
+
+    "api-contract-reviewer":            { "group": "API·문서", "note": "프론트-백 계약 정합" },
+    "api-doc-writer":                   { "group": "API·문서", "note": "FastAPI 엔드포인트 카탈로그" },
+    "docs-writer":                      { "group": "API·문서", "note": "개발자 문서(README·ADR)" },
+
+    "ui-ux-reviewer":                   { "group": "화면", "note": "웹 UI/UX·접근성" },
+    "game-ui-reviewer":                 { "group": "화면", "note": "게임 HUD·메뉴" },
+
+    "game-feel-reviewer":               { "group": "게임", "note": "손맛·juice" },
+    "level-designer":                   { "group": "게임", "note": "레벨·스테이지 공간" },
+    "game-audio-reviewer":              { "group": "게임", "note": "오디오 구현" },
+    "game-localization-reviewer":       { "group": "게임", "note": "현지화 준비" },
+    "multiplayer-rule-reviewer":        { "group": "게임", "note": "멀티플레이 룰·서버 권위" },
+    "playtest-designer":                { "group": "게임", "note": "사람 플레이테스트 설계" },
+    "unity-build-auditor":              { "group": "게임", "note": "빌드·스토어 제출" },
+
+    "ml-experiment-reviewer":           { "group": "도메인", "note": "ML 실험 설계·데이터 누출" },
+    "accounting-rule-reviewer":         { "group": "도메인", "note": "복식부기 규칙" },
+
+    "copy-reviewer":                    { "group": "콘텐츠·마케팅", "note": "카피 품질" },
+    "landing-reviewer":                 { "group": "콘텐츠·마케팅", "note": "랜딩 전환 구조" },
+    "seo-optimizer":                    { "group": "콘텐츠·마케팅", "note": "전통 검색 최적화" },
+    "ai-search-optimizer":              { "group": "콘텐츠·마케팅", "note": "AI 검색·인용" },
+    "video-optimizer":                  { "group": "콘텐츠·마케팅", "note": "유튜브 패키징·리텐션" },
+    "image-prompt-engineer":            { "group": "콘텐츠·마케팅", "note": "AI 이미지 프롬프트" },
+    "fact-checker":                     { "group": "콘텐츠·마케팅", "note": "초안 속 사실·출처 검증" },
+    "content-repurposer":               { "group": "콘텐츠·마케팅", "note": "1소스 멀티포맷 파생" },
+    "brand-voice-guardian":             { "group": "콘텐츠·마케팅", "note": "브랜드 보이스 일관성" },
+    "offer-strategist":                 { "group": "콘텐츠·마케팅", "note": "오퍼 설계(카피 앞단)" },
+    "email-sequence-writer":            { "group": "콘텐츠·마케팅", "note": "이메일 시퀀스" },
+    "proposal-strategist":              { "group": "콘텐츠·마케팅", "note": "제안서 전략" },
+
+    "curriculum-designer":              { "group": "교육·창작·커리어", "note": "강의 교수 설계" },
+    "storyteller":                      { "group": "교육·창작·커리어", "note": "완성형 이야기 집필" },
+    "cover-letter-tailor":              { "group": "교육·창작·커리어", "note": "채용 자소서 맞춤" },
+
+    "brainstormer":                     { "group": "발상·검증", "note": "발산→수렴(모든 실행 앞단)" },
+    "truth-checker":                    { "group": "발상·검증", "note": "질문·주장 정확성 검증" },
+
+    "ai-workspace-architect":           { "group": "메타·인프라", "note": "AI 작업환경 재설계" },
+    "agent-definition-reviewer":        { "group": "메타·인프라", "note": "이 라이브러리의 정의 점검" },
+    "memory-recaller":                  { "group": "메타·인프라", "note": "메모리 회상(질의 기반)" },
+    "self-reflector":                   { "group": "메타·인프라", "note": "관찰 로그 증류" },
+    "knowledge-gardener":               { "group": "메타·인프라", "note": "지식베이스 구조 위생" }
+  }
+}
