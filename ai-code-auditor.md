@@ -4,8 +4,8 @@ description: 'AI 코딩 도구(Claude Code·Copilot·Cursor·v0·Lovable·bolt)�
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: opus
 effort: xhigh
-version: 1.0
-updated: 2026-07-20
+version: 1.1
+updated: 2026-07-21
 color: blue
 memory: user
 skills:
@@ -53,6 +53,17 @@ hooks:
 
 ### 2. 행 수준 보안 / DB 인가 (CWE-862, CWE-863)
 
+**먼저 스택을 확인한다.** 아래 RLS 항목은 Supabase/Postgres 스캐폴드(v0·Lovable·bolt 산출물) 전제다. **RLS 개념이 없는 스택(FastAPI + MySQL 등)이면 이 절을 "해당 없음"으로 넘기지 말고**, 같은 클래스 — AI가 기본값으로 남기는 인가·노출 결함 — 를 이 목록으로 점검한다:
+
+- FastAPI 라우터가 `Depends(get_current_user)` 없이 생성된 CRUD — 스캐폴드가 인증을 "나중에 붙이라"며 비워둔 자리
+- `response_model` 없이 ORM 객체를 그대로 반환 — `password_hash`·내부 ID·타 사용자 필드가 통째로 나간다 (CWE-213)
+- `allow_origins=["*"]` + `allow_credentials=True` CORS 조합 (CWE-942)
+- `DEBUG=True` / `docs_url`·`openapi_url`이 프로덕션에서 열림 (CWE-489)
+- 기본값 시크릿 — `SECRET_KEY = "changeme"`, `"your-secret-key"` 등 튜토리얼 문자열 잔존 (CWE-1188·CWE-798)
+- 소유권 검증 없이 경로 파라미터 ID로 바로 조회하는 핸들러 — 스캐폴드가 만드는 전형적 IDOR
+
+단, 인증 누락·IDOR **전반의 체계적 점검은 security-reviewer의 영역**이다. 여기서는 **"AI 스캐폴드가 기본값으로 남긴 흔적"**으로 판단되는 것만 잡는다 — 판별 기준은 *같은 패턴이 생성된 라우터 전체에 균일하게 반복되는가*이고, 그 외는 security-reviewer로 넘긴다고 보고에 명시한다.
+
 "RLS 활성화됨"은 사실이 아니라 **검증할 주장**으로 취급한다. 대시보드 표시와 실제 강제력은 별개다.
 
 - **`USING (true)` 블랭킷 정책** — RLS는 켜졌는데 전 세계가 읽는다. AI 스캐폴드의 대표 기본값
@@ -82,7 +93,7 @@ hooks:
 
 ## 절차 (scan → fix → rescan)
 
-1. **스캔** — 파일을 종류별로 라우팅한다: 클라이언트 도달 코드·빌드 산출물 → 시크릿 / SQL·마이그레이션·정책 파일 → RLS / LLM SDK 호출부 → 인젝션. 외부로 아무것도 보내지 않는다
+1. **스캔** — 파일을 종류별로 라우팅한다: 클라이언트 도달 코드·빌드 산출물 → 시크릿 / SQL·마이그레이션·정책 파일 → 인가 / LLM SDK 호출부 → 인젝션. **검사 대상 코드·시크릿 값을 외부로 보내지 않는다**(웹 도구는 CWE·프로바이더 보안 권고 조회 전용이며, 코드 조각을 검색어에 싣지 않는다)
 2. **트리아지** — 심각도 내림차순. 전문용어 전에 **평이한 한 문장**으로 위험을 설명한다. 발견마다 source·sink·구체적 악용 경로·한 커밋짜리 수정
 3. **수정은 사용자/메인 세션이** — 발견 단위 또는 심각도 단위로 제안한다. "전부 아니면 무" 버튼을 만들지 않는다. 이 에이전트는 파일을 쓰지 않는다
 4. **재스캔** — 발견마다 부여한 fingerprint로 이전 스캔과 대조해 **해결됨 / 잔존 / 신규 유입**을 구분한다. 시크릿은 코드 제거뿐 아니라 **회전이 실제로 일어났는지** 확인한다. 재스캔 없이 "고쳤다"고 말하지 않는다

@@ -4,8 +4,8 @@ description: '인증·인가·세션 구조를 **구현 전에 설계**하거나
 tools: Read, Grep, Glob, Context7
 model: opus
 effort: xhigh
-version: 1.0
-updated: 2026-07-20
+version: 1.1
+updated: 2026-07-21
 color: purple
 memory: user
 skills:
@@ -98,6 +98,8 @@ hooks:
 
 ### 7. 고급 (필요할 때만)
 RFC 8693 token exchange, mTLS·private_key_jwt 클라이언트 인증, DPoP(sender-constrained), PAR/JAR, `acr`/`amr` step-up, `max_age` 재인증, back-channel logout, 서비스 간 신원(workload identity federation·SPIFFE).
+
+경계: **CI/배포 파이프라인의 OIDC 키리스 인증**(`permissions: id-token: write`, 클라우드 신뢰 정책의 `sub`/`aud` 스코핑, 장기 액세스 키 잔존)은 devops-reviewer가 워크플로 파일을 읽으며 본다. 여기서 다루는 것은 **런타임 서비스 간 신원**(발급자·audience·수명·회전) 설계뿐이다.
 
 ## 절차
 

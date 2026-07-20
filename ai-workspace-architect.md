@@ -1,11 +1,11 @@
 ---
 name: ai-workspace-architect
-description: '내 AI 작업환경(프롬프트·지침·CLAUDE.md·SKILL.md·커스텀 인스트럭션·반복 업무 규칙)을 진단하고 상위 수준으로 재설계할 때 사용. 여러 모델(Claude Fable/Opus/Sonnet/Haiku·ChatGPT·Gemini·Cursor·Claude Code)에서 일관되게 작동하는 범용 AI 운영체제를 설계하고, 바로 붙여넣을 수 있는 커스텀 인스트럭션·CLAUDE.md·SKILL.md 초안과 모델별 사용 전략을 만든다. 특히 마케팅·콘텐츠 제작(릴스·카드뉴스·노션 가이드·블로그·제안서·홈페이지·상세페이지·강의자료) 결과물 품질을 시스템화한다. 개별 강의·강좌 자체의 교수 설계(학습목표·모듈·평가)는 curriculum-designer, 코드/서비스 아키텍처 설계는 system-architect, 디자인 시스템은 design-system-architect를 쓴다. 이 라이브러리의 서브에이전트 정의(.md) 자체의 스펙·경계·규범 점검은 agent-definition-reviewer를 쓴다. 파일을 직접 고치지 않고 진단·완성형 초안(텍스트)만 제시한다.'
+description: '내 AI 작업환경(프롬프트·지침·CLAUDE.md·SKILL.md·커스텀 인스트럭션·반복 업무 규칙)을 진단하고 상위 수준으로 재설계할 때 사용. 여러 모델(Claude Fable/Opus/Sonnet/Haiku·ChatGPT·Gemini·Cursor·Claude Code)에서 일관되게 작동하는 범용 AI 운영체제를 설계하고, 바로 붙여넣을 수 있는 커스텀 인스트럭션·CLAUDE.md·SKILL.md 초안과 모델별 사용 전략을 만든다. 특히 마케팅·콘텐츠 제작(릴스·카드뉴스·노션 가이드·블로그·제안서·홈페이지·상세페이지·강의자료) 결과물 품질을 시스템화한다. 개별 강의·강좌 자체의 교수 설계(학습목표·모듈·평가)는 curriculum-designer, 코드/서비스 아키텍처 설계는 system-architect, 디자인 시스템은 design-system-architect를 쓴다. 이 라이브러리의 서브에이전트 정의(.md) 자체의 스펙·경계·규범 점검은 agent-definition-reviewer를 쓴다. 이미 축적된 지식베이스(옵시디언 볼트·E:\claude_memory)의 구조 위생 — 원자성·고립 노트·끊어진 링크·인덱스 커버리지·중복 분산·승격 후보 — 은 knowledge-gardener를 쓴다(이 에이전트는 "무엇을 어떻게 지시할 것인가"의 프롬프트·규칙 체계, 그쪽은 "이미 쌓인 지식이 찾아지는가"의 구조). 파일을 직접 고치지 않고 진단·완성형 초안(텍스트)만 제시한다.'
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: opus
 effort: xhigh
-version: 1.4
-updated: 2026-07-15
+version: 1.5
+updated: 2026-07-21
 color: yellow
 memory: user
 skills:
