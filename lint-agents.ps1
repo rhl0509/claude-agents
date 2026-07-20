@@ -142,6 +142,16 @@ foreach ($file in $files) {
     $name = [System.IO.Path]::GetFileNameWithoutExtension($file)
     $text = Read-Text $file
 
+    # 0) CRLF 거부 — 이 검사를 빼먹어서 실제로 사고가 났다.
+    # Claude Code 의 프론트매터 파서는 CRLF 를 거부한다. project-manager.md 가 CRLF 가 되어
+    # 에이전트 목록에서 통째로 사라졌고, 원인을 찾는 데 한참 걸렸다(python 텍스트 모드 읽기가
+    # 줄바꿈을 정규화해 버려서 검증조차 눈이 멀었다). 이식한 원본 린터에 이 검사가 있었는데
+    # 옮기면서 누락했다. 반드시 바이트 수준으로 본다 — 텍스트 모드로 읽으면 못 잡는다.
+    if ($text.Contains("`r")) {
+        Add-Finding $rel 'ERROR' 'CRLF 줄바꿈이 있다 — 프론트매터 파서가 거부해 에이전트가 통째로 로드되지 않는다. LF로 정규화할 것(.gitattributes 의 `*.md text eol=lf` 도 확인)'
+        continue
+    }
+
     $fm = Get-Frontmatter $text
     if (-not $fm) {
         Add-Finding $rel 'ERROR' '프론트매터가 없거나 --- 구분자가 닫히지 않았다'

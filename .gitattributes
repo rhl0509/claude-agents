@@ -1,0 +1,23 @@
+# 줄바꿈 고정 — 이게 없으면 에이전트가 통째로 죽는다.
+#
+# 이 저장소는 core.autocrlf=true 환경에서 쓰인다. .gitattributes 가 없으면 git 이
+# 체크아웃할 때 추적 파일을 전부 CRLF 로 바꾸고, sync.ps1 이 그대로 ~/.claude/agents 로
+# 복사하며, Claude Code 의 프론트매터 파서는 CRLF 를 거부한다 → 73종 전체가 사용 불가.
+#
+# 실제로 2026-07-20 에 project-manager.md 하나가 CRLF 가 되어 에이전트 목록에서 사라졌다.
+# 그때는 파일 하나였지만, clone·checkout·reset --hard 를 한 번 하면 전부가 그렇게 된다.
+#
+# 정의·문서·데이터는 LF 로 고정한다.
+*.md    text eol=lf
+*.json  text eol=lf
+*.js    text eol=lf
+
+# PowerShell 은 CRLF 로 둔다. Windows PowerShell 5.1 은 UTF-8 BOM 이 없으면 .ps1 을
+# ANSI(cp949)로 읽어 한글이 깨지므로 BOM 을 유지해야 하고, 줄바꿈도 CRLF 가 관행이다.
+*.ps1   text eol=crlf working-tree-encoding=UTF-8
+*.bat   text eol=crlf
+
+# 바이너리로 취급(줄바꿈 변환 금지)
+*.png   binary
+*.jpg   binary
+*.ico   binary
