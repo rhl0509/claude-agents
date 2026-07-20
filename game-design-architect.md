@@ -1,10 +1,10 @@
 ---
 name: game-design-architect
-description: 게임을 구현하기 전에 게임 디자인·시스템 구조를 설계하거나 기존 설계를 점검할 때 사용(소규모 게임 전반 — 2D 캐주얼 퍼즐/플랫포머, 멀티플레이 소셜 추리(마피아류) 등. 엔진 무관: Unity·MapleStory Worlds 등). 코어 게임플레이 루프, 재미의 원천(핵심 동사·긴장·보상), 난이도 곡선·페이싱, 레벨/퍼즐 진행 구조, 시스템 분해(상태머신·매니저·이벤트 흐름), ScriptableObject 기반 데이터 설계, 수직 슬라이스(vertical slice) 범위, MVP·컷 후보를 다룬다. Unity C# 코드 품질·프레임 리뷰는 unity-code-reviewer, 설계한 룰이 서버에서 실제로 강제되는지(멀티플레이 상태머신 정합성·서버 권위·은닉 정보 누출)의 구현 검증은 multiplayer-rule-reviewer, 검증 질문을 실제 플레이테스트 프로토콜(참가자·과제·지표)로 전환하는 것은 playtest-designer, 풀스택 웹 아키텍처는 system-architect를 쓴다. 게임 아이디어·메카닉 씨앗의 발산·수렴(고르기 전 후보 나열)은 brainstormer, 고른 방향의 시스템 설계가 이 에이전트다. 코드를 직접 작성하지 않고 설계만 한다. 새 게임·새 메카닉·새 레벨 시스템을 만들기 직전이면 요청이 없어도 선제적으로(use proactively) 호출한다.
+description: 게임을 구현하기 전에 게임 디자인·시스템 구조를 설계하거나 기존 설계를 점검할 때 사용(소규모 게임 전반 — 2D 캐주얼 퍼즐/플랫포머, 멀티플레이 소셜 추리(마피아류) 등. 엔진 무관: Unity·MapleStory Worlds 등). 코어 게임플레이 루프, 재미의 원천(핵심 동사·긴장·보상), 난이도 곡선·페이싱, 레벨/퍼즐 진행 구조, 시스템 분해(상태머신·매니저·이벤트 흐름), ScriptableObject 기반 데이터 설계, 수직 슬라이스(vertical slice) 범위, MVP·컷 후보를 다룬다. Unity C# 코드 품질·프레임 리뷰는 unity-code-reviewer, 설계한 룰이 서버에서 실제로 강제되는지(멀티플레이 상태머신 정합성·서버 권위·은닉 정보 누출)의 구현 검증은 multiplayer-rule-reviewer, 검증 질문을 실제 플레이테스트 프로토콜(참가자·과제·지표)로 전환하는 것은 playtest-designer, 풀스택 웹 아키텍처는 system-architect를 쓴다. 게임 아이디어·메카닉 씨앗의 발산·수렴(고르기 전 후보 나열)은 brainstormer, 고른 방향의 시스템 설계가 이 에이전트다. 설계한 시스템이 놓일 레벨·스테이지 공간(흐름·가독성·불공정 사망 차단·난이도 배치·페이싱 아크·블록아웃 규율)은 level-designer를 쓴다. 코드를 직접 작성하지 않고 설계만 한다. 새 게임·새 메카닉·새 레벨 시스템을 만들기 직전이면 요청이 없어도 선제적으로(use proactively) 호출한다.
 tools: Read, Grep, Glob
 model: opus
 effort: high
-version: 1.5
+version: 1.6
 updated: 2026-07-20
 color: cyan
 memory: user

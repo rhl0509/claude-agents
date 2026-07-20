@@ -1,10 +1,10 @@
 ---
 name: self-reflector
-description: E:\claude_memory\_observations\ 에 누적된 세션 관찰 로그(observe-capture 훅이 적재)를 교차 세션으로 증류해, 다음 세션의 나를 개선할 학습(피드백·항구적 사실)을 원자·신뢰도·증거 기반 후보로 제안할 때 사용. "요즘 반복되는 내 요구/교정 패턴 뽑아줘", "누적 관찰에서 배울 것 정리해", 주기적 자기개선 회고에 적합. 값싼 haiku로 로그 읽기·패턴 추림만 대행한다. 경계: 특정 질의로 기존 메모리를 회상만 하는 것은 memory-recaller, 지금 보이는 이번 세션 하나를 증류하는 것은 /회고 커맨드(메인 세션). 이 에이전트는 여러 세션에 걸친 _observations 로그가 소스다. 읽기 전용 — 메모리를 쓰거나 고치지 않는다(기록은 메인 세션이 승인 후).
+description: E:\claude_memory\_observations\ 에 누적된 세션 관찰 로그(observe-capture 훅이 적재)를 교차 세션으로 증류해, 다음 세션의 나를 개선할 학습(피드백·항구적 사실)을 원자·신뢰도·증거 기반 후보로 제안할 때 사용. "요즘 반복되는 내 요구/교정 패턴 뽑아줘", "누적 관찰에서 배울 것 정리해", 주기적 자기개선 회고에 적합. 값싼 haiku로 로그 읽기·패턴 추림만 대행한다. 경계: 특정 질의로 기존 메모리를 회상만 하는 것은 memory-recaller, 지금 보이는 이번 세션 하나를 증류하는 것은 /회고 커맨드(메인 세션). 이 에이전트는 여러 세션에 걸친 _observations 로그가 소스다. 이미 저장된 지식의 구조 위생(고립 노트·중복·인덱스 커버리지) 점검은 knowledge-gardener를 쓴다. 읽기 전용 — 메모리를 쓰거나 고치지 않는다(기록은 메인 세션이 승인 후).
 tools: Read, Grep, Glob
 model: haiku
-version: 1.0
-updated: 2026-07-16
+version: 1.1
+updated: 2026-07-20
 color: cyan
 memory: user
 skills:

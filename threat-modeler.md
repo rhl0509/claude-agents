@@ -1,11 +1,11 @@
 ---
 name: threat-modeler
-description: 기능·시스템을 구현하기 전(또는 큰 변경·외부 연동 전) 위협 모델을 세울 때 사용. 자산·진입점·공격 표면·신뢰 경계·데이터 흐름을 도출하고 STRIDE(스푸핑·변조·부인·정보노출·서비스거부·권한상승)로 구성요소별 위협을 뽑아 위험도순으로 완화책·보안 요구사항·악용 시나리오를 낸다. 코드가 이미 있는 상태의 취약점 점검은 security-reviewer, 코드가 생긴 뒤의 AI/LLM 심화 점검은 llm-ai-security-reviewer(설계 단계 LLM 위협은 이 에이전트가 위협 모델에 포함), 시스템 구조 설계는 system-architect를 쓴다. 설계 단계 선제 방어라 코드를 수정하지 않고 위협 모델·요구사항만 제시한다. 새 기능·인증/결제/파일업로드/외부연동을 설계하기 전 선제적으로(use proactively) 호출한다.
+description: 기능·시스템을 구현하기 전(또는 큰 변경·외부 연동 전) 위협 모델을 세울 때 사용. 자산·진입점·공격 표면·신뢰 경계·데이터 흐름을 도출하고 STRIDE(스푸핑·변조·부인·정보노출·서비스거부·권한상승)로 구성요소별 위협을 뽑아 위험도순으로 완화책·보안 요구사항·악용 시나리오를 낸다. 코드가 이미 있는 상태의 취약점 점검은 security-reviewer, 코드가 생긴 뒤의 AI/LLM 심화 점검은 llm-ai-security-reviewer(설계 단계 LLM 위협은 이 에이전트가 위협 모델에 포함), 시스템 구조 설계는 system-architect, 신원 표면의 구체 설계(OAuth/OIDC 플로우와 콜백 검증·세션 방식 결정·패스키·SSO/SCIM·테넌트 격리 지점)는 identity-access-architect를 쓴다. 설계 단계 선제 방어라 코드를 수정하지 않고 위협 모델·요구사항만 제시한다. 새 기능·인증/결제/파일업로드/외부연동을 설계하기 전 선제적으로(use proactively) 호출한다.
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: opus
 effort: xhigh
-version: 1.1
-updated: 2026-07-07
+version: 1.2
+updated: 2026-07-20
 color: blue
 memory: user
 skills:

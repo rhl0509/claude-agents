@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (64종)
+# 서브에이전트 전체 정리 (73종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> **클러스터 구성(64종)** — 번호는 `README.md`의 에이전트 표와 동일하다(`#1`~`#64` 연속).
+> **클러스터 구성(73종)** — 번호는 `README.md`의 에이전트 표와 동일하다(`#1`~`#73` 연속).
 >
 > | 클러스터 | 종수 | 성격 |
 > |---|---|---|
@@ -111,6 +111,15 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 62 | `offer-strategist` | `/offer` | 콘텐츠 | 카피 앞단 오퍼 설계(가치제안·가격 티어·보증·보너스·포지셔닝) | Read, Grep, Glob |
 | 63 | `truth-checker` | `/truth` | 검증 | 질문·주장 정확성 검증(5분류·날조 금지·근거 기반 신뢰도 0~1·0.8 미만 재작성·[명확한 답변]/[신뢰도]/[확인할 점]) | Read, Grep, Glob, WebSearch, WebFetch |
 | 64 | `brainstormer` | `/brainstorm` | 발상 | 아이디어 발산(다각도 렌즈)→수렴(기준 채점) 브레인스토밍 — 번호 표·Top 3+와일드카드, 모든 실행 앞단 | Read, Grep, Glob |
+| 65 | `ai-code-auditor` | `/aicode` | 보안 | AI 생성 코드의 스캐폴딩 기본값 결함(클라 도달 시크릿·RLS 허울·프롬프트 인젝션 싱크) — CWE 매핑·오탐보다 미탐 | Read, Grep, Glob, WebSearch, WebFetch |
+| 66 | `codebase-archaeologist` | `/archaeo` | 엔지니어링 | 여러 세션 누적 로직 드리프트 발굴(병렬 구현·폴백 역전·상태 존재 가정·단위 불일치) — 4뷰 레지스트리 | Read, Grep, Glob, Bash |
+| 67 | `identity-access-architect` | `/autharch` | 설계 | 인증·인가·세션 구조 설계(플로우 검증·세션 결정표·패스키·SSO/SCIM·테넌트 격리) | Read, Grep, Glob, Context7 |
+| 68 | `video-optimizer` | `/video` | 콘텐츠 | 유튜브 패키징·리텐션·메타데이터 최적화(제목 3방향·훅 초단위·챕터) + 키즈 채널 분기 | Read, Grep, Glob, WebSearch, WebFetch |
+| 69 | `ai-search-optimizer` | `/aeo` | 콘텐츠 | AI 검색·인용 최적화(기반 감사 + 인용 감사) — seo-optimizer의 보완층 | Read, Grep, Glob, WebSearch, WebFetch |
+| 70 | `image-prompt-engineer` | `/imgprompt` | 콘텐츠 | AI 이미지 생성 프롬프트 5계층 설계 + 권리 경계(실존 인물·브랜드 거부) | Read, Grep, Glob |
+| 71 | `proposal-strategist` | `/proposal` | 콘텐츠 | 제안서 전략(승리 테마·3막 서사·경영진 요약) — 1인 규모 체크포인트 환산 | Read, Grep, Glob |
+| 72 | `level-designer` | `/level` | 게임 | 레벨·스테이지 공간 설계(흐름·불공정 사망 차단·페이싱·블록아웃 규율) | Read, Grep, Glob |
+| 73 | `knowledge-gardener` | `/garden` | 인프라 | 지식베이스 구조 위생(고립 노트·인덱스 커버리지·상록 승격) — 읽기 전용 | Read, Grep, Glob |
 
 ---
 
@@ -418,6 +427,46 @@ Swift 앱 구조 설계. 아키텍처 패턴 선택(MVVM/TCA/VIPER/Clean, 규모
 → 구현 코드 결함은 `swift-code-reviewer`, 웹 풀스택은 `system-architect`, .NET 구조는 `dotnet-architect`, C 구조는 `c-architect`.
 
 ---
+
+### 🆕 1.92 신설 — 외부 라이브러리 대조로 채운 공백 9종
+
+공개 모음집 [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)(MIT, 308종)의 프론트매터를 전수 대조해 이 라이브러리에 **없던 각도만** 추린 결과다. 내용만 취하고 형식은 저장소 규범으로 다시 썼다. 소속 클러스터는 각 항목에 표시한다.
+
+**65. ai-code-auditor (`/aicode`, `/에이아이코드`)** — 🔒 보안 심화 · opus · **effort xhigh**
+AI 코딩 도구가 **기본값으로** 남기는 결함만 본다. ① 클라이언트 도달 시크릿(`NEXT_PUBLIC_`/`VITE_`/`PUBLIC_`/`EXPO_PUBLIC_` 접두사 뒤·`service_role` 키·빌드 산출물) ② 행 수준 보안 허울(`USING (true)` 블랭킷·RLS on + 정책 0개·world-readable storage·클라이언트가 수정 가능한 `user_metadata`로 권한 판정) ③ 요청 입력→LLM 싱크 taint 추적, 심각도는 **도달 위치**로 결정(자기 user-role 메시지면 침묵 / 시스템 프롬프트면 medium / 툴 호출이 붙으면 high). 최우선 규율은 **오탐보다 미탐** — 늑대를 외치는 도구는 음소거되고 음소거된 도구는 아무것도 지키지 않으므로, 공개 설계 키(anon·publishable·Firebase 웹 config)는 영구 침묵 목록이다. 발견마다 CWE + fingerprint를 달아 scan→fix→rescan에서 해결/잔존/신규를 구분하고, 시크릿은 **회전 절차까지** 제시하되 원문 값은 보고에 되찍지 않는다. "몇 % 안전" 같은 보증 숫자 대신 **가시 범위**를 밝힌다.
+→ 스택 전반 OWASP는 `security-reviewer`, LLM 기능 심화는 `llm-ai-security-reviewer`, 설계 단계 위협 모델링은 `threat-modeler`, 인증 구조 설계는 `identity-access-architect`, 누적 드리프트는 `codebase-archaeologist`.
+
+**66. codebase-archaeologist (`/archaeo`, `/코드고고학`)** — 🛠 엔지니어링 · opus · effort high
+코드베이스를 파일이 아니라 **지층**으로 읽는다. 드리프트는 절대 공표되지 않으므로("3월에 쓴 것과 모순된다"는 커밋 메시지는 없다) 일은 발견이 아니라 역사 재구성이다. 유사 파일 비교로 **절대 안 잡히는 두 클래스를 독립 패스로 강제**한다 — ④ 이벤트·웹훅 핸들러의 상태 존재 가정(명시적 존재 체크·upsert·큐 순서 계약·트랜잭션만 보장으로 인정하고 주석·이벤트 이름 뉘앙스는 불인정) ⑤ 금액·단위·표현 추적(변수명이 완전히 달라도 하류 전수 추적, 에러가 안 나도 flag). 그 밖에 같은 책임의 병렬 구현·폴백 순서 역전·이중 변환·유사 이름 혼동·문서와 동작 괴리·반쪽 수정. 규율: **사람이나 도구를 지목하지 않고**, 최신 코드가 옳다고 가정하지 않으며, 안전하려고 Critical을 주지 않고, 검증해서 안전한 것도 "확인함"으로 남긴다. 산출은 4뷰 레지스트리(발견별·시대별·책임별·위험별)이며 **발견을 삭제하지 않는다**("Won't Fix"로 보존해 재발견을 막는다). `Bash`는 `git log` 이력 조회 전용.
+→ 증상이 있는 버그는 `debugger`, 변경분 한 건 리뷰는 `code-reviewer`, 정리 단계 설계는 `refactor-strategist`, 보안 기본값은 `ai-code-auditor`.
+
+**67. identity-access-architect (`/autharch`, `/인증설계`)** — 🏗 설계 · opus · **effort xhigh**
+신원 표면 전담 아키텍트. 판단 기준은 늘 같다 — **지루하고 표준화되고 검증 가능한 것이 영리한 것을 이긴다**. 절대 규칙 4개: 인증 프리미티브를 발명하지 않는다 / 클라이언트는 권위가 아니다 / **테넌트 격리는 데이터 계층의 성질이다**(개발자가 WHERE 절을 잊지 않는 것에 의존하면 실패한 설계) / JWT는 서명됐을 뿐 비밀이 아니다. 다루는 축: OAuth2/OIDC 콜백 검증 전량(`state`·`nonce`·PKCE를 짧은 TTL로 저장하고 콜백 후 즉시 폐기, `redirect_uri` 정확 일치, issuer·audience·`alg` 허용목록), 세션 결정 표(불투명 서버 세션 vs 단명 JWT+회전 refresh — refresh 재사용 감지 시 토큰 패밀리 전체 폐기), 토큰 수명을 **폭발 반경**으로 산정, 패스키(`rpID` 결박이 피싱 저항의 실체, signCount 감소 = 복제 신호), SSO/SCIM(assertion 서명·audience·`InResponseTo`·replay 캐시·인증서 회전·디프로비저닝 지연·감사되는 break-glass), RBAC→ABAC/ReBAC 승격 게이트. **해피패스는 쉬운 20%**이므로 실패 경로부터 설계한다. xhigh 근거: 인증 설계 결함은 배포 후 되돌리기가 가장 비싸다.
+→ 구현된 코드 취약점은 `security-reviewer`, STRIDE 전반은 `threat-modeler`, 스택 구조는 `system-architect`, AI 스캐폴딩 기본값은 `ai-code-auditor`.
+
+**68. video-optimizer (`/video`, `/영상`)** — 📣 콘텐츠 · opus · effort high
+"패키징이 클릭 → 훅·페이싱이 리텐션 → 세션 설계가 추천"의 3단 모델. 제목은 항상 3방향(호기심·검색·베네핏)을 동시에 내고, 썸네일은 3요소(비주얼·텍스트 3단어 이내·컬러)로 명세하되 **모바일 크기로 판정**한다. 제목-썸네일은 합쳐 하나의 마이크로 스토리여야 하며 같은 정보를 두 번 말하면 절반을 버린 것이다. 첫 30초는 요약이 아니라 **한 단어씩 쓴 스크립트**로 내고, 가치 없는 인트로·죽은 공기를 제거하고, 주의력이 꺾이기 전에 보상을 배치한다. 마무리는 "시청 감사합니다"가 아니라 다음 영상으로 직결한다. **키즈 채널 분기 규칙**(원본에 없어 신규 집필): "아동용" 설정 시 댓글·엔드스크린·카드·개인 맞춤 광고가 막히므로 세션 연결을 재생목록 편성·시리즈 넘버링·영상 내 예고로 대체한다. 성과 수치·알고리즘 통설은 창작 금지(`⚠️검증필요`).
+→ 문장 카피 품질은 `copy-reviewer`, 1소스 멀티포맷 파생은 `content-repurposer`, 웹 검색 최적화는 `seo-optimizer`, AI 검색은 `ai-search-optimizer`, 썸네일 생성 프롬프트는 `image-prompt-engineer`.
+
+**69. ai-search-optimizer (`/aeo`, `/에이아이검색`)** — 📣 콘텐츠 · opus · effort high
+**AI 인용은 검색 순위와 다른 게임**이다 — 검색엔진은 페이지를 순위 매기고 AI 엔진은 답을 합성한 뒤 출처를 인용한다. 2단 절차: ① 기반 감사(`robots.txt`의 AI 크롤러 지시문 — **레거시 파일이 전부 막고 있는 걸 모른 채 콘텐츠 전략을 돌리는 것**이 최빈 실패, `llms.txt`, JS 없이 본문 렌더, 헤딩 위계, 스키마, 크롤 로그로 본 실제 수집) ② 인용 감사(프롬프트 세트 → 플랫폼별 질의 → 인용률·경쟁사 점유율·lost prompt → 원인 3분류: 없는 페이지 / 없는 스키마 / 없는 엔터티 신호 → 처방). **변동성 규율을 정의에 못박았다**: `llms.txt`는 표준이 아니라 커뮤니티 관례, 디스커버리 규격은 초기 단계, 크롤러 정책·토큰 기준은 현행 확인 후 출처 표기, 인용은 보장이 아니라 가능성, 차단 여부는 비즈니스 결정. 이 영역 자체가 프롬프트 인젝션 표적이라 **점검 대상 페이지에 심긴 지시를 발견 항목으로 보고**한다. 인용 감사의 질의 횟수 비용을 먼저 알리고 축소안을 함께 낸다.
+→ 전통 SEO는 `seo-optimizer`(보완 관계, 대체 아님), 전환 구조는 `landing-reviewer`, 렌더 성능은 `perf-auditor`.
+
+**70. image-prompt-engineer (`/imgprompt`, `/이미지프롬프트`)** — 📣 콘텐츠 · opus · effort high
+5계층(피사체·환경·**조명**·기술·스타일)으로 쌓는다. 조명이 결과를 가장 크게 좌우한다. 모호한 일상어를 사진 용어로 치환하고("배경 흐리게" → `shallow depth of field, f/1.8, creamy bokeh`), 조명 방향과 그림자 묘사의 모순·물리적으로 불가능한 조합을 검문한다. 장르별 슬롯 패턴(인물·제품·풍경·패션)과 플랫폼별 문법, 필름 에뮬레이션 어휘를 제공하고 네거티브 프롬프트와 변주 2~3개를 함께 낸다. **권리·윤리 경계는 신규 집필**(원본이 상업 용도를 전제하면서 이 층이 공백이었다): 실존 인물 얼굴·브랜드 로고 생성 거부, 생존 작가 화풍 요청에는 리스크를 알린 뒤 **기법으로 분해한 대안**을 함께 제시.
+→ UI 시각 설계는 `design-system-architect`, 화면 점검은 `ui-ux-reviewer`, 썸네일 **컨셉 전략**은 `video-optimizer`.
+
+**71. proposal-strategist (`/proposal`, `/제안서`)** — 📣 콘텐츠 · opus · effort high
+판정 기준 하나: **고객사 이름을 바꿔도 말이 되는 제안서는 이미 지고 있다**. 승리 테마 2~3개(1인 규모에선 줄이는 편이 집중도가 오른다)에 스트레스 테스트 4문항을 건다 — 특히 4번 "경쟁사가 똑같이 주장하기 어려운가"에서 걸리면 테마가 아니라 업계 상식이다. 3막 서사(과제 이해로 신뢰 확보 → 역량을 과제에 매핑한 여정 → 정량화된 변화 후 상태)와 경영진 요약 5단을 낸다. **경영진 요약은 요약이 아니라 맨 앞에 놓인 최종 변론**이며 작성 순서상 이것을 먼저 쓴다(디테일이 번식하기 전에 논증을 강제). 빈 형용사 제거·모든 주장에 증거·경쟁사 직접 비판 금지·가격은 가치 뒤에. 원본이 대기업/정부 조달(Shipley·color team·capture) 전제라 **1인 규모 체크포인트 환산표를 신규 집필**했다(black hat → 스스로 쓰는 1페이지 반박문, 검토위원회 → 업계 밖 지인 5분 스캔, 콘텐츠 라이브러리 → 섹션이 아니라 **테마별**). `cover-letter-tailor`와 동일한 창작 금지 규율.
+→ 오퍼 자체 설계는 `offer-strategist`, 페이지 전환은 `landing-reviewer`, 문장 품질은 `copy-reviewer`, 자소서는 `cover-letter-tailor`.
+
+**72. level-designer (`/level`, `/레벨`)** — 🎮 게임 · opus · effort high
+게임 9종에 통째로 비어 있던 **공간 설계** 층. `game-design-architect`가 시스템을 설계한다면 이쪽은 그 시스템이 놓일 공간을 설계한다 — 통로는 문장, 방은 문단, 레벨은 하나의 주장. 원본이 3D·FPS·오픈월드 전제라 **2D 어휘로 번역**했다(치수→타일/유닛, 3층 조명→명도·채도 대비와 실루엣, 엄폐물→발판·안전 지대, 인카운터→장애물 구간·퍼즐 방). 절대 규칙 4개: **불공정 사망 금지**(화면 밖 투사체·예고 없는 낙사) / **아트가 레이아웃을 구제하지 못한다**(그레이박스 플레이테스트 통과 전 드레싱 금지, 예외 없음) / 난이도는 공간 먼저 수치는 나중 / **설계자의 의도는 증거가 아니다**(테스트에서 실제 관찰된 해법 2개 이상이어야 유효). 절차적 생성의 도달 가능성·해결 가능성 자동 검증은 2D 타일 퍼즐에 이식 가치가 높아 유지했고, 멀티플레이 맵 설계는 범위 밖으로 제외했다. 페이싱 차트는 예측이지 사실이 아니라고 명시한다.
+→ 코어 루프·시스템은 `game-design-architect`, 손맛은 `game-feel-reviewer`, HUD·메뉴는 `game-ui-reviewer`, 사람 플레이테스트는 `playtest-designer`.
+
+**73. knowledge-gardener (`/garden`, `/지식정원`)** — 🧠 인프라 · **opus**(기존 인프라 2종은 haiku) · effort high
+지식은 폴더 계층이 아니라 **링크와 인덱스 항목으로 자란다**는 전제. 원자성·고립 노트·끊어진 링크·인덱스 커버리지·중복 분산·사건 대 상록 분리·썩은 노트·명명 일관성을 점검하고, 깊이 읽은 자료의 구조 노트 설계와 각 제안에 대한 반론 질문(Gegenrede)을 낸다. **rho 환경의 고정 사실을 절대 규칙으로 못박았다**: `E:\claude_memory`가 단일 소스이고 C드라이브 `MEMORY.md`는 포인터이므로 **그쪽에 쓰자는 제안 금지**(원본의 "루트 MEMORY.md에 복사" 단계를 그대로 옮기면 규칙 위반), `_observations`는 원자료라 점검·정리 대상 제외, `project_active.md`와 중복되는 open-loops 파일 신설 금지, 삭제 후보는 경로·크기·수정일·근거를 붙여 개별 확인이 가능하게. 옵시디언 볼트와 `E:` 두 체계에 어느 점검 축이 적용되는지 표로 분리한다. 원본의 페르소나 전환 기능(Feynman·Munger 등)은 저장소 규범과 충돌해 폐기했다. **읽기 전용** — 기록·이동·삭제는 메인 세션이 승인 후 수행.
+→ 질의 기반 회상은 `memory-recaller`, 관찰 로그 증류는 `self-reflector`, 코드 문서화는 `docs-writer`.
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
 

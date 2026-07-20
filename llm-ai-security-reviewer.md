@@ -1,11 +1,11 @@
 ---
 name: llm-ai-security-reviewer
-description: 앱이 LLM/AI 기능(챗봇·RAG·에이전트·툴 호출·파인튜닝)을 포함할 때 그 AI 보안을 심화 점검할 때 사용. OWASP LLM Top 10 2025 기준으로 프롬프트 인젝션(직접·간접), 부적절한 출력 처리, 과도한 행위성(에이전트 권한), 민감정보·시스템 프롬프트 유출, RAG/벡터 포이즈닝·멀티테넌시, 모델·데이터 공급망, 무제한 소비, 가드레일·평가/레드팀을 본다. 웹 앱 일반 보안(인증·인젝션·XSS 등)은 security-reviewer, 배포·시크릿·모델 서빙 인프라는 devops-reviewer, 설계 단계 위협 모델링은 threat-modeler를 쓴다. 코드를 수정하지 않고 점검·제안만 한다. LLM 기능이 있는 코드를 머지하기 전 선제적으로(use proactively) 호출한다.
+description: 앱이 LLM/AI 기능(챗봇·RAG·에이전트·툴 호출·파인튜닝)을 포함할 때 그 AI 보안을 심화 점검할 때 사용. OWASP LLM Top 10 2025 기준으로 프롬프트 인젝션(직접·간접), 부적절한 출력 처리, 과도한 행위성(에이전트 권한), 민감정보·시스템 프롬프트 유출, RAG/벡터 포이즈닝·멀티테넌시, 모델·데이터 공급망, 무제한 소비, 가드레일·평가/레드팀을 본다. 웹 앱 일반 보안(인증·인젝션·XSS 등)은 security-reviewer, 배포·시크릿·모델 서빙 인프라는 devops-reviewer, 설계 단계 위협 모델링은 threat-modeler, AI 코딩 도구가 생성한 코드의 기본값 결함(하드코딩 시크릿·행 수준 보안·요청 입력이 시스템 프롬프트에 도달하는 싱크)은 ai-code-auditor를 쓴다. 코드를 수정하지 않고 점검·제안만 한다. LLM 기능이 있는 코드를 머지하기 전 선제적으로(use proactively) 호출한다.
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: opus
 effort: xhigh
-version: 1.1
-updated: 2026-07-07
+version: 1.2
+updated: 2026-07-20
 color: blue
 memory: user
 skills:

@@ -1,11 +1,11 @@
 ---
 name: security-reviewer
-description: FastAPI 백엔드와 Next.js 프론트엔드의 보안 취약점을 점검할 때 사용. JWT/인증, IDOR, 권한 체크 누락, SQL 인젝션, XSS, 미인증 엔드포인트, 민감정보 노출을 찾는다. LLM/RAG 연동의 프롬프트 인젝션·출력 처리 등 AI 보안(OWASP LLM Top 10)도 본다. PR이나 새 기능을 머지하기 전, 또는 "보안 점검"이 필요할 때 호출. 일반 코드 품질·버그는 code-reviewer, 배포·CI 설정·시크릿 취급은 devops-reviewer, 의존성 취약·버전·라이선스는 dependency-auditor, LLM/AI 기능이 핵심이거나 RAG·에이전트·툴 호출의 심화 점검이 필요하면 llm-ai-security-reviewer, 설계 단계 위협 모델링은 threat-modeler, 멀티플레이 게임의 서버 권위·치팅 벡터(클라 입력 재검증·은닉 정보 누출·재화 멱등성)는 multiplayer-rule-reviewer를 쓴다(위협 모델이 웹 OWASP와 다르고 스택도 게임 스크립트다). C 코드의 메모리 안전·정수 오버플로가 곧 보안이 되는 결함(버퍼 오버플로·UAF·포맷 스트링)은 c-code-reviewer가 그 층을 맡으므로 그쪽을 쓴다(웹 OWASP 위협 모델 밖). 인증·권한·입력 처리 등 보안 민감 코드가 바뀌면 머지 전 선제적으로(use proactively) 호출한다.
+description: FastAPI 백엔드와 Next.js 프론트엔드의 보안 취약점을 점검할 때 사용. JWT/인증, IDOR, 권한 체크 누락, SQL 인젝션, XSS, 미인증 엔드포인트, 민감정보 노출을 찾는다. LLM/RAG 연동의 프롬프트 인젝션·출력 처리 등 AI 보안(OWASP LLM Top 10)도 본다. PR이나 새 기능을 머지하기 전, 또는 "보안 점검"이 필요할 때 호출. 일반 코드 품질·버그는 code-reviewer, 배포·CI 설정·시크릿 취급은 devops-reviewer, 의존성 취약·버전·라이선스는 dependency-auditor, LLM/AI 기능이 핵심이거나 RAG·에이전트·툴 호출의 심화 점검이 필요하면 llm-ai-security-reviewer, 설계 단계 위협 모델링은 threat-modeler, 멀티플레이 게임의 서버 권위·치팅 벡터(클라 입력 재검증·은닉 정보 누출·재화 멱등성)는 multiplayer-rule-reviewer를 쓴다(위협 모델이 웹 OWASP와 다르고 스택도 게임 스크립트다). C 코드의 메모리 안전·정수 오버플로가 곧 보안이 되는 결함(버퍼 오버플로·UAF·포맷 스트링)은 c-code-reviewer가 그 층을 맡으므로 그쪽을 쓴다(웹 OWASP 위협 모델 밖). AI 코딩 도구가 생성한 코드의 스캐폴딩 기본값 결함(클라이언트 도달 경로의 하드코딩 시크릿·행 수준 보안 미적용이나 블랭킷 정책·클라이언트가 조작 가능한 값으로 권한 판정·요청 입력이 시스템 프롬프트나 툴 호출에 도달하는 싱크)은 ai-code-auditor, 인증·세션·멀티테넌트 격리의 구조 설계는 identity-access-architect를 쓴다. 인증·권한·입력 처리 등 보안 민감 코드가 바뀌면 머지 전 선제적으로(use proactively) 호출한다.
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: opus
 effort: xhigh
-version: 1.13
-updated: 2026-07-15
+version: 1.14
+updated: 2026-07-20
 color: blue
 memory: user
 skills:

@@ -1,11 +1,11 @@
 ---
 name: refactor-strategist
-description: 기능 변경 없이 코드 구조를 개선할 때 사용. 책임 분리·함수/모듈 추출, 네이밍·중복 제거, 데드코드·순환의존, 안전한 변경 seam(테스트 경계)·단계적 이행 순서를 설계한다. "이거 정리하고 싶다", 큰 변경 전 구조 정돈에 적합. 버그·정확성 리뷰는 code-reviewer, 기능 구현 전 신규 아키텍처 설계는 system-architect, 리팩터를 안전하게 만들 커버리지 보강은 test-strategy를 쓴다. 코드를 직접 고치지 않고 리팩터 계획·단계만 제시한다.
+description: 기능 변경 없이 코드 구조를 개선할 때 사용. 책임 분리·함수/모듈 추출, 네이밍·중복 제거, 데드코드·순환의존, 안전한 변경 seam(테스트 경계)·단계적 이행 순서를 설계한다. "이거 정리하고 싶다", 큰 변경 전 구조 정돈에 적합. 버그·정확성 리뷰는 code-reviewer, 기능 구현 전 신규 아키텍처 설계는 system-architect, 리팩터를 안전하게 만들 커버리지 보강은 test-strategy, 무엇이 서로 어긋나 있는지의 발굴(여러 세션에 걸친 누적 드리프트 감사)은 codebase-archaeologist를 쓴다 — 그 발견을 받아 정리 단계를 설계하는 것이 이 에이전트다. 코드를 직접 고치지 않고 리팩터 계획·단계만 제시한다.
 tools: Read, Grep, Glob
 model: opus
 effort: high
-version: 1.0
-updated: 2026-07-12
+version: 1.1
+updated: 2026-07-20
 color: blue
 memory: user
 skills:
