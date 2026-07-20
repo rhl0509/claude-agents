@@ -1066,7 +1066,7 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 73개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 75개 슬래시 명령(+ 한글 별칭 47개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사하고, `workflows/`·`hooks/`·`skills/`·`rules/`도 각각 `%USERPROFILE%\.claude\`의 대응 폴더로 배포합니다(배포 대상 7종). 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 73개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 76개 슬래시 명령(+ 한글 별칭 48개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사하고, `workflows/`·`hooks/`·`skills/`·`rules/`도 각각 `%USERPROFILE%\.claude\`의 대응 폴더로 배포합니다(배포 대상 7종). 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -1175,6 +1175,7 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/proposal` | proposal-strategist | 공고·기회 설명(선택) |
 | `/level` | level-designer | 레벨·스테이지 설명(선택) |
 | `/garden` | knowledge-gardener | 경로·범위(선택) |
+| `/lint` | (스크립트) lint-agents.ps1 — 정의 규범 검사 | 파일 경로(선택) |
 
 ### 한글 별칭 (1.65)
 
@@ -1205,7 +1206,7 @@ Claude Code는 슬래시 명령 이름에 **한글(비ASCII)을 허용한다**(1
 | `/인증설계` | `/autharch` | `/영상` | `/video` |
 | `/에이아이검색` | `/aeo` | `/이미지프롬프트` | `/imgprompt` |
 | `/제안서` | `/proposal` | `/레벨` | `/level` |
-| `/지식정원` | `/garden` | | |
+| `/지식정원` | `/garden` | `/린트` | `/lint` |
 
 > 한국어 **자연어 호출**은 별칭과 무관하게 원래부터 동작한다(64종 description이 전부 한국어라 라우터가 한국어 문장으로 매치). 별칭은 슬래시 표기 편의일 뿐이다.
 
@@ -1251,6 +1252,8 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 
 ---
 
+> 정의를 고친 뒤 `sync.ps1` 실행 **전에** `.\lint-agents.ps1`을 돌린다. 프론트매터 필수 필드·읽기 전용 계약·경계 위임절·끊어진 위임 링크·라우팅 고아를 기계가 잡는다(ERROR면 종료 코드 1). 새 에이전트를 추가했다면 특히 **역방향 경계절**(이웃이 새 에이전트를 가리키는 절)이 빠지지 않았는지 이 검사로 확인한다.
+
 ## 저장소 구조
 
 ```
@@ -1258,6 +1261,7 @@ claude-agents/
 ├─ README.md                     # 이 문서
 ├─ CHANGELOG.md                  # 버전별 변경 이력
 ├─ AGENTS.md                     # 73개 에이전트 통합 정리
+├─ lint-agents.ps1               # 정의 규범 검사(프론트매터·경계 위임절·끊어진 링크·라우팅 고아)
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)

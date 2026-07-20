@@ -24,6 +24,9 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 > **경계 원칙 몇 가지**: 리뷰↔성능은 **원인/증상 대칭**(코드 원인은 리뷰어, 프레임·GC 증상과 측정 해석은 perf) · 정적 리뷰(증상 없음)와 `debugger`(증상 있음)는 다른 층 · 생성기(`content-repurposer`·`storyteller`·`cover-letter-tailor`·`email-sequence-writer`)는 점검 에이전트를 **단방향으로만** 가리킨다(예외: 발상 생성기 `brainstormer`는 `offer-strategist`·`game-design-architect`와 "고르기 전 발산 ↔ 고른 뒤 설계" **대칭**) · 새 언어 클러스터는 **프로모션 게이트**(실제 수요가 반복될 때까지 미생성).
 
 ## 공통 규칙
+
+> 정의를 고친 뒤 `sync.ps1` 전에 `lint-agents.ps1`(`/lint`)로 규범 검사를 돌린다 — 프론트매터·읽기 전용 계약·경계 위임절·끊어진 위임 링크·라우팅 고아를 기계가 잡는다.
+
 - 발견/제안은 **영향도(심각도) 순으로 정렬**
 - 근거에 `파일경로:줄번호` 명시
 - 확신이 없으면 추측하지 않고 **"확인 필요" / "검토 필요" / "추정"** 으로 표시

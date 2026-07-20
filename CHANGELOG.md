@@ -10,6 +10,22 @@
 
 ---
 
+## 1.93 (2026-07-20) — 정의 린터 `lint-agents.ps1` 신설 (에이전트 무변경 1건 제외)
+
+73종으로 늘어나면서 규범 준수를 사람이 매번 확인하는 게 한계에 다다랐다. 그동안 `agent-definition-reviewer`(수동 호출)로만 잡던 것을 **기계 검사로 내렸다**. 출처는 1.92에서 대조한 [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)의 `scripts/lint-agents.sh`이며, 검사 항목은 이 저장소 규범으로 전면 교체하고 **원본에 없던 3종을 추가**했다.
+
+- **[신설] `lint-agents.ps1`** (`/lint` `/린트`) — PowerShell 5.1 대응(UTF-8 BOM + CRLF로 저장해야 한글이 안 깨진다), 종료 코드로 실패를 알림(`-WarnAsError`로 WARN도 실패 처리, `-Quiet`, `-Path`로 단일 파일).
+  - **ERROR(머지 차단)**: 프론트매터 존재·필수 8필드(`name`/`description`/`tools`/`model`/`color`/`memory`/`version`/`updated`) · `name`↔파일명 일치 · `model`/`effort` 유효값 · **tools에 Write/Edit 등 변경 도구 금지**(읽기 전용 계약) · `agent-conventions` 스킬 프리로드 · **PreToolUse 가드 훅 존재** · description 한국어 · **경계 위임절 존재** · **끊어진 위임 링크**(존재하지 않는 에이전트 지목).
+  - **WARN(판단 필요)**: opus/fable인데 `effort` 없음 · color 스펙 밖 · Bash 보유인데 본문에 사용 범위 미기재 · `updated`/`version` 형식 · description 길이·호출 시점 신호 · 본문의 신뢰 경계·출력 형식·읽기 전용 선언 누락 · 슬래시 커맨드 부재 · **라우팅 고아**.
+  - **원본에 없는 3종이 핵심**: ① 경계 위임절 존재 ② 끊어진 위임 링크 ③ **라우팅 고아**(아무도 그 에이전트로 위임하지 않으면 라우터가 영영 안 고른다 — 1.92에서 카브아웃 14건을 손으로 넣은 그 작업을 기계가 검증한다).
+  - 설계 결정 두 가지: **역할 접미사를 하드코딩하지 않고 실존 이름의 마지막 마디에서 유도**해 새 접미사가 생겨도 따라오게 했고, **라우팅 진입점 예외 목록**(`$RoutingEntryPoints`)을 둬 `project-manager`(모든 에이전트 위에 앉는 조율 층이라 아무도 그쪽으로 위임하지 않는 게 정상)를 고아 검사에서 제외했다. 예외는 코드에 사유와 함께 적었다.
+  - 참조 탐지 초기 구현이 하이픈 있는 토큰만 매칭해 `brainstormer`·`debugger`·`storyteller` 3종을 거짓 고아로 보고했다 — 실존 이름을 단어 경계로 직접 찾는 방식으로 교체.
+- **[수정] memory-recaller v1.4→1.5** — 린터 첫 실행이 **실제 드리프트 2건**을 잡았다: `memory: user` 필드와 **PreToolUse 가드 훅이 둘 다 없었다**. 자매 haiku 에이전트 `self-reflector`에는 둘 다 있어 비대칭이었고, CLAUDE.md 규범("모든 에이전트가 가드 훅을 돈다")과도 어긋났다. 가드가 없으면 `memory: user`가 켜주는 Write/Edit를 막을 층이 tools 허용목록뿐이라 읽기 전용 봉인이 한 겹 얇아진다. 기계적 대칭 복구라 정의 내용은 무변경.
+- **[커맨드]** `/lint`·`/린트` 2종 신설. 영문 75→76, 한글 별칭 47→48종.
+- **남은 WARN 8건(미수정, 판단 대기)**: 아키텍트·설계 계열 7종(`c-architect`·`data-modeler`·`dotnet-architect`·`game-design-architect`·`perf-auditor`·`swift-architect`·`system-architect`)의 **본문에 읽기 전용 선언이 없다** — description에는 "코드를 직접 작성하지 않고 설계만 한다"가 있으나 본문 규범과는 어긋난다. `memory-recaller`는 **출력 형식 절 없음**(회상 결과라 고정 서식이 없는 게 의도일 수 있다). 프롬프트 본문을 고치는 일이라 기계적 일관성 범위를 넘는다고 보고 사용자 판단으로 남겼다.
+
+---
+
 ## 1.92 (2026-07-20) — 외부 라이브러리 대조로 커버리지 공백 9종 신설 → 73종
 
 공개 에이전트 모음집 **[msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)**(MIT, 308개 정의)의 프론트매터를 전수 대조해 이 라이브러리의 커버리지 공백을 추린 뒤, **rho의 실제 작업 맥락에 닿는 9종만** 신설했다. 원본은 영어·페르소나 중심·자기평가 성공지표 스타일이라 **내용만 취하고 형식은 이 저장소 규범으로 다시 썼다**(한국어 description·경계 위임절·최소권한 tools·읽기전용·불확실 표기). 중국 플랫폼 13종, Unreal·Godot·Roblox 10종, XR 6종, GIS 13종, 엔터프라이즈 조직 운영, B2B 영업조직 7종 등은 기각.
