@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (63종)
+# 서브에이전트 전체 정리 (64종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> **클러스터 구성(63종)** — 번호는 `README.md`의 에이전트 표와 동일하다(`#1`~`#63` 연속).
+> **클러스터 구성(64종)** — 번호는 `README.md`의 에이전트 표와 동일하다(`#1`~`#64` 연속).
 >
 > | 클러스터 | 종수 | 성격 |
 > |---|---|---|
@@ -15,13 +15,13 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 > | 🚀 운영 | 4 | 배포·의존성·관측성·자동화 신뢰성 |
 > | 🎮 게임 | 12 | Unity + C# 싱글플레이 2D 캐주얼 + MSW 멀티플레이(색상 `cyan` 공유) |
 > | 🧩 시스템 언어 | 10 | C·비-Unity .NET은 리뷰·설계·성능 3역, Java·Swift는 리뷰·설계 2역(perf는 프로모션 게이트로 유보) |
-> | 📣 콘텐츠 / 마케팅 | 11 | 마케팅 8(리뷰어 6 + 생성기 `email-sequence-writer`·설계 `offer-strategist`) + 창작 1 + 교육 1 + 커리어 1 |
+> | 📣 콘텐츠 / 마케팅 | 12 | 마케팅 8(리뷰어 6 + 생성기 `email-sequence-writer`·설계 `offer-strategist`) + 발상 1(`brainstormer`) + 창작 1 + 교육 1 + 커리어 1 |
 > | 🧭 메타 / 인프라 | 5 | 조율 `project-manager`(#1) + 메타 2 + 인프라 2(`memory-recaller`·`self-reflector`, 저장소의 두 `haiku`) |
 > | 🧪 검증 | 1 | 질문·주장 정확성 검증 `truth-checker`(5분류·날조 금지·근거 기반 신뢰도·0.8 미만 재작성 루프) |
 >
 > **모델 티어링**: 대부분 `opus`(+`effort: high`, 보안 3종과 `ai-workspace-architect`·`truth-checker`는 `xhigh`), `sonnet` 2종(`api-doc-writer`·`test-runner`), `haiku` 2종(`memory-recaller`·`self-reflector` — 기계적 작업), `fable` 1종(`storyteller` — 창작 특화).
 >
-> **경계 원칙 몇 가지**: 리뷰↔성능은 **원인/증상 대칭**(코드 원인은 리뷰어, 프레임·GC 증상과 측정 해석은 perf) · 정적 리뷰(증상 없음)와 `debugger`(증상 있음)는 다른 층 · 생성기(`content-repurposer`·`storyteller`·`cover-letter-tailor`·`email-sequence-writer`)는 점검 에이전트를 **단방향으로만** 가리킨다 · 새 언어 클러스터는 **프로모션 게이트**(실제 수요가 반복될 때까지 미생성).
+> **경계 원칙 몇 가지**: 리뷰↔성능은 **원인/증상 대칭**(코드 원인은 리뷰어, 프레임·GC 증상과 측정 해석은 perf) · 정적 리뷰(증상 없음)와 `debugger`(증상 있음)는 다른 층 · 생성기(`content-repurposer`·`storyteller`·`cover-letter-tailor`·`email-sequence-writer`)는 점검 에이전트를 **단방향으로만** 가리킨다(예외: 발상 생성기 `brainstormer`는 `offer-strategist`·`game-design-architect`와 "고르기 전 발산 ↔ 고른 뒤 설계" **대칭**) · 새 언어 클러스터는 **프로모션 게이트**(실제 수요가 반복될 때까지 미생성).
 
 ## 공통 규칙
 - 발견/제안은 **영향도(심각도) 순으로 정렬**
@@ -110,6 +110,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 61 | `email-sequence-writer` | `/email` | 콘텐츠 | 이메일/라이프사이클 시퀀스 생성(웰컴·런칭·너처·재참여·콜드아웃리치, 타이밍·제목·CTA) | Read, Grep, Glob |
 | 62 | `offer-strategist` | `/offer` | 콘텐츠 | 카피 앞단 오퍼 설계(가치제안·가격 티어·보증·보너스·포지셔닝) | Read, Grep, Glob |
 | 63 | `truth-checker` | `/truth` | 검증 | 질문·주장 정확성 검증(5분류·날조 금지·근거 기반 신뢰도 0~1·0.8 미만 재작성·[명확한 답변]/[신뢰도]/[확인할 점]) | Read, Grep, Glob, WebSearch, WebFetch |
+| 64 | `brainstormer` | `/brainstorm` | 발상 | 아이디어 발산(다각도 렌즈)→수렴(기준 채점) 브레인스토밍 — 번호 표·Top 3+와일드카드, 모든 실행 앞단 | Read, Grep, Glob |
 
 ---
 
@@ -232,7 +233,13 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 
 **62. offer-strategist (`/offer`, `/오퍼`)** — 콘텐츠 (전략 설계)
 상세페이지·제안서·런칭·가격표를 만들기 **전에** 오퍼 자체(무엇을·얼마에·어떤 조건으로)를 설계하는 **카피 앞단** 층 — `game-design-architect`가 코드 앞단인 것과 같은 위치. 좋은 카피도 약한 오퍼는 못 구한다(전환 상한선은 오퍼가 정한다). 설계: 핵심 가치제안(결과 중심)·가치 방정식(꿈의 결과×확률÷시간·노력)·가격/패키지 티어·앵커링·보증(리스크 리버설, **지킬 수 있는 범위만**)·보너스 스택(반론별)·정직한 긴급성·희소성·차별 포지셔닝·네이밍. 시장·경쟁·실적 수치 창작 금지(`가정`/`⚠️검증필요`). 출력: 오퍼 진단/가정 → 오퍼 설계(가치제안→가격→보증→보너스→긴급성→포지셔닝→이름) → 한 장 오퍼 시트 → 다음 단계 위임 안내.
-→ 페이지 전환 구조 리뷰는 `landing-reviewer`, 문장 카피는 `copy-reviewer`, 파는 이메일 시퀀스는 `email-sequence-writer`, 사실·시장 데이터는 `fact-checker`.
+→ 페이지 전환 구조 리뷰는 `landing-reviewer`, 문장 카피는 `copy-reviewer`, 파는 이메일 시퀀스는 `email-sequence-writer`, 사실·시장 데이터는 `fact-checker`, 오퍼 방향·네이밍 후보의 발산·수렴(고르기 전)은 `brainstormer`.
+
+### 💡 발상 (브레인스토밍)
+
+**64. brainstormer (`/brainstorm`, `/발상`)** — 발상 (생성기)
+주제·문제·목표만 있고 구체 아이디어가 없을 때, 모든 실행(오퍼·이야기·게임 설계·강의 설계) **앞단의 아이디어 단계**를 전담 — 다른 생성기가 "고른 방향을 실행"한다면 이 에이전트는 **고를 후보 자체를 만든다**. 발산: 최소 5개 렌즈(역발상·유추 차용·결합·제약 강화·극단화·타깃 전환·빼기)를 바꿔가며 렌즈당 3~5개, 인접 중복 제거, 판단 유보. 수렴: 명시 기준(기본 3축 — 목적 적합도/실행 난이도/차별성) 채점, Top 3 + 와일드카드 1(고위험·고보상), 탈락 후보도 목록에 보존. 발상 정직성: 아이디어는 자유, 딸려 붙는 시장·수치·트렌드 주장은 창작 금지(`⚠️검증필요`), 사용자 제약을 임의로 버리지 않되 제약 밖 유망 후보는 "제약 밖" 표시. 출력: 전제 요약 → 아이디어 전체 표(번호·이름·한 줄 설명·느낌/렌즈 — 번호로 고르기) → Top 3(근거+첫 걸음) → 와일드카드 → 다음 단계 라우팅 → 채운 가정.
+→ 고른 방향의 실행은 전문 에이전트로 — 오퍼 설계는 `offer-strategist`, 이야기 집필은 `storyteller`, 소스 파생은 `content-repurposer`, 게임 시스템 설계는 `game-design-architect`, 강의 설계는 `curriculum-designer`, 사실 검증은 `fact-checker`·`truth-checker`.
 
 ### 🧑‍💼 커리어 / 채용
 
@@ -264,7 +271,7 @@ Unity + C# 게임 코드(싱글플레이어 2D 캐주얼)의 게임 엔진 고�
 
 **28. game-design-architect (`/gdd`)**
 구현 전 2D 캐주얼 게임 디자인·시스템 구조 설계. 코어 게임플레이 루프·재미 가설, 난이도 곡선·페이싱, 시스템 분해(상태머신·이벤트·SO 데이터 경계·세이브), 수직 슬라이스·MVP·컷 후보. 솔로 개발 최대 리스크 "미완성"을 겨냥해 야심 기능마다 컷 후보 강제, 재미는 단정 않고 "가설 + 플레이테스트 검증 질문"으로. 출력(설계): 요구/가정 → 코어 루프·재미 가설 → 시스템 분해 → 진행·난이도 → 수직 슬라이스·컷 라인 → 검증 질문.
-→ Unity C# 코드 품질·프레임 리뷰는 `unity-code-reviewer`, 풀스택 웹 아키텍처는 `system-architect`.
+→ Unity C# 코드 품질·프레임 리뷰는 `unity-code-reviewer`, 풀스택 웹 아키텍처는 `system-architect`, 게임 아이디어·메카닉 씨앗의 발산·수렴(고르기 전)은 `brainstormer`.
 
 **29. game-ui-reviewer (`/gui`)**
 Unity 게임 **UI/UX 레이어**(HUD·메뉴·팝업·튜토리얼 화면) 점검. HUD/메뉴 레이아웃·정보 위계, CanvasScaler 해상도·종횡비 스케일링, 세이프 에어리어(노치), 캔버스 렌더 모드, 게임패드·터치 내비게이션·포커스(EventSystem·explicit navigation), 움직이는 화면 위 텍스트 가독성·색약/명도 대비, UI 상태(로딩/빈/에러/전환), 온보딩 UI, (수익화 시) F2P 다크패턴. YAML 설정·코드로 확정 가능한 것만 심각도, 실제 보임새는 기기 확인 권고로 분리(화면 못 봄). 출력: 요약 → Must/Should/Nit → 기기 확인 권고 → 위임 → Top 3.
@@ -414,7 +421,7 @@ Swift 앱 구조 설계. 아키텍처 패턴 선택(MVVM/TCA/VIPER/Clean, 규모
 
 ## 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
-양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 1.56의 전수 스캔 34쌍에서 1.64·1.67~1.72를 거치며 늘어 **현재 61쌍**이며 클러스터별로 나눈다.
+양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 1.56의 전수 스캔 34쌍에서 1.64·1.67~1.72·1.89·1.91을 거치며 늘어 **현재 63쌍**이며 클러스터별로 나눈다.
 
 **웹 스택 (20쌍)**
 | 쌍 | 구분 |
@@ -440,13 +447,14 @@ Swift 앱 구조 설계. 아키텍처 패턴 선택(MVVM/TCA/VIPER/Clean, 규모
 | debugger ↔ code-reviewer | 이미 난 증상에서 "역추적" ↔ 증상 없이 변경분에서 "잠재 결함" 정적 리뷰 ⟵ 1.64 |
 | debugger ↔ observability-reviewer | 지금 있는 로그로 "원인 규명" ↔ 추적 "가능성" 자체의 공백 점검 ⟵ 1.64 |
 
-**콘텐츠 / 마케팅 (4쌍)**
+**콘텐츠 / 마케팅 (5쌍)**
 | 쌍 | 구분 |
 |---|---|
 | copy-reviewer ↔ landing-reviewer | 문장 카피 품질 ↔ 상세페이지·랜딩 전환 구조 |
 | copy-reviewer ↔ seo-optimizer | 설득·문장 품질 ↔ 검색 최적화 |
 | landing-reviewer ↔ seo-optimizer | 전환 구조 ↔ 검색 유입 |
 | truth-checker ↔ fact-checker | 질문·주장 자체 "정확성 검증"(신뢰도 산정) ↔ 콘텐츠 초안 속 진술 "출처 검증" ⟵ 1.89 |
+| brainstormer ↔ offer-strategist | 오퍼 방향·네이밍 후보 "발산·수렴"(고르기 전) ↔ 고른 방향의 오퍼 "설계" ⟵ 1.91 |
 
 **보안 (3쌍)**
 | 쌍 | 구분 |
@@ -455,7 +463,7 @@ Swift 앱 구조 설계. 아키텍처 패턴 선택(MVVM/TCA/VIPER/Clean, 규모
 | security-reviewer ↔ llm-ai-security-reviewer | 웹 앱 일반 보안 ↔ AI/LLM 특화 심화 |
 | threat-modeler ↔ llm-ai-security-reviewer | 설계 단계 위협(LLM 포함) ↔ 구현 후 AI/LLM 심화 |
 
-**게임 (Unity + C# · MSW, 16쌍)**
+**게임 (Unity + C# · MSW, 17쌍)**
 | 쌍 | 구분 |
 |---|---|
 | game-design-architect ↔ unity-code-reviewer | 코어 루프·시스템 "설계" ↔ C# 코드 품질·프레임 "리뷰" |
@@ -474,6 +482,7 @@ Swift 앱 구조 설계. 아키텍처 패턴 선택(MVVM/TCA/VIPER/Clean, 규모
 | game-feel-reviewer ↔ playtest-designer | 손맛 장치·프로토타입 검증 항목 ↔ 검증 프로토콜 |
 | unity-code-reviewer ↔ unity-perf-auditor | GC 유발 코드 "원인" ↔ 프레임 예산 "증상·측정 해석" |
 | unity-build-auditor ↔ unity-perf-auditor | 텍스처 압축 "빌드 용량" ↔ "런타임 메모리·GPU" |
+| brainstormer ↔ game-design-architect | 게임 아이디어·메카닉 씨앗 "발산·수렴"(고르기 전) ↔ 고른 방향의 시스템 "설계" ⟵ 1.91 |
 
 **도메인 (ML · 회계 · 자동화, 4쌍)** — 1.69 신설
 | 쌍 | 구분 |

@@ -6,7 +6,28 @@
 
 **작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync.ps1`을 실행해 전역(`%USERPROFILE%\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`(상단 버전 요약·버전 표·해당 상세 블록)와 `AGENTS.md`·`CLAUDE.md`의 관련 내용을 갱신한 뒤 ④ `sync.ps1` 실행 후 `git commit` 한다. **원격 `git push`는 명시 요청 시에만** 한다(public repo에서 push는 곧 공개 게시 — sync만으로 로컬 에이전트는 이미 작동).
 
-**effort 튜닝 요약(1.57~1.60)**: opus 30종 `high` 일괄 채택(1.57) → 보안 3종 `xhigh`(1.58) → fable `xhigh`(1.59) → 1.60에서 신규 opus 3종(refactor-strategist·docs-writer·agent-definition-reviewer)도 `high`로 신설. 현재 **`xhigh` 5종**(security-reviewer·threat-modeler·llm-ai-security-reviewer·ai-workspace-architect·truth-checker), 나머지 opus 53종 `high`(현재 opus 총 58종), sonnet·haiku는 세션 상속. `effort`는 실행 정책 필드라 기존 에이전트 개별 `version` 미bump(신규는 v1.0 신설).
+**effort 튜닝 요약(1.57~1.60)**: opus 30종 `high` 일괄 채택(1.57) → 보안 3종 `xhigh`(1.58) → fable `xhigh`(1.59) → 1.60에서 신규 opus 3종(refactor-strategist·docs-writer·agent-definition-reviewer)도 `high`로 신설. 현재 **`xhigh` 5종**(security-reviewer·threat-modeler·llm-ai-security-reviewer·ai-workspace-architect·truth-checker), 나머지 opus 54종 `high`(현재 opus 총 59종), sonnet·haiku는 세션 상속. `effort`는 실행 정책 필드라 기존 에이전트 개별 `version` 미bump(신규는 v1.0 신설).
+
+---
+
+## 1.91 (2026-07-20) — 발상 에이전트 brainstormer 신설 → 64종
+
+모든 실행 에이전트의 **앞단(아이디어 단계)**을 전담하는 브레인스토밍 에이전트를 신설. 기존 생성기들이 "고른 방향을 실행"한다면(offer-strategist는 고른 오퍼를 설계, storyteller는 고른 전제를 집필, game-design-architect는 고른 메카닉을 설계), 이 에이전트는 **고를 후보 자체를 만든다** — 발산과 수렴을 분리한 2단계 구조(💡 발상 클러스터 신설).
+
+**설계: opus를 택하고 fable을 안 쓴 이유.** 초안은 fable(창작 특화)이었으나 agent-definition-reviewer 점검(P2)에서 opus로 정렬했다: ① 가장 가까운 이웃(offer-strategist·game-design-architect·curriculum-designer)이 전부 opus 발상/설계 생성기, ② 수렴 절반(기준 채점·위험/보상 분석)이 분석 추론, ③ fable 헌장은 "서사 생성" 전용으로 유지(storyteller가 유일). 같은 점검에서 역방향 카브아웃 2건과 생성기 표준 "요약 갈음 금지" 출력 계약도 반영했다.
+
+- **[신설] brainstormer v1.0** (`/brainstorm` `/발상`, opus·effort high·color green·memory user, tools Read/Grep/Glob)
+  - **발산**: 최소 5개 렌즈(역발상·유추 차용·결합·제약 강화·극단화·타깃 전환·빼기)를 바꿔가며 렌즈당 3~5개, 인접 중복 제거, 판단 유보(이상해 보여도 목록에).
+  - **수렴**: 명시 기준(기본 3축 — 목적 적합도/실행 난이도/차별성) 채점, Top 3(근거+첫 걸음) + 와일드카드 1(고위험·고보상), 탈락 후보도 번호 표에 보존(선별 기준이 사용자와 다를 수 있음).
+  - **발상 정직성**: 아이디어는 자유, 딸려 붙는 시장·수치·트렌드 주장은 창작 금지(`⚠️검증필요`), 사용자 제약 보존(제약 밖 유망 후보는 "제약 밖" 표시로 별도 제시), 채운 가정 명시.
+  - **출력**: 전제 요약 → 아이디어 전체 표(번호·이름·한 줄 설명·느낌/렌즈 — 사용자가 번호로 고름) → Top 3 → 와일드카드 → 다음 단계 라우팅 → 채운 가정. 생성기 표준 "최종 텍스트=산출물, 요약 갈음 금지" 계약 포함.
+  - **경계**: 고른 방향의 실행은 offer-strategist(오퍼)·storyteller(이야기)·content-repurposer(파생)·game-design-architect(게임 시스템)·curriculum-designer(강의)·copy-reviewer(카피 점검)·fact-checker/truth-checker(검증)로.
+- **[카브아웃]** 생성기로선 이례적으로 **대칭쌍 2개 신설**(61→63쌍) — 두 이웃이 발상 인접 영역(네이밍·메카닉 씨앗)을 이미 갖고 있어 일방향으론 라우팅이 샌다:
+  - game-design-architect v1.4→1.5 — "게임 아이디어·메카닉 씨앗의 발산·수렴(고르기 전 후보 나열)은 brainstormer" 추가.
+  - offer-strategist v1.0→1.1 — "오퍼 방향·네이밍 후보의 발산·수렴은 brainstormer" 추가.
+- **[커맨드]** `/brainstorm`·`/발상` 2종 신설. 영문 65→66, 한글 별칭 37→38종.
+- **[문서]** README 63→64종(💡 발상 1종 신설) — intro·버전 요약·표 행(#64)·상세 블록·대칭쌍 61→63(콘텐츠 4→5·게임 16→17)·슬래시/별칭 표·구조도·앵커(`#에이전트-64종`) 동기화. AGENTS.md 제목·클러스터 표(콘텐츠 11→12)·전체 표(#64)·분류별 상세(💡 발상)·대칭쌍·경계 원칙(생성기 단방향 원칙의 대칭 예외 명시) 동기화. CLAUDE.md intro 문단·에이전트 표·model tiering opus 목록(58→59종) 갱신.
+- sync.ps1 실행해 전역 반영.
 
 ---
 
