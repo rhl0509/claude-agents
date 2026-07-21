@@ -26,7 +26,7 @@
 
 ## 에이전트 74종
 
-**관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했다(예외: 📣 콘텐츠/마케팅 표는 **마케팅 → 창작 → 교육 → 커리어** 하위 묶음 순서를 번호보다 우선한다). `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록 자체는 번호순이 아니라 클러스터별로 묶여 있다). 번호는 **1~74 연속이며 결번이 없다** — `#1`은 모든 에이전트 위에 앉는 진입/조율 층인 `project-manager`, `#2`부터는 대체로 추가된 순서다. 번호는 상세 블록을 찾는 **인덱스일 뿐 추가 시점을 뜻하지 않으며**, 새 에이전트는 다음 번호(`#75`…)를 이어 받는다.
+**관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했다. `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록 자체는 번호순이 아니라 클러스터별로 묶여 있다). 번호는 **1~74 연속이며 결번이 없다** — `#1`은 모든 에이전트 위에 앉는 진입/조율 층인 `project-manager`, `#2`부터는 대체로 추가된 순서다. 번호는 상세 블록을 찾는 **인덱스일 뿐 추가 시점을 뜻하지 않으며**, 새 에이전트는 다음 번호(`#75`…)를 이어 받는다.
 
 #### 🔍 코드 품질 · 디버깅 · 테스트
 
@@ -83,8 +83,8 @@
 | 15 | `devops-reviewer` | `/devops` `/배포` | 1.10 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
 | 16 | `dependency-auditor` | `/deps` `/의존성` | 1.1 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
 | 17 | `observability-reviewer` | `/obs` `/관측성` | 1.4 | opus | 로깅·트레이싱·관측성 점검(웹 앱 런타임) | Read, Grep, Glob |
-| 74 | `aws-reviewer` | `/aws` `/인프라` | 1.0 | opus | **AWS IaC 자세**(IAM 최소권한·공개 노출·암호화·격리·state·비용·파괴적 변경) | Read, Grep, Glob |
 | 44 | `automation-reliability-reviewer` | `/auto` `/자동화` | 1.1 | opus | **데몬·크론 자동화 신뢰성**(로그 유실·중복 실행·하트비트·멱등성) | Read, Grep, Glob |
+| 74 | `aws-reviewer` | `/aws` `/인프라` | 1.0 | opus | **AWS IaC 자세**(IAM 최소권한·공개 노출·암호화·격리·state·비용·파괴적 변경) | Read, Grep, Glob |
 
 #### 🎮 게임 (Unity + C# 싱글플레이 2D 캐주얼 · MSW 멀티플레이)
 
@@ -131,12 +131,12 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 | 22 | `fact-checker` | `/factcheck` | 1.1 | opus | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
 | 23 | `content-repurposer` | `/repurpose` | 1.4 | opus | 1소스 → 멀티 포맷 재활용(단발 뉴스레터까지) | Read, Grep, Glob |
 | 24 | `brand-voice-guardian` | `/voice` | 1.1 | opus | 브랜드 보이스(문체·톤) 일관성 점검(판정 규칙·태그 취급 에이전트 소유) | Read, Grep, Glob |
-| 61 | `email-sequence-writer` | `/email` `/이메일` | 1.0 | opus | 이메일/라이프사이클 시퀀스 생성(웰컴·런칭·너처·재참여·콜드아웃리치, 타이밍·제목·CTA) | Read, Grep, Glob |
-| 62 | `offer-strategist` | `/offer` `/오퍼` | 1.2 | opus | 카피 앞단 오퍼 설계(가치제안·가격 티어·보증·보너스·포지셔닝) | Read, Grep, Glob |
-| 64 | `brainstormer` | `/brainstorm` `/발상` | 1.0 | opus | 아이디어 발산(다각도 렌즈)→수렴(기준 채점) 브레인스토밍 — 번호 표·Top 3+와일드카드, 모든 실행 앞단 | Read, Grep, Glob |
 | 38 | `storyteller` | `/story` `/이야기` | 1.1 | **fable** | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성 | Read, Grep, Glob |
 | 54 | `curriculum-designer` | `/curriculum` `/강의설계` | 1.1 | opus | 강의·워크숍·강좌 교수 설계(학습 목표·모듈 계열화·backward design·슬라이드 골격) | Read, Grep, Glob |
 | 59 | `cover-letter-tailor` | `/cover` `/자소서` | 1.1 | opus | 채용 공고(JD)에 맞춰 자기소개서 맞춤 재작성(역량 매핑·STAR·글자수·사실만·공백 표시) | Read, Grep, Glob |
+| 61 | `email-sequence-writer` | `/email` `/이메일` | 1.0 | opus | 이메일/라이프사이클 시퀀스 생성(웰컴·런칭·너처·재참여·콜드아웃리치, 타이밍·제목·CTA) | Read, Grep, Glob |
+| 62 | `offer-strategist` | `/offer` `/오퍼` | 1.2 | opus | 카피 앞단 오퍼 설계(가치제안·가격 티어·보증·보너스·포지셔닝) | Read, Grep, Glob |
+| 64 | `brainstormer` | `/brainstorm` `/발상` | 1.0 | opus | 아이디어 발산(다각도 렌즈)→수렴(기준 채점) 브레인스토밍 — 번호 표·Top 3+와일드카드, 모든 실행 앞단 | Read, Grep, Glob |
 | 68 | `video-optimizer` | `/video` `/영상` | 1.1 | opus | **유튜브 최적화**(제목 3방향·썸네일·훅 초단위·챕터·숏폼) + 키즈 채널 분기 규칙 | Read, Grep, Glob, WebSearch, WebFetch |
 | 69 | `ai-search-optimizer` | `/aeo` `/에이아이검색` | 1.0 | opus | **AI 검색·인용 최적화**(기반 감사 + 인용 감사) — seo-optimizer 보완층 | Read, Grep, Glob, WebSearch, WebFetch |
 | 70 | `image-prompt-engineer` | `/imgprompt` `/이미지프롬프트` | 1.1 | opus | **AI 이미지 프롬프트 5계층 설계** + 권리 경계(실존 인물·브랜드 거부) | Read, Grep, Glob |
