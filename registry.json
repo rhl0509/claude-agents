@@ -104,6 +104,7 @@
     "curriculum-designer":              { "group": "교육·창작·커리어", "note": "강의 교수 설계" },
     "storyteller":                      { "group": "교육·창작·커리어", "note": "완성형 이야기 집필" },
     "cover-letter-tailor":              { "group": "교육·창작·커리어", "note": "채용 자소서 맞춤" },
+    "job-posting-scout":                { "group": "교육·창작·커리어", "note": "채용 공고 탐색·큐레이션" },
 
     "brainstormer":                     { "group": "발상·검증", "note": "발산→수렴(모든 실행 앞단)" },
     "truth-checker":                    { "group": "발상·검증", "note": "질문·주장 정확성 검증" },

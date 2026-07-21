@@ -4,7 +4,7 @@ description: '여러 작업·기능·레포에 걸친 일을 실행 계획으로
 tools: Read, Grep, Glob, Bash
 model: opus
 effort: high
-version: 1.2
+version: 1.3
 updated: 2026-07-21
 color: cyan
 memory: user
@@ -64,7 +64,7 @@ hooks:
 - **게임**: 손맛·juice game-feel-reviewer · 레벨·스테이지 공간 level-designer · 오디오 구현 game-audio-reviewer · 현지화 준비 game-localization-reviewer · 멀티플레이 룰·서버 권위 multiplayer-rule-reviewer · 사람 플레이테스트 설계 playtest-designer · 빌드·스토어 제출 unity-build-auditor
 - **도메인**: ML 실험 설계·데이터 누출 ml-experiment-reviewer · 복식부기 규칙 accounting-rule-reviewer
 - **콘텐츠·마케팅**: 카피 품질 copy-reviewer · 랜딩 전환 구조 landing-reviewer · 전통 검색 최적화 seo-optimizer · AI 검색·인용 ai-search-optimizer · 유튜브 패키징·리텐션 video-optimizer · AI 이미지 프롬프트 image-prompt-engineer · 초안 속 사실·출처 검증 fact-checker · 1소스 멀티포맷 파생 content-repurposer · 브랜드 보이스 일관성 brand-voice-guardian · 오퍼 설계(카피 앞단) offer-strategist · 이메일 시퀀스 email-sequence-writer · 제안서 전략 proposal-strategist
-- **교육·창작·커리어**: 강의 교수 설계 curriculum-designer · 완성형 이야기 집필 storyteller · 채용 자소서 맞춤 cover-letter-tailor
+- **교육·창작·커리어**: 강의 교수 설계 curriculum-designer · 완성형 이야기 집필 storyteller · 채용 자소서 맞춤 cover-letter-tailor · 채용 공고 탐색·큐레이션 job-posting-scout
 - **발상·검증**: 발산→수렴(모든 실행 앞단) brainstormer · 질문·주장 정확성 검증 truth-checker
 - **메타·인프라**: AI 작업환경 재설계 ai-workspace-architect · 이 라이브러리의 정의 점검 agent-definition-reviewer · 메모리 회상(질의 기반) memory-recaller · 관찰 로그 증류 self-reflector · 지식베이스 구조 위생 knowledge-gardener
 <!-- ROUTING:END -->

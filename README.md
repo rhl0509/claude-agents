@@ -3,16 +3,16 @@
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
 코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 여기에 강의·워크숍·강좌·교육 자료의 교수 설계(학습자 분석·측정 가능한 학습 목표·모듈 계열화·목표-평가-활동 정렬)를 맡는 **교육/교수설계 에이전트 1종**(`curriculum-designer`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터). 여기에 더해 **C와 비-Unity C#/.NET**을 전담하는 시스템 언어 에이전트 6종(`c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`)이 추가되었습니다(🧩 시스템 언어 클러스터 — 각 언어를 리뷰·설계·성능 3역으로). 이어 이 클러스터를 **Java(JVM)·Swift**로 넓혀 4종(`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect`)을 추가했는데, C/.NET처럼 3역 트리오가 아니라 **리뷰어+아키텍트 2역씩**만 두고 **전담 perf 에이전트는 의도적으로 만들지 않았다**(프로모션 게이트 — 각 언어의 성능 점검 수요가 실제로 반복될 때까지 유보하고, 리뷰어가 그 공백을 "알려진 공백"으로 명시). 가장 최근에는 주제·문제만 있고 구체 아이디어가 없을 때 **발산(다각도 렌즈)→수렴(기준 채점)**으로 고를 수 있는 후보 목록을 만드는 **브레인스토밍 에이전트 1종**(`brainstormer`)이 더해졌습니다 — 모든 실행(오퍼·이야기·게임 설계·강의 설계) 앞단의 아이디어 단계를 전담합니다.
 
-- 에이전트 수: **74종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET/Java/Swift 10종 + 도메인 3종(ML·회계·자동화) + 메타 3종 + 검증 1종 + 콘텐츠/마케팅 8종 + 교육 1종 + 창작 1종 + 발상 1종 + 커리어 1종 + 보안 심화 2종 + 게임 13종 + 인프라 3종 + AI검색·영상·이미지·제안서 4종 + 보안·인증·운영·엔지니어링 4종(ai-code-auditor·identity-access-architect·aws-reviewer·codebase-archaeologist))
+- 에이전트 수: **75종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET/Java/Swift 10종 + 도메인 3종(ML·회계·자동화) + 메타 3종 + 검증 1종 + 콘텐츠/마케팅 8종 + 교육 1종 + 창작 1종 + 발상 1종 + 커리어 2종 + 보안 심화 2종 + 게임 13종 + 인프라 3종 + AI검색·영상·이미지·제안서 4종 + 보안·인증·운영·엔지니어링 4종(ai-code-auditor·identity-access-architect·aws-reviewer·codebase-archaeologist))
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.14**, `test-runner` **v1.11**, `code-reviewer` **v1.16**(Flask 흡수), `devops-reviewer` **v1.10**, `aws-reviewer` **v1.0**, `data-modeler` **v1.7**, `api-doc-writer` **v1.7**, `ui-ux-reviewer` **v1.6**, `system-architect` **v1.8**, `perf-auditor` **v1.5**, `design-system-architect` **v1.6**·`test-strategy` **v1.5**, `observability-reviewer` **v1.4**·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 3종 `ai-workspace-architect` **v1.5**·`agent-definition-reviewer` **v1.1**·`project-manager` **v1.2**, 콘텐츠/마케팅 8종 `copy-reviewer` **v1.3**·`content-repurposer` **v1.4**·`landing-reviewer` **v1.2**·`seo-optimizer` **v1.1**·`brand-voice-guardian` **v1.1**·`fact-checker` **v1.1**·`email-sequence-writer` **v1.0**·`offer-strategist` **v1.2**, 발상 `brainstormer` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.2**, 조율 `project-manager` **v1.2**, 게임 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.8**·`game-feel-reviewer` **v1.3**·`game-ui-reviewer` **v1.4**·`playtest-designer` **v1.2**·`unity-build-auditor`·`multiplayer-rule-reviewer`·`unity-perf-auditor` **v1.1**·`save-data-reviewer` **v1.0**·`game-localization-reviewer`·`game-test-strategy`·`game-audio-reviewer` **v1.1**, 인프라 `memory-recaller` **v1.5**·`self-reflector` **v1.1**, 검증 `truth-checker` **v1.0**, 엔지니어링 `refactor-strategist` **v1.1**, 문서 `docs-writer` **v1.2**, 창작 `storyteller` **v1.1**, 커리어 `cover-letter-tailor` **v1.1**, 디버깅 `debugger` **v1.5**, 도메인 `ml-experiment-reviewer`·`accounting-rule-reviewer` **v1.0**·`automation-reliability-reviewer` **v1.1**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** , 1.92 신설 9종 `codebase-archaeologist`·`ai-search-optimizer`·`level-designer` **v1.0** · `ai-code-auditor`·`identity-access-architect`·`video-optimizer`·`image-prompt-engineer`·`proposal-strategist`·`knowledge-gardener` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
-- 추론 강도(`effort`): opus 심층추론 69종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 7종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`·`truth-checker`·`ai-code-auditor`·`identity-access-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller·self-reflector)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.14**, `test-runner` **v1.11**, `code-reviewer` **v1.16**(Flask 흡수), `devops-reviewer` **v1.10**, `aws-reviewer` **v1.0**, `data-modeler` **v1.7**, `api-doc-writer` **v1.7**, `ui-ux-reviewer` **v1.6**, `system-architect` **v1.8**, `perf-auditor` **v1.5**, `design-system-architect` **v1.6**·`test-strategy` **v1.5**, `observability-reviewer` **v1.4**·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 3종 `ai-workspace-architect` **v1.5**·`agent-definition-reviewer` **v1.1**·`project-manager` **v1.3**, 콘텐츠/마케팅 8종 `copy-reviewer` **v1.3**·`content-repurposer` **v1.4**·`landing-reviewer` **v1.2**·`seo-optimizer` **v1.1**·`brand-voice-guardian` **v1.1**·`fact-checker` **v1.1**·`email-sequence-writer` **v1.0**·`offer-strategist` **v1.2**, 발상 `brainstormer` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.2**, 조율 `project-manager` **v1.3**, 게임 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.8**·`game-feel-reviewer` **v1.3**·`game-ui-reviewer` **v1.4**·`playtest-designer` **v1.2**·`unity-build-auditor`·`multiplayer-rule-reviewer`·`unity-perf-auditor` **v1.1**·`save-data-reviewer` **v1.0**·`game-localization-reviewer`·`game-test-strategy`·`game-audio-reviewer` **v1.1**, 인프라 `memory-recaller` **v1.5**·`self-reflector` **v1.1**, 검증 `truth-checker` **v1.0**, 엔지니어링 `refactor-strategist` **v1.1**, 문서 `docs-writer` **v1.2**, 창작 `storyteller` **v1.1**, 커리어 `cover-letter-tailor` **v1.2**·`job-posting-scout` **v1.0**, 디버깅 `debugger` **v1.5**, 도메인 `ml-experiment-reviewer`·`accounting-rule-reviewer` **v1.0**·`automation-reliability-reviewer` **v1.1**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** , 1.92 신설 9종 `codebase-archaeologist`·`ai-search-optimizer`·`level-designer` **v1.0** · `ai-code-auditor`·`identity-access-architect`·`video-optimizer`·`image-prompt-engineer`·`proposal-strategist`·`knowledge-gardener` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 추론 강도(`effort`): opus 심층추론 70종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 7종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`·`truth-checker`·`ai-code-auditor`·`identity-access-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller·self-reflector)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
 
 ## 목차
-- [에이전트 74종](#에이전트-74종)
+- [에이전트 75종](#에이전트-75종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -24,9 +24,9 @@
 
 ---
 
-## 에이전트 74종
+## 에이전트 75종
 
-**관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했다. `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록 자체는 번호순이 아니라 클러스터별로 묶여 있다). 번호는 **1~74 연속이며 결번이 없다** — `#1`은 모든 에이전트 위에 앉는 진입/조율 층인 `project-manager`, `#2`부터는 대체로 추가된 순서다. 번호는 상세 블록을 찾는 **인덱스일 뿐 추가 시점을 뜻하지 않으며**, 새 에이전트는 다음 번호(`#75`…)를 이어 받는다.
+**관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했다. `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록 자체는 번호순이 아니라 클러스터별로 묶여 있다). 번호는 **1~75 연속이며 결번이 없다** — `#1`은 모든 에이전트 위에 앉는 진입/조율 층인 `project-manager`, `#2`부터는 대체로 추가된 순서다. 번호는 상세 블록을 찾는 **인덱스일 뿐 추가 시점을 뜻하지 않으며**, 새 에이전트는 다음 번호(`#76`…)를 이어 받는다.
 
 #### 🔍 코드 품질 · 디버깅 · 테스트
 
@@ -133,7 +133,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 | 24 | `brand-voice-guardian` | `/voice` | 1.1 | opus | 브랜드 보이스(문체·톤) 일관성 점검(판정 규칙·태그 취급 에이전트 소유) | Read, Grep, Glob |
 | 38 | `storyteller` | `/story` `/이야기` | 1.1 | **fable** | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성 | Read, Grep, Glob |
 | 54 | `curriculum-designer` | `/curriculum` `/강의설계` | 1.1 | opus | 강의·워크숍·강좌 교수 설계(학습 목표·모듈 계열화·backward design·슬라이드 골격) | Read, Grep, Glob |
-| 59 | `cover-letter-tailor` | `/cover` `/자소서` | 1.1 | opus | 채용 공고(JD)에 맞춰 자기소개서 맞춤 재작성(역량 매핑·STAR·글자수·사실만·공백 표시) | Read, Grep, Glob |
+| 59 | `cover-letter-tailor` | `/cover` `/자소서` | 1.2 | opus | 채용 공고(JD)에 맞춰 자기소개서 맞춤 재작성(역량 매핑·STAR·글자수·사실만·공백 표시) | Read, Grep, Glob |
 | 61 | `email-sequence-writer` | `/email` `/이메일` | 1.0 | opus | 이메일/라이프사이클 시퀀스 생성(웰컴·런칭·너처·재참여·콜드아웃리치, 타이밍·제목·CTA) | Read, Grep, Glob |
 | 62 | `offer-strategist` | `/offer` `/오퍼` | 1.2 | opus | 카피 앞단 오퍼 설계(가치제안·가격 티어·보증·보너스·포지셔닝) | Read, Grep, Glob |
 | 64 | `brainstormer` | `/brainstorm` `/발상` | 1.0 | opus | 아이디어 발산(다각도 렌즈)→수렴(기준 채점) 브레인스토밍 — 번호 표·Top 3+와일드카드, 모든 실행 앞단 | Read, Grep, Glob |
@@ -141,12 +141,13 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 | 69 | `ai-search-optimizer` | `/aeo` `/에이아이검색` | 1.0 | opus | **AI 검색·인용 최적화**(기반 감사 + 인용 감사) — seo-optimizer 보완층 | Read, Grep, Glob, WebSearch, WebFetch |
 | 70 | `image-prompt-engineer` | `/imgprompt` `/이미지프롬프트` | 1.1 | opus | **AI 이미지 프롬프트 5계층 설계** + 권리 경계(실존 인물·브랜드 거부) | Read, Grep, Glob |
 | 71 | `proposal-strategist` | `/proposal` `/제안서` | 1.1 | opus | **제안서 전략**(승리 테마·3막 서사·경영진 요약) — 1인 규모 환산 | Read, Grep, Glob |
+| 75 | `job-posting-scout` | `/jobscout` `/채용공고` | 1.0 | opus | **국내 채용 공고 탐색·선별**(정규직·대기업 우선·현재 개방만·지어내지 않음) → 우선순위 지원 관리표 | Read, Grep, Glob, WebSearch, WebFetch |
 
 #### 🧭 메타 / 인프라 (내 작업환경 자체)
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 1 | `project-manager` | `/pm` `/프로젝트관리` | 1.2 | opus | **프로젝트 조율**(태스크 분해·의존성·우선순위·전문 에이전트 라우팅 맵·순서/마일스톤·진행 현황) — 오케스트레이터 아님(계획을 텍스트로 냄) | Read, Grep, Glob, Bash |
+| 1 | `project-manager` | `/pm` `/프로젝트관리` | 1.3 | opus | **프로젝트 조율**(태스크 분해·의존성·우선순위·전문 에이전트 라우팅 맵·순서/마일스톤·진행 현황) — 오케스트레이터 아님(계획을 텍스트로 냄) | Read, Grep, Glob, Bash |
 | 18 | `ai-workspace-architect` | `/fable` | 1.5 | opus | AI 작업환경 진단·재설계(프롬프트·CLAUDE.md·SKILL.md·모델별 전략) | Read, Grep, Glob, WebSearch, WebFetch |
 | 34 | `memory-recaller` | `/recall` `/회상` | 1.5 | **haiku** | 파일 기반 장기기억 회상(`E:\claude_memory`) — 값싼 Haiku 회상 | Read, Grep, Glob |
 | 37 | `agent-definition-reviewer` | `/agentdef` | 1.1 | opus | 이 라이브러리의 에이전트 정의(.md) 스펙·경계·규범 점검 | Read, Grep, Glob |
@@ -719,9 +720,9 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 - **구분**: 기존 자산을 매체별로 파생하는 것은 `content-repurposer`, 카피 품질은 `copy-reviewer`, 확정 보이스 준수는 `brand-voice-guardian`, 프롬프트·지침 시스템 설계는 `ai-workspace-architect`
 </details>
 
-### 🧑‍💼 커리어 / 채용 (1.85 추가)
+### 🧑‍💼 커리어 / 채용 (1.85 추가 · 1.100 확장)
 
-> 채용 공고(JD)를 해부해 지원자의 **실제 경험**을 그 요구에 맞게 재구성하는 생성 에이전트. 콘텐츠 생성기 계열이지만 마케팅이 아니라 **커리어 문서**를 다루는 별도 1종이다. 핵심 가드레일은 **없는 사실을 창작하지 않는 것**(허위기재 방지) — 프레이밍은 자유롭게, 팩트는 지원자가 준 것에서만.
+> 마케팅이 아니라 **커리어**를 다루는 별도 2종 — 어디에 지원할지 찾는 `job-posting-scout`(공고 탐색·선별)와 그 공고에 뭐라고 쓸지 만드는 `cover-letter-tailor`(자소서 재작성). 공고를 찾아 고른 뒤 자소서로 잇는 흐름이다. 공통 핵심 가드레일은 **없는 사실을 창작하지 않는 것** — 스카우트는 확인 못 한 공고·링크를 지어내지 않고, 자소서는 지원자가 준 팩트만 쓴다.
 
 <details>
 <summary><b>59. cover-letter-tailor</b> (<code>/cover</code> <code>/자소서</code>) — 채용 공고에 맞춰 자기소개서 맞춤 재작성</summary>
@@ -731,6 +732,17 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 - **정직성(최우선)**: 지원자가 준 사실만 사용 — 없는 경력·수상·자격·정량 수치 창작 금지. 근거 공백은 숨기지 않고 "이런 경험이 있으면 알려달라"로 되묻는다. 위조·과장 요청은 거부하고 위험(합격/채용 취소·법적 책임)을 밝힌 뒤 "가진 사실을 더 강하게" 대안으로 전환
 - **출력**: 공고 요구역량 요약 → 매핑 표(공백 포함) → 문항별 완성본(글자수 표기) → 보강 제안(공백 메우기 질문) → 채운 가정
 - **구분**: 마케팅 카피 품질은 `copy-reviewer`, 확정 브랜드 보이스 정합은 `brand-voice-guardian`, 1소스 멀티포맷 파생은 `content-repurposer`, 창작 서사는 `storyteller`, 외부 사실·수치 검증은 `fact-checker`
+</details>
+
+<details>
+<summary><b>75. job-posting-scout</b> (<code>/jobscout</code> <code>/채용공고</code>) — 국내 채용 공고 탐색·선별 → 지원 관리표</summary>
+
+- **언제**: 구직·이직 중 국내 채용 사이트(원티드·점핏·사람인·잡코리아·링크드인·리멤버·랠릿·게임잡)와 기업 공식 채용 페이지에서 오늘 지원 가능한 공고를 찾아 우선순위로 정리할 때. 슬래시 `/jobscout`·`/채용공고`
+- **정직성(최우선)**: 기업명·공고·링크·마감일을 **지어내지 않는다** — 확인 가능한(링크 있는) 현재 개방 공고만. 로그인·차단으로 못 본 소스(원티드·링크드인·리멤버 등)는 "확인 불가"로 표시하고 직접 확인 URL 제공. 확인 시점 명시 + 지원 직전 재확인 안내(공고는 변동 큼)
+- **선별**: 대기업·대형 계열사 우선(부족하면 이유 먼저 + 적합도 높은 중견/중소/스타트업 보조후보), 이미 지원·마감 제외, 정규직 우선, 요구사항 **60~70% 매칭이면 후보**, 후순위 신호(석사·논문·계약직 단독 등) 반영
+- **출력**: 소스 접근 요약 → 12열 지원 관리표(후보 10건) → 공고별 적합 이유 → 앞세울 포트폴리오 프로젝트 → "오늘 바로 지원할 순서"(1번부터) + 링크
+- **입력 부족 시**: 희망직무·기술·도메인·경력·지역·지원완료목록이 없으면 지어내지 말고 되묻는다
+- **구분**: 고른 공고용 **자소서 작성**은 `cover-letter-tailor`(텍스트)·`/cover`(파일 저장까지 메인 세션), 제안서는 `proposal-strategist`, 콘텐츠 속 사실검증은 `fact-checker`, 주장 자체 검증은 `truth-checker`
 </details>
 
 ### 🐞 디버깅 (품질 · 1.64 추가)
@@ -914,7 +926,7 @@ AI 코딩 도구가 **기본값으로** 남기는 결함만 본다. ① 클라�
 
 ### 역할이 겹치기 쉬운 쌍 (양방향 위임)
 
-양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 1.56의 전수 스캔 34쌍에서 1.64·1.67~1.72·1.89·1.91·1.99를 거치며 늘어 **현재 64쌍**이며 클러스터별로 나눈다.
+양쪽 description이 서로를 가리키는 대칭 위임(`↔`) — 어느 쪽으로 호출해도 인접 영역으로 안내된다. 1.56의 전수 스캔 34쌍에서 1.64·1.67~1.72·1.89·1.91·1.99·1.100을 거치며 늘어 **현재 65쌍**이며 클러스터별로 나눈다.
 
 **웹 스택 (20쌍)**
 | 쌍 | 구분 |
@@ -940,7 +952,7 @@ AI 코딩 도구가 **기본값으로** 남기는 결함만 본다. ① 클라�
 | debugger ↔ code-reviewer | 이미 난 증상에서 "역추적" ↔ 증상 없이 변경분에서 "잠재 결함" 정적 리뷰 ⟵ 1.64 |
 | debugger ↔ observability-reviewer | 지금 있는 로그로 "원인 규명" ↔ 추적 "가능성" 자체의 공백 점검 ⟵ 1.64 |
 
-**콘텐츠 / 마케팅 (6쌍)**
+**콘텐츠 / 마케팅 (7쌍)**
 | 쌍 | 구분 |
 |---|---|
 | copy-reviewer ↔ landing-reviewer | 문장 카피 품질 ↔ 상세페이지·랜딩 전환 구조 |
@@ -949,6 +961,7 @@ AI 코딩 도구가 **기본값으로** 남기는 결함만 본다. ① 클라�
 | truth-checker ↔ fact-checker | 질문·주장 자체 "정확성 검증"(신뢰도 산정) ↔ 콘텐츠 초안 속 진술 "출처 검증" ⟵ 1.89 |
 | brainstormer ↔ offer-strategist | 오퍼 방향·네이밍 후보 "발산·수렴"(고르기 전) ↔ 고른 방향의 오퍼 "설계" ⟵ 1.91 |
 | cover-letter-tailor ↔ proposal-strategist | 채용 자소서(JD 맞춤·사실만) ↔ 사업·용역·강의 제안서(승리 테마·3막 서사) ⟵ 1.99 |
+| job-posting-scout ↔ cover-letter-tailor | 지원할 공고 "탐색·선별"(어디에 지원할지) ↔ 고른 공고용 자소서 "작성"(뭐라고 쓸지) ⟵ 1.100 |
 
 **보안 (3쌍)**
 | 쌍 | 구분 |
