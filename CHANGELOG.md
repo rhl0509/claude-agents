@@ -19,7 +19,8 @@
 - **[카브아웃] game-design-architect 1.7→1.8** — multiplayer-rule-reviewer 위임절에 **역할 구성 밸런스** 축 추가. "마피아 역할 밸런스 봐줘" 같은 발화가 재미·긴장 설계(이 에이전트)와 즉시승리·무효 조합의 룰 검증(multiplayer-rule-reviewer) 사이에서 동시 매치되던 유일한 토큰 중첩을 해소(1.7에서 마피아류 편입 시 생김).
 - **[카브아웃] cover-letter-tailor 1.0→1.1** — proposal-strategist로 가는 역방향 위임절 추가(편도 위임 대칭화, drift #5 위생).
 - **[문서] README** — 상단 목차 "에이전트 64종"→"74종" 정정, 상세 블록에 **#74 aws-reviewer 누락분 추가**(1~74 연속 약속 복구), 버전 요약·표 3종 동기화.
-- **[알려진 잔여]** README 상단 버전 요약(line 9)에 이번 변경과 무관한 기존 버전 드리프트 다수(project-manager v1.0→실제 1.2 등)와 "1.92 신설 9종 v1.0" 뭉치(6종은 실제 v1.1)가 남아 있음 — 별도 스윕 대상. AGENTS.md 클러스터 상세에도 aws-reviewer 항목 미추가(마스터 표엔 있음).
+- **[문서 버전 드리프트 일괄 정리]** frontmatter를 정본으로 README 버전 표 12행(project-manager 1.0→1.2·ai-workspace-architect 1.4→1.5·memory-recaller 1.4→1.5·devops-reviewer 1.9→1.10·game-ui-reviewer 1.3→1.4·copy-reviewer 1.2→1.3·ai-code-auditor·identity-access-architect·video-optimizer·image-prompt-engineer·proposal-strategist·knowledge-gardener 1.0→1.1)과 상단 요약(line 9) 토큰을 동기화, "1.92 신설 9종 v1.0" 뭉치를 v1.0 3종/v1.1 6종으로 분리. 스크립트로 표·요약 잔여 불일치 0 확인. (버전 컬럼은 AGENTS.md·CLAUDE.md에 없어 README 전용.)
+- **[알려진 잔여 — 버전 아님]** README 클러스터 카운트 내역(line 6 합 70≠74, 운영/AWS 미분류)·line 9 하위 라벨(게임 9종/인프라 2종)·인트로 시대 서술(line 4)과 AGENTS.md 클러스터 상세의 aws-reviewer 항목(마스터 표엔 있음)은 카운트/서술 드리프트라 별도 정리 대상.
 
 ## 1.98 (2026-07-21) — `_drafts` 편입: aws-reviewer(#74) + aws-deploy 스킬 → 74종
 

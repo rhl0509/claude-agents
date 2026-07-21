@@ -6,7 +6,7 @@
 - 에이전트 수: **74종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET/Java/Swift 10종 + 도메인 3종(ML·회계·자동화) + 메타 3종 + 검증 1종 + 콘텐츠/마케팅 8종 + 교육 1종 + 창작 1종 + 발상 1종 + 커리어 1종 + 보안 심화 2종 + 게임 13종 + 인프라 3종 + AI검색·영상·이미지·제안서 4종)
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.14**, `test-runner` **v1.11**, `code-reviewer` **v1.16**(Flask 흡수), `devops-reviewer` **v1.9**, `data-modeler` **v1.7**, `api-doc-writer` **v1.7**, `ui-ux-reviewer` **v1.6**, `system-architect` **v1.8**, `perf-auditor` **v1.5**, `design-system-architect` **v1.6**·`test-strategy` **v1.5**, `observability-reviewer` **v1.4**·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 3종 `ai-workspace-architect` **v1.4**·`agent-definition-reviewer` **v1.1**·`project-manager` **v1.0**, 콘텐츠/마케팅 8종 `copy-reviewer` **v1.2**·`content-repurposer` **v1.4**·`landing-reviewer` **v1.2**·`seo-optimizer` **v1.1**·`brand-voice-guardian` **v1.1**·`fact-checker` **v1.1**·`email-sequence-writer` **v1.0**·`offer-strategist` **v1.2**, 발상 `brainstormer` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.2**, 조율 `project-manager` **v1.0**, 게임 9종 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.8**·`game-feel-reviewer` **v1.3**·`game-ui-reviewer` **v1.3**·`playtest-designer` **v1.2**·`unity-build-auditor`·`multiplayer-rule-reviewer`·`unity-perf-auditor` **v1.1**·`save-data-reviewer` **v1.0**, 인프라 2종 `memory-recaller` **v1.4**·`self-reflector` **v1.1**, 검증 `truth-checker` **v1.0**, 엔지니어링 `refactor-strategist` **v1.1**, 문서 `docs-writer` **v1.2**, 창작 `storyteller` **v1.1**, 커리어 `cover-letter-tailor` **v1.1**, 디버깅 `debugger` **v1.5**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** , 1.92 신설 9종 `ai-code-auditor`·`codebase-archaeologist`·`identity-access-architect`·`video-optimizer`·`ai-search-optimizer`·`image-prompt-engineer`·`proposal-strategist`·`level-designer`·`knowledge-gardener` **v1.0** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.14**, `test-runner` **v1.11**, `code-reviewer` **v1.16**(Flask 흡수), `devops-reviewer` **v1.10**, `data-modeler` **v1.7**, `api-doc-writer` **v1.7**, `ui-ux-reviewer` **v1.6**, `system-architect` **v1.8**, `perf-auditor` **v1.5**, `design-system-architect` **v1.6**·`test-strategy` **v1.5**, `observability-reviewer` **v1.4**·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 3종 `ai-workspace-architect` **v1.5**·`agent-definition-reviewer` **v1.1**·`project-manager` **v1.2**, 콘텐츠/마케팅 8종 `copy-reviewer` **v1.3**·`content-repurposer` **v1.4**·`landing-reviewer` **v1.2**·`seo-optimizer` **v1.1**·`brand-voice-guardian` **v1.1**·`fact-checker` **v1.1**·`email-sequence-writer` **v1.0**·`offer-strategist` **v1.2**, 발상 `brainstormer` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.2**, 조율 `project-manager` **v1.2**, 게임 9종 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.8**·`game-feel-reviewer` **v1.3**·`game-ui-reviewer` **v1.4**·`playtest-designer` **v1.2**·`unity-build-auditor`·`multiplayer-rule-reviewer`·`unity-perf-auditor` **v1.1**·`save-data-reviewer` **v1.0**, 인프라 2종 `memory-recaller` **v1.5**·`self-reflector` **v1.1**, 검증 `truth-checker` **v1.0**, 엔지니어링 `refactor-strategist` **v1.1**, 문서 `docs-writer` **v1.2**, 창작 `storyteller` **v1.1**, 커리어 `cover-letter-tailor` **v1.1**, 디버깅 `debugger` **v1.5**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** , 1.92 신설 9종 `codebase-archaeologist`·`ai-search-optimizer`·`level-designer` **v1.0** · `ai-code-auditor`·`identity-access-architect`·`video-optimizer`·`image-prompt-engineer`·`proposal-strategist`·`knowledge-gardener` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 - 추론 강도(`effort`): opus 심층추론 69종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 7종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`·`truth-checker`·`ai-code-auditor`·`identity-access-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller·self-reflector)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
@@ -47,7 +47,7 @@
 | 3 | `security-reviewer` | `/sec` `/보안` | 1.14 | opus | 코드 보안 취약점(OWASP) 점검 — 구현 **후**(+ C 메모리안전=보안 층은 c-code-reviewer로) | Read, Grep, Glob, WebSearch, WebFetch |
 | 25 | `threat-modeler` | `/threat` | 1.2 | opus | 설계 단계 위협 모델링(STRIDE) — 구현 **전** | Read, Grep, Glob, WebSearch, WebFetch |
 | 26 | `llm-ai-security-reviewer` | `/aisec` | 1.2 | opus | AI/LLM 보안 심화(OWASP LLM Top 10) | Read, Grep, Glob, WebSearch, WebFetch |
-| 65 | `ai-code-auditor` | `/aicode` `/에이아이코드` | 1.0 | opus | **AI 생성 코드 감사**(클라 도달 시크릿·RLS 허울·프롬프트 인젝션 싱크 · CWE 매핑 · scan→fix→rescan) | Read, Grep, Glob, WebSearch, WebFetch |
+| 65 | `ai-code-auditor` | `/aicode` `/에이아이코드` | 1.1 | opus | **AI 생성 코드 감사**(클라 도달 시크릿·RLS 허울·프롬프트 인젝션 싱크 · CWE 매핑 · scan→fix→rescan) | Read, Grep, Glob, WebSearch, WebFetch |
 
 #### 🗄 데이터 / DB
 
@@ -66,7 +66,7 @@
 | 8 | `api-doc-writer` | `/apidoc` | 1.7 | sonnet | FastAPI 엔드포인트 카탈로그 | Read, Grep, Glob, Context7 |
 | 14 | `system-architect` | `/arch` `/아키텍처` | 1.8 | opus | 시스템 아키텍처 설계(계층·경계·확장성) | Read, Grep, Glob, Context7 |
 | 36 | `docs-writer` | `/docs` `/문서` | 1.2 | opus | 개발자용 기술문서(README·아키텍처·온보딩·ADR) | Read, Grep, Glob |
-| 67 | `identity-access-architect` | `/autharch` `/인증설계` | 1.0 | opus | **인증·인가·세션 구조 설계**(플로우 검증·세션 결정표·패스키·SSO/SCIM·테넌트 격리) | Read, Grep, Glob, Context7 |
+| 67 | `identity-access-architect` | `/autharch` `/인증설계` | 1.1 | opus | **인증·인가·세션 구조 설계**(플로우 검증·세션 결정표·패스키·SSO/SCIM·테넌트 격리) | Read, Grep, Glob, Context7 |
 
 #### 🎨 프론트엔드 (화면 · 디자인 · 성능)
 
@@ -80,7 +80,7 @@
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 15 | `devops-reviewer` | `/devops` `/배포` | 1.9 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
+| 15 | `devops-reviewer` | `/devops` `/배포` | 1.10 | opus | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
 | 16 | `dependency-auditor` | `/deps` `/의존성` | 1.1 | opus | 의존성 취약점·버전·라이선스 점검 | Read, Grep, Glob, Bash |
 | 17 | `observability-reviewer` | `/obs` `/관측성` | 1.4 | opus | 로깅·트레이싱·관측성 점검(웹 앱 런타임) | Read, Grep, Glob |
 | 74 | `aws-reviewer` | `/aws` `/인프라` | 1.0 | opus | **AWS IaC 자세**(IAM 최소권한·공개 노출·암호화·격리·state·비용·파괴적 변경) | Read, Grep, Glob |
@@ -92,7 +92,7 @@
 |---|---|---|---|---|---|---|
 | 27 | `unity-code-reviewer` | `/ureview` | 1.5 | opus | Unity C# 코드 리뷰(수명주기·GC·프레임/물리 · Fast Enter Play Mode · 비-Unity .NET은 dotnet-code-reviewer로) | Read, Grep, Glob, Bash |
 | 28 | `game-design-architect` | `/gdd` | 1.8 | opus | 게임 디자인·시스템 설계(코어 루프·난이도·수직 슬라이스, 엔진 무관) | Read, Grep, Glob |
-| 29 | `game-ui-reviewer` | `/gui` | 1.3 | opus | 게임 UI/UX(HUD·스케일링·내비·가독성, UGUI/UI Toolkit 분기) | Read, Grep, Glob |
+| 29 | `game-ui-reviewer` | `/gui` | 1.4 | opus | 게임 UI/UX(HUD·스케일링·내비·가독성, UGUI/UI Toolkit 분기) | Read, Grep, Glob |
 | 30 | `game-feel-reviewer` | `/feel` | 1.3 | opus | 손맛/juice(입력 관대성·히트스톱·카메라 + 페이즈/턴 기반 피드백) | Read, Grep, Glob |
 | 31 | `unity-perf-auditor` | `/uperf` | 1.1 | opus | 런타임 성능·렌더링(배칭·오버드로우·메모리·Profiler) | Read, Grep, Glob |
 | 32 | `playtest-designer` | `/playtest` | 1.2 | opus | 플레이테스트 설계(가설·참가자·지표 + 다인 동시 세션) | Read, Grep, Glob |
@@ -125,7 +125,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 19 | `copy-reviewer` | `/copy` `/카피` | 1.2 | opus | 마케팅 카피 품질 리뷰(후킹·CTA·과장/윤리) | Read, Grep, Glob |
+| 19 | `copy-reviewer` | `/copy` `/카피` | 1.3 | opus | 마케팅 카피 품질 리뷰(후킹·CTA·과장/윤리) | Read, Grep, Glob |
 | 20 | `landing-reviewer` | `/landing` | 1.2 | opus | 상세페이지·랜딩 전환 구조 리뷰 | Read, Grep, Glob |
 | 21 | `seo-optimizer` | `/seo` | 1.1 | opus | 블로그·페이지 SEO 점검 | Read, Grep, Glob, WebSearch, WebFetch |
 | 22 | `fact-checker` | `/factcheck` | 1.1 | opus | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
@@ -137,22 +137,22 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 | 38 | `storyteller` | `/story` `/이야기` | 1.1 | **fable** | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성 | Read, Grep, Glob |
 | 54 | `curriculum-designer` | `/curriculum` `/강의설계` | 1.1 | opus | 강의·워크숍·강좌 교수 설계(학습 목표·모듈 계열화·backward design·슬라이드 골격) | Read, Grep, Glob |
 | 59 | `cover-letter-tailor` | `/cover` `/자소서` | 1.1 | opus | 채용 공고(JD)에 맞춰 자기소개서 맞춤 재작성(역량 매핑·STAR·글자수·사실만·공백 표시) | Read, Grep, Glob |
-| 68 | `video-optimizer` | `/video` `/영상` | 1.0 | opus | **유튜브 최적화**(제목 3방향·썸네일·훅 초단위·챕터·숏폼) + 키즈 채널 분기 규칙 | Read, Grep, Glob, WebSearch, WebFetch |
+| 68 | `video-optimizer` | `/video` `/영상` | 1.1 | opus | **유튜브 최적화**(제목 3방향·썸네일·훅 초단위·챕터·숏폼) + 키즈 채널 분기 규칙 | Read, Grep, Glob, WebSearch, WebFetch |
 | 69 | `ai-search-optimizer` | `/aeo` `/에이아이검색` | 1.0 | opus | **AI 검색·인용 최적화**(기반 감사 + 인용 감사) — seo-optimizer 보완층 | Read, Grep, Glob, WebSearch, WebFetch |
-| 70 | `image-prompt-engineer` | `/imgprompt` `/이미지프롬프트` | 1.0 | opus | **AI 이미지 프롬프트 5계층 설계** + 권리 경계(실존 인물·브랜드 거부) | Read, Grep, Glob |
-| 71 | `proposal-strategist` | `/proposal` `/제안서` | 1.0 | opus | **제안서 전략**(승리 테마·3막 서사·경영진 요약) — 1인 규모 환산 | Read, Grep, Glob |
+| 70 | `image-prompt-engineer` | `/imgprompt` `/이미지프롬프트` | 1.1 | opus | **AI 이미지 프롬프트 5계층 설계** + 권리 경계(실존 인물·브랜드 거부) | Read, Grep, Glob |
+| 71 | `proposal-strategist` | `/proposal` `/제안서` | 1.1 | opus | **제안서 전략**(승리 테마·3막 서사·경영진 요약) — 1인 규모 환산 | Read, Grep, Glob |
 
 #### 🧭 메타 / 인프라 (내 작업환경 자체)
 
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
-| 1 | `project-manager` | `/pm` `/프로젝트관리` | 1.0 | opus | **프로젝트 조율**(태스크 분해·의존성·우선순위·전문 에이전트 라우팅 맵·순서/마일스톤·진행 현황) — 오케스트레이터 아님(계획을 텍스트로 냄) | Read, Grep, Glob, Bash |
-| 18 | `ai-workspace-architect` | `/fable` | 1.4 | opus | AI 작업환경 진단·재설계(프롬프트·CLAUDE.md·SKILL.md·모델별 전략) | Read, Grep, Glob, WebSearch, WebFetch |
-| 34 | `memory-recaller` | `/recall` `/회상` | 1.4 | **haiku** | 파일 기반 장기기억 회상(`E:\claude_memory`) — 값싼 Haiku 회상 | Read, Grep, Glob |
+| 1 | `project-manager` | `/pm` `/프로젝트관리` | 1.2 | opus | **프로젝트 조율**(태스크 분해·의존성·우선순위·전문 에이전트 라우팅 맵·순서/마일스톤·진행 현황) — 오케스트레이터 아님(계획을 텍스트로 냄) | Read, Grep, Glob, Bash |
+| 18 | `ai-workspace-architect` | `/fable` | 1.5 | opus | AI 작업환경 진단·재설계(프롬프트·CLAUDE.md·SKILL.md·모델별 전략) | Read, Grep, Glob, WebSearch, WebFetch |
+| 34 | `memory-recaller` | `/recall` `/회상` | 1.5 | **haiku** | 파일 기반 장기기억 회상(`E:\claude_memory`) — 값싼 Haiku 회상 | Read, Grep, Glob |
 | 37 | `agent-definition-reviewer` | `/agentdef` | 1.1 | opus | 이 라이브러리의 에이전트 정의(.md) 스펙·경계·규범 점검 | Read, Grep, Glob |
 | 60 | `self-reflector` | `/reflect-log` `/누적회고` | 1.1 | **haiku** | 누적 관찰 로그(`_observations`) 교차 세션 증류 → 학습 후보 제안(신뢰도·증거 기반, 자기개선 루프) | Read, Grep, Glob |
 | 63 | `truth-checker` | `/truth` `/진실검증` | 1.0 | opus | **질문·주장 정확성 검증**(5분류·날조 금지·근거 기반 신뢰도 0~1·0.8 미만 재작성 · [명확한 답변]/[신뢰도]/[확인할 점]) | Read, Grep, Glob, WebSearch, WebFetch |
-| 73 | `knowledge-gardener` | `/garden` `/지식정원` | 1.0 | opus | **지식베이스 구조 위생**(고립 노트·인덱스 커버리지·상록 승격) — 읽기 전용 | Read, Grep, Glob |
+| 73 | `knowledge-gardener` | `/garden` `/지식정원` | 1.1 | opus | **지식베이스 구조 위생**(고립 노트·인덱스 커버리지·상록 승격) — 읽기 전용 | Read, Grep, Glob |
 
 ### 🧭 진입 / 조율 (#1 — 모든 에이전트 위에 앉는 조율 층)
 
