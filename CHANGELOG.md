@@ -20,7 +20,8 @@
 - **[카브아웃] cover-letter-tailor 1.0→1.1** — proposal-strategist로 가는 역방향 위임절 추가(편도 위임 대칭화, drift #5 위생).
 - **[문서] README** — 상단 목차 "에이전트 64종"→"74종" 정정, 상세 블록에 **#74 aws-reviewer 누락분 추가**(1~74 연속 약속 복구), 버전 요약·표 3종 동기화.
 - **[문서 버전 드리프트 일괄 정리]** frontmatter를 정본으로 README 버전 표 12행(project-manager 1.0→1.2·ai-workspace-architect 1.4→1.5·memory-recaller 1.4→1.5·devops-reviewer 1.9→1.10·game-ui-reviewer 1.3→1.4·copy-reviewer 1.2→1.3·ai-code-auditor·identity-access-architect·video-optimizer·image-prompt-engineer·proposal-strategist·knowledge-gardener 1.0→1.1)과 상단 요약(line 9) 토큰을 동기화, "1.92 신설 9종 v1.0" 뭉치를 v1.0 3종/v1.1 6종으로 분리. 스크립트로 표·요약 잔여 불일치 0 확인. (버전 컬럼은 AGENTS.md·CLAUDE.md에 없어 README 전용.)
-- **[알려진 잔여 — 버전 아님]** README 클러스터 카운트 내역(line 6 합 70≠74, 운영/AWS 미분류)·line 9 하위 라벨(게임 9종/인프라 2종)·인트로 시대 서술(line 4)과 AGENTS.md 클러스터 상세의 aws-reviewer 항목(마스터 표엔 있음)은 카운트/서술 드리프트라 별도 정리 대상.
+- **[카운트/서술 드리프트 정리]** README line 6 내역을 74로 재합산(누락 4종 ai-code-auditor·identity-access-architect·aws-reviewer·codebase-archaeologist을 "보안·인증·운영·엔지니어링 4종" 버킷으로 추가). line 9 버전 요약이 빠뜨렸던 7종(게임 3종 game-localization·game-test-strategy·game-audio + 도메인 3종 ml·회계·자동화 + aws-reviewer)을 채워 **74종 전원 등장** 확인(스크립트), 교차뷰 충돌을 내던 "게임 9종/인프라 2종" 카운트 라벨은 제거. AGENTS.md에 aws-reviewer(#74) 클러스터 상세 추가(마스터 표엔 이미 있었음).
+- **[의도적 유지]** README 인트로(line 4)의 "게임 7종·콘텐츠 6종…시범 추가되었습니다"는 **추가 당시**를 적은 역사 서술이라 현재 수치로 바꾸지 않음(바꾸면 역사가 틀려짐).
 
 ## 1.98 (2026-07-21) — `_drafts` 편입: aws-reviewer(#74) + aws-deploy 스킬 → 74종
 
