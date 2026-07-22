@@ -61,7 +61,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 9 | `db-optimizer` | `/db` | DB | MySQL 쿼리·인덱스 성능 튜닝 | Read, Grep, Glob, Bash |
 | 10 | `migration-reviewer` | `/migrate` | DB | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
 | 11 | `ui-ux-reviewer` | `/ui` | 디자인 | UI/UX·접근성·반응형 점검(일반 웹 화면 전용) | Read, Grep, Glob |
-| 76 | `slide-deck-reviewer` | `/deck` | 디자인 | 발표 슬라이드 덱(1440×810 고정 캔버스) 규약 점검 — 배열·번호 동기화·캔버스 이탈·투사 가독성·에셋 대조·템플릿 잔재 | Read, Grep, Glob |
+| 76 | `slide-deck-reviewer` | `/deck` `/ppt` | 디자인 | 발표 슬라이드 덱(1440×810 고정 캔버스) 규약 점검 — 배열·번호 동기화·캔버스 이탈·투사 가독성·에셋 대조·템플릿 잔재 | Read, Grep, Glob |
 | 12 | `design-system-architect` | `/dsystem` | 디자인 | 디자인 토큰·컴포넌트 설계 | Read, Grep, Glob, Context7 |
 | 13 | `data-modeler` | `/datamodel` | 설계 | 데이터 모델/스키마 설계 | Read, Grep, Glob |
 | 14 | `system-architect` | `/arch` | 설계 | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |

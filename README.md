@@ -75,7 +75,7 @@
 | 6 | `perf-auditor` | `/perf` `/성능` | 1.5 | opus | Next.js **프론트 전용** 성능(번들·CWV·캐싱 · 파이썬 백엔드 런타임 성능은 범위 밖=알려진 공백) | Read, Grep, Glob |
 | 11 | `ui-ux-reviewer` | `/ui` `/화면` | 1.7 | opus | UI/UX·접근성·반응형·다크패턴 점검(**일반 웹 화면 전용**) | Read, Grep, Glob |
 | 12 | `design-system-architect` | `/dsystem` | 1.6 | opus | 디자인 토큰·컴포넌트 설계(DESIGN.md) | Read, Grep, Glob, Context7 |
-| 76 | `slide-deck-reviewer` | `/deck` `/발표` | 1.1 | opus | **발표 슬라이드 덱**(1440×810 고정 캔버스) 규약 점검 — 배열·페이지번호 동기화·캔버스 이탈·투사 가독성·에셋 대조·템플릿 잔재 | Read, Grep, Glob |
+| 76 | `slide-deck-reviewer` | `/deck` `/ppt` `/발표` `/슬라이드` `/프레젠테이션` `/프리젠테이션` | 1.1 | opus | **발표 슬라이드 덱**(1440×810 고정 캔버스) 규약 점검 — 배열·페이지번호 동기화·캔버스 이탈·투사 가독성·에셋 대조·템플릿 잔재 | Read, Grep, Glob |
 
 #### 🚀 운영 (배포 · 의존성 · 관측성)
 
@@ -295,7 +295,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 </details>
 
 <details>
-<summary><b>76. slide-deck-reviewer</b> (<code>/deck</code> <code>/발표</code>) — 발표 슬라이드 덱 규약 점검</summary>
+<summary><b>76. slide-deck-reviewer</b> (<code>/deck</code> <code>/ppt</code> <code>/발표</code> <code>/슬라이드</code> <code>/프레젠테이션</code> <code>/프리젠테이션</code>) — 발표 슬라이드 덱 규약 점검</summary>
 
 - **언제**: 새 발표 폴더를 만든 직후, 슬라이드를 추가·삭제한 뒤, 발표 당일 전 최종 점검
 - **전제**: 규약 정본 `D:\presentation\INDEX.md`를 `Read`로 직접 읽어 기준 삼는다(부재 시 내장 기준 + 첫 줄에 명시). **일반 웹 화면과 판정 기준이 다르다** — 반응형이 아니라 1440×810 고정 캔버스 + `transform: scale()`, 스크롤이 아니라 잘림, 마우스가 아니라 키보드·레이저 포인터, 브라우저 거리가 아니라 **빔프로젝터 투사**
@@ -1101,7 +1101,7 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 76개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 79개 슬래시 명령(+ 한글 별칭 51개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사하고, `workflows/`·`hooks/`·`skills/`·`rules/`도 각각 `%USERPROFILE%\.claude\`의 대응 폴더로 배포합니다(배포 대상 7종). 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 76개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 80개 슬래시 명령(+ 한글 별칭 54개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사하고, `workflows/`·`hooks/`·`skills/`·`rules/`도 각각 `%USERPROFILE%\.claude\`의 대응 폴더로 배포합니다(배포 대상 7종). 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -1147,7 +1147,7 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/db` | db-optimizer | 경로/쿼리 |
 | `/migrate` | migration-reviewer | 마이그레이션 경로(선택) |
 | `/ui` | ui-ux-reviewer | 경로 |
-| `/deck` | slide-deck-reviewer | 발표 폴더 경로(선택) |
+| `/deck` `/ppt` | slide-deck-reviewer | 발표 폴더 경로(선택) |
 | `/dsystem` | design-system-architect | 경로 |
 | `/datamodel` | data-modeler | 요구사항/경로 |
 | `/arch` | system-architect | 기능 설명/경로 |
