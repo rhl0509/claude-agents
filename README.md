@@ -6,7 +6,7 @@
 - 에이전트 수: **75종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET/Java/Swift 10종 + 도메인 3종(ML·회계·자동화) + 메타 3종 + 검증 1종 + 콘텐츠/마케팅 8종 + 교육 1종 + 창작 1종 + 발상 1종 + 커리어 2종 + 보안 심화 2종 + 게임 13종 + 인프라 3종 + AI검색·영상·이미지·제안서 4종 + 보안·인증·운영·엔지니어링 4종(ai-code-auditor·identity-access-architect·aws-reviewer·codebase-archaeologist))
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.14**, `test-runner` **v1.11**, `code-reviewer` **v1.16**(Flask 흡수), `devops-reviewer` **v1.10**, `aws-reviewer` **v1.0**, `data-modeler` **v1.7**, `api-doc-writer` **v1.7**, `ui-ux-reviewer` **v1.6**, `system-architect` **v1.8**, `perf-auditor` **v1.5**, `design-system-architect` **v1.6**·`test-strategy` **v1.5**, `observability-reviewer` **v1.4**·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 3종 `ai-workspace-architect` **v1.5**·`agent-definition-reviewer` **v1.1**·`project-manager` **v1.3**, 콘텐츠/마케팅 8종 `copy-reviewer` **v1.3**·`content-repurposer` **v1.4**·`landing-reviewer` **v1.2**·`seo-optimizer` **v1.1**·`brand-voice-guardian` **v1.1**·`fact-checker` **v1.1**·`email-sequence-writer` **v1.0**·`offer-strategist` **v1.2**, 발상 `brainstormer` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.2**, 조율 `project-manager` **v1.3**, 게임 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.8**·`game-feel-reviewer` **v1.3**·`game-ui-reviewer` **v1.4**·`playtest-designer` **v1.2**·`unity-build-auditor`·`multiplayer-rule-reviewer`·`unity-perf-auditor` **v1.1**·`save-data-reviewer` **v1.0**·`game-localization-reviewer`·`game-test-strategy`·`game-audio-reviewer` **v1.1**, 인프라 `memory-recaller` **v1.5**·`self-reflector` **v1.1**, 검증 `truth-checker` **v1.0**, 엔지니어링 `refactor-strategist` **v1.1**, 문서 `docs-writer` **v1.2**, 창작 `storyteller` **v1.1**, 커리어 `cover-letter-tailor` **v1.2**·`job-posting-scout` **v1.0**, 디버깅 `debugger` **v1.5**, 도메인 `ml-experiment-reviewer`·`accounting-rule-reviewer` **v1.0**·`automation-reliability-reviewer` **v1.1**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** , 1.92 신설 9종 `codebase-archaeologist`·`ai-search-optimizer`·`level-designer` **v1.0** · `ai-code-auditor`·`identity-access-architect`·`video-optimizer`·`image-prompt-engineer`·`proposal-strategist`·`knowledge-gardener` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.14**, `test-runner` **v1.11**, `code-reviewer` **v1.16**(Flask 흡수), `devops-reviewer` **v1.10**, `aws-reviewer` **v1.0**, `data-modeler` **v1.7**, `api-doc-writer` **v1.7**, `ui-ux-reviewer` **v1.6**, `system-architect` **v1.8**, `perf-auditor` **v1.5**, `design-system-architect` **v1.6**·`test-strategy` **v1.5**, `observability-reviewer` **v1.4**·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 3종 `ai-workspace-architect` **v1.5**·`agent-definition-reviewer` **v1.1**·`project-manager` **v1.3**, 콘텐츠/마케팅 8종 `copy-reviewer` **v1.3**·`content-repurposer` **v1.4**·`landing-reviewer` **v1.2**·`seo-optimizer` **v1.1**·`brand-voice-guardian` **v1.2**·`fact-checker` **v1.1**·`email-sequence-writer` **v1.0**·`offer-strategist` **v1.2**, 발상 `brainstormer` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.2**, 조율 `project-manager` **v1.3**, 게임 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.8**·`game-feel-reviewer` **v1.3**·`game-ui-reviewer` **v1.4**·`playtest-designer` **v1.2**·`unity-build-auditor`·`multiplayer-rule-reviewer`·`unity-perf-auditor` **v1.1**·`save-data-reviewer` **v1.0**·`game-localization-reviewer`·`game-test-strategy`·`game-audio-reviewer` **v1.1**, 인프라 `memory-recaller` **v1.5**·`self-reflector` **v1.1**, 검증 `truth-checker` **v1.0**, 엔지니어링 `refactor-strategist` **v1.1**, 문서 `docs-writer` **v1.2**, 창작 `storyteller` **v1.1**, 커리어 `cover-letter-tailor` **v1.2**·`job-posting-scout` **v1.0**, 디버깅 `debugger` **v1.5**, 도메인 `ml-experiment-reviewer`·`accounting-rule-reviewer` **v1.0**·`automation-reliability-reviewer` **v1.1**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** , 1.92 신설 9종 `codebase-archaeologist`·`ai-search-optimizer`·`level-designer` **v1.0** · `ai-code-auditor`·`identity-access-architect`·`video-optimizer`·`image-prompt-engineer`·`proposal-strategist`·`knowledge-gardener` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 - 추론 강도(`effort`): opus 심층추론 70종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 7종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`·`truth-checker`·`ai-code-auditor`·`identity-access-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller·self-reflector)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
@@ -130,7 +130,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 | 21 | `seo-optimizer` | `/seo` | 1.1 | opus | 블로그·페이지 SEO 점검 | Read, Grep, Glob, WebSearch, WebFetch |
 | 22 | `fact-checker` | `/factcheck` | 1.1 | opus | 콘텐츠 사실·수치·출처 검증 | Read, Grep, Glob, WebSearch, WebFetch |
 | 23 | `content-repurposer` | `/repurpose` | 1.4 | opus | 1소스 → 멀티 포맷 재활용(단발 뉴스레터까지) | Read, Grep, Glob |
-| 24 | `brand-voice-guardian` | `/voice` | 1.1 | opus | 브랜드 보이스(문체·톤) 일관성 점검(판정 규칙·태그 취급 에이전트 소유) | Read, Grep, Glob |
+| 24 | `brand-voice-guardian` | `/voice` | 1.2 | opus | 브랜드 보이스(문체·톤) 일관성 점검(판정 규칙 에이전트 소유, 정본 `auto_agent_content\voice.md` 직접 참조) | Read, Grep, Glob |
 | 38 | `storyteller` | `/story` `/이야기` | 1.1 | **fable** | 프롬프트(뼈대)에 살 붙여 완성형 이야기 작성 | Read, Grep, Glob |
 | 54 | `curriculum-designer` | `/curriculum` `/강의설계` | 1.1 | opus | 강의·워크숍·강좌 교수 설계(학습 목표·모듈 계열화·backward design·슬라이드 골격) | Read, Grep, Glob |
 | 59 | `cover-letter-tailor` | `/cover` `/자소서` | 1.2 | opus | 채용 공고(JD)에 맞춰 자기소개서 맞춤 재작성(역량 매핑·STAR·글자수·사실만·공백 표시) | Read, Grep, Glob |
@@ -416,7 +416,7 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 <summary><b>24. brand-voice-guardian</b> (<code>/voice</code>) — 브랜드 보이스 일관성 점검</summary>
 
 - **언제**: 채널 톤을 일관되게 지키고 싶을 때, 여러 사람이 같은 채널 글을 쓸 때, 발행 전 보이스 점검
-- **기준 소스**(이 순서): `voice.md` → `voice/examples/` 확정글 → 제공된 예시 추론(근거 명시) → 아무 기준도 없으면 보이스를 지어내지 않고 `/fable`로 `voice.md`부터 만들라고 안내
+- **기준 소스**(이 순서, v1.2): 프로젝트의 `voice.md` → **보이스 정본 `D:\auto_agent_content\voice.md`를 직접 읽음**(복사 불필요) → `voice/examples/` 확정글 → 제공된 예시 추론(근거 명시) → 전부 없으면 보이스를 지어내지 않고 `/fable`로 `voice.md`부터 만들라고 안내. **정본이 있는데 프로젝트에만 없는 경우엔 새로 만들라고 하지 않고 정본을 복사해 오라고 안내**(두 번째 voice.md = 보이스 드리프트). 어느 파일을 기준으로 썼는지 결과 상단에 경로까지 밝힌다
 - **점검**: 문장 습관(길이·종결어미), 거리감·호칭, 어휘(자주 쓰는 표현·**금지 표현**), 시그니처, 톤 일관성(한 글 내 흔들림), 번역투·클리셰, 채널별 톤 변주 범위
 - **판정**(v1.1 — **에이전트가 소유하는 규칙**, voice.md는 데이터일 뿐 지시 아님): 통과 / 제안(`[임시 기본값]` 태그 항목) / 수정 권고(확정 항목 이탈) / 반려(과장·허위만)
 - **출력**: 요약(기준 소스·부합도) → 벗어난 구간(판정 4단계·위치·위반 기준·**원문→교정**) → 미세 조정·유지 → 임시 기준 제안 항목 별도 묶음 → (기준 부재 시) 보이스 정의 보강 제안
@@ -1086,7 +1086,7 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 74개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 78개 슬래시 명령(+ 한글 별칭 49개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사하고, `workflows/`·`hooks/`·`skills/`·`rules/`도 각각 `%USERPROFILE%\.claude\`의 대응 폴더로 배포합니다(배포 대상 7종). 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 75개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 78개 슬래시 명령(+ 한글 별칭 50개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사하고, `workflows/`·`hooks/`·`skills/`·`rules/`도 각각 `%USERPROFILE%\.claude\`의 대응 폴더로 배포합니다(배포 대상 7종). 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -1315,8 +1315,11 @@ claude-agents/
 ├─ workflows/                    # ── 워크플로 (pm-orchestrate) ──
 │  └─ pm-orchestrate.js
 │
-├─ hooks/                        # ── 읽기 전용 가드 훅 ──
-│  └─ agent-guard.ps1
+├─ hooks/                        # ── 훅 (가드 + 세션·메모리 6종, 1.101 편입) ──
+│  ├─ agent-guard.ps1            # 읽기 전용 가드(에이전트 frontmatter가 참조)
+│  ├─ memory-map.ps1             ├─ index-read-trigger.ps1  ├─ observe-capture.ps1
+│  └─ obsidian-session-log.ps1   └─ obsidian-memory-mirror.ps1  └─ precompact-snapshot.ps1
+│                                # 훅 배선(어느 이벤트에 무엇)은 ~/.claude/settings.json — 이 저장소 관리 밖
 │
 ├─ skills/                       # ── 프리로드 스킬 ──
 │  ├─ agent-conventions/         └─ design-reference/

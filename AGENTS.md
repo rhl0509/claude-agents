@@ -39,7 +39,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 전역 슬래시 명령 | `%USERPROFILE%\.claude\commands\` | `/명령`으로 호출 |
 | 전역 런처 | `%USERPROFILE%\.claude\launchers\` | 데스크톱 실행용 `claude.bat` |
 | 전역 워크플로 | `%USERPROFILE%\.claude\workflows\` | `pm-orchestrate`(`/pm-run`) |
-| 전역 훅 | `%USERPROFILE%\.claude\hooks\` | 읽기 전용 가드 `agent-guard.ps1` |
+| 전역 훅 | `%USERPROFILE%\.claude\hooks\` | 읽기 전용 가드 `agent-guard.ps1` + 세션·메모리 훅 6종(`memory-map`·`index-read-trigger`·`observe-capture`·`obsidian-session-log`·`obsidian-memory-mirror`·`precompact-snapshot`, 1.101 편입). 배선은 `~/.claude/settings.json`(저장소 관리 밖) |
 | 전역 스킬 | `%USERPROFILE%\.claude\skills\` | 프리로드 `agent-conventions`·`design-reference` |
 | 전역 규칙 | `%USERPROFILE%\.claude\rules\` | 경로 스코프 규칙(common·python·typescript) |
 | 소스(원본) | `d:\auto_agent`의 `*.md`·`commands/*.md`·`launchers/*.bat`·`workflows/*.js`·`hooks/*.ps1`·`skills/<name>/SKILL.md`·`rules/*.md` | 편집용 단일 소스. 여기서만 편집(sync.ps1 배포 대상 7종) |
@@ -238,7 +238,7 @@ MySQL 데이터 모델 **설계**. 엔터티·관계(N:M 연결 테이블), 정�
 → 카피 품질은 `copy-reviewer`, 검색 최적화는 `seo-optimizer`, 사실 검증은 `fact-checker`.
 
 **24. brand-voice-guardian (`/voice`)**
-콘텐츠가 브랜드 보이스(문체·톤·어휘·거리감·시그니처)에 맞는지 점검. 기준 소스: voice.md → 확정 예시글 → 제공 예시 추론 → 부재 시 `/fable`로 voice.md부터 만들라고 안내(보이스 지어내지 않음). 문장 습관·호칭·금지 표현·시그니처·톤 일관성·번역투 점검. 출력: 요약(기준·부합도) → 벗어난 구간(원문→교정) → 보강 제안.
+콘텐츠가 브랜드 보이스(문체·톤·어휘·거리감·시그니처)에 맞는지 점검. 기준 소스: 프로젝트 voice.md → **보이스 정본 `D:\auto_agent_content\voice.md` 직접 읽기**(1.101 연결, 복사 불필요) → 확정 예시글 → 제공 예시 추론 → 전부 부재 시 `/fable`로 voice.md부터 만들라고 안내(보이스 지어내지 않음. 단 정본이 있는데 프로젝트에만 없으면 새로 만들지 말고 정본을 복사해 오라고 안내 — 두 번째 voice.md는 드리프트). 문장 습관·호칭·금지 표현·시그니처·톤 일관성·번역투 점검. 판정 4단계(통과/제안/수정 권고/반려)는 에이전트가 소유. 출력: 요약(기준 파일 경로·부합도) → 벗어난 구간(원문→교정) → 보강 제안.
 → 일반 카피 품질은 `copy-reviewer`, 보이스 정의·시스템 설계는 `ai-workspace-architect`.
 
 **61. email-sequence-writer (`/email`, `/이메일`)** — 콘텐츠 (생성기)
