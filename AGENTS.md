@@ -1,9 +1,9 @@
-# 서브에이전트 전체 정리 (76종)
+# 서브에이전트 전체 정리 (77종)
 
 Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음입니다.
 모두 한국어로 작성되었고, **읽기 전용으로 분석·리뷰·설계·제안만** 하며 코드/스키마를 직접 수정하지 않습니다.
 
-> **클러스터 구성(76종)** — 번호는 `README.md`의 에이전트 표와 동일하다(`#1`~`#76` 연속).
+> **클러스터 구성(77종)** — 번호는 `README.md`의 에이전트 표와 동일하다(`#1`~`#77` 연속).
 >
 > | 클러스터 | 종수 | 성격 |
 > |---|---|---|
@@ -11,7 +11,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 > | 🔒 보안 (3단 방어) | 3 | 설계 단계 `threat-modeler` → 코드 `security-reviewer` → AI/LLM `llm-ai-security-reviewer` |
 > | 🗄 데이터 / DB | 4 | 스키마 설계·마이그레이션·쿼리 튜닝 + 회계 규칙 감사 |
 > | 🏗 아키텍처 · API · 문서 | 4 | 구조 설계·계약 정합·문서화 |
-> | 🎨 프론트엔드 | 3 | 화면·디자인 시스템·성능 |
+> | 🎨 프론트엔드 | 5 | 화면·디자인 시스템·모션·발표 덱·성능 |
 > | 🚀 운영 | 4 | 배포·의존성·관측성·자동화 신뢰성 |
 > | 🎮 게임 | 12 | Unity + C# 싱글플레이 2D 캐주얼 + MSW 멀티플레이(색상 `cyan` 공유) |
 > | 🧩 시스템 언어 | 10 | C·비-Unity .NET은 리뷰·설계·성능 3역, Java·Swift는 리뷰·설계 2역(perf는 프로모션 게이트로 유보) |
@@ -62,7 +62,8 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 10 | `migration-reviewer` | `/migrate` | DB | 스키마 마이그레이션 안전성 점검 | Read, Grep, Glob |
 | 11 | `ui-ux-reviewer` | `/ui` | 디자인 | UI/UX·접근성·반응형 점검(일반 웹 화면 전용) | Read, Grep, Glob |
 | 76 | `slide-deck-reviewer` | `/deck` `/ppt` | 디자인 | 발표 슬라이드 덱(1440×810 고정 캔버스) 규약 점검 — 배열·번호 동기화·캔버스 이탈·투사 가독성·에셋 대조·템플릿 잔재 | Read, Grep, Glob |
-| 12 | `design-system-architect` | `/dsystem` | 디자인 | 디자인 토큰·컴포넌트 설계 | Read, Grep, Glob, Context7 |
+| 12 | `design-system-architect` | `/dsystem` | 디자인 | 디자인 토큰·컴포넌트·모션 토큰 설계 | Read, Grep, Glob, Context7 |
+| 77 | `motion-reviewer` | `/motion` `/모션` | 디자인 | 모션·애니메이션 품질 점검(빈도 게이트·이징·300ms 예산·원점·인터럽트·GPU·제스처) + 기회 탐색 | Read, Grep, Glob |
 | 13 | `data-modeler` | `/datamodel` | 설계 | 데이터 모델/스키마 설계 | Read, Grep, Glob |
 | 14 | `system-architect` | `/arch` | 설계 | 시스템 아키텍처 설계 | Read, Grep, Glob, Context7 |
 | 15 | `devops-reviewer` | `/devops` | 운영 | Docker·CI/CD·배포 설정 점검 | Read, Grep, Glob |
@@ -181,11 +182,16 @@ MySQL/Alembic 스키마 마이그레이션 **안전성** 점검(대형 테이블
 
 **11. ui-ux-reviewer (`/ui`)**
 화면 UI/UX·접근성 점검. 레이아웃/간격, 타이포 위계, 색 대비(WCAG AA), 반응형·터치 타깃, 접근성(시맨틱·aria·키보드·alt·label·reduced-motion), 상태 표현(로딩/빈/에러), **폼/입력(검증 시점·에러 위치), 마이크로카피, 국제화(i18n/RTL), 다크모드 품질, 다크 패턴/윤리**, 컴포넌트 일관성. 실무 디자인 감사 카테고리 + Nielsen 휴리스틱 렌즈. 출력: 요약 → Must/Should/Nit.
-→ 코드 로직 버그는 `code-reviewer`, 토큰/시스템 설계는 `design-system-architect`, 로드·렌더 성능(번들·CWV)은 `perf-auditor`.
+→ 코드 로직 버그는 `code-reviewer`, 토큰/시스템 설계는 `design-system-architect`, 로드·렌더 성능(번들·CWV)은 `perf-auditor`, 모션 품질(이징·지속시간·인터럽트·GPU)은 `motion-reviewer`(이쪽은 `prefers-reduced-motion` 대응 유무까지).
 
 **12. design-system-architect (`/dsystem`)**
-디자인 시스템 설계. 디자인 토큰(색/타이포/스페이싱/래디우스/섀도), 테마(다크모드), 컴포넌트 계층·variant, 네이밍, Tailwind 설정 토큰화, 중복 통합, 문서화. 디자인 시스템을 **`DESIGN.md`**([google-labs-code/design.md](https://github.com/google-labs-code/design.md) 포맷: 프런트매터 토큰 + 산문 근거) 단일 소스로 정리·작성. 토큰 참조 `{colors.primary}`, WCAG 대비 명시. `@google/design.md` CLI(`lint`/`export`→Tailwind v3·v4·DTCG/`diff`)는 실행 안 하고 안내만. 출력: 현황 진단 → 제안 토큰 세트(DESIGN.md 형태) → DESIGN.md 초안 → 컴포넌트 구조 → 마이그레이션 단계.
-→ 개별 화면 UI/UX 점검은 `ui-ux-reviewer`.
+디자인 시스템 설계. 디자인 토큰(색/타이포/스페이싱/래디우스/섀도/**모션**), 테마(다크모드), 컴포넌트 계층·variant, 네이밍, Tailwind 설정 토큰화, 중복 통합, 문서화. 디자인 시스템을 **`DESIGN.md`**([google-labs-code/design.md](https://github.com/google-labs-code/design.md) 포맷: 프런트매터 토큰 + 산문 근거) 단일 소스로 정리·작성. 토큰 참조 `{colors.primary}`, WCAG 대비 명시. `@google/design.md` CLI(`lint`/`export`→Tailwind v3·v4·DTCG/`diff`)는 실행 안 하고 안내만. 출력: 현황 진단 → 제안 토큰 세트(DESIGN.md 형태) → DESIGN.md 초안 → 컴포넌트 구조 → 마이그레이션 단계.
+모션 토큰(이징 3종·요소 예산에서 유도한 듀레이션 스케일·스프링 프리셋·reduced motion의 토큰 레벨 처리)도 여기서 세운다 — DESIGN.md 프런트매터에 모션은 표준 키가 아니므로 CSS 변수를 정본으로 두고 `## Motion` 산문 섹션으로 근거를 남기게 안내한다.
+→ 개별 화면 UI/UX 점검은 `ui-ux-reviewer`, 구현된 애니메이션 품질 점검은 `motion-reviewer`.
+
+**77. motion-reviewer (`/motion` `/모션`)**
+웹 모션·애니메이션 품질 점검 + 기회 탐색. 판정은 취향이 아니라 구체 값이다 — 빈도 게이트(하루 100회 이상·키보드 시작 동작은 애니메이션 실격), 이징(등장·퇴장 `ease-out` / **UI의 `ease-in`은 결함** / 약한 내장 커브 대신 커스텀 cubic-bezier), 지속시간 예산(UI 300ms 미만·요소별 표), 물리성·원점(`scale(0)` 금지·팝오버는 트리거에서·모달 예외), 인터럽트 가능성(빠르게 반복되는 것에 keyframes는 재시작 → transition/스프링·현재 화면값에서 이어받기), GPU 속성(`transform`·`opacity`만·`transition: all`·레이아웃 속성·Framer Motion 축약형), 비대칭 타이밍, 제스처 물리(1:1 추적·속도 핸드오프·모멘텀 투영·러버밴딩), 접근성(reduced motion은 0이 아니라 더 순하게·호버의 포인터 게이트), 응집·스태거(30~80ms). 기회 탐색 모드는 **절제가 기본**이라 제안 5~7개 상한 + **기각 후보 필수**. 수정은 지운다 → 줄인다 → 이징 → 원점 → 인터럽트 → GPU → 비대칭 → 다듬기 → 접근성 순. 프리로드 스킬 `motion-reference`(값 정본)를 인용하고 근사하지 않는다. 출력: 모드·범위 → 발견 표 → 영향도 6등급 → (기회 모드면) 제안·기각 표 → 보류/통과 판정 → 확인 필요.
+→ 화면 전반은 `ui-ux-reviewer`, 모션 토큰 설계는 `design-system-architect`, 번들·CWV는 `perf-auditor`, 일반 버그는 `code-reviewer`, 게임플레이 손맛은 `game-feel-reviewer`, 고정 캔버스 덱은 `slide-deck-reviewer`.
 
 ### 🏗 설계
 
@@ -501,6 +507,9 @@ AI 코딩 도구가 **기본값으로** 남기는 결함만 본다. ① 클라�
 | perf-auditor ↔ db-optimizer | 프론트 "성능"(번들·렌더) ↔ MySQL 쿼리·인덱스 "성능" |
 | perf-auditor ↔ ui-ux-reviewer | 로드·렌더 "성능"(번들·CWV) ↔ 시각·사용성·접근성 |
 | ui-ux-reviewer ↔ design-system-architect | 개별 화면 "점검" ↔ 토큰·컴포넌트 "시스템 설계" |
+| ui-ux-reviewer ↔ motion-reviewer | 화면 전반(레이아웃·대비·폼) ↔ 움직임의 값(이징·지속시간·인터럽트·GPU) |
+| motion-reviewer ↔ design-system-architect | 구현된 모션 "점검" ↔ 이징·듀레이션·스프링 "토큰 설계" |
+| motion-reviewer ↔ game-feel-reviewer | 웹 UI 모션(CSS·React) ↔ 게임플레이 손맛(코요테 타임·히트스톱) |
 | dependency-auditor ↔ security-reviewer | 의존성 자체 "취약·버전·라이선스" ↔ 앱 "코드 보안 취약점" |
 | dependency-auditor ↔ devops-reviewer | 의존성 "건강성"(매니페스트·lockfile) ↔ CI/공급망 "설정"(SBOM·서명) |
 | devops-reviewer ↔ security-reviewer | 배포/파이프라인 설정 "운영 보안" ↔ 애플리케이션 "코드 보안" |

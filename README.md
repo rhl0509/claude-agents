@@ -3,16 +3,16 @@
 **Next.js + FastAPI + MySQL** 풀스택 개발을 위한 [Claude Code](https://claude.com/claude-code) 서브에이전트 모음입니다.
 코드 리뷰·보안 점검·테스트·문서화·DB·디자인·아키텍처 설계를 각각 전문 에이전트가 담당합니다. 여기에 더해, 개발 스택과 무관하게 **AI 작업환경·프롬프트 시스템 자체**를 재설계하는 메타 에이전트 1종(`ai-workspace-architect`)과, **마케팅 카피·상세페이지·SEO·팩트체크·콘텐츠 재활용·브랜드 보이스**를 다루는 콘텐츠 에이전트 6종(`copy-reviewer`·`landing-reviewer`·`seo-optimizer`·`fact-checker`·`content-repurposer`·`brand-voice-guardian`)이 포함됩니다. 여기에 프롬프트(뼈대)에 살을 붙여 이야기를 짓는 **창작 특화(Fable) 스토리 생성 에이전트 1종**(`storyteller`)이 더해집니다. 여기에 강의·워크숍·강좌·교육 자료의 교수 설계(학습자 분석·측정 가능한 학습 목표·모듈 계열화·목표-평가-활동 정렬)를 맡는 **교육/교수설계 에이전트 1종**(`curriculum-designer`)이 더해집니다. 보안 계열은 코드 취약점(`security-reviewer`)에 더해 **설계 단계 위협 모델링(`threat-modeler`)과 AI/LLM 보안 심화(`llm-ai-security-reviewer`)**까지 다룹니다. 여기에 더해 **Unity + C# 게임 개발(싱글플레이어 2D 캐주얼)**을 위한 게임 도메인 에이전트 7종(`unity-code-reviewer`·`game-design-architect`·`game-ui-reviewer`·`game-feel-reviewer`·`unity-perf-auditor`·`playtest-designer`·`unity-build-auditor`)이 시범 추가되었습니다(🎮 게임 클러스터). 여기에 더해 **C와 비-Unity C#/.NET**을 전담하는 시스템 언어 에이전트 6종(`c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`)이 추가되었습니다(🧩 시스템 언어 클러스터 — 각 언어를 리뷰·설계·성능 3역으로). 이어 이 클러스터를 **Java(JVM)·Swift**로 넓혀 4종(`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect`)을 추가했는데, C/.NET처럼 3역 트리오가 아니라 **리뷰어+아키텍트 2역씩**만 두고 **전담 perf 에이전트는 의도적으로 만들지 않았다**(프로모션 게이트 — 각 언어의 성능 점검 수요가 실제로 반복될 때까지 유보하고, 리뷰어가 그 공백을 "알려진 공백"으로 명시). 가장 최근에는 주제·문제만 있고 구체 아이디어가 없을 때 **발산(다각도 렌즈)→수렴(기준 채점)**으로 고를 수 있는 후보 목록을 만드는 **브레인스토밍 에이전트 1종**(`brainstormer`)이 더해졌습니다 — 모든 실행(오퍼·이야기·게임 설계·강의 설계) 앞단의 아이디어 단계를 전담합니다.
 
-- 에이전트 수: **76종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET/Java/Swift 10종 + 도메인 3종(ML·회계·자동화) + 메타 3종 + 검증 1종 + 콘텐츠/마케팅 8종 + 교육 1종 + 창작 1종 + 발상 1종 + 커리어 2종 + 보안 심화 2종 + 게임 13종 + 인프라 3종 + AI검색·영상·이미지·제안서 4종 + 보안·인증·운영·엔지니어링 4종(ai-code-auditor·identity-access-architect·aws-reviewer·codebase-archaeologist) + 발표 1종(slide-deck-reviewer))
+- 에이전트 수: **77종** (개발 스택 리뷰·엔지니어링·문서 19종 + 시스템 언어 C/.NET/Java/Swift 10종 + 도메인 3종(ML·회계·자동화) + 메타 3종 + 검증 1종 + 콘텐츠/마케팅 8종 + 교육 1종 + 창작 1종 + 발상 1종 + 커리어 2종 + 보안 심화 2종 + 게임 13종 + 인프라 3종 + AI검색·영상·이미지·제안서 4종 + 보안·인증·운영·엔지니어링 4종(ai-code-auditor·identity-access-architect·aws-reviewer·codebase-archaeologist) + 발표 1종(slide-deck-reviewer) + 모션 1종(motion-reviewer))
 - 언어: 한국어 프롬프트
 - 성격: **읽기 전용** — 분석·리뷰·설계·제안만 하고 코드/스키마를 직접 수정하지 않음
-- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.14**, `test-runner` **v1.11**, `code-reviewer` **v1.16**(Flask 흡수), `devops-reviewer` **v1.10**, `aws-reviewer` **v1.0**, `data-modeler` **v1.7**, `api-doc-writer` **v1.7**, `ui-ux-reviewer` **v1.7**, `slide-deck-reviewer` **v1.1**, `system-architect` **v1.8**, `perf-auditor` **v1.5**, `design-system-architect` **v1.6**·`test-strategy` **v1.5**, `observability-reviewer` **v1.4**·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 3종 `ai-workspace-architect` **v1.5**·`agent-definition-reviewer` **v1.1**·`project-manager` **v1.4**, 콘텐츠/마케팅 8종 `copy-reviewer` **v1.3**·`content-repurposer` **v1.4**·`landing-reviewer` **v1.2**·`seo-optimizer` **v1.1**·`brand-voice-guardian` **v1.2**·`fact-checker` **v1.1**·`email-sequence-writer` **v1.0**·`offer-strategist` **v1.2**, 발상 `brainstormer` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.2**, 조율 `project-manager` **v1.4**, 게임 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.8**·`game-feel-reviewer` **v1.3**·`game-ui-reviewer` **v1.4**·`playtest-designer` **v1.2**·`unity-build-auditor`·`multiplayer-rule-reviewer`·`unity-perf-auditor` **v1.1**·`save-data-reviewer` **v1.0**·`game-localization-reviewer`·`game-test-strategy`·`game-audio-reviewer` **v1.1**, 인프라 `memory-recaller` **v1.5**·`self-reflector` **v1.1**, 검증 `truth-checker` **v1.0**, 엔지니어링 `refactor-strategist` **v1.1**, 문서 `docs-writer` **v1.2**, 창작 `storyteller` **v1.1**, 커리어 `cover-letter-tailor` **v1.2**·`job-posting-scout` **v1.0**, 디버깅 `debugger` **v1.5**, 도메인 `ml-experiment-reviewer`·`accounting-rule-reviewer` **v1.0**·`automation-reliability-reviewer` **v1.1**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** , 1.92 신설 9종 `codebase-archaeologist`·`ai-search-optimizer`·`level-designer` **v1.0** · `ai-code-auditor`·`identity-access-architect`·`video-optimizer`·`image-prompt-engineer`·`proposal-strategist`·`knowledge-gardener` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
+- 현재 버전: `db-optimizer` **v1.10**, `security-reviewer` **v1.14**, `test-runner` **v1.11**, `code-reviewer` **v1.16**(Flask 흡수), `devops-reviewer` **v1.10**, `aws-reviewer` **v1.0**, `data-modeler` **v1.7**, `api-doc-writer` **v1.7**, `ui-ux-reviewer` **v1.8**, `motion-reviewer` **v1.0**, `slide-deck-reviewer` **v1.1**, `system-architect` **v1.8**, `perf-auditor` **v1.5**, `design-system-architect` **v1.7**·`test-strategy` **v1.5**, `observability-reviewer` **v1.4**·`migration-reviewer` **v1.3**, `api-contract-reviewer`·`dependency-auditor` **v1.1**, 메타 3종 `ai-workspace-architect` **v1.5**·`agent-definition-reviewer` **v1.1**·`project-manager` **v1.5**, 콘텐츠/마케팅 8종 `copy-reviewer` **v1.3**·`content-repurposer` **v1.4**·`landing-reviewer` **v1.2**·`seo-optimizer` **v1.1**·`brand-voice-guardian` **v1.2**·`fact-checker` **v1.1**·`email-sequence-writer` **v1.0**·`offer-strategist` **v1.2**, 발상 `brainstormer` **v1.0**, 교육 `curriculum-designer` **v1.1**, 보안 심화 `threat-modeler`·`llm-ai-security-reviewer` **v1.2**, 조율 `project-manager` **v1.5**, 게임 `unity-code-reviewer` **v1.5**·`game-design-architect` **v1.8**·`game-feel-reviewer` **v1.3**·`game-ui-reviewer` **v1.4**·`playtest-designer` **v1.2**·`unity-build-auditor`·`multiplayer-rule-reviewer`·`unity-perf-auditor` **v1.1**·`save-data-reviewer` **v1.0**·`game-localization-reviewer`·`game-test-strategy`·`game-audio-reviewer` **v1.1**, 인프라 `memory-recaller` **v1.5**·`self-reflector` **v1.1**, 검증 `truth-checker` **v1.0**, 엔지니어링 `refactor-strategist` **v1.1**, 문서 `docs-writer` **v1.2**, 창작 `storyteller` **v1.1**, 커리어 `cover-letter-tailor` **v1.2**·`job-posting-scout` **v1.0**, 디버깅 `debugger` **v1.5**, 도메인 `ml-experiment-reviewer`·`accounting-rule-reviewer` **v1.0**·`automation-reliability-reviewer` **v1.1**, 시스템 언어 C/.NET/Java/Swift 10종 `c-code-reviewer`·`c-architect`·`c-perf-auditor`·`dotnet-code-reviewer`·`dotnet-architect`·`dotnet-perf-auditor`·`java-code-reviewer`·`java-architect`·`swift-code-reviewer`·`swift-architect` **v1.0** , 1.92 신설 9종 `codebase-archaeologist`·`ai-search-optimizer`·`level-designer` **v1.0** · `ai-code-auditor`·`identity-access-architect`·`video-optimizer`·`image-prompt-engineer`·`proposal-strategist`·`knowledge-gardener` **v1.1** — 상세 이력은 [CHANGELOG.md](CHANGELOG.md)
 - 추론 강도(`effort`): opus 심층추론 71종은 frontmatter `effort: high`로 고정해 세션 설정과 무관하게 추론 깊이를 보장하고, 그중 **`xhigh` 7종**(`security-reviewer`·`threat-modeler`·`llm-ai-security-reviewer`·`ai-workspace-architect`·`truth-checker`·`ai-code-auditor`·`identity-access-architect`)은 더 깊게 돈다. 창작 에이전트 `storyteller`는 `fable` 모델 + `effort: high`로 창작 품질 플로어를 둔다(저장소 첫 `fable` 에이전트). `sonnet`·`haiku`(api-doc-writer·test-runner·memory-recaller·self-reflector)는 세션 상속 — 상세는 [CHANGELOG.md](CHANGELOG.md) effort 튜닝 요약
 
 ---
 
 ## 목차
-- [에이전트 76종](#에이전트-76종)
+- [에이전트 77종](#에이전트-77종)
 - [공통 규칙](#공통-규칙)
 - [설치 / 등록](#설치--등록)
 - [사용 방법](#사용-방법)
@@ -24,9 +24,9 @@
 
 ---
 
-## 에이전트 76종
+## 에이전트 77종
 
-**관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했다. `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록 자체는 번호순이 아니라 클러스터별로 묶여 있다). 번호는 **1~76 연속이며 결번이 없다** — `#1`은 모든 에이전트 위에 앉는 진입/조율 층인 `project-manager`, `#2`부터는 대체로 추가된 순서다. 번호는 상세 블록을 찾는 **인덱스일 뿐 추가 시점을 뜻하지 않으며**, 새 에이전트는 다음 번호(`#77`…)를 이어 받는다.
+**관련된 것끼리 묶은 표**다(추가된 순서가 아니라 역할 기준). 각 표 안에서는 `#` 오름차순으로 정렬했다. `#`은 아래 상세 블록의 번호와 같아서 번호를 따라가면 그 에이전트의 상세를 찾을 수 있다(상세 블록 자체는 번호순이 아니라 클러스터별로 묶여 있다). 번호는 **1~77 연속이며 결번이 없다** — `#1`은 모든 에이전트 위에 앉는 진입/조율 층인 `project-manager`, `#2`부터는 대체로 추가된 순서다. 번호는 상세 블록을 찾는 **인덱스일 뿐 추가 시점을 뜻하지 않으며**, 새 에이전트는 다음 번호(`#78`…)를 이어 받는다.
 
 #### 🔍 코드 품질 · 디버깅 · 테스트
 
@@ -73,8 +73,9 @@
 | # | 에이전트 | 슬래시 | 버전 | 모델 | 역할 | 도구 |
 |---|---|---|---|---|---|---|
 | 6 | `perf-auditor` | `/perf` `/성능` | 1.5 | opus | Next.js **프론트 전용** 성능(번들·CWV·캐싱 · 파이썬 백엔드 런타임 성능은 범위 밖=알려진 공백) | Read, Grep, Glob |
-| 11 | `ui-ux-reviewer` | `/ui` `/화면` | 1.7 | opus | UI/UX·접근성·반응형·다크패턴 점검(**일반 웹 화면 전용**) | Read, Grep, Glob |
-| 12 | `design-system-architect` | `/dsystem` | 1.6 | opus | 디자인 토큰·컴포넌트 설계(DESIGN.md) | Read, Grep, Glob, Context7 |
+| 11 | `ui-ux-reviewer` | `/ui` `/화면` | 1.8 | opus | UI/UX·접근성·반응형·다크패턴 점검(**일반 웹 화면 전용**) | Read, Grep, Glob |
+| 12 | `design-system-architect` | `/dsystem` | 1.7 | opus | 디자인 토큰·컴포넌트·**모션 토큰** 설계(DESIGN.md) | Read, Grep, Glob, Context7 |
+| 77 | `motion-reviewer` | `/motion` `/모션` | 1.0 | opus | **모션·애니메이션 품질**(빈도 게이트·이징·300ms 예산·원점·인터럽트·GPU 속성·제스처 물리) + 기회 탐색(기각 후보 필수) | Read, Grep, Glob |
 | 76 | `slide-deck-reviewer` | `/deck` `/ppt` `/발표` `/슬라이드` `/프레젠테이션` `/프리젠테이션` | 1.1 | opus | **발표 슬라이드 덱**(1440×810 고정 캔버스) 규약 점검 — 배열·페이지번호 동기화·캔버스 이탈·투사 가독성·에셋 대조·템플릿 잔재 | Read, Grep, Glob |
 
 #### 🚀 운영 (배포 · 의존성 · 관측성)
@@ -281,17 +282,31 @@ C·.NET은 각 언어를 **리뷰 · 설계 · 성능** 3역으로 나눴다(웹
 - **점검**: 레이아웃/간격, 타이포 위계, 색 대비(WCAG AA), 반응형·터치 타깃, 접근성(시맨틱·aria·키보드·alt·label·reduced-motion), 상태 표현(로딩/빈/에러), 컴포넌트 일관성
 - **확장(v1.3)**: 폼/입력(검증 시점·에러 위치), 마이크로카피/콘텐츠, 국제화(i18n/RTL·텍스트 확장), 다크모드 품질(표면 위계), **다크 패턴/윤리**, Nielsen 사용성 휴리스틱 렌즈 (실무 디자인 감사 카테고리 기반)
 - **출력**: 요약 → Must/Should/Nit
-- **구분**: 코드 로직·버그는 `code-reviewer`, 토큰/시스템 설계는 `design-system-architect`, 로드·렌더 성능(번들·CWV)은 `perf-auditor`, **발표 슬라이드 덱**(고정 캔버스·스케일)은 `slide-deck-reviewer` — 반응형·스크롤·WCAG 전제가 성립하지 않는다 (1.102)
+- **구분**: 코드 로직·버그는 `code-reviewer`, 토큰/시스템 설계는 `design-system-architect`, 로드·렌더 성능(번들·CWV)은 `perf-auditor`, **발표 슬라이드 덱**(고정 캔버스·스케일)은 `slide-deck-reviewer` — 반응형·스크롤·WCAG 전제가 성립하지 않는다 (1.102), **모션 품질**(이징·지속시간·인터럽트·GPU 속성)은 `motion-reviewer` — 이쪽은 `prefers-reduced-motion` 대응 유무까지만 본다 (1.105)
 </details>
 
 <details>
 <summary><b>12. design-system-architect</b> (<code>/dsystem</code>) — 디자인 시스템 설계</summary>
 
 - **언제**: 흩어진 스타일을 일관된 시스템으로 정비, 디자인 시스템을 `DESIGN.md` 단일 소스로 정리
-- **설계**: 디자인 토큰(색/타이포/스페이싱/래디우스/섀도), 테마(다크모드), 컴포넌트 계층·variant, 네이밍, Tailwind 토큰화, 중복 통합, 문서화(Storybook)
+- **설계**: 디자인 토큰(색/타이포/스페이싱/래디우스/섀도/**모션**), 테마(다크모드), 컴포넌트 계층·variant, 네이밍, Tailwind 토큰화, 중복 통합, 문서화(Storybook)
+- **모션 토큰(v1.7)**: 이징 3종(`--ease-out`·`--ease-in-out`·`--ease-drawer`) + 요소 예산에서 유도한 듀레이션 스케일(UI 300ms 상한) + 스프링 프리셋 + reduced motion의 토큰 레벨 처리. DESIGN.md 프런트매터에 모션은 **표준 키가 아니므로** CSS 변수를 정본으로 두고 `## Motion` 산문 섹션으로 근거를 남기게 안내 — 프리로드 스킬 `motion-reference` 기반
 - **DESIGN.md(v1.3)**: [google-labs-code/design.md](https://github.com/google-labs-code/design.md) 포맷(프런트매터 토큰 + 산문 근거)으로 단일 소스 초안 작성. 토큰 참조 `{colors.primary}`, WCAG 대비 명시. `@google/design.md` CLI(`lint`/`export` → Tailwind v3 JSON·v4 `@theme`·DTCG/`diff`)는 실행하지 않고 다음 단계로 안내
 - **출력**: 현황 진단 → 제안 토큰 세트(DESIGN.md 형태) → DESIGN.md 초안 → 컴포넌트 구조 → 마이그레이션 단계
-- **구분**: 개별 화면 UI/UX 점검은 `ui-ux-reviewer`
+- **구분**: 개별 화면 UI/UX 점검은 `ui-ux-reviewer`, 이미 구현된 애니메이션의 품질 점검은 `motion-reviewer`(이쪽은 그 판정 기준이 될 토큰 체계를 세운다)
+</details>
+
+<details>
+<summary><b>77. motion-reviewer</b> (<code>/motion</code> <code>/모션</code>) — 모션·애니메이션 품질 점검</summary>
+
+- **언제**: 모션·트랜지션·제스처 코드를 머지하기 전, "애니메이션이 굼뜨다·겉돈다"는 느낌이 있을 때, 또는 "여기 뭘 애니메이션할까"
+- **두 모드**: ① **점검**(기본 — 기존 모션의 결함) ② **기회 탐색**(절제가 기본값 — 제안 5~7개 상한 + **기각 후보 필수**. 기각 목록이 없으면 위시리스트일 뿐이다)
+- **점검 11축**: ① 정당성(피드백/공간 일관성/상태 표시/급변 완충/설명 중 하나로 부를 수 있는가 — "멋있어서"는 목적이 아님) ② **빈도 게이트**(하루 100회 이상·키보드로 시작되는 동작의 애니메이션은 판단이 아니라 실격) ③ 이징(등장·퇴장 `ease-out`, **UI의 `ease-in`은 결함**, 약한 내장 커브 대신 커스텀 cubic-bezier) ④ 지속시간 예산(UI 300ms 미만 / 버튼 100~160 · 툴팁 125~200 · 드롭다운 150~250 · 모달 200~500ms) ⑤ 물리성·원점(`scale(0)` 금지, 팝오버는 트리거에서 자람·**모달은 예외**, 들어온 경로로 나가는가) ⑥ **인터럽트 가능성**(토스트·토글의 keyframes는 처음부터 다시 시작 → transition/스프링, 현재 화면값에서 이어지는가) ⑦ GPU 속성(`transform`·`opacity`만, `transition: all`·레이아웃 속성·부모 변수로 자식 구동·Framer Motion `x`/`y` 축약형) ⑧ 비대칭 타이밍 ⑨ 제스처 물리(1:1 추적·포인터 캡처·속도 핸드오프·모멘텀 투영·러버밴딩·거리가 아니라 속도로 커밋 판정) ⑩ 접근성(reduced motion은 0이 아니라 더 순하게 / 호버 모션의 포인터 게이트) ⑪ 응집·스태거(30~80ms, 상호작용을 막지 않음)
+- **수정 순서**: 지운다 → 줄인다 → 이징 → 원점·물리성 → 인터럽트 → GPU → 비대칭 → 다듬기 → 접근성·응집 (앞쪽을 먼저 권한다 — 애매하면 지우는 쪽이 대체로 정답)
+- **한계**: 코드만으로 "느낌"을 단정하지 않는다. 규범 이탈만 단정하고 나머지는 확인 방법(2~5배 슬로모션·DevTools 애니메이션 패널·제스처는 실기기·다음 날 다시 보기)과 함께 분리
+- **출력**: 모드·범위 → 발견 표(위치/Before/After/왜) → 영향도 6등급 → (기회 모드면) 제안 표 + **기각 표** → **보류(Block)/통과(Approve)** 판정 → 확인 필요
+- **근거**: 프리로드 스킬 `motion-reference`(구체 값 정본 — 값을 근사하지 않고 인용). 출처는 [emilkowalski/skills](https://github.com/emilkowalski/skills)(MIT © 2026 Emil Kowalski) 방법론 + Apple WWDC *Designing Fluid Interfaces*의 **모션·제스처 부분만**
+- **구분**: 화면 전반(레이아웃·대비·폼·다크패턴)은 `ui-ux-reviewer`, 모션 **토큰 체계 설계**는 `design-system-architect`, 번들·CWV는 `perf-auditor`, 애니메이션 코드의 일반 버그는 `code-reviewer`, Unity 게임플레이 손맛(코요테 타임·히트스톱)은 `game-feel-reviewer`, 고정 캔버스 발표 덱은 `slide-deck-reviewer`
 </details>
 
 <details>
@@ -955,6 +970,9 @@ AI 코딩 도구가 **기본값으로** 남기는 결함만 본다. ① 클라�
 | perf-auditor ↔ db-optimizer | 프론트 "성능"(번들·렌더) ↔ MySQL 쿼리·인덱스 "성능" |
 | perf-auditor ↔ ui-ux-reviewer | 로드·렌더 "성능"(번들·CWV) ↔ 시각·사용성·접근성 |
 | ui-ux-reviewer ↔ design-system-architect | 개별 화면 "점검" ↔ 토큰·컴포넌트 "시스템 설계" |
+| ui-ux-reviewer ↔ motion-reviewer | 화면 전반(레이아웃·대비·폼·다크패턴) ↔ 움직임의 값(이징·지속시간·인터럽트·GPU) |
+| motion-reviewer ↔ design-system-architect | 구현된 모션 "점검" ↔ 이징·듀레이션·스프링 "토큰 체계 설계" |
+| motion-reviewer ↔ game-feel-reviewer | 웹 UI 모션(CSS·React) ↔ 게임플레이 손맛(코요테 타임·히트스톱·화면 흔들림) |
 | dependency-auditor ↔ security-reviewer | 의존성 자체 "취약·버전·라이선스" ↔ 앱 "코드 보안 취약점" |
 | dependency-auditor ↔ devops-reviewer | 의존성 "건강성"(매니페스트·lockfile) ↔ CI/공급망 "설정"(SBOM·서명) |
 | devops-reviewer ↔ security-reviewer | 배포/파이프라인 설정 "운영 보안" ↔ 애플리케이션 "코드 보안" |
@@ -1101,7 +1119,7 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 76개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 80개 슬래시 명령(+ 한글 별칭 54개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사하고, `workflows/`·`hooks/`·`skills/`·`rules/`도 각각 `%USERPROFILE%\.claude\`의 대응 폴더로 배포합니다(배포 대상 7종). 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 77개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 81개 슬래시 명령(+ 한글 별칭 55개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사하고, `workflows/`·`hooks/`·`skills/`·`rules/`도 각각 `%USERPROFILE%\.claude\`의 대응 폴더로 배포합니다(배포 대상 7종). 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -1147,6 +1165,7 @@ security-reviewer 서브에이전트로 src/auth 점검해줘
 | `/db` | db-optimizer | 경로/쿼리 |
 | `/migrate` | migration-reviewer | 마이그레이션 경로(선택) |
 | `/ui` | ui-ux-reviewer | 경로 |
+| `/motion` | motion-reviewer | 경로 또는 "기회 탐색"(선택) |
 | `/deck` `/ppt` | slide-deck-reviewer | 발표 폴더 경로(선택) |
 | `/dsystem` | design-system-architect | 경로 |
 | `/datamodel` | data-modeler | 요구사항/경로 |
@@ -1337,15 +1356,16 @@ claude-agents/
 │  └─ obsidian-session-log.ps1   └─ obsidian-memory-mirror.ps1  └─ precompact-snapshot.ps1
 │                                # 훅 배선(어느 이벤트에 무엇)은 ~/.claude/settings.json — 이 저장소 관리 밖
 │
-├─ skills/                       # ── 프리로드 스킬 ──
-│  ├─ agent-conventions/         └─ design-reference/
+├─ skills/                       # ── 프리로드 스킬 + 워크플로 스킬 ──
+│  ├─ agent-conventions/         ├─ design-reference/         ├─ motion-reference/
+│  └─ aws-deploy/                # (사용자 호출 워크플로)
 │
 ├─ rules/                        # ── 경로 스코프 규칙(common·python·typescript) ──
 │  ├─ README.md  ├─ common.md    ├─ python.md    └─ typescript.md
 │
 ├─ _drafts/                      # ── 미편입 초안(sync 배포 안 함) ──
 │
-├─ code-reviewer.md              # ── 에이전트 정의 (64개) ──
+├─ code-reviewer.md              # ── 에이전트 정의 (77개) ──
 ├─ security-reviewer.md
 ├─ test-runner.md
 ├─ test-strategy.md
@@ -1408,10 +1428,23 @@ claude-agents/
 ├─ swift-architect.md            # 시스템 언어(Swift 구조 설계)
 ├─ email-sequence-writer.md      # 콘텐츠/마케팅(이메일·라이프사이클 시퀀스 생성)
 ├─ offer-strategist.md           # 콘텐츠/마케팅(카피 앞단 오퍼 설계)
-└─ truth-checker.md              # 검증(질문·주장 정확성·근거 기반 신뢰도)
+├─ truth-checker.md              # 검증(질문·주장 정확성·근거 기반 신뢰도)
+├─ project-manager.md            # 메타/조율(WBS·라우팅 맵·진행 보고)
+├─ codebase-archaeologist.md     # 품질(여러 세션 누적 로직 드리프트 발굴)
+├─ ai-code-auditor.md            # 보안(AI 생성 코드 기본값 결함)
+├─ identity-access-architect.md  # 설계(인증·세션·테넌트 격리)
+├─ aws-reviewer.md               # 운영(AWS IaC 보안·비용 자세)
+├─ knowledge-gardener.md         # 인프라(지식베이스 구조 위생)
+├─ level-designer.md             # 게임(레벨·스테이지 공간 설계)
+├─ ai-search-optimizer.md        # 콘텐츠(AI 검색·인용 최적화 AEO/GEO)
+├─ video-optimizer.md            # 콘텐츠(유튜브 패키징·리텐션)
+├─ image-prompt-engineer.md      # 콘텐츠(AI 이미지 생성 프롬프트)
+├─ proposal-strategist.md        # 콘텐츠(제안서 전략·승리 테마)
+├─ job-posting-scout.md          # 커리어(채용 공고 탐색·큐레이션)
+└─ motion-reviewer.md            # 화면(모션·애니메이션 품질 점검)
 ```
 
-> 프리로드 스킬은 `skills/`에 있다: `agent-conventions`(전 에이전트 공용 규범) · `design-reference`(ui-ux-reviewer·design-system-architect에 주입되는 구체 디자인 레퍼런스 — 업계 매핑·클리셰·팔레트·폰트·체크리스트).
+> 프리로드 스킬은 `skills/`에 있다: `agent-conventions`(전 에이전트 공용 규범) · `design-reference`(ui-ux-reviewer·design-system-architect에 주입되는 구체 디자인 레퍼런스 — 업계 매핑·클리셰·팔레트·폰트·체크리스트) · `motion-reference`(motion-reviewer·design-system-architect에 주입되는 구체 모션 값 — 빈도 게이트·이징 커브·듀레이션 예산·제스처 물리·용어 대조표).
 
 ---
 
