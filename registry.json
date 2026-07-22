@@ -76,6 +76,7 @@
 
     "ui-ux-reviewer":                   { "group": "화면", "note": "웹 UI/UX·접근성" },
     "game-ui-reviewer":                 { "group": "화면", "note": "게임 HUD·메뉴" },
+    "slide-deck-reviewer":              { "group": "화면", "note": "발표 슬라이드 덱(고정 캔버스)" },
 
     "game-feel-reviewer":               { "group": "게임", "note": "손맛·juice" },
     "level-designer":                   { "group": "게임", "note": "레벨·스테이지 공간" },
