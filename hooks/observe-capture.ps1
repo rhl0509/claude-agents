@@ -1,4 +1,4 @@
-# UserPromptSubmit hook: capture the user's prompt as a RAW observation for the
+﻿# UserPromptSubmit hook: capture the user's prompt as a RAW observation for the
 # self-improvement loop. Append-only into E:\claude_memory\_observations\YYYYMMDD.jsonl.
 #
 # This is raw signal for later distillation (via /회고 or the self-reflector agent);
