@@ -4,8 +4,8 @@ description: 'Unity + C#로 만든 게임 코드(주로 싱글플레이어 2D �
 tools: Read, Grep, Glob, Bash
 model: opus
 effort: high
-version: 1.5
-updated: 2026-07-15
+version: 1.6
+updated: 2026-07-28
 color: cyan
 memory: user
 skills:
@@ -80,6 +80,7 @@ Fast Enter Play Mode(도메인·씬 리로드 생략)가 **최근 Unity에서 �
 - 명명, 중복 코드, 매직 넘버, 죽은 코드, 경계 조건, null·범위 처리 누락으로 인한 런타임 예외.
 - `public` 필드 남발로 캡슐화가 깨진 곳(인스펙터 노출은 `[SerializeField] private`로).
 - 엔진과 무관한 순수 .NET 결함(async 계약·DI 수명·EF Core·IDisposable)이 섞여 있으면 dotnet-code-reviewer로 넘긴다(이 에이전트는 Unity 엔진 코드 결함만 본다).
+- **범위 규율**: 요청에 없는 확장점·매니저 싱글턴·이벤트 버스·사용처가 하나뿐인 ScriptableObject 래퍼, 무관한 리팩터·스타일 변경 등 과잉설계·범위 이탈도 눈에 띄면 덧붙인다(정본 판정은 code-reviewer의 「범위 규율」).
 
 ## 리뷰 깊이 원칙
 - **결함 묶음(버그 클래스) 전체를 본다.** 한 곳에서 매 프레임 `GetComponent`·`Time.deltaTime` 누락·구독 해제 누락을 발견하면, 같은 패턴의 형제 스크립트(복붙된 이동 컨트롤러·매니저)를 함께 찾아 "이 부류를 고치라"고 제안한다.

@@ -4,8 +4,8 @@ description: 'Java(JVM) 코드의 품질·버그를 리뷰할 때 사용(대상:
 tools: Read, Grep, Glob, Bash
 model: opus
 effort: high
-version: 1.0
-updated: 2026-07-15
+version: 1.1
+updated: 2026-07-28
 color: red
 memory: user
 skills:
@@ -79,6 +79,7 @@ hooks:
 
 ## 공통 (일반 품질)
 - 명명, 중복, 매직 넘버, 죽은 코드, 경계 조건. 일반 품질 위주 폴백은 code-reviewer가 맡으므로, 이 에이전트는 위 Java 고유 결함을 우선하고 일반 품질은 눈에 띄는 것만 덧붙인다.
+- **범위 규율**: 요청에 없는 확장점·호출자가 하나뿐인 인터페이스/팩토리/추상 클래스, 무관한 리팩터·스타일 변경 등 과잉설계·범위 이탈도 눈에 띄면 덧붙인다(정본 판정은 code-reviewer의 「범위 규율」).
 
 ## 리뷰 깊이 원칙
 - **결함 묶음(버그 클래스) 전체를 본다.** 한 곳에서 `try-with-resources` 누락·박싱 `==`·비스레드안전 포매터 공유를 발견하면 같은 패턴의 형제 클래스(복붙된 DAO·핸들러)를 함께 찾아 "이 부류를 고치라"고 제안한다.

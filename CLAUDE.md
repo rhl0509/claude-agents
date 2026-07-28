@@ -14,7 +14,7 @@ The agents are authored in **Korean** and (with one exception) all target the sa
 
 | File | Purpose | Tools | Writes code? |
 |---|---|---|---|
-| `code-reviewer.md` | General quality/readability/bug review across Next.js + FastAPI | Read, Grep, Glob, Bash | No |
+| `code-reviewer.md` | General quality/readability/bug review across Next.js + FastAPI, plus a stack-agnostic **scope discipline** lens (1.17): over-engineering (unused extension points, single-caller abstractions, impossible-case error handling), every changed line traceable to the request (no unrelated refactors/comment cleanup/adjacent "improvements"), and orphan-cleanup bounds (remove what *your* change orphaned; deleting pre-existing dead code is itself scope creep). Canonical definition lives here; the five sibling language reviewers carry a one-line deferral to it | Read, Grep, Glob, Bash | No |
 | `security-reviewer.md` | OWASP-oriented security review (authz/IDOR, Next.js middleware bypass, JWT, injection, XSS, secret leakage, OWASP LLM Top 10 2025) | Read, Grep, Glob, WebSearch, WebFetch | No |
 | `db-optimizer.md` | MySQL schema/query/index analysis (N+1, indexing, pagination, locks, MySQL 9 vector search) | Read, Grep, Glob, Bash | No |
 | `migration-reviewer.md` | MySQL/Alembic migration safety (locks, backfill order, rollback, deploy order) | Read, Grep, Glob | No |

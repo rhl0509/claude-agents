@@ -141,7 +141,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 ### 🔍 품질 / QA
 
 **2. code-reviewer (`/review`)**
-Next.js + FastAPI 코드의 품질·가독성·버그 가능성 리뷰. `git diff`로 변경분을 파악해 그 범위에 집중(커밋/PR 전 셀프 리뷰). 백엔드(Pydantic·async·DB 세션·예외·계층 분리), 프론트(서버/클라 경계·페칭·useEffect·타입). Next.js 15/16이면 Server Actions 보안·`use cache` 오캐시·React Compiler 중복 수동 메모도 점검(버전 불명확하면 "확인 필요"). 출력: 요약 → Must fix → Should fix → Nit.
+Next.js + FastAPI 코드의 품질·가독성·버그 가능성 리뷰. `git diff`로 변경분을 파악해 그 범위에 집중(커밋/PR 전 셀프 리뷰). 백엔드(Pydantic·async·DB 세션·예외·계층 분리), 프론트(서버/클라 경계·페칭·useEffect·타입). Next.js 15/16이면 Server Actions 보안·`use cache` 오캐시·React Compiler 중복 수동 메모도 점검(버전 불명확하면 "확인 필요"). **범위 규율**(1.17): 동작하는 코드여도 요청한 것만 했는지를 따로 본다 — 요청에 없는 확장점·1회용 추상화·불가능한 예외 처리, 변경 줄의 요청 역추적(무관한 리팩터·주석 정리·인접 코드 "개선"), 고아 정리의 범위(내 변경이 만든 것만 제거, 기존 죽은 코드 삭제도 이탈). 스택 무관 적용. 출력: 요약 → Must fix → Should fix → Nit.
 → 보안 전용은 `security-reviewer`, 시각·접근성·UX는 `ui-ux-reviewer`, 프론트-백 API 계약 정합은 `api-contract-reviewer`, 로깅·관측성은 `observability-reviewer`, 동작 보존 리팩터 계획은 `refactor-strategist`, 이미 발생한 증상의 원인 규명은 `debugger`(코드리뷰는 증상 없는 정적 탐색).
 
 **3. security-reviewer (`/sec`)**
