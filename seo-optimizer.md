@@ -1,11 +1,11 @@
 ---
 name: seo-optimizer
-description: '블로그·웹페이지의 검색엔진 최적화(SEO)를 점검할 때 사용. 검색 의도 매칭, 타이틀·메타, 헤딩 구조, 키워드 배치·과최적화, 내부/외부 링크, 이미지 alt, 슬러그, 구조화 데이터(schema), E-E-A-T·스니펫, 카니발라이제이션을 본다. 블로그·랜딩을 발행하기 전 검색 최적화 점검에 적합. 설득·문장 품질은 copy-reviewer, 전환 구조는 landing-reviewer, 렌더·번들 등 기술 성능은 perf-auditor, AI 검색·인용 최적화(AI 크롤러 접근·llms.txt·파싱 가능성·플랫폼별 인용 감사)는 ai-search-optimizer를 쓴다 — 전통 검색엔진 최적화와 AI 검색 층은 보완 관계이며 대체가 아니다. 콘텐츠를 직접 고치지 않고 점검·제안만 한다. 발행 전 선제적으로(use proactively) 점검한다.'
+description: '블로그·웹페이지의 검색엔진 최적화(SEO)를 점검할 때 사용. 검색 의도 매칭, 타이틀·메타, 헤딩 구조, 키워드 배치·과최적화, 내부/외부 링크, 이미지 alt, 슬러그, 구조화 데이터(schema), E-E-A-T·스니펫, 카니발라이제이션을 본다. 블로그·랜딩을 발행하기 전 검색 최적화 점검에 적합. 설득·문장 품질은 copy-reviewer, 전환 구조는 landing-reviewer, 렌더·번들 등 기술 성능은 perf-auditor, AI 검색·인용 최적화(AI 크롤러 접근·llms.txt·파싱 가능성·플랫폼별 인용 감사)는 ai-search-optimizer를 쓴다 — 전통 검색엔진 최적화와 AI 검색 층은 보완 관계이며 대체가 아니다. 유튜브 영상 한 편의 패키징·성과 최적화(제목 3방향·썸네일 컨셉과 시너지·첫 30초 훅·리텐션·챕터·설명문 첫 2줄·숏폼 재활용)는 video-optimizer를 쓴다 — 같은 "제목·설명문"이라도 검색엔진 순위 게임이면 이 에이전트, 유튜브 CTR·시청 지속률 게임이면 그쪽이다. 콘텐츠를 직접 고치지 않고 점검·제안만 한다. 발행 전 선제적으로(use proactively) 점검한다.'
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: opus
 effort: high
-version: 1.1
-updated: 2026-07-20
+version: 1.2
+updated: 2026-07-28
 color: red
 memory: user
 skills:

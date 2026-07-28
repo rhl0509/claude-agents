@@ -10,6 +10,23 @@
 
 ---
 
+## 1.111 (2026-07-28) — 77종 전수 감사: 역방향 carve-out 8건 + 자기점검 규칙 현행화
+
+"에이전트 전부 검증·테스트·협업 문제 없는지" 요청. 기계 검증(직접) + 경계 판단(`agent-definition-reviewer`) 2단으로 돌리고 **보고된 주장은 전부 파일로 재확인한 뒤** 반영했다.
+
+**기계 검증 — 전부 통과**: 프론트매터 77종 무결(name↔파일명·model/effort/color 유효값·version/updated·agent-conventions·agent-guard 훅·`memory: user`·변경 도구 미포함), 원본↔배포본 diff 0, 커맨드 136개 전부 매핑, 커맨드 없는 에이전트 0, description out-degree 0 없음. 커맨드 4개(`회고`·`reflect`·`lint`·`린트`)가 에이전트를 안 가리키는 것은 의도된 것(메인 세션 리추얼·스크립트).
+
+**반영한 것 — 대칭 위임(§4상 무확인 정렬 대상) 8건 + 사실 정정 1건**
+- `security-reviewer` 1.14→**1.15**: `aws-reviewer` 위임 절 추가. **신규 15종 중 유일하게 in-degree 1**이었고 하필 겹치는 트리거가 "보안"이라, IaC 든 레포에 `/sec`을 쓰면 IAM 와일드카드·퍼블릭 S3를 웹 OWASP 렌즈로 지나칠 수 있었다.
+- `seo-optimizer` 1.1→**1.2**: `video-optimizer` 위임 절. 두 정의의 트리거 어휘("타이틀·메타·키워드")가 사실상 동일한데 한쪽만 알고 있었다 — 이번 목록에서 오라우팅 확률이 가장 높았다.
+- `code-reviewer` 1.18→**1.19**, `perf-auditor` 1.5→**1.6**: `motion-reviewer` 위임 절(각각 "애니메이션 코드의 일반 버그" / "굼뜬 모션 vs 로드 성능" 축).
+- `curriculum-designer` 1.1→**1.2**, `proposal-strategist` 1.1→**1.2**: `slide-deck-reviewer` 위임 절. 둘 다 자기 범위에 "슬라이드 골격"을 적어두고도 덱 구조 점검자를 몰랐다.
+- `game-feel-reviewer` 1.4→**1.5**: `level-designer`(난이도를 공간으로 조절하는 층) 위임 절. `storyteller` 1.1→**1.2**: `brainstormer`(소재 발산) 위임 절 — 1.91에서 대칭 쌍을 2개만 만든 결과 storyteller만 빠져 있었다.
+- `playtest-designer` 1.2→**1.3**: 입력원에 `level-designer`의 "테스트에서 관찰돼야 할 것" 추가(기존엔 game-design-architect·game-feel-reviewer 2개로 못 박혀 있었다).
+- `agent-definition-reviewer` 1.1→**1.2**: **자기 점검 규칙이 stale해 오탐을 내고 있었다.** `model` 티어 열거에 `fable` 누락, `effort: xhigh` 예외를 "보안 3종 + ai-workspace-architect"로 하드코딩 — 실제 승인은 7종이라 `ai-code-auditor`·`identity-access-architect`·`truth-checker`·`storyteller`를 스펙 위반으로 오탐한다. **목록 하드코딩을 없애고 "점검 전 CLAUDE.md의 effort 불릿을 먼저 읽으라"로 바꿨다** — 같은 방식으로 다시 낡지 않게.
+
+**의논 대기(범위·의미가 바뀌어 무확인 적용하지 않음)**: ① 발표 덱의 모션 품질 공백(`motion-reviewer`가 덱 전체를 넘기는데 `slide-deck-reviewer`는 "틀만 본다"며 모션을 안 다뤄 주인이 없음) ② `slide-deck-reviewer` description이 본문 체크리스트를 복제해 라우팅 신호가 희석된 건 ③ 클라우드 인프라 *설계*(IaC 이전 단계) 공백 — 다른 알려진 공백과 달리 CLAUDE.md에 기록조차 없다.
+
 ## 1.110 (2026-07-28) — 로스터 드리프트 정정 (문서 전용, 에이전트 무변경)
 
 "77종이 맞나"는 확인 요청에서 출발한 전수 감사. **77이 맞다** — 원본 `*.md`(프론트매터 `name:` 보유) 77개, 배포본 `~/.claude/agents/*.md` 77개로 일치. 다만 문서 3곳이 어긋나 있었다.
