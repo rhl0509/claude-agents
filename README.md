@@ -1446,7 +1446,7 @@ claude-agents/
 └─ motion-reviewer.md            # 화면(모션·애니메이션 품질 점검)
 ```
 
-> 프리로드 스킬은 `skills/`에 있다: `agent-conventions`(전 에이전트 공용 규범) · `design-reference`(ui-ux-reviewer·design-system-architect에 주입되는 구체 디자인 레퍼런스 — 업계 매핑·클리셰·팔레트·폰트·체크리스트) · `motion-reference`(motion-reviewer·design-system-architect에 주입되는 구체 모션 값 — 빈도 게이트·이징 커브·듀레이션 예산·제스처 물리·용어 대조표).
+> 프리로드 스킬은 `skills/`에 있다: `agent-conventions`(전 에이전트 공용 규범) · `design-reference`(ui-ux-reviewer·design-system-architect에 주입되는 구체 디자인 레퍼런스 — 업계 매핑·클리셰·팔레트·폰트·**차트/데이터 시각화**·체크리스트) · `motion-reference`(motion-reviewer·design-system-architect에 주입되는 구체 모션 값 — 빈도 게이트·이징 커브·듀레이션 예산·제스처 물리·용어 대조표).
 
 ---
 
