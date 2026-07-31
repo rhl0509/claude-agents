@@ -1312,7 +1312,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 3. `CHANGELOG.md`에 변경 기록
 4. **`README.md`의 버전 표 갱신** (버전업 시)
 5. `sync.ps1`으로 전역(`~/.claude/`의 `agents/`·`commands/`·`workflows/`·`launchers/`·`hooks/`·`skills/`·`rules/` 7종)에 반영
-6. `git commit` (원격 `git push`는 **명시 요청 시에만** — public repo에서 push는 곧 공개 게시)
+6. `git commit` (원격 `git push`는 **명시 요청 시에만** — sync만으로 로컬 에이전트는 이미 작동하므로 push는 백업·공유용. 이 레포는 현재 **private**)
 
 ---
 

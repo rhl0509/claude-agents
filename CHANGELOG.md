@@ -4,11 +4,19 @@
 - 마이너 올림 (1.2 → 1.3): 체크 항목 추가, 표현 다듬기 등 작은 개선
 - 메이저 올림 (1.x → 2.0): 역할·출력 형식·동작이 크게 바뀔 때
 
-**작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync.ps1`을 실행해 전역(`%USERPROFILE%\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`(상단 버전 요약·버전 표·해당 상세 블록)와 `AGENTS.md`·`CLAUDE.md`의 관련 내용을 갱신한 뒤 ④ `sync.ps1` 실행 후 `git commit` 한다. **원격 `git push`는 명시 요청 시에만** 한다(public repo에서 push는 곧 공개 게시 — sync만으로 로컬 에이전트는 이미 작동).
+**작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync.ps1`을 실행해 전역(`%USERPROFILE%\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`(상단 버전 요약·버전 표·해당 상세 블록)와 `AGENTS.md`·`CLAUDE.md`의 관련 내용을 갱신한 뒤 ④ `sync.ps1` 실행 후 `git commit` 한다. **원격 `git push`는 명시 요청 시에만** 한다(sync만으로 로컬 에이전트는 이미 작동하므로 push는 백업·공유용이다). ⚠️ **이 레포는 private다** — 2026-07-31 `gh repo view rhl0509/claude-agents` 확인. 그전까지 여기 "public repo라 push가 곧 공개 게시"라고 적혀 있었으나 사실이 아니었다. 공개로 전환하면 그 근거가 되살아나므로 이 문구를 다시 검토할 것.
 
 **effort 튜닝 요약(1.57~1.60)**: opus 30종 `high` 일괄 채택(1.57) → 보안 3종 `xhigh`(1.58) → fable `xhigh`(1.59) → 1.60에서 신규 opus 3종(refactor-strategist·docs-writer·agent-definition-reviewer)도 `high`로 신설. 현재 **`xhigh` 7종**(security-reviewer·threat-modeler·llm-ai-security-reviewer·ai-workspace-architect·truth-checker·ai-code-auditor·identity-access-architect), 나머지 opus 61종 `high`(현재 opus 총 68종), sonnet·haiku는 세션 상속. `effort`는 실행 정책 필드라 기존 에이전트 개별 `version` 미bump(신규는 v1.0 신설).
 
 ---
+
+## 1.115 (2026-07-31) — 레포 공개 여부 표기 정정 (문서 전용)
+
+**틀린 사실이 두 문서에 근거로 박혀 있었다.** 작업 규칙(CHANGELOG 상단)과 업데이트 워크플로(README)가 `git push`를 명시 요청으로 제한하는 이유를 "public repo에서 push는 곧 공개 게시"라고 적어두었는데, `gh repo view rhl0509/claude-agents` 결과 **이 레포는 private다**.
+
+- **규칙은 그대로 두고 근거만 고쳤다.** "명시 요청 시에만 push"는 사용자 방침이라 유효하다. 바뀐 건 왜냐는 부분 — sync만으로 로컬 에이전트가 이미 작동하므로 push는 백업·공유용이라는 실제 이유로 교체했다.
+- **오정보의 비용이 실제로 발생했다**: 이 문구를 확인 없이 신뢰한 세션이 작업 내내 "public이라 공개 게시된다"를 전제로 판단하고 사용자에게도 그렇게 보고했다. 근거를 적을 때 확인 시점을 함께 남기지 않으면 이런 식으로 굳는다 — 그래서 정정문에 확인 날짜와 명령을 같이 적었다.
+- 공개로 전환하면 원래 근거가 되살아나므로 **재검토 조건**을 문구 안에 남겼다.
 
 ## 1.114 (2026-07-31) — graphify 코드 지도용 한글 커맨드 2종 (`/지도`·`/지도대조`)
 
