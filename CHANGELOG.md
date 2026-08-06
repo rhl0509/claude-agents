@@ -10,6 +10,16 @@
 
 ---
 
+## 1.116 (2026-08-06) — 주간 자동 회고 스케줄 (`weekly-reflect.ps1`)
+
+유명 에이전트 레포 7종(AutoGPT·MetaGPT·AutoGen·CrewAI·OpenHands·Letta·smolagents)을 이 라이브러리와 대조한 결과 구조적으로 가져올 것은 없었고, 운용 1건만 채택 — Letta의 "sleep-time 메모리 통합"에서 착안해 `/누적회고`를 수동 호출에서 주간 자동 실행으로 올렸다.
+
+- **`weekly-reflect.ps1` 신설(레포 루트, sync 배포 대상 아님)**: Windows 작업 스케줄러 `auto_agent-weekly-reflect`(매주 월 09:00)가 직접 실행한다. `claude -p "/누적회고"` 헤드리스로 self-reflector(haiku)를 돌려 결과를 `E:\claude_memory\_reflections\YYYYMMDD_누적회고.md`에 남긴다.
+- **자동 기록 금지 규칙과의 정합**: 자동화되는 것은 학습 후보 *제안 리포트 생성*까지다. 정식 메모리 기록은 여전히 메인 세션이 사용자 승인 후 수행한다.
+- **E: 미마운트 시 exit 1**로 작업 스케줄러 Last Run Result에 실패가 남는다(조용한 실패 방지).
+- **인코딩 함정 재확인**: 최초 버전이 BOM 없는 UTF-8로 저장돼 PS 5.1이 ANSI로 읽어 한글 명령·파일명이 깨졌다(lint-agents.ps1에 문서화된 것과 동일 함정). UTF-8 with BOM + CRLF로 재저장 — 한글이 든 모든 `.ps1`에 이 규칙이 적용된다.
+- 에이전트 정의 변경 없음(개별 version 미bump).
+
 ## 1.115 (2026-07-31) — 레포 공개 여부 표기 정정 (문서 전용)
 
 **틀린 사실이 두 문서에 근거로 박혀 있었다.** 작업 규칙(CHANGELOG 상단)과 업데이트 워크플로(README)가 `git push`를 명시 요청으로 제한하는 이유를 "public repo에서 push는 곧 공개 게시"라고 적어두었는데, `gh repo view rhl0509/claude-agents` 결과 **이 레포는 private다**.

@@ -1331,6 +1331,7 @@ claude-agents/
 ├─ design-agents.md              # 디자인 에이전트 4종 상세
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
+├─ weekly-reflect.ps1            # 주간 자동 회고(작업 스케줄러 월 09:00 → /누적회고 헤드리스 → E:\claude_memory\_reflections\ 리포트)
 ├─ .gitignore
 │
 ├─ commands/                     # ── 슬래시 명령 정의 (66개, +한글 별칭 38개) ──
