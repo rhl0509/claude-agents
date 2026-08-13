@@ -2,7 +2,10 @@
 #   1줄: 폴더 (git브랜치) [모델] 컨텍스트막대 %
 #   2줄: 플랜 사용량 잔여(%) + CPU/RAM/GPU
 [Console]::OutputEncoding = [Text.Encoding]::UTF8
-$in = [Console]::In.ReadToEnd() | ConvertFrom-Json
+# stdin은 UTF-8인데 [Console]::In은 콘솔 코드페이지(한국어 Windows = CP949)로 읽는다.
+# 세션 이름이 한글이면 그 구간이 깨지면서 JSON 파싱이 통째로 실패해 statusline이 빈다 → 스트림을 UTF-8로 직접 읽는다.
+$reader = New-Object IO.StreamReader ([Console]::OpenStandardInput()), (New-Object Text.UTF8Encoding $false)
+$in = $reader.ReadToEnd() | ConvertFrom-Json
 
 # --- 1줄 ---
 $dir = $in.workspace.current_dir
