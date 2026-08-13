@@ -42,7 +42,7 @@ Next.js + FastAPI + MySQL 스택을 위한 Claude Code 서브에이전트 모음
 | 전역 훅 | `%USERPROFILE%\.claude\hooks\` | 읽기 전용 가드 `agent-guard.ps1` + 세션·메모리 훅 6종(`memory-map`·`index-read-trigger`·`observe-capture`·`obsidian-session-log`·`obsidian-memory-mirror`·`precompact-snapshot`, 1.101 편입). 배선은 `~/.claude/settings.json`(저장소 관리 밖) |
 | 전역 스킬 | `%USERPROFILE%\.claude\skills\` | 프리로드 `agent-conventions`·`design-reference` |
 | 전역 규칙 | `%USERPROFILE%\.claude\rules\` | 경로 스코프 규칙(common·python·typescript) |
-| 소스(원본) | `d:\auto_agent`의 `*.md`·`commands/*.md`·`launchers/*.bat`·`workflows/*.js`·`hooks/*.ps1`·`skills/<name>/SKILL.md`·`rules/*.md` | 편집용 단일 소스. 여기서만 편집(sync.ps1 배포 대상 7종) |
+| 소스(원본) | `d:\auto_agent`의 `*.md`·`commands/*.md`·`launchers/*.bat`·`workflows/*.js`·`hooks/*.ps1`·`skills/<name>/SKILL.md`·`rules/*.md`·`statusline.ps1` | 편집용 단일 소스. 여기서만 편집(sync.ps1 배포 대상 8종) |
 
 ---
 

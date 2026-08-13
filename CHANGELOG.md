@@ -10,6 +10,18 @@
 
 ---
 
+## 1.118 (2026-08-13) — statusline.ps1 편입: 8번째 배포 대상
+
+`~/.claude/statusline.ps1`이 어디에도 소스가 없는 런타임 전용 파일이었다. 1.101에서 세션·메모리 훅 6종을 편입한 것과 같은 이유 — C드라이브가 날아가면 복구 불가다. 배포 대상이 7종 → **8종**이 됐다.
+
+- **`statusline.ps1` 신설(레포 루트)**. 루트에 둔 유일한 배포 산출물이다(나머지 루트 `.ps1`은 `sync`·`lint-agents`·`build-registry`·`weekly-reflect` — 저장소 도구라 배포되지 않는다). 하위 폴더를 만들지 않은 이유는 **목적지가 `~/.claude/` 루트**라서다. `hooks/`→`hooks/`처럼 이름이 대응하는 다른 6종과 달리 대응할 폴더가 없어, 레포 루트 ↔ 목적지 루트 대칭을 택했다.
+- **`sync.ps1`에 배포 블록 추가** — 디렉터리가 아니라 단일 파일을 복사하는 첫 블록. 실패 시 `errorCount`를 올려 exit 1로 이어지는 규약은 기존 6종과 동일.
+- **훅과 같은 분리 유지**: 스크립트는 여기서 버전 관리하되, *배선*(`settings.json`의 `statusLine` 블록)은 이 레포가 관리하지 않는다. 새 PC에서는 `sync.ps1` 실행 후 `settings.json`에 `statusLine`을 수동으로 가리켜야 한다.
+- **내용 자체는 이번에 실측으로 재작성됐다**(참고): CPU 사용률을 `Win32_Processor.LoadPercentage`(1133ms)에서 **전 프로세스 CPU시간 델타(97ms)**로 바꿨다 — `wmic` 1157ms·`Get-Counter` 2107ms·`PerfFormattedData_PerfOS_Processor` 6473ms로 WMI 계열은 전부 못 쓴다. 매 렌더 1.5초가 걸려 상태줄이 통째로 사라지던 증상의 원인이었다. 겸해서 2줄 구성(1줄 폴더·브랜치·모델·컨텍스트 막대 / 2줄 사용량·CPU·RAM·GPU)으로 바꿨고, git 브랜치는 stdin JSON에 없어서(`worktree.branch`는 `--worktree` 세션 전용) `git rev-parse`를 직접 부른다(49ms).
+- **인코딩 규칙 재적용**: 한글 주석이 든 `.ps1`이라 UTF-8 **with BOM** + CRLF다(`lint-agents.ps1`과 동일 함정 — 작업 중 한 번 BOM을 날렸다가 되돌렸다). 막대 문자 `■`/`□`도 소스에 직접 넣지 않고 `[char]0x25A0`/`0x25A1`로 만든다.
+
+---
+
 ## 1.117 (2026-08-13) — slide-deck-reviewer 1.2: 실사용에서 드러난 점검 공백 3종
 
 덱 하나(`D:\presentation\mini`, FloatWatch 13장)를 새로 만들고 이 에이전트로 점검한 뒤, **에이전트가 잡은 것과 내가 눈으로 잡은 것의 차이**를 정의에 반영했다. 잡아낸 항목(배열 동기화·번호·`data-nav`·템플릿 잔재·`turbopack`·동적 import 의존성)은 그대로 두고, 놓친 축만 추가.

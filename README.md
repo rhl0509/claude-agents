@@ -1121,7 +1121,7 @@ Claude Code는 아래 위치의 `.md` 파일을 에이전트로 인식합니다.
 ```powershell
 powershell -ExecutionPolicy Bypass -File sync.ps1
 ```
-> `sync.ps1`은 77개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 81개 슬래시 명령(+ 한글 별칭 55개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사하고, `workflows/`·`hooks/`·`skills/`·`rules/`도 각각 `%USERPROFILE%\.claude\`의 대응 폴더로 배포합니다(배포 대상 7종). 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
+> `sync.ps1`은 77개 에이전트 파일을 `%USERPROFILE%\.claude\agents\`로, `commands/`의 81개 슬래시 명령(+ 한글 별칭 55개) 파일을 `%USERPROFILE%\.claude\commands\`로, `launchers/`의 런처를 `%USERPROFILE%\.claude\launchers\`로 복사하고, `workflows/`·`hooks/`·`skills/`·`rules/`도 각각 `%USERPROFILE%\.claude\`의 대응 폴더로 배포하며, `statusline.ps1`은 대응 폴더 없이 `%USERPROFILE%\.claude\` 바로 아래로 복사합니다(배포 대상 8종). 에이전트는 frontmatter `name:`이 있는 `.md`만 배포(문서는 자동 스킵)하고, 이 저장소가 이전에 배포한 에이전트가 지워지거나 이름이 바뀌면 런타임에서도 제거합니다(manifest 기반 delete-sync — 사용자 개인 에이전트는 건드리지 않음). 복사/삭제 중 오류가 나면 종료 코드 1로 알립니다.
 
 슬래시 명령(`/review` 등)도 위 `sync.ps1` 실행으로 함께 등록됩니다(별도 복사 불필요).
 
@@ -1311,7 +1311,7 @@ VS Code 없이 바로 쓰고 싶을 때를 위한 런처가 `launchers/claude.ba
 2. frontmatter `version`/`updated` 갱신 (마이너/메이저 판단)
 3. `CHANGELOG.md`에 변경 기록
 4. **`README.md`의 버전 표 갱신** (버전업 시)
-5. `sync.ps1`으로 전역(`~/.claude/`의 `agents/`·`commands/`·`workflows/`·`launchers/`·`hooks/`·`skills/`·`rules/` 7종)에 반영
+5. `sync.ps1`으로 전역(`~/.claude/`의 `agents/`·`commands/`·`workflows/`·`launchers/`·`hooks/`·`skills/`·`rules/`와 `statusline.ps1` 8종)에 반영
 6. `git commit` (원격 `git push`는 **명시 요청 시에만** — sync만으로 로컬 에이전트는 이미 작동하므로 push는 백업·공유용. 이 레포는 현재 **private**)
 
 ---
@@ -1332,6 +1332,7 @@ claude-agents/
 ├─ CLAUDE.md                     # 저장소 작업 가이드(Claude Code용)
 ├─ sync.ps1                      # 전역 동기화 스크립트(에이전트 + 슬래시 명령)
 ├─ weekly-reflect.ps1            # 주간 자동 회고(작업 스케줄러 월 09:00 → /누적회고 헤드리스 → E:\claude_memory\_reflections\ 리포트)
+├─ statusline.ps1                # ★배포 대상★ 상태줄 스크립트 → ~/.claude/statusline.ps1 (다른 루트 .ps1은 저장소 도구, 이것만 배포됨)
 ├─ .gitignore
 │
 ├─ commands/                     # ── 슬래시 명령 정의 (66개, +한글 별칭 38개) ──

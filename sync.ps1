@@ -191,9 +191,25 @@ if (Test-Path $rlSrc) {
         }
 }
 
+# Status line script -> ~/.claude root (the only deploy target that is a single
+# file at the root rather than a directory, because that is where Claude Code's
+# `statusLine` setting points). The wiring itself lives in ~/.claude/settings.json,
+# which this repo does not manage -- same split as the hooks above.
+$slSrc = Join-Path $src 'statusline.ps1'
+$slDst = Join-Path $env:USERPROFILE '.claude'
+if (Test-Path $slSrc) {
+    try {
+        Copy-Item $slSrc -Destination $slDst -Force -ErrorAction Stop
+        Write-Host "synced statusline: statusline.ps1"
+    } catch {
+        Write-Host "ERROR syncing statusline: $($_.Exception.Message)"
+        $script:errorCount++
+    }
+}
+
 if ($errorCount -gt 0) {
-    Write-Host "FAILED: $errorCount error(s). Targets: $dst , $cmdDst , $wfDst , $lchDst , $hkDst , $skDst , $rlDst"
+    Write-Host "FAILED: $errorCount error(s). Targets: $dst , $cmdDst , $wfDst , $lchDst , $hkDst , $skDst , $rlDst , $slDst\statusline.ps1"
     exit 1
 }
-Write-Host "Done -> $dst , $cmdDst , $wfDst , $lchDst , $hkDst , $skDst , $rlDst"
+Write-Host "Done -> $dst , $cmdDst , $wfDst , $lchDst , $hkDst , $skDst , $rlDst , $slDst\statusline.ps1"
 exit 0
