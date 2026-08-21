@@ -4,9 +4,19 @@
 - 마이너 올림 (1.2 → 1.3): 체크 항목 추가, 표현 다듬기 등 작은 개선
 - 메이저 올림 (1.x → 2.0): 역할·출력 형식·동작이 크게 바뀔 때
 
-**작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync.ps1`을 실행해 전역(`%USERPROFILE%\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`(상단 버전 요약·버전 표·해당 상세 블록)와 `AGENTS.md`·`CLAUDE.md`의 관련 내용을 갱신한 뒤 ④ `sync.ps1` 실행 후 `git commit` 한다. **원격 `git push`는 명시 요청 시에만** 한다(sync만으로 로컬 에이전트는 이미 작동하므로 push는 백업·공유용이다). ⚠️ **이 레포는 private다** — 2026-07-31 `gh repo view rhl0509/claude-agents` 확인. 그전까지 여기 "public repo라 push가 곧 공개 게시"라고 적혀 있었으나 사실이 아니었다. 공개로 전환하면 그 근거가 되살아나므로 이 문구를 다시 검토할 것.
+**작업 규칙**: 수정은 항상 원본(`d:\auto_agent`)에서 하고, `sync.ps1`을 실행해 전역(`%USERPROFILE%\.claude\agents`)에 반영한다. 변경 시 ① 해당 에이전트의 frontmatter `version`/`updated`를 올리고 ② 아래에 기록하고 ③ `README.md`(상단 버전 요약·버전 표·해당 상세 블록)와 `AGENTS.md`·`CLAUDE.md`의 관련 내용을 갱신한 뒤 ④ `sync.ps1` 실행 후 `git commit` 한다. **원격 `git push`는 명시 요청 시에만** 한다(sync만으로 로컬 에이전트는 이미 작동하므로 push는 백업·공유용이다). ⚠️ **이 레포는 public이다** — 2026-08-21 전환. 그전(2026-07-31~08-21)은 private였다. **전환으로 "push가 곧 공개 게시"라는 근거가 되살아났다** — 1.119까지 그 근거는 사실이 아니었으나 지금은 참이다. push한 순간 캐시·인덱싱 대상이 되므로 되돌리기 어렵고, 따라서 `git push`를 명시 요청으로 제한하는 규칙은 이제 백업 편의가 아니라 **공개 게시 통제**가 이유다. 커밋 전 개인정보·사적 경로·시크릿을 확인한다.
 
 **effort 튜닝 요약(1.57~1.60)**: opus 30종 `high` 일괄 채택(1.57) → 보안 3종 `xhigh`(1.58) → fable `xhigh`(1.59) → 1.60에서 신규 opus 3종(refactor-strategist·docs-writer·agent-definition-reviewer)도 `high`로 신설. 현재 **`xhigh` 7종**(security-reviewer·threat-modeler·llm-ai-security-reviewer·ai-workspace-architect·truth-checker·ai-code-auditor·identity-access-architect), 나머지 opus 61종 `high`(현재 opus 총 68종), sonnet·haiku는 세션 상속. `effort`는 실행 정책 필드라 기존 에이전트 개별 `version` 미bump(신규는 v1.0 신설).
+
+---
+
+## 1.120 (2026-08-21) — 레포 public 전환
+
+포트폴리오(`rhl0509.github.io`) Selected work 04행이 이 레포를 링크하는데, private라 방문자에게 404로 떨어지고 있었다. GitHub은 private 레포에 403이 아니라 404를 주므로 링크가 "잠김"이 아니라 "깨짐"으로 읽힌다. 채용 맥락에서 자기소개서가 주장하는 서브에이전트 77종을 검증할 경로가 그 링크 하나였다.
+
+- **전환 전 감사** — 이력 전체(136커밋) 스캔: 민감 파일명 0건, 실제 키 패턴(`sk-`/`AIza`/`gh*_`/`hf_`/`AKIA`/PRIVATE KEY) 0건. `_observations`·토픽 메모리 등 개인 기억 **내용**은 커밋된 적 없음(경로 문자열 `E:\claude_memory` 82건은 회상 대상 지정일 뿐 내용이 아님). 레포 `CLAUDE.md`는 레포 스코프라 사용자 전역 `~/.claude/CLAUDE.md`의 개인 사실은 포함하지 않음.
+- **문서 정정** — 작업 규칙(위)과 `README.md` 업데이트 워크플로 6번의 "이 레포는 private" 표기를 갱신했다. 1.116에서 "public이라 push가 곧 공개 게시"가 **틀린 근거**로 판명돼 정정했었는데, 이번 전환으로 그 문장이 **사실이 됐다**. 같은 문장이라도 확인 시점 없이는 참·거짓이 뒤집히므로 양쪽 모두 날짜를 남겼다.
+- **1.116 항목은 손대지 않았다** — 그건 당시 사실의 기록이고, 지금 사실로 덮어쓰면 이력이 아니라 은폐가 된다.
 
 ---
 
